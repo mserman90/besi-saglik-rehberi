@@ -402,10 +402,11 @@
           <button class="btn btn-primary" onclick="switchTab('triage')">➕ Yeni Triyaj</button>
           <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç & İKAS</button>
           <button class="btn btn-info" onclick="switchTab('repro')">🩸 Üreme & Doğum</button>
+          <button class="btn btn-warning" style="background:#e65100; color:white;" onclick="switchTab('calf')">🍼 Buzağı & Kolostrum</button>
           <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Şerit Metre Kilo</button>
           <button class="btn btn-info" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
           <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil Müdahale</button>
-          <button class="btn btn-outline" style="grid-column: span 2;" onclick="switchTab('milker')">🥛 Sağımcı Modu</button>
+          <button class="btn btn-outline" onclick="switchTab('milker')">🥛 Sağımcı Modu</button>
         </div>
       </div>
 
@@ -743,11 +744,79 @@
           <ul id="weight-drug-doses" style="font-size:0.82rem; line-height:1.7; padding-left:18px; color:#334155;"></ul>
         </div>
 
-        <button class="btn btn-primary" onclick="applyWeightToEmergency()" style="margin-top:6px;">⚡ Bu Kiloyu Acil Müdahale & İlaç Formlarına Aktar</button>
       </div>
     </section>
 
-    <!-- ================= 7. ACİL İLK YARDIM ================= -->
+    <!-- ================= 7. BUZAĞI HAYATTA TUTMA & KOLOSTRUM MODÜLÜ ================= -->
+    <section id="tab-calf" class="tab-section">
+      <div class="card">
+        <div class="card-title">🍼 Buzağı Hayatta Tutma & Kolostrum Motoru</div>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
+          Yeni doğan buzağının ilk 2 saatlik altın kuralı, Brix refraktometre kalite ölçümü ve ishal sıvı tedavisi.
+        </p>
+
+        <!-- Altın Kural Kartı -->
+        <div class="banner-alert banner-warning" style="margin-bottom:12px;">
+          ⏱️ <strong>İLK 2 SAAT ALTIN KURALI:</strong> Bağırsak geçirgenliği hızla kapanır! Doğumdan sonraki ilk 2 saat içinde buzağının canlı ağırlığının en az %10'u kadar (3–4 Litre) kaliteli kolostrum (ağız sütü) içirilmelidir!
+        </div>
+
+        <div style="background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:12px; margin-bottom:12px;">
+          <div style="font-weight:700; color:var(--primary); font-size:0.92rem; margin-bottom:8px;">🔬 Kolostrum Kalite Ölçer (Brix Refraktometre)</div>
+          
+          <label for="colostrum-brix">Ölçülen Brix Değeri (%):</label>
+          <div style="display:flex; gap:8px;">
+            <input type="number" id="colostrum-brix" value="24" step="0.5" oninput="calculateColostrumQuality()" style="margin-bottom:0;">
+            <div id="brix-quality-badge" style="padding:8px 12px; border-radius:6px; font-weight:800; font-size:0.95rem; white-space:nowrap; display:flex; align-items:center; background:#dcfce7; color:#15803d;">
+              🟢 MÜKEMMEL KALİTE
+            </div>
+          </div>
+          <div id="brix-quality-desc" style="font-size:0.8rem; color:#475569; margin-top:6px;">
+            IgG antikor konsantrasyonu >50 g/L. Buzağıya doğrudan ilk ağız sütü olarak içirilebilir veya dondurulabilir.
+          </div>
+        </div>
+
+        <!-- Buzağı Dehidrasyon & İshal Sıvı Hesaplayıcı -->
+        <div style="background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:12px;">
+          <div style="font-weight:700; color:var(--danger); font-size:0.92rem; margin-bottom:8px;">🚨 Buzağı İshali Elektrolit & Sıvı İhtiyacı</div>
+          
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="calf-weight">Buzağı Ağırlığı (kg):</label>
+              <input type="number" id="calf-weight" value="40" step="5" oninput="calculateCalfRehydration()">
+            </div>
+            <div>
+              <label for="calf-dehydration-level">Göz Çökmesi / Belirti:</label>
+              <select id="calf-dehydration-level" onchange="calculateCalfRehydration()">
+                <option value="6">Hafif (%6 - Gözde hafif çukur, emer)</option>
+                <option value="8">Orta (%8 - Göz belirgin çökük, halsiz)</option>
+                <option value="10">Şiddetli (%10 - Yatar, emme refleksi yok)</option>
+                <option value="12">Kritik (%12 - Koma, soğuk kulaklar)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Hesaplanan Sıvı Tedavisi -->
+          <div id="calf-fluid-result" class="card" style="background:#eff6ff; border:1px solid #3b82f6; margin-top:6px; padding:10px;">
+            <div style="font-weight:800; color:#1d4ed8; font-size:0.9rem;">Gereken 24 Saatlik Sıvı Miktarı: 4.4 Litre</div>
+            <div style="font-size:0.8rem; color:#334155; margin-top:4px; line-height:1.6;">
+              • <strong>Sıvı Açığı (Defisit):</strong> 2.4 Litre<br>
+              • <strong>Günlük Yaşama Payı:</strong> 2.0 Litre<br>
+              • <strong>Uygulama:</strong> Emme refleksi varsa oral elektrolit içirin; emme refleksi yoksa ve hayvan yatıyorsa derhal damar içi (IV) serum (Ringer Laktat / %1.3 Sodyum Bikarbonat) verin.
+            </div>
+          </div>
+        </div>
+
+        <!-- Göbek Kordonu Bakımı -->
+        <div class="card" style="background:#fafafa; border:1px dashed #cbd5e1; margin-top:10px; font-size:0.82rem; line-height:1.6;">
+          <strong>🛡️ Doğum Sonrası Kritik Kontrol Listesi:</strong>
+          <br>1. <strong>Göbek İpi Dezenfeksiyonu:</strong> Doğar doğmaz %7'lik İyot (Tentürdiyot) içine batırarak daldırın (Göz damlalığıyla damlatmayın, tamamen daldırın).
+          <br>2. <strong>Doğumdan 1-2 Saat Sonra:</strong> İyot uygulamasını tekrarlayın.
+          <br>3. <strong>Altlık Hijyeni:</strong> Buzağı bölmesini kuru, temiz ve bol samanlı tutun.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 8. ACİL İLK YARDIM ================= -->
     <section id="tab-emergency" class="tab-section">
       <div class="banner-alert banner-danger">
         ⚠️ <strong>ÖNEMLİ:</strong> Bu protokoller veteriner hekim çiftliğe ulaşana kadar hastanın yaşama şansını artırmak için acil ilk yardım adımlarıdır.
@@ -886,6 +955,10 @@
     <button class="nav-item" onclick="switchTab('repro')">
       <span class="nav-icon">🩸</span>
       <span>Üreme</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('calf')">
+      <span class="nav-icon">🍼</span>
+      <span>Buzağı</span>
     </button>
     <button class="nav-item" onclick="switchTab('weight')">
       <span class="nav-icon">⚖️</span>
@@ -1107,7 +1180,7 @@
 
       // Menü aktifliği
       const navButtons = document.querySelectorAll(".nav-item");
-      const mapping = { dashboard: 0, triage: 1, ikas: 2, repro: 3, weight: 4, vaccine: 5, emergency: 6, milker: 7 };
+      const mapping = { dashboard: 0, triage: 1, ikas: 2, repro: 3, calf: 4, weight: 5, vaccine: 6, emergency: 7, milker: 8 };
       if (navButtons[mapping[tabId]]) {
         navButtons[mapping[tabId]].classList.add("active");
       }
@@ -1116,6 +1189,7 @@
       if (tabId === "milker") checkMilkerStatus();
       if (tabId === "repro") renderReproRecords();
       if (tabId === "weight") calculateSchaefferWeight();
+      if (tabId === "calf") { calculateColostrumQuality(); calculateCalfRehydration(); }
     }
 
     // İlaç Seçiciyi Doldur
@@ -1725,6 +1799,64 @@
       }
       alert(`✅ ${lastCalculatedWeightKg} kg canlı ağırlık değeri acil müdahale ve ilaç dozaj motoruna başarıyla aktarıldı!`);
       switchTab("emergency");
+    }
+
+    /* =========================================================================
+       BUZAĞI HAYATTA TUTMA & KOLOSTRUM KALİTE HESAPLAMA MOTORU
+       ========================================================================= */
+    function calculateColostrumQuality() {
+      const brix = parseFloat(document.getElementById("colostrum-brix").value) || 0;
+      const badge = document.getElementById("brix-quality-badge");
+      const desc = document.getElementById("brix-quality-desc");
+
+      if (brix >= 22) {
+        badge.textContent = "🟢 MÜKEMMEL KALİTE";
+        badge.style.background = "#dcfce7";
+        badge.style.color = "#15803d";
+        desc.innerHTML = `<strong>Brix %${brix}:</strong> Yüksek antikor düzeyi (IgG > 50 g/L). Yeni doğan buzağıya ilk 2 saat içinde 3–4 litre rahatlıkla içirilebilir. Artan kısım dondurulup kolostrum bankası yapılabilir.`;
+      } else if (brix >= 18) {
+        badge.textContent = "🟡 ORTA / SINIRDA";
+        badge.style.background = "#fef9c3";
+        badge.style.color = "#854d0e";
+        desc.innerHTML = `<strong>Brix %${brix}:</strong> Orta antikor düzeyi (IgG 25–50 g/L). İlk 2 saat için yeterli koruma sağlamayabilir. Mümkünse dondurulmuş yüksek kaliteli kolostrumla takviye edin veya 2. öğünde kullanın.`;
+      } else {
+        badge.textContent = "🔴 DÜŞÜK KALİTE (YETERSİZ)";
+        badge.style.background = "#fee2e2";
+        badge.style.color = "#b91c1c";
+        desc.innerHTML = `<strong>Brix %${brix}:</strong> Çok düşük antikor düzeyi (IgG < 25 g/L). ⚠️ <strong>UYARI:</strong> Bu ağız sütü buzağıyı septisemiden ve ishalden korumaz! Derhal derin dondurucudaki kaliteli kolostrum çözdürülüp verilmelidir.`;
+      }
+    }
+
+    function calculateCalfRehydration() {
+      const weight = parseFloat(document.getElementById("calf-weight").value) || 40;
+      const dehPercent = parseFloat(document.getElementById("calf-dehydration-level").value) || 6;
+      const resultBox = document.getElementById("calf-fluid-result");
+
+      // Sıvı İhtiyacı Formülü (Merck Vet & Tarım Standartları):
+      // Defisit (Açık Litre) = Ağırlık (kg) * (Dehidrasyon % / 100)
+      // Günlük Yaşama Payı (Litre) = Ağırlık (kg) * 0.05 (ortalama 50-80 mL/kg/gün)
+      // Toplam 24 Saatlik Sıvı = Defisit + Yaşama Payı + Devam eden kayıplar (yaklaşık 1-2 L)
+      const deficitLiters = (weight * (dehPercent / 100)).toFixed(1);
+      const maintenanceLiters = (weight * 0.05).toFixed(1);
+      const totalFluid = (parseFloat(deficitLiters) + parseFloat(maintenanceLiters) + 1.0).toFixed(1);
+
+      let routeText = "";
+      if (dehPercent <= 6) {
+        routeText = "Buzağının emme refleksi varsa günde 2–3 öğüne bölerek <strong>Oral Elektrolit (Drench / Biberon)</strong> içirin.";
+      } else if (dehPercent <= 8) {
+        routeText = "Emme isteği zayıfsa sonda (özofagus tüpü) ile ılık oral elektrolit verin; göz çökmesi fazlaysa 1-2 Litre IV serum takviyesi yapın.";
+      } else {
+        routeText = "🚨 <strong>ACİL DAMAR İÇİ (IV) SERUM ŞART:</strong> Emme refleksi kaybolmuş ve hayvan yatıyor. Oral sıvı tek başına yetersizdir, acil Ringer Laktat veya %1.3 Sodyum Bikarbonat IV infüzyonu başlatın!";
+      }
+
+      resultBox.innerHTML = `
+        <div style="font-weight:800; color:#1d4ed8; font-size:0.95rem;">Gereken 24 Saatlik Sıvı Miktarı: ${totalFluid} Litre</div>
+        <div style="font-size:0.8rem; color:#334155; margin-top:4px; line-height:1.6;">
+          • <strong>Dehidrasyon Kaybı (Sıvı Açığı):</strong> ${deficitLiters} Litre<br>
+          • <strong>Günlük Yaşama Payı İhtiyacı:</strong> ${maintenanceLiters} Litre<br>
+          • <strong>Önerilen Müdahale:</strong> ${routeText}
+        </div>
+      `;
     }
 
     /* =========================================================================
