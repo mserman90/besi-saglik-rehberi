@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1b5e20">
+  <meta name="description" content="Sığırlarda Hastalık Önleme, Saha Triyajı, Aşı ve İKAS Takip Sistemi - %100 Çevrimdışı">
+  <link rel="manifest" href="manifest.json">
+  <title>Sığır Sağlık & Saha Triyaj Sistemi</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card-bg: #ffffff;
+      --text: #1a202c;
+      --text-muted: #64748b;
+      --primary: #1b5e20;
+      --primary-light: #e8f5e9;
+      --danger: #b71c1c;
+      --danger-light: #ffebee;
+      --warning: #e65100;
+      --warning-light: #fff3e0;
+      --info: #0d47a1;
+      --info-light: #e3f2fd;
+      --border: #dcdfe4;
+      --shadow: 0 2px 6px rgba(0,0,0,0.06);
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 76px;
+    }
+
+    /* Üst Başlık */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-offline {
+      background: rgba(255,255,255,0.2);
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* Ana Konteyner */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    /* Sekme Bölümleri */
+    .tab-section {
+      display: none;
+    }
+    .tab-section.active {
+      display: block;
+      animation: fadeIn 0.15s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Kartlar */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .banner-alert {
+      padding: 12px;
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .banner-danger { background: var(--danger-light); color: var(--danger); border: 1px solid #ffcdd2; }
+    .banner-warning { background: var(--warning-light); color: var(--warning); border: 1px solid #ffe0b2; }
+    .banner-info { background: var(--info-light); color: var(--info); border: 1px solid #bbdefb; }
+    .banner-success { background: var(--primary-light); color: var(--primary); border: 1px solid #c8e6c9; }
+
+    /* İstatistik Izgarası */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .stat-card {
+      background: #fafafa;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+    }
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Form ve Buton Elemanları */
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #334155;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(27, 94, 32, 0.15);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 11px 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:active {
+      opacity: 0.85;
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-warning { background: var(--warning); color: white; }
+    .btn-info { background: var(--info); color: white; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+
+    /* DART ve Skor Seçiciler */
+    .score-group {
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+    .score-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .score-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .score-btn {
+      padding: 8px 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: #f8fafc;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .score-btn.selected {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Tablo Görünümü */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    /* Alt Gezinme Çubuğu (Bottom Navigation) */
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      border-top: 1px solid var(--border);
+      z-index: 100;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 2px;
+      text-decoration: none;
+      color: #64748b;
+      font-size: 0.68rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+    }
+    .nav-item.active {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+    .nav-icon {
+      font-size: 1.25rem;
+      margin-bottom: 2px;
+    }
+
+    /* İKAS Rozetleri */
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+    .tag-danger { background: var(--danger-light); color: var(--danger); }
+    .tag-warning { background: var(--warning-light); color: var(--warning); }
+    .tag-success { background: var(--primary-light); color: var(--primary); }
+
+    /* Sağımcı Ekranı Büyük Görsel Kutular */
+    .milker-status-box {
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 12px;
+      text-align: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+    .milker-red { background: #d32f2f; }
+    .milker-yellow { background: #f57c00; }
+    .milker-green { background: #388e3c; }
+
+    /* Hızlı Müdahale Butonları */
+    .emergency-card {
+      border-left: 5px solid var(--danger);
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+    .emergency-card h3 {
+      font-size: 0.95rem;
+      color: var(--danger);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .emergency-details {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #334155;
+      display: none;
+      padding-top: 8px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .emergency-details.open {
+      display: block;
+    }
+
+    .badge-mandatory {
+      background: #ffebee;
+      color: #c62828;
+      border: 1px solid #ef9a9a;
+      font-size: 0.68rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Başlık -->
+  <header>
+    <div>
+      <h1>🐄 Sığır Sağlık & Saha Sistemi</h1>
+      <small style="opacity:0.85; font-size:0.75rem;">Saha Triyajı • İKAS Gıda Güvenliği • Aşı Takvimi</small>
+    </div>
+    <span class="badge-offline">⚡ Çevrimdışı (Offline)</span>
+  </header>
+
+  <main>
+
+    <!-- ================= 1. GÖSTERGE PANELİ ================= -->
+    <section id="tab-dashboard" class="tab-section active">
+      <div id="active-alert-box"></div>
+
+      <div class="grid-2">
+        <div class="stat-card">
+          <div class="stat-val" id="stat-total-animals">0</div>
+          <div class="stat-label">Kayıtlı Hayvan</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" style="color:var(--danger);" id="stat-ikas-blocked">0</div>
+          <div class="stat-label">Sütü Yasak (İKAS)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" style="color:var(--warning);" id="stat-quarantine">0</div>
+          <div class="stat-label">Karantinada</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" style="color:var(--info);" id="stat-upcoming-vaccines">0</div>
+          <div class="stat-label">Yaklaşan Aşı</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">⚡ Hızlı Saha Eylemleri</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <button class="btn btn-primary" onclick="switchTab('triage')">➕ Yeni Triyaj</button>
+          <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç & İKAS</button>
+          <button class="btn btn-info" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
+          <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil Müdahale</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🚨 Kritik Kalıntılı Süt (İKAS) Durumu</div>
+        <div id="dashboard-ikas-list" style="font-size:0.85rem; color:#475569;">
+          Kayıtlı aktif süt arınma kısıtı bulunmuyor.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📋 Hayvan Listesi & Durumlar</div>
+        <div style="display:flex; gap:6px; margin-bottom:8px;">
+          <input type="text" id="animal-search" placeholder="Küpe No Ara (örn: TR16001)" oninput="renderAnimalTable()" style="margin-bottom:0;">
+          <button class="btn btn-primary" style="width:auto; padding:0 14px;" onclick="openNewAnimalModal()">+ Ekle</button>
+        </div>
+        <div class="table-container">
+          <table id="animal-table">
+            <thead>
+              <tr>
+                <th>Küpe No</th>
+                <th>Cinsiyet/Yaş</th>
+                <th>VKS</th>
+                <th>Karantina</th>
+                <th>Durum</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. SAHA TRİYAJI VE DART SKORLAMA ================= -->
+    <section id="tab-triage" class="tab-section">
+      <div class="card">
+        <div class="card-title">🚨 Saha Triyajı & Vital Muayene</div>
+        
+        <label for="triage-animal-select">Hayvan Seç (Küpe No):</label>
+        <select id="triage-animal-select"></select>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <label for="vital-temp">Rektal Ateş (°C):</label>
+            <input type="number" id="vital-temp" step="0.1" value="38.8" oninput="calculateTriage()">
+            <small id="temp-hint" style="font-size:0.75rem; color:#64748b;">Normal: 38.0 - 39.3°C</small>
+          </div>
+          <div>
+            <label for="vital-pulse">Kalp/Nabız (atım/dk):</label>
+            <input type="number" id="vital-pulse" value="65" oninput="calculateTriage()">
+            <small style="font-size:0.75rem; color:#64748b;">Normal: 48 - 84/dk</small>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <label for="vital-resp">Solunum (nefes/dk):</label>
+            <input type="number" id="vital-resp" value="32" oninput="calculateTriage()">
+            <small style="font-size:0.75rem; color:#64748b;">Normal: 26 - 50/dk</small>
+          </div>
+          <div>
+            <label for="vital-rumen">Rumen Motilite (2 dk):</label>
+            <select id="vital-rumen" onchange="calculateTriage()">
+              <option value="2-3">Normal (2 - 3 hareket)</option>
+              <option value="1">Zayıf (1 hareket)</option>
+              <option value="0">Atonik / Durmuş (0 hareket)</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="vital-dehydration">Dehidrasyon (Sıvı Kaybı - Göz Çökmesi / Deri Çadırı):</label>
+        <select id="vital-dehydration" onchange="calculateTriage()">
+          <option value="0">Normal (< %5)</option>
+          <option value="6">Hafif Dehidrasyon (%6 - %7)</option>
+          <option value="9">Orta / Şiddetli (%8 - %10 Sıvı Tedavisi Şart)</option>
+          <option value="12">Kritik Hipovolemik Şok (> %10)</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🩺 BRD / Solunum Yolu İçin DART Skorlama Algoritması</div>
+        
+        <div class="score-group">
+          <div class="score-label"><span>D - Depresyon (Durgunluk)</span><span id="score-val-d">0/3</span></div>
+          <div class="score-buttons" data-metric="d">
+            <button class="score-btn selected" onclick="setScore('d',0,this)">0: Normal</button>
+            <button class="score-btn" onclick="setScore('d',1,this)">1: Hafif Durgun</button>
+            <button class="score-btn" onclick="setScore('d',2,this)">2: Belirgin Durgun</button>
+            <button class="score-btn" onclick="setScore('d',3,this)">3: Başını Kaldırmaz</button>
+          </div>
+        </div>
+
+        <div class="score-group">
+          <div class="score-label"><span>A - İştahsızlık (Appetite)</span><span id="score-val-a">0/3</span></div>
+          <div class="score-buttons" data-metric="a">
+            <button class="score-btn selected" onclick="setScore('a',0,this)">0: İştahlı</button>
+            <button class="score-btn" onclick="setScore('a',1,this)">1: Yavaş Yiyor</button>
+            <button class="score-btn" onclick="setScore('a',2,this)">2: Yarı Yem Bırakır</button>
+            <button class="score-btn" onclick="setScore('a',3,this)">3: Tamamen Yemez</button>
+          </div>
+        </div>
+
+        <div class="score-group">
+          <div class="score-label"><span>R - Solunum (Respiration)</span><span id="score-val-r">0/3</span></div>
+          <div class="score-buttons" data-metric="r">
+            <button class="score-btn selected" onclick="setScore('r',0,this)">0: Normal</button>
+            <button class="score-btn" onclick="setScore('r',1,this)">1: Hafif Öksürük</button>
+            <button class="score-btn" onclick="setScore('r',2,this)">2: Kesik/Hızlı Nefes</button>
+            <button class="score-btn" onclick="setScore('r',3,this)">3: Ağızdan Soluma</button>
+          </div>
+        </div>
+
+        <div class="score-group">
+          <div class="score-label"><span>T - Vücut Sıcaklığı (Otomatik)</span><span id="score-val-t">0/3</span></div>
+          <small style="color:#64748b; font-size:0.75rem;">Yukarıdaki rektal ateşten otomatik hesaplanır (39.5°C+ skor üretir)</small>
+        </div>
+
+        <!-- Triyaj Çıktı Karar Kutusu -->
+        <div id="triage-result-box" style="margin-top:12px;"></div>
+
+        <button class="btn btn-primary" onclick="saveTriageRecord()" style="margin-top:10px;">💾 Triyajı Kaydet & Hayvan Durumunu Güncelle</button>
+      </div>
+    </section>
+
+    <!-- ================= 3. İKAS VE İLAÇ YÖNETİMİ ================= -->
+    <section id="tab-ikas" class="tab-section">
+      <div class="card">
+        <div class="card-title">💊 Yeni Tedavi & Otomatik İKAS Hesaplayıcı</div>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
+          5996 Sayılı Kanun gereği gıda güvenliğini korur. Kombine tedavilerde en uzun arınma süresini baz alır.
+        </p>
+
+        <label for="treatment-animal-select">Hasta Hayvanı Seç:</label>
+        <select id="treatment-animal-select"></select>
+
+        <label for="treatment-drug-select">Uygulanan İlaç (Etken Madde):</label>
+        <select id="treatment-drug-select" onchange="onDrugSelectChange()"></select>
+
+        <div id="drug-warning-banner"></div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <label for="treatment-dose">Uygulanan Doz (mL):</label>
+            <input type="number" id="treatment-dose" value="15" step="0.5">
+          </div>
+          <div>
+            <label for="treatment-route">Uygulama Yolu:</label>
+            <select id="treatment-route">
+              <option value="IM">Kas İçi (IM)</option>
+              <option value="SC">Deri Altı (SC)</option>
+              <option value="IV">Damar İçi (IV)</option>
+              <option value="IMM">Meme İçi</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <label for="treatment-date">Uygulama Tarihi / Saati:</label>
+            <input type="datetime-local" id="treatment-date">
+          </div>
+          <div>
+            <label for="treatment-vet">Reçete / Hekim Onayı:</label>
+            <input type="text" id="treatment-vet" placeholder="Vet. Hekim Onaylı (VCPR)">
+          </div>
+        </div>
+
+        <div id="calculated-ikas-preview" class="banner-alert banner-warning" style="display:none;"></div>
+
+        <button class="btn btn-warning" onclick="saveTreatment()">🔒 Tedaviyi Uygula & Süt/Et Kilidini Başlat</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🚫 Aktif İKAS Engelleri ve Canlı Geri Sayımlar</div>
+        <div class="table-container">
+          <table id="active-ikas-table">
+            <thead>
+              <tr>
+                <th>Küpe No</th>
+                <th>İlaç</th>
+                <th>Süt Bitiş</th>
+                <th>Et Bitiş</th>
+                <th>Durum</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. AŞI TAKVİMİ ================= -->
+    <section id="tab-vaccine" class="tab-section">
+      <div class="card">
+        <div class="card-title">📅 Akıllı Sığır Aşı Takvimi</div>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
+          T.C. Tarım ve Orman Bakanlığı zorunlu aşıları (Şap, Brusella, LSD) ve koruyucu sürü bağışıklık protokolleri.
+        </p>
+
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+          <button class="btn btn-primary" onclick="openVaccineModal()">💉 Yeni Aşı Uygula</button>
+        </div>
+
+        <div class="table-container">
+          <table id="vaccine-records-table">
+            <thead>
+              <tr>
+                <th>Küpe No</th>
+                <th>Aşı Adı</th>
+                <th>Tür</th>
+                <th>Uygulama</th>
+                <th>Rapel / Gelecek Doz</th>
+                <th>TÜRKVET</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📚 Protokol Kütüphanesi & Rapel Kuralları</div>
+        <div style="font-size:0.82rem; line-height:1.6; color:#334155;">
+          <p><strong>• Şap (FMD) Aşısı:</strong> 4. ayda ilk doz, 1 ay sonra rapel. Yılda 2–3 kez tekrarlanır. Sevk için en az 21 gün geçmiş olmalı.</p>
+          <p><strong>• Bruselloz (S19):</strong> 3–6 aylık dişi buzağılara konjunktival (göz damlası). Zorunlu.</p>
+          <p><strong>• LSD (Sığır Çiçeği):</strong> 3. aydan itibaren her ilkbahar. Yıllık zorunlu aşı.</p>
+          <p><strong>• BRD Karma (Solunum):</strong> Sütten kesim öncesi ve risk döneminde 2–4 hafta arayla 2 doz.</p>
+          <p><strong>• Gebe İnek İshal Aşısı:</strong> Doğuma 7-5 hafta kala ilk doz, 4-2 hafta kala rapel (Kolostrum koruması).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 5. ACİL İLK YARDIM ================= -->
+    <section id="tab-emergency" class="tab-section">
+      <div class="banner-alert banner-danger">
+        ⚠️ <strong>ÖNEMLİ:</strong> Bu protokoller veteriner hekim çiftliğe ulaşana kadar hastanın yaşama şansını artırmak için acil ilk yardım adımlarıdır.
+      </div>
+
+      <!-- Canlı Ağırlık Doz Hesaplayıcı -->
+      <div class="card">
+        <div class="card-title">⚖️ Acil Adrenalin Doz Hesaplayıcı (Anafilaktik Şok)</div>
+        <label for="emergency-weight">Hayvanın Tahmini Canlı Ağırlığı (kg):</label>
+        <div style="display:flex; gap:8px;">
+          <input type="number" id="emergency-weight" value="450" step="25" oninput="calculateEpiDose()">
+          <div style="background:#fee2e2; color:#b91c1c; padding:8px 12px; border-radius:6px; font-weight:800; font-size:1.1rem; white-space:nowrap; display:flex; align-items:center;" id="epi-dose-result">
+            10.0 mL
+          </div>
+        </div>
+        <small style="color:#64748b; font-size:0.75rem;">Kural: 1:1000 Adrenalin Solüsyonundan her 45 kg canlı ağırlık için 1 mL (SC veya IM)</small>
+      </div>
+
+      <!-- Acil Kartlar -->
+      <div class="emergency-card" onclick="toggleEmergency('em-anaphylaxis')">
+        <h3><span>💉 Anafilaktik Şok (Aşı/İlaç Sonrası Yere Yıkılma)</span> <span>▼</span></h3>
+        <div id="em-anaphylaxis" class="emergency-details">
+          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>Kaynak:</strong> Merck Veterinary Manual 11th Ed. - Emergency & Critical Care Protocol</p>
+          <ol style="padding-left:18px; line-height:1.6;">
+            <li><strong>Enjeksiyonu Derhal Durdurun!</strong> Hayvan aşı veya ilaç sırasında/hemen sonrasında titreyip düşmüşse ilacı kesin.</li>
+            <li><strong>Epinefrin (Adrenalin 1:1000):</strong> Yukarıdaki hesaplayıcıdan çıkan dozu (her 45 kg canlı ağırlık için 1 mL / 0.01-0.02 mg/kg) derhal Deri Altı (SC) veya Kas İçi (IM) uygulayın.</li>
+            <li><strong>Solunum Yolunu Açın:</strong> Baş ve boynu düz bir hat halinde uzatın, dili yana çekin, salya akışını sağlayın.</li>
+            <li>Veteriner hekimi derhal arayın. Cevap alınamazsa 15–20 dakika sonra adrenalin dozunun yarısı tekrarlanabilir.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="emergency-card" onclick="toggleEmergency('em-bloat')">
+        <h3><span>🎈 Akut Rumen Şişkinliği (Gaz & Köpüklü Bloat / Timpani)</span> <span>▼</span></h3>
+        <div id="em-bloat" class="emergency-details">
+          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>Kaynak:</strong> Merck Veterinary Manual 11th Ed. - Diseases of the Forestomach (p. 227-230)</p>
+          <ol style="padding-left:18px; line-height:1.6;">
+            <li><strong>Sol Açlık Çukurunu İnceleyin:</strong> Sol karın duvarı omurga hizasını geçmişse ve nefes darlığı (ağızdan soluma, dil dışarıda) varsa hayati tehlike vardır.</li>
+            <li><strong>Mide Sondası (Stomach Tube):</strong> En kalın boy sonda takılarak serbest gaz tahliyesi denenir.</li>
+            <li><strong>Köpüklü Şişkinlik (Frothy Bloat) Sağıtımı:</strong> Sondayla köpük söndürücü yüzey aktif ajan verilir:
+              <br>• <strong>Poloxalene:</strong> 25–50 g PO (Merck Vet standart protokolü) veya
+              <br>• <strong>Bitkisel Yağlar (Soya, Fıstık, Ayçiçek yağı):</strong> 250–500 mL drench olarak verilir.</li>
+            <li><strong>Acil Trokar Uygulaması:</strong> Boğulma riski olan ve sondanın rahatlatmadığı vakalarda sol açlık çukurunun en kabarık noktasına geniş çaplı steril trokar/kanül batırılarak gaz yavaşça tahliye edilir; kanülden köpük kırıcı yağ verilebilir.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="emergency-card" onclick="toggleEmergency('em-prolapse')">
+        <h3><span>🔴 Uterus Prolapsusu (Rahim Düşmesi / Doğum Sonrası)</span> <span>▼</span></h3>
+        <div id="em-prolapse" class="emergency-details">
+          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>Kaynak:</strong> Merck Veterinary Manual 11th Ed. - Uterine Prolapse & Eversion (p. 1390)</p>
+          <ol style="padding-left:18px; line-height:1.6;">
+            <li><strong>Organı Koruyun:</strong> Dışarı çıkan rahmi asla kuru bırakmayın, toprak/çamur/dışkı ile temasını engelleyin.</li>
+            <li><strong>Temiz Nemli Bezle Örtün ve Yükseltin:</strong> Ilık steril/temiz tuzlu suyla ıslatılmış çarşaf ile organı sarın. Uterin arter yırtılmasını ve mesane basıncını önlemek için rahmi vulva hizasına yükseltin. Hayvan yatıyorsa arka tarafı yüksek pozisyona getirin.</li>
+            <li><strong>Ödem Azaltıcı:</strong> Merck Vet önerisi: Rahim yüzeyine gliserol uygulanması ödemi azaltır ve kayganlık sağlar.</li>
+            <li><strong>Hekim Müdahalesi:</strong> Epidural anestezi sonrası organ serviksten başlayarak kornu uçlarına doğru içeri itilir. Organ yerine oturtulduktan sonra kornu uçlarında kıvrım kalmadığı elle kontrol edilir ve tonus artışı için Oksitosin uygulanır.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="emergency-card" onclick="toggleEmergency('em-milk-fever')">
+        <h3><span>📉 Süt Humması (Hipokalsemi / Doğum Felci - Parturient Paresis)</span> <span>▼</span></h3>
+        <div id="em-milk-fever" class="emergency-details">
+          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>Kaynak:</strong> Merck Veterinary Manual 11th Ed. - Disorders of Calcium Metabolism (p. 988-990)</p>
+          <ol style="padding-left:18px; line-height:1.6;">
+            <li><strong>Evre Değerlendirmesi:</strong>
+              <br>• <em>Evre 1:</em> Ayakta, titreme, huzursuzluk.
+              <br>• <em>Evre 2:</em> Göğüs üstü (sternal) yatan, başını böğrüne dayayan, kuru burun, soğuk kulaklar/ekstremiteler, zayıf nabız.
+              <br>• <em>Evre 3:</em> Yan yatan, koma, şişkinlik ve tam felç hali.</li>
+            <li><strong>Kalsiyum Boroglukonat (%23) IV Tedavisi:</strong> Yatan ineğe 500 mL şişe (8-11 g kalsiyum - 1 g Ca / 45 kg canlı ağırlık) <strong>en az 10–20 dakikada çok yavaş</strong> IV verilir. Hızlı verilirse kardiyotoksiktir (kalp durur)! Kalp dinlenmeli, ritim bozulursa durulmalıdır.</li>
+            <li><strong>Nüksün Önlenmesi ve Oral Kalsiyum:</strong> İyileşen ineklerin %25-30'u 24-48 saatte nükseder. Ayakta olan veya yutkunabilen ineklere kalsiyum propiyonat jeli/bolusu verilir. Yutkunamayan veya komadaki hayvana kesinlikle oral verilmez (aspirasyon pnömonisi riski).</li>
+            <li>Yatan ineğin mutlaka sternal (göğüs üstü) pozisyonda kalması sağlanmalı, yan yatırılmamalıdır.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. SAĞIMCI MODU ================= -->
+    <section id="tab-milker" class="tab-section">
+      <div class="card">
+        <div class="card-title">👨‍🌾 Sağımhane Hızlı Kontrol Paneli</div>
+        <p style="font-size:0.85rem; color:#475569; margin-bottom:12px;">
+          Sağımcı için büyük harfli hızlı kontrol. Küpe numarasını yazın veya seçin:
+        </p>
+
+        <input type="text" id="milker-search" placeholder="Örn: TR16001" oninput="checkMilkerStatus()" style="font-size:1.2rem; font-weight:800; padding:12px; text-transform:uppercase;">
+
+        <div id="milker-result-box" style="margin-top:14px;">
+          <div class="milker-status-box milker-green">
+            🟢 SAĞIMA UYGUN
+            <div style="font-size:0.85rem; font-weight:400; margin-top:4px;">Kalıntı veya hastalık engeli yok.</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px; border: 1.5px solid #ef4444;">
+          <div style="font-weight:700; color:#b91c1c; margin-bottom:6px;">🚫 ŞU AN TANKA SAĞILMASI YASAK TÜM İNEKLER:</div>
+          <ul id="milker-blocked-list" style="padding-left:18px; font-weight:700; font-size:0.95rem; color:#b91c1c;">
+            <li>Yasaklı hayvan yok.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="border: 1px dashed #94a3b8; background: #f8fafc;">
+        <div class="card-title" style="font-size:0.9rem; color:#475569;">💾 Çevrimdışı Veri Yedekleme & Aktarım</div>
+        <p style="font-size:0.75rem; color:#64748b; margin-bottom:8px;">
+          Tüm veriler cihazınızda saklanır. Başka bir telefona veya bilgisayara aktarmak için yedek alabilir veya geri yükleyebilirsiniz.
+        </p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+          <button class="btn btn-outline" style="font-size:0.8rem; padding:8px;" onclick="exportDataJson()">📥 Yedeği İndir (JSON)</button>
+          <label class="btn btn-outline" style="font-size:0.8rem; padding:8px; margin-bottom:0; cursor:pointer; text-align:center;">
+            📤 Yedeği Yükle
+            <input type="file" id="backup-file-input" accept=".json" onchange="importDataJson(event)" style="display:none;">
+          </label>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Alt Menü (Bottom Bar) -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="switchTab('dashboard')">
+      <span class="nav-icon">📊</span>
+      <span>Özet</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('triage')">
+      <span class="nav-icon">🚨</span>
+      <span>Triyaj</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('ikas')">
+      <span class="nav-icon">💊</span>
+      <span>İKAS/İlaç</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('vaccine')">
+      <span class="nav-icon">📅</span>
+      <span>Aşı</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('emergency')">
+      <span class="nav-icon">🆘</span>
+      <span>İlk Yardım</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('milker')">
+      <span class="nav-icon">🥛</span>
+      <span>Sağımcı</span>
+    </button>
+  </nav>
+
+  <!-- Hayvan Ekleme Modalı (Sadeleştirilmiş Div) -->
+  <div id="modal-animal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:200; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:white; border-radius:10px; max-width:400px; width:100%; padding:16px;">
+      <h3 style="margin-bottom:10px; color:var(--primary);">➕ Yeni Hayvan Kaydı</h3>
+      
+      <label for="new-eartag">Kulak Küpe No (TÜRKVET):</label>
+      <input type="text" id="new-eartag" placeholder="TR1600123456">
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div>
+          <label for="new-gender">Cinsiyet:</label>
+          <select id="new-gender">
+            <option value="Dişi">Dişi</option>
+            <option value="Erkek">Erkek</option>
+          </select>
+        </div>
+        <div>
+          <label for="new-type">Üretim:</label>
+          <select id="new-type">
+            <option value="Süt">Süt</option>
+            <option value="Besi">Besi</option>
+            <option value="Damızlık">Damızlık</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div>
+          <label for="new-age">Yaş / Ay:</label>
+          <input type="number" id="new-age" value="24">
+        </div>
+        <div>
+          <label for="new-bcs">VKS (1.0 - 5.0):</label>
+          <input type="number" id="new-bcs" step="0.25" value="3.0">
+        </div>
+      </div>
+
+      <label>
+        <input type="checkbox" id="new-quarantine" style="width:auto; margin-right:6px;">
+        Yeni geldi, 30–42 günlük karantinaya al
+      </label>
+
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button class="btn btn-outline" onclick="closeAnimalModal()">İptal</button>
+        <button class="btn btn-primary" onclick="saveNewAnimal()">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aşı Ekleme Modalı -->
+  <div id="modal-vaccine" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:200; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:white; border-radius:10px; max-width:400px; width:100%; padding:16px;">
+      <h3 style="margin-bottom:10px; color:var(--primary);">💉 Aşı Uygulama Kaydı</h3>
+      
+      <label for="vac-animal-select">Hayvan Seç:</label>
+      <select id="vac-animal-select"></select>
+
+      <label for="vac-type-select">Aşı Türü:</label>
+      <select id="vac-type-select">
+        <option value="Şap (FMD)">Şap (FMD) [Zorunlu - Bakanlık]</option>
+        <option value="Bruselloz (S19)">Bruselloz S19 [Zorunlu - Dişi 3-6 Ay]</option>
+        <option value="LSD (Sığır Çiçeği)">LSD (Nodüler Ekzantem) [Zorunlu]</option>
+        <option value="BRD Karma Solunum">BRD Karma Solunum (IBR, BVD, PI3, BRSV)</option>
+        <option value="Klostridyal Karma (Yanıkara)">Klostridyal Karma (Yanıkara / Enterotoksemi)</option>
+        <option value="Buzağı İshal Aşısı">Gebe İnek Buzağı İshal Aşısı (E. coli, Rota, Corona)</option>
+      </select>
+
+      <label for="vac-date">Uygulama Tarihi:</label>
+      <input type="date" id="vac-date">
+
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button class="btn btn-outline" onclick="closeVaccineModal()">İptal</button>
+        <button class="btn btn-primary" onclick="saveVaccineRecord()">Uygulandı Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       VERİTABANI VE YEREL DEPOLAMA (LOCALSTORAGE - ÇEVRİMDIŞI)
+       ========================================================================= */
+
+    // Referans İlaç Kataloğu (Merck Veterinary Manual 11. Baskı ve Yasal İKAS Değerleri)
+    const DRUG_CATALOG = [
+      { id: "florfenicol", name: "Florfenikol", milkHours: 0, meatDays: 30, lactatingForbidden: true, note: "Merck Vet: Laktasyondaki süt ineklerinde kullanılmaz! Et arınma: 28-30 gün." },
+      { id: "meloxicam", name: "Meloksikam (NSAID)", milkHours: 120, meatDays: 15, lactatingForbidden: false, note: "Merck Vet: Süt İKAS: 120 saat (5 gün). Et İKAS: 15 gün." },
+      { id: "flunixin", name: "Fluniksin Meglumin", milkHours: 48, meatDays: 5, lactatingForbidden: false, note: "Merck Vet: Süt İKAS: 48 saat (36-48 sa). Et İKAS: 4-5 gün." },
+      { id: "ketoprofen", name: "Ketoprofen", milkHours: 0, meatDays: 4, lactatingForbidden: false, note: "Merck Vet: Süt İKAS: 0 saat. Et İKAS: 1-4 gün." },
+      { id: "ceftiofur", name: "Seftiofur", milkHours: 0, meatDays: 4, lactatingForbidden: false, note: "Merck Vet Tablo: Süt İKAS: 0 saat. Et İKAS: 2-4 gün." },
+      { id: "tulathromycin", name: "Tulatromisin (Makrolid)", milkHours: 0, meatDays: 18, lactatingForbidden: true, note: "Merck Vet Tablo 50: Doz: 2.5 mg/kg SC tek doz. Et İKAS: 18 gün. Süt ineklerinde kullanılmaz." },
+      { id: "tilmicosin", name: "Tilmikosin (Makrolid)", milkHours: 0, meatDays: 28, lactatingForbidden: true, note: "Merck Vet Tablo 50: Doz: 10 mg/kg SC tek doz. Et İKAS: 28 gün. Süt veren ineklerde kullanılmaz." },
+      { id: "tylosin", name: "Tilosin (Makrolid)", milkHours: 96, meatDays: 21, lactatingForbidden: false, note: "Merck Vet Tablo 50: Doz: 10-20 mg/kg IM. Süt İKAS: 96 saat (4 gün). Et İKAS: 21 gün." },
+      { id: "penicillin_g", name: "Prokain Penisilin G", milkHours: 72, meatDays: 10, lactatingForbidden: false, note: "Merck Vet Tablo: Doz etiketinde Süt İKAS: 72 saat (3 gün). Et İKAS: 10 gün (Yüksek dozda 30 gün)." },
+      { id: "amoxicillin", name: "Amoksisilin", milkHours: 48, meatDays: 30, lactatingForbidden: false, note: "Merck Vet Tablo: Süt İKAS: 48 saat (2 gün). Et İKAS: 30 gün." },
+      { id: "oxytetracycline_la", name: "Oksitetrasiklin (Uzun Etkili LA)", milkHours: 0, meatDays: 28, lactatingForbidden: true, note: "Merck Vet Tablo 43: Doz: 20 mg/kg IM/SC. Süt veren ineklerde kullanılmaz! Et İKAS: 28 gün." },
+      { id: "cephapirin_imm", name: "Sodyum Sefapirin (Meme İçi)", milkHours: 96, meatDays: 4, lactatingForbidden: false, note: "Merck Vet Tablo: Meme içi mastitis sağıtımı. Süt İKAS: 96 saat (4 gün). Et İKAS: 4 gün." },
+      { id: "sulfamethazine", name: "Sülfametazin (Sülfonamid)", milkHours: 96, meatDays: 10, lactatingForbidden: false, note: "Merck Vet Tablo 42: Süt İKAS: 96 saat (4 gün). Et İKAS: 10 gün." },
+      { id: "enrofloxacin", name: "Enrofloksasin (Florokinolon)", milkHours: 168, meatDays: 14, lactatingForbidden: true, note: "Merck Vet: YASAK: Tüketime süt veren laktasyondaki sığırlarda kesinlikle kullanılmaz!" },
+      { id: "ivermectin", name: "İvermektin (Antiparaziter)", milkHours: 672, meatDays: 28, lactatingForbidden: true, note: "Merck Vet: YASAK: Süt veren ineklerde kesinlikle kullanılmaz! Et arınma: 28 gün." }
+    ];
+
+    // Varsayılan Başlangıç Verileri (İlk açılışta yüklenir)
+    const DEFAULT_ANIMALS = [
+      { id: "TR16001", earTag: "TR16001", gender: "Dişi", type: "Süt", ageMonths: 36, bcs: 3.25, quarantine: false, lastStatus: "Sağlıklı" },
+      { id: "TR16002", earTag: "TR16002", gender: "Dişi", type: "Süt", ageMonths: 28, bcs: 2.75, quarantine: false, lastStatus: "Sağlıklı" },
+      { id: "TR16003", earTag: "TR16003", gender: "Erkek", type: "Besi", ageMonths: 14, bcs: 3.5, quarantine: false, lastStatus: "Sağlıklı" },
+      { id: "TR16004", earTag: "TR16004", gender: "Dişi", type: "Damızlık", ageMonths: 4, bcs: 3.0, quarantine: true, lastStatus: "Karantinada (38 gün kaldı)" },
+      { id: "TR16005", earTag: "TR16005", gender: "Dişi", type: "Süt", ageMonths: 42, bcs: 3.0, quarantine: false, lastStatus: "Sağlıklı" }
+    ];
+
+    // LocalStorage Yardımcıları
+    function getStore(key, defaultVal) {
+      const data = localStorage.getItem("cattlesys_" + key);
+      return data ? JSON.parse(data) : defaultVal;
+    }
+    function setStore(key, val) {
+      localStorage.setItem("cattlesys_" + key, JSON.stringify(val));
+    }
+
+    // Uygulama Durumu (State)
+    let animals = getStore("animals", DEFAULT_ANIMALS);
+    let treatments = getStore("treatments", []);
+    let triageRecords = getStore("triage", []);
+    let vaccineRecords = getStore("vaccines", [
+      { id: 1, animalId: "TR16001", vaccine: "Şap (FMD)", date: "2026-08-10", boosterDate: "2026-09-10", mandatory: true, turkvet: true },
+      { id: 2, animalId: "TR16004", vaccine: "Bruselloz (S19)", date: "2026-09-15", boosterDate: "Tek Doz", mandatory: true, turkvet: true }
+    ]);
+
+    // DART Skorları için anlık seçimler
+    let currentDart = { d: 0, a: 0, r: 0, t: 0 };
+
+    /* =========================================================================
+       BAŞLANGIÇ ÇALIŞTIRMA VE ARAYÜZ YÖNETİMİ
+       ========================================================================= */
+    window.addEventListener("DOMContentLoaded", () => {
+      // Varsayılan tarihleri ayarla
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      document.getElementById("treatment-date").value = now.toISOString().slice(0, 16);
+      document.getElementById("vac-date").value = now.toISOString().slice(0, 10);
+
+      initDrugSelect();
+      populateAnimalSelects();
+      renderAnimalTable();
+      renderActiveIkasTable();
+      renderVaccineRecords();
+      updateDashboardStats();
+      calculateTriage();
+      calculateEpiDose();
+
+      // Periyodik kontrol (Canlı sayaçlar için her dakika çalışır)
+      setInterval(() => {
+        renderActiveIkasTable();
+        updateDashboardStats();
+      }, 60000);
+    });
+
+    // Sekme Değiştirme
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-section").forEach(sec => sec.classList.remove("active"));
+      document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("active"));
+
+      const targetSec = document.getElementById("tab-" + tabId);
+      if (targetSec) targetSec.classList.add("active");
+
+      // Menü aktifliği
+      const navButtons = document.querySelectorAll(".nav-item");
+      const mapping = { dashboard: 0, triage: 1, ikas: 2, vaccine: 3, emergency: 4, milker: 5 };
+      if (navButtons[mapping[tabId]]) {
+        navButtons[mapping[tabId]].classList.add("active");
+      }
+
+      window.scrollTo(0, 0);
+      if (tabId === "milker") checkMilkerStatus();
+    }
+
+    // İlaç Seçiciyi Doldur
+    function initDrugSelect() {
+      const select = document.getElementById("treatment-drug-select");
+      select.innerHTML = "";
+      DRUG_CATALOG.forEach(drug => {
+        const opt = document.createElement("option");
+        opt.value = drug.id;
+        opt.textContent = `${drug.name} (Süt: ${drug.milkHours} sa, Et: ${drug.meatDays} g)`;
+        select.appendChild(opt);
+      });
+      onDrugSelectChange();
+    }
+
+    // Hayvan Seçicileri Güncelle
+    function populateAnimalSelects() {
+      const triageSelect = document.getElementById("triage-animal-select");
+      const treatSelect = document.getElementById("treatment-animal-select");
+      const vacSelect = document.getElementById("vac-animal-select");
+
+      [triageSelect, treatSelect, vacSelect].forEach(sel => {
+        if (!sel) return;
+        sel.innerHTML = "";
+        animals.forEach(a => {
+          const opt = document.createElement("option");
+          opt.value = a.id;
+          opt.textContent = `${a.earTag} (${a.type} - ${a.gender})`;
+          sel.appendChild(opt);
+        });
+      });
+    }
+
+    /* =========================================================================
+       1. GÖSTERGE PANELİ VE İSTATİSTİKLER
+       ========================================================================= */
+    function updateDashboardStats() {
+      document.getElementById("stat-total-animals").textContent = animals.length;
+
+      const now = new Date();
+      let activeIkasCount = 0;
+      let blockedEarTags = [];
+
+      treatments.forEach(t => {
+        const milkEnd = new Date(t.milkSafeDate);
+        if (milkEnd > now) {
+          activeIkasCount++;
+          if (!blockedEarTags.includes(t.earTag)) blockedEarTags.push(t.earTag);
+        }
+      });
+
+      document.getElementById("stat-ikas-blocked").textContent = blockedEarTags.length;
+      document.getElementById("stat-quarantine").textContent = animals.filter(a => a.quarantine).length;
+      document.getElementById("stat-upcoming-vaccines").textContent = vaccineRecords.length;
+
+      // Kritik Bildirim Kutusu
+      const alertBox = document.getElementById("active-alert-box");
+      if (blockedEarTags.length > 0) {
+        alertBox.innerHTML = `
+          <div class="banner-alert banner-danger">
+            🚫 <strong>DİKKAT:</strong> ${blockedEarTags.join(", ")} küpeli ineklerin sütünde antibiyotik kısıtı vardır! Tank sütüne sağmayın!
+          </div>
+        `;
+      } else {
+        alertBox.innerHTML = `
+          <div class="banner-alert banner-success">
+            ✅ Sürüde aktif süt arınma kısıtı (İKAS) bulunmamaktadır. Tüm sütler tanka uygundur.
+          </div>
+        `;
+      }
+
+      // İKAS Özet Listesi
+      const ikasList = document.getElementById("dashboard-ikas-list");
+      if (blockedEarTags.length > 0) {
+        ikasList.innerHTML = `<strong>Kısıtlı Hayvanlar:</strong> ` + blockedEarTags.map(tag => `<span class="tag tag-danger">${tag}</span>`).join(" ");
+      } else {
+        ikasList.innerHTML = "Aktif süt arınma kısıtı yok.";
+      }
+    }
+
+    function renderAnimalTable() {
+      const tbody = document.querySelector("#animal-table tbody");
+      const search = (document.getElementById("animal-search").value || "").toLowerCase();
+      tbody.innerHTML = "";
+
+      const filtered = animals.filter(a => a.earTag.toLowerCase().includes(search));
+
+      filtered.forEach(a => {
+        const tr = document.createElement("tr");
+
+        let bcsClass = "tag-success";
+        if (a.bcs <= 2.0 || a.bcs >= 3.75) bcsClass = "tag-danger";
+
+        tr.innerHTML = `
+          <td><strong>${a.earTag}</strong></td>
+          <td>${a.gender} / ${a.ageMonths} ay</td>
+          <td><span class="tag ${bcsClass}">${a.bcs.toFixed(2)}</span></td>
+          <td>${a.quarantine ? '<span class="tag tag-warning">Karantinada</span>' : 'Hayır'}</td>
+          <td><small>${a.lastStatus || 'Normal'}</small></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* =========================================================================
+       2. TRİYAJ VE DART SKORLAMA MOTORU
+       ========================================================================= */
+    function setScore(metric, val, btn) {
+      currentDart[metric] = val;
+      document.getElementById("score-val-" + metric).textContent = val + "/3";
+
+      const container = btn.parentElement;
+      container.querySelectorAll(".score-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+
+      calculateTriage();
+    }
+
+    function calculateTriage() {
+      const temp = parseFloat(document.getElementById("vital-temp").value) || 38.5;
+      const pulse = parseInt(document.getElementById("vital-pulse").value) || 60;
+      const resp = parseInt(document.getElementById("vital-resp").value) || 30;
+      const rumen = document.getElementById("vital-rumen").value;
+      const dehydration = parseInt(document.getElementById("vital-dehydration").value) || 0;
+
+      // Ateş skoru DART formülü
+      let tScore = 0;
+      if (temp >= 40.0) tScore = 3;
+      else if (temp >= 39.5) tScore = 2;
+      else if (temp >= 39.4) tScore = 1;
+      else tScore = 0;
+
+      currentDart.t = tScore;
+      document.getElementById("score-val-t").textContent = tScore + "/3";
+
+      const totalDart = currentDart.d + currentDart.a + currentDart.r + currentDart.t;
+
+      // Ateş Uyarı Metni
+      const tempHint = document.getElementById("temp-hint");
+      if (temp >= 39.5) {
+        tempHint.innerHTML = `<span style="color:var(--danger); font-weight:700;">⚠️ YÜKSEK ATEŞ (>39.5°C)</span>`;
+      } else {
+        tempHint.textContent = "Normal: 38.0 - 39.3°C";
+      }
+
+      // Karar Algoritması
+      const resultBox = document.getElementById("triage-result-box");
+      let category = "HAFİF / NORMAL";
+      let bannerType = "banner-success";
+      let actionText = "Rutin gözleme devam edin. Belirgin bir acil patoloji saptanmadı.";
+
+      // Hayati Tehlike / Şiddetli Triyaj Kriterleri
+      const isShock = pulse > 90 || temp > 40.5 || dehydration >= 9 || rumen === "0";
+
+      if (isShock || totalDart >= 7) {
+        category = "ŞİDDETLİ (SİSTEMİK ŞOK & KRİTİK BRD)";
+        bannerType = "banner-danger";
+        actionText = `🚨 <strong>ACİL MÜDAHALE GEREKLİ!</strong><br>
+        • DART Skoru: <strong>${totalDart}/12</strong> (Yüksek Risk)<br>
+        • Hayvanı derhal İzolasyon Padoğuna alın.<br>
+        • Serum/Sıvı Tedavisi ve Hekim Onaylı Agresif Antibiyotik + NSAID (Meloksikam) protokolü uygulayın.<br>
+        • Rumen durmuş ise sindirim stazı protokolü başlatın.`;
+      } else if (totalDart >= 4 || temp >= 39.5 || rumen === "1" || dehydration >= 6) {
+        category = "ORTA DERECE (TEDAVİ BAŞLAT)";
+        bannerType = "banner-warning";
+        actionText = `⚠️ <strong>TEDAVİ BAŞLATILMALI:</strong><br>
+        • DART Skoru: <strong>${totalDart}/12</strong><br>
+        • Ateş düşürücü ve veteriner hekim reçeteli antibiyotik tedavisi uygulayın.<br>
+        • 24 saat sonra DART skorunu tekrar kaydedin.`;
+      }
+
+      resultBox.innerHTML = `
+        <div class="banner-alert ${bannerType}">
+          <div>
+            <div style="font-size:1rem; font-weight:800; margin-bottom:4px;">Kategori: ${category}</div>
+            <div style="font-size:0.85rem;">${actionText}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveTriageRecord() {
+      const animalId = document.getElementById("triage-animal-select").value;
+      const animal = animals.find(a => a.id === animalId);
+      if (!animal) return;
+
+      const totalDart = currentDart.d + currentDart.a + currentDart.r + currentDart.t;
+      const temp = parseFloat(document.getElementById("vital-temp").value);
+
+      // Otomatik DART Tetikleyicisi (total_dart_score >= 4 ise karantina uyarısı)
+      if (totalDart >= 4) {
+        animal.quarantine = true;
+        animal.lastStatus = `Hasta (DART: ${totalDart}, Ateş: ${temp}°C) - İzolasyona Alındı`;
+      } else {
+        animal.lastStatus = `Kontrol Edildi (DART: ${totalDart})`;
+      }
+
+      triageRecords.push({
+        id: Date.now(),
+        animalId: animal.id,
+        date: new Date().toISOString(),
+        dartScore: totalDart,
+        temp: temp
+      });
+
+      setStore("animals", animals);
+      setStore("triage", triageRecords);
+      renderAnimalTable();
+      updateDashboardStats();
+
+      alert(`✅ ${animal.earTag} triyajı kaydedildi!\nToplam DART Skoru: ${totalDart}\nDurum güncellendi.`);
+      switchTab("dashboard");
+    }
+
+    /* =========================================================================
+       3. İKAS VE İLAÇ ETKİLEŞİM MOTORU (GIDA GÜVENLİĞİ)
+       ========================================================================= */
+    function onDrugSelectChange() {
+      const drugId = document.getElementById("treatment-drug-select").value;
+      const drug = DRUG_CATALOG.find(d => d.id === drugId);
+      const warnBox = document.getElementById("drug-warning-banner");
+      const previewBox = document.getElementById("calculated-ikas-preview");
+
+      if (!drug) return;
+
+      if (drug.lactatingForbidden) {
+        warnBox.innerHTML = `
+          <div class="banner-alert banner-danger">
+            ⛔ <strong>GIDA GÜVENLİĞİ YASAĞI:</strong> ${drug.name} etken maddesi laktasyondaki süt ineklerinde kesinlikle kullanılamaz!
+          </div>
+        `;
+      } else {
+        warnBox.innerHTML = `
+          <div class="banner-alert banner-info">
+            ℹ️ ${drug.note}
+          </div>
+        `;
+      }
+
+      // Canlı Önizleme
+      const applyDateVal = document.getElementById("treatment-date").value;
+      if (applyDateVal) {
+        const applyDate = new Date(applyDateVal);
+        const milkEnd = new Date(applyDate.getTime() + drug.milkHours * 3600 * 1000);
+        const meatEnd = new Date(applyDate.getTime() + drug.meatDays * 24 * 3600 * 1000);
+
+        previewBox.style.display = "block";
+        previewBox.innerHTML = `
+          ⏱️ <strong>Hesaplanan İKAS Süreleri:</strong><br>
+          • <strong>Süt Satışına Uygun Tarih:</strong> ${drug.milkHours === 0 ? 'Sıfır Gün (Serbest)' : milkEnd.toLocaleString('tr-TR')}<br>
+          • <strong>Kesime Uygun Tarih:</strong> ${meatEnd.toLocaleDateString('tr-TR')} (${drug.meatDays} Gün Sonra)
+        `;
+      }
+    }
+
+    function saveTreatment() {
+      const animalId = document.getElementById("treatment-animal-select").value;
+      const drugId = document.getElementById("treatment-drug-select").value;
+      const dose = document.getElementById("treatment-dose").value;
+      const route = document.getElementById("treatment-route").value;
+      const applyDateVal = document.getElementById("treatment-date").value;
+      const vet = document.getElementById("treatment-vet").value || "Sorumlu Veteriner Hekim";
+
+      if (!applyDateVal) {
+        alert("Lütfen uygulama tarih ve saatini girin.");
+        return;
+      }
+
+      const animal = animals.find(a => a.id === animalId);
+      const drug = DRUG_CATALOG.find(d => d.id === drugId);
+
+      const applyDate = new Date(applyDateVal);
+      let milkEndDate = new Date(applyDate.getTime() + drug.milkHours * 3600 * 1000);
+      let meatEndDate = new Date(applyDate.getTime() + drug.meatDays * 24 * 3600 * 1000);
+
+      // KOMBİNE TEDAVİ KURALI:
+      // Eğer bu hayvana daha önce uygulanan ve henüz süresi bitmemiş başka ilaç varsa,
+      // en uzun İKAS süresi esas alınır!
+      treatments.forEach(prev => {
+        if (prev.animalId === animal.id) {
+          const prevMilkEnd = new Date(prev.milkSafeDate);
+          const prevMeatEnd = new Date(prev.meatSafeDate);
+          if (prevMilkEnd > milkEndDate) milkEndDate = prevMilkEnd;
+          if (prevMeatEnd > meatEndDate) meatEndDate = prevMeatEnd;
+        }
+      });
+
+      const newTreatment = {
+        id: Date.now(),
+        animalId: animal.id,
+        earTag: animal.earTag,
+        drugName: drug.name,
+        dose: dose + " mL (" + route + ")",
+        appliedAt: applyDate.toISOString(),
+        milkSafeDate: milkEndDate.toISOString(),
+        meatSafeDate: meatEndDate.toISOString(),
+        vet: vet
+      };
+
+      treatments.push(newTreatment);
+      setStore("treatments", treatments);
+
+      // Hayvan son durumunu güncelle
+      animal.lastStatus = `Tedavi Görmekte (${drug.name})`;
+      setStore("animals", animals);
+
+      renderActiveIkasTable();
+      updateDashboardStats();
+      alert(`✅ Tedavi kaydedildi!\n${animal.earTag} için Süt Engel Saati: ${milkEndDate.toLocaleString('tr-TR')}\nSağımcı ekranına otomatik yasak gönderildi.`);
+      switchTab("dashboard");
+    }
+
+    function renderActiveIkasTable() {
+      const tbody = document.querySelector("#active-ikas-table tbody");
+      tbody.innerHTML = "";
+      const now = new Date();
+
+      if (treatments.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#94a3b8;">Kayıtlı tedavi bulunmuyor.</td></tr>`;
+        return;
+      }
+
+      treatments.forEach(t => {
+        const milkEnd = new Date(t.milkSafeDate);
+        const meatEnd = new Date(t.meatSafeDate);
+
+        const isMilkBlocked = milkEnd > now;
+        const isMeatBlocked = meatEnd > now;
+
+        const tr = document.createElement("tr");
+
+        let remainingMilkText = "Serbest";
+        if (isMilkBlocked) {
+          const diffMs = milkEnd - now;
+          const diffHrs = Math.floor(diffMs / (3600 * 1000));
+          const diffMins = Math.floor((diffMs % (3600 * 1000)) / (60 * 1000));
+          remainingMilkText = `<span class="tag tag-danger">YASAK (${diffHrs} sa ${diffMins} dk kaldı)</span>`;
+        } else {
+          remainingMilkText = `<span class="tag tag-success">Serbest</span>`;
+        }
+
+        let remainingMeatText = isMeatBlocked 
+          ? `<span class="tag tag-warning">${meatEnd.toLocaleDateString('tr-TR')}</span>`
+          : `<span class="tag tag-success">Serbest</span>`;
+
+        tr.innerHTML = `
+          <td><strong>${t.earTag}</strong></td>
+          <td>${t.drugName}</td>
+          <td>${remainingMilkText}</td>
+          <td>${remainingMeatText}</td>
+          <td><button class="btn btn-outline" style="padding:4px 8px; font-size:0.75rem;" onclick="deleteTreatment(${t.id})">Sil</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deleteTreatment(id) {
+      if (!confirm("Bu tedavi kaydını silmek istediğinize emin misiniz?")) return;
+      treatments = treatments.filter(t => t.id !== id);
+      setStore("treatments", treatments);
+      renderActiveIkasTable();
+      updateDashboardStats();
+    }
+
+    /* =========================================================================
+       4. AŞILAMA TAKVİMİ MOTORU
+       ========================================================================= */
+    function renderVaccineRecords() {
+      const tbody = document.querySelector("#vaccine-records-table tbody");
+      tbody.innerHTML = "";
+
+      if (vaccineRecords.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8;">Kayıtlı aşı yok.</td></tr>`;
+        return;
+      }
+
+      vaccineRecords.forEach(v => {
+        const animal = animals.find(a => a.id === v.animalId) || { earTag: v.animalId };
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${animal.earTag}</strong></td>
+          <td>${v.vaccine}</td>
+          <td>${v.mandatory ? '<span class="badge-mandatory">Bakanlık Zorunlu</span>' : '<span class="tag tag-info">İşletme</span>'}</td>
+          <td>${v.date}</td>
+          <td><strong>${v.boosterDate}</strong></td>
+          <td>${v.turkvet ? '✅ Senkronize' : '⏳ Bekliyor'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openVaccineModal() {
+      document.getElementById("modal-vaccine").style.display = "flex";
+    }
+    function closeVaccineModal() {
+      document.getElementById("modal-vaccine").style.display = "none";
+    }
+
+    function saveVaccineRecord() {
+      const animalId = document.getElementById("vac-animal-select").value;
+      const vacType = document.getElementById("vac-type-select").value;
+      const dateVal = document.getElementById("vac-date").value;
+
+      if (!dateVal) {
+        alert("Lütfen aşı tarihini seçin.");
+        return;
+      }
+
+      // Rapel kuralı hesaplama (Şap: 30 gün, LSD: 30 gün, BRD: 21 gün)
+      const d = new Date(dateVal);
+      let boosterText = "Yıllık Tekrar";
+      let isMandatory = vacType.includes("Şap") || vacType.includes("Bruselloz") || vacType.includes("LSD");
+
+      if (vacType.includes("Şap") || vacType.includes("LSD")) {
+        const b = new Date(d.getTime() + 30 * 24 * 3600 * 1000);
+        boosterText = b.toISOString().slice(0, 10) + " (30 gün sonra rapel)";
+      } else if (vacType.includes("BRD")) {
+        const b = new Date(d.getTime() + 21 * 24 * 3600 * 1000);
+        boosterText = b.toISOString().slice(0, 10) + " (21 gün sonra rapel)";
+      } else if (vacType.includes("Bruselloz")) {
+        boosterText = "Tek Doz (Ömür Boyu Bağışıklık)";
+      }
+
+      vaccineRecords.push({
+        id: Date.now(),
+        animalId: animalId,
+        vaccine: vacType,
+        date: dateVal,
+        boosterDate: boosterText,
+        mandatory: isMandatory,
+        turkvet: true
+      });
+
+      setStore("vaccines", vaccineRecords);
+      closeVaccineModal();
+      renderVaccineRecords();
+      updateDashboardStats();
+      alert("✅ Aşı kaydı başarıyla oluşturuldu ve TÜRKVET formatına hazırlandı.");
+    }
+
+    /* =========================================================================
+       5. ACİL İLK YARDIM FONKSİYONLARI
+       ========================================================================= */
+    function toggleEmergency(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle("open");
+    }
+
+    function calculateEpiDose() {
+      const weight = parseFloat(document.getElementById("emergency-weight").value) || 0;
+      // Formül: Her 45 kg canlı ağırlık için 1 mL Epinefrin (1:1000)
+      const dose = (weight / 45).toFixed(1);
+      document.getElementById("epi-dose-result").textContent = dose + " mL";
+    }
+
+    /* =========================================================================
+       6. SAĞIMCI MODU (SADE VE NET EKRAN)
+       ========================================================================= */
+    function checkMilkerStatus() {
+      const search = (document.getElementById("milker-search").value || "").trim().toUpperCase();
+      const resBox = document.getElementById("milker-result-box");
+      const blockedUl = document.getElementById("milker-blocked-list");
+      const now = new Date();
+
+      // Tüm aktif yasaklı hayvanları bul
+      let blockedMap = {};
+      treatments.forEach(t => {
+        const milkEnd = new Date(t.milkSafeDate);
+        if (milkEnd > now) {
+          const diffMs = milkEnd - now;
+          const diffHrs = Math.floor(diffMs / (3600 * 1000));
+          const diffMins = Math.floor((diffMs % (3600 * 1000)) / (60 * 1000));
+          blockedMap[t.earTag.toUpperCase()] = `${diffHrs} saat ${diffMins} dakika kaldı (${t.drugName})`;
+        }
+      });
+
+      // Yasaklı listeyi güncelle
+      const blockedKeys = Object.keys(blockedMap);
+      if (blockedKeys.length === 0) {
+        blockedUl.innerHTML = `<li>Şu an antibiyotikli veya yasaklı inek bulunmamaktadır.</li>`;
+      } else {
+        blockedUl.innerHTML = blockedKeys.map(tag => `<li>🚫 ${tag} : ${blockedMap[tag]}</li>`).join("");
+      }
+
+      // Arama yapılmışsa tek hayvan kontrolü
+      if (!search) {
+        resBox.innerHTML = `
+          <div class="milker-status-box milker-green">
+            🟢 SAĞIMA UYGUN
+            <div style="font-size:0.85rem; font-weight:400; margin-top:4px;">Lütfen kontrol etmek için yukarıya inek küpe numarasını yazın.</div>
+          </div>
+        `;
+        return;
+      }
+
+      if (blockedMap[search]) {
+        resBox.innerHTML = `
+          <div class="milker-status-box milker-red">
+            🔴 BU İNEĞİ TANKA SAĞMA!
+            <div style="font-size:1rem; font-weight:600; margin-top:6px;">ANTİBİYOTİKLİ SÜT - TANKA KARIŞTIRILAMAZ!</div>
+            <div style="font-size:0.85rem; font-weight:400; margin-top:4px;">Kalan Kısıt Süresi: ${blockedMap[search]}</div>
+          </div>
+        `;
+      } else {
+        const animalExists = animals.some(a => a.earTag.toUpperCase() === search);
+        if (animalExists) {
+          resBox.innerHTML = `
+            <div class="milker-status-box milker-green">
+              🟢 SAĞIMA UYGUN
+              <div style="font-size:1rem; font-weight:600; margin-top:4px;">${search} KÜPELİ İNEK TEMİZ</div>
+              <div style="font-size:0.85rem; font-weight:400;">Kalıntı engeli yoktur, tanka sağılabilir.</div>
+            </div>
+          `;
+        } else {
+          resBox.innerHTML = `
+            <div class="milker-status-box milker-yellow">
+              🟡 KÜPE LİSTEDE BULUNAMADI
+              <div style="font-size:0.85rem; font-weight:400; margin-top:4px;">"${search}" küpe numarası kayıtlı değil. Lütfen kontrol ediniz.</div>
+            </div>
+          `;
+        }
+      }
+    }
+
+    /* =========================================================================
+       HAYVAN EKLEME İŞLEMLERİ
+       ========================================================================= */
+    function openNewAnimalModal() {
+      document.getElementById("modal-animal").style.display = "flex";
+    }
+    function closeAnimalModal() {
+      document.getElementById("modal-animal").style.display = "none";
+    }
+    function saveNewAnimal() {
+      const eartag = (document.getElementById("new-eartag").value || "").trim().toUpperCase();
+      if (!eartag) {
+        alert("Lütfen küpe numarası girin.");
+        return;
+      }
+      if (animals.some(a => a.earTag.toUpperCase() === eartag)) {
+        alert("Bu küpe numarası zaten kayıtlı!");
+        return;
+      }
+
+      const gender = document.getElementById("new-gender").value;
+      const type = document.getElementById("new-type").value;
+      const age = parseInt(document.getElementById("new-age").value) || 12;
+      const bcs = parseFloat(document.getElementById("new-bcs").value) || 3.0;
+      const isQuarantine = document.getElementById("new-quarantine").checked;
+
+      const newA = {
+        id: eartag,
+        earTag: eartag,
+        gender: gender,
+        type: type,
+        ageMonths: age,
+        bcs: bcs,
+        quarantine: isQuarantine,
+        lastStatus: isQuarantine ? "Karantina Başlatıldı (42 gün)" : "Kayıt Edildi"
+      };
+
+      animals.unshift(newA);
+      setStore("animals", animals);
+
+      closeAnimalModal();
+      populateAnimalSelects();
+      renderAnimalTable();
+      updateDashboardStats();
+      document.getElementById("new-eartag").value = "";
+      alert(`✅ ${eartag} başarıyla eklendi!`);
+    }
+
+    /* =========================================================================
+       VERİ YEDEKLEME VE GERİ YÜKLEME (OFFLINE JSON IMPORT / EXPORT)
+       ========================================================================= */
+    function exportDataJson() {
+      const dump = {
+        animals: animals,
+        treatments: treatments,
+        vaccines: vaccineRecords,
+        triage: triageRecords,
+        exportedAt: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `sigir_saglik_yedek_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importDataJson(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (parsed.animals && Array.isArray(parsed.animals)) {
+            animals = parsed.animals;
+            setStore("animals", animals);
+          }
+          if (parsed.treatments && Array.isArray(parsed.treatments)) {
+            treatments = parsed.treatments;
+            setStore("treatments", treatments);
+          }
+          if (parsed.vaccines && Array.isArray(parsed.vaccines)) {
+            vaccineRecords = parsed.vaccines;
+            setStore("vaccines", vaccineRecords);
+          }
+          if (parsed.triage && Array.isArray(parsed.triage)) {
+            triageRecords = parsed.triage;
+            setStore("triage", triageRecords);
+          }
+
+          populateAnimalSelects();
+          renderAnimalTable();
+          renderActiveIkasTable();
+          renderVaccineRecords();
+          updateDashboardStats();
+          alert("✅ Yedek veriler başarıyla cihaza yüklendi!");
+        } catch (err) {
+          alert("❌ Hata: Geçersiz yedek dosyası!");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // PWA Service Worker Kaydı (Tam Çevrimdışı Çalışma)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
