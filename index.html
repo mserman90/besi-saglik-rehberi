@@ -7,6 +7,7 @@
   <meta name="description" content="Sığırlarda Hastalık Önleme, Saha Triyajı, Aşı ve İKAS Takip Sistemi - %100 Çevrimdışı">
   <link rel="manifest" href="manifest.json">
   <title>Sığır Sağlık & Saha Triyaj Sistemi</title>
+  <script src="html5-qrcode.min.js"></script>
   <style>
     :root {
       --bg: #f4f6f8;
@@ -416,6 +417,7 @@
         <div class="card-title">📋 Hayvan Listesi & Durumlar</div>
         <div style="display:flex; gap:6px; margin-bottom:8px;">
           <input type="text" id="animal-search" placeholder="Küpe No Ara (örn: TR16001)" oninput="renderAnimalTable()" style="margin-bottom:0;">
+          <button class="btn btn-warning" style="width:auto; padding:0 12px;" onclick="startQrScanner('search')" title="Kamerayla Küpe Oku">📷 Oku</button>
           <button class="btn btn-primary" style="width:auto; padding:0 14px;" onclick="openNewAnimalModal()">+ Ekle</button>
         </div>
         <div class="table-container">
@@ -441,7 +443,10 @@
         <div class="card-title">🚨 Saha Triyajı & Vital Muayene</div>
         
         <label for="triage-animal-select">Hayvan Seç (Küpe No):</label>
-        <select id="triage-animal-select"></select>
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+          <select id="triage-animal-select" style="margin-bottom:0;"></select>
+          <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('triage')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
+        </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <div>
@@ -535,7 +540,10 @@
         </p>
 
         <label for="treatment-animal-select">Hasta Hayvanı Seç:</label>
-        <select id="treatment-animal-select"></select>
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+          <select id="treatment-animal-select" style="margin-bottom:0;"></select>
+          <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('treatment')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
+        </div>
 
         <label for="treatment-drug-select">Uygulanan İlaç (Etken Madde):</label>
         <select id="treatment-drug-select" onchange="onDrugSelectChange()"></select>
@@ -720,7 +728,10 @@
           Sağımcı için büyük harfli hızlı kontrol. Küpe numarasını yazın veya seçin:
         </p>
 
-        <input type="text" id="milker-search" placeholder="Örn: TR16001" oninput="checkMilkerStatus()" style="font-size:1.2rem; font-weight:800; padding:12px; text-transform:uppercase;">
+        <div style="display:flex; gap:6px; margin-bottom:12px;">
+          <input type="text" id="milker-search" placeholder="Örn: TR16001" oninput="checkMilkerStatus()" style="font-size:1.2rem; font-weight:800; padding:12px; text-transform:uppercase; margin-bottom:0;">
+          <button class="btn btn-warning" style="width:auto; padding:0 16px; font-size:1.1rem; white-space:nowrap;" onclick="startQrScanner('milker')" title="Kamerayla Küpe Oku">📷 Oku</button>
+        </div>
 
         <div id="milker-result-box" style="margin-top:14px;">
           <div class="milker-status-box milker-green">
@@ -787,7 +798,10 @@
       <h3 style="margin-bottom:10px; color:var(--primary);">➕ Yeni Hayvan Kaydı</h3>
       
       <label for="new-eartag">Kulak Küpe No (TÜRKVET):</label>
-      <input type="text" id="new-eartag" placeholder="TR1600123456">
+      <div style="display:flex; gap:6px; margin-bottom:10px;">
+        <input type="text" id="new-eartag" placeholder="TR1600123456" style="margin-bottom:0;">
+        <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('new_animal')" title="Kamerayla Küpe Oku">📷 Oku</button>
+      </div>
 
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
         <div>
@@ -854,6 +868,31 @@
       <div style="display:flex; gap:8px; margin-top:12px;">
         <button class="btn btn-outline" onclick="closeVaccineModal()">İptal</button>
         <button class="btn btn-primary" onclick="saveVaccineRecord()">Uygulandı Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kamera ile Küpe Barkod/QR Okuma Modalı -->
+  <div id="modal-scanner" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); z-index:300; align-items:center; justify-content:center; padding:12px;">
+    <div style="background:white; border-radius:12px; max-width:440px; width:100%; padding:16px; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h3 style="font-size:1.05rem; color:var(--primary); font-weight:800; display:flex; align-items:center; gap:6px;">
+          📷 Kulak Küpesi Barkod / QR Oku
+        </h3>
+        <button onclick="stopQrScanner()" style="background:transparent; border:none; font-size:1.3rem; font-weight:800; cursor:pointer; color:#64748b;">✕</button>
+      </div>
+      <p style="font-size:0.78rem; color:#64748b; margin-bottom:10px;">
+        Telefon kamerasını hayvanın kulak küpesindeki barkoda veya QR koda doğrultun:
+      </p>
+
+      <!-- Kamera Canlı Önizleme Kutusu -->
+      <div id="qr-reader" style="width:100%; min-height:260px; background:#1e293b; border-radius:8px; overflow:hidden;"></div>
+      <div id="scanner-status" style="font-size:0.8rem; font-weight:600; text-align:center; margin-top:8px; color:#1e293b;">
+        Kamera hazırlanıyor...
+      </div>
+
+      <div style="margin-top:12px; display:flex; gap:8px;">
+        <button class="btn btn-outline" onclick="stopQrScanner()">Kapat</button>
       </div>
     </div>
   </div>
@@ -1582,6 +1621,130 @@
         }
       };
       reader.readAsText(file);
+    }
+
+    /* =========================================================================
+       KAMERA İLE KULAK KÜPESİ BARKOD / QR OKUYUCU (OFFLINE)
+       ========================================================================= */
+    let html5QrScannerInstance = null;
+    let activeScanTarget = null; // 'search', 'triage', 'treatment', 'milker', 'new_animal'
+
+    function startQrScanner(targetMode) {
+      activeScanTarget = targetMode;
+      const modal = document.getElementById("modal-scanner");
+      const statusText = document.getElementById("scanner-status");
+      modal.style.display = "flex";
+      statusText.textContent = "Kamera başlatılıyor, lütfen izin verin...";
+      statusText.style.color = "#1e293b";
+
+      if (typeof Html5Qrcode === "undefined") {
+        statusText.textContent = "❌ Barkod okuyucu kütüphanesi yüklenemedi!";
+        statusText.style.color = "var(--danger)";
+        return;
+      }
+
+      if (html5QrScannerInstance) {
+        html5QrScannerInstance.stop().catch(() => {}).then(() => {
+          html5QrScannerInstance = null;
+          initCameraScanner();
+        });
+      } else {
+        initCameraScanner();
+      }
+    }
+
+    function initCameraScanner() {
+      const statusText = document.getElementById("scanner-status");
+      html5QrScannerInstance = new Html5Qrcode("qr-reader");
+
+      const config = {
+        fps: 10,
+        qrbox: { width: 250, height: 180 },
+        aspectRatio: 1.333334
+      };
+
+      // Arka kamera öncelikli başlat (facingMode: environment)
+      html5QrScannerInstance.start(
+        { facingMode: "environment" },
+        config,
+        onQrScanSuccess,
+        (errorMessage) => {
+          // Anlık okuma hatalarını sessizce geç
+        }
+      ).then(() => {
+        statusText.textContent = "🟢 Kamera aktif. Küpedeki barkod veya QR kodu kutunun içine hizalayın.";
+        statusText.style.color = "var(--primary)";
+      }).catch((err) => {
+        statusText.innerHTML = `⚠️ Kamera erişimi açılamadı:<br><small>${err}</small><br>Tarayıcıdan kamera iznini onayladığınızdan emin olun.`;
+        statusText.style.color = "var(--danger)";
+      });
+    }
+
+    function onQrScanSuccess(decodedText, decodedResult) {
+      if (!decodedText) return;
+      const cleanTag = decodedText.trim().toUpperCase();
+
+      // Sesli / titreşimli geri bildirim (mobil destekliyorsa)
+      if (navigator.vibrate) {
+        navigator.vibrate(120);
+      }
+
+      // Kamerayı durdur ve kapat
+      stopQrScanner();
+
+      // Hedef ekrana göre küpe bilgisini aktar
+      if (activeScanTarget === 'search') {
+        const searchInput = document.getElementById("animal-search");
+        searchInput.value = cleanTag;
+        renderAnimalTable();
+        alert(`📷 Küpe Okundu: ${cleanTag}`);
+      } else if (activeScanTarget === 'milker') {
+        const milkerInput = document.getElementById("milker-search");
+        milkerInput.value = cleanTag;
+        checkMilkerStatus();
+      } else if (activeScanTarget === 'triage') {
+        setAnimalSelectValue("triage-animal-select", cleanTag);
+      } else if (activeScanTarget === 'treatment') {
+        setAnimalSelectValue("treatment-animal-select", cleanTag);
+      } else if (activeScanTarget === 'new_animal') {
+        document.getElementById("new-eartag").value = cleanTag;
+      }
+    }
+
+    function setAnimalSelectValue(selectId, earTag) {
+      const sel = document.getElementById(selectId);
+      let found = false;
+      for (let i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value.toUpperCase() === earTag || sel.options[i].text.toUpperCase().includes(earTag)) {
+          sel.selectedIndex = i;
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        // Listede yoksa geçici ekle veya uyar
+        const opt = document.createElement("option");
+        opt.value = earTag;
+        opt.textContent = `${earTag} (Kamera ile Okundu)`;
+        sel.appendChild(opt);
+        sel.value = earTag;
+        alert(`📷 Küpe Okundu: ${earTag}\n(Sistemde kayıtlı bulunamadı, geçici eklendi)`);
+      } else {
+        alert(`📷 Küpe Eşleşti: ${earTag}`);
+      }
+    }
+
+    function stopQrScanner() {
+      const modal = document.getElementById("modal-scanner");
+      modal.style.display = "none";
+      if (html5QrScannerInstance) {
+        html5QrScannerInstance.stop().then(() => {
+          html5QrScannerInstance.clear();
+          html5QrScannerInstance = null;
+        }).catch(() => {
+          html5QrScannerInstance = null;
+        });
+      }
     }
 
     // PWA Service Worker Kaydı (Tam Çevrimdışı Çalışma)

@@ -17,7 +17,12 @@ Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü b
 
 ---
 
-## 📱 Barındırdığı 6 Temel Saha Modülü
+## 📱 Barındırdığı Temel Saha Modülleri
+
+0. **📷 Cep Telefonu Kamerasıyla Küpe Okuma (Barkod & QR):**
+   - Hayvan arama, Saha Triyajı, İlaç/İKAS girişi, Sağımcı kontrolü ve Yeni Hayvan ekleme ekranlarında yer alan **"📷 Oku"** butonuyla telefon kamerası anında açılır.
+   - Kulak küpesindeki barkod veya QR kod okunduğu anda küpe numarası ekrana otomatik aktarılır, titreşimli bildirim verilir ve ilgili hayvanın sağlık durumu anında ekrana gelir.
+   - Harici internet bağlantısı gerekmez; yerel kütüphane sayesinde **%100 çevrimdışı** çalışır.
 
 1. **📊 Gösterge Paneli (Dashboard):**
    - Toplam sürü sayısı, karantinadaki hayvanlar, aktif kalıntılı süt engelleri (İKAS) ve yaklaşan aşılar.
