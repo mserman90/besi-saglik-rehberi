@@ -39,7 +39,12 @@ Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü b
    - **Kombine Tedavi Kuralı:** Birden fazla ilaç yapıldığında otomatik olarak en uzun İKAS süresini baz alma.
    - Canlı saat/dakika geri sayımı.
 
-4. **🩸 Üreme, Tohumlama ve Doğum Çarkı (Akıllı Takvim):**
+4. **💰 Hastalık, Dökülen Süt & Tedavi Maliyet Defteri (Ekonomik Zarar Analizi):**
+   - **Gerçek Çiftlik Maliyet Takibi:** Veteriner hekim vizitesi, kullanılan ilaç bedeli ve **antibiyotik nedeniyle imha edilen/dökülen sütün parasal kaybı**.
+   - **Kayıp Formülü:** $\text{Zarar} = \text{Veteriner} + \text{İlaç} + (\text{Günlük Süt Litresi} \times \text{Dökülen Gün} \times \text{Süt Satış Fiyatı})$.
+   - **Kümülatif Çiftlik Özeti:** Sürü genelinde hastalıklara harcanan toplam para, dökülen toplam süt litresi ve ciro kaybı göstergeleri.
+
+5. **🩸 Üreme, Tohumlama ve Doğum Çarkı (Akıllı Takvim):**
    - **21 Gün Kızgınlık Gözlemi (18–24. Günler):** Tohumlanan ineğin tutmama ihtimaline karşı tekrar kızgınlık döngüsü uyarısı.
    - **40 Gün Gebelik Muayenesi (35–45. Günler):** Ultrason veya rektal muayene hatırlatıcısı.
    - **220 Gün Kuruya Çıkarma (Doğuma 60 Gün):** Sağımı durdurma ve kuru dönem meme içi antibiyotik protokolü alarmı.

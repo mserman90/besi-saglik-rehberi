@@ -263,13 +263,16 @@
       right: 0;
       background: white;
       display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       border-top: 1px solid var(--border);
       z-index: 100;
       max-width: 900px;
       margin: 0 auto;
     }
     .nav-item {
-      flex: 1;
+      flex: 0 0 68px;
+      min-width: 68px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -401,12 +404,13 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <button class="btn btn-primary" onclick="switchTab('triage')">➕ Yeni Triyaj</button>
           <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç & İKAS</button>
+          <button class="btn btn-danger" style="background:#b91c1c; color:white;" onclick="switchTab('cost')">💰 Zarar & Maliyet Defteri</button>
           <button class="btn btn-info" onclick="switchTab('repro')">🩸 Üreme & Doğum</button>
           <button class="btn btn-warning" style="background:#e65100; color:white;" onclick="switchTab('calf')">🍼 Buzağı & Kolostrum</button>
           <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Şerit Metre Kilo</button>
           <button class="btn btn-info" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
           <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil Müdahale</button>
-          <button class="btn btn-outline" onclick="switchTab('milker')">🥛 Sağımcı Modu</button>
+          <button class="btn btn-outline" style="grid-column: span 2;" onclick="switchTab('milker')">🥛 Sağımcı Modu</button>
         </div>
       </div>
 
@@ -597,6 +601,135 @@
                 <th>Süt Bitiş</th>
                 <th>Et Bitiş</th>
                 <th>Durum</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. HASTALIK, DÖKÜLEN SÜT & TEDAVİ MALİYET DEFTERİ ================= -->
+    <section id="tab-cost" class="tab-section">
+      <div class="card" style="border-top: 4px solid #b91c1c;">
+        <div class="card-title" style="color:#b91c1c;">💰 Hastalık & Dökülen Süt Ekonomik Zarar Defteri</div>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
+          Tedavi edilen ineğin veteriner hekim vizitesi, ilaç bedeli ve <strong>antibiyotik nedeniyle imha edilen/dökülen sütün</strong> parasal kaybını otomatik hesaplar.
+        </p>
+
+        <!-- Çiftlik Referans Fiyat Ayarları -->
+        <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:10px; margin-bottom:12px;">
+          <div style="font-weight:700; font-size:0.85rem; color:#1e293b; margin-bottom:6px;">⚙️ Çiftlik Birim Fiyatları:</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="farm-milk-price">Çiğ Süt Satış Fiyatı (TL / Litre):</label>
+              <input type="number" id="farm-milk-price" value="16.5" step="0.5" oninput="updateCostSummary()">
+            </div>
+            <div>
+              <label for="farm-currency">Para Birimi:</label>
+              <input type="text" id="farm-currency" value="₺ TL" disabled style="background:#e2e8f0;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Yeni Maliyet & Zarar Kaydı Formu -->
+        <div class="card" style="background:#fff; border:1px solid #e2e8f0;">
+          <div style="font-weight:700; color:var(--primary); font-size:0.9rem; margin-bottom:8px;">➕ Yeni Tedavi & Zarar Kaydı Ekle</div>
+
+          <label for="cost-animal-select">Hasta / Tedavi Edilen Hayvan:</label>
+          <div style="display:flex; gap:6px; margin-bottom:10px;">
+            <select id="cost-animal-select" style="margin-bottom:0;"></select>
+            <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('cost')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="cost-disease">Hastalık / Teşhis:</label>
+              <select id="cost-disease">
+                <option value="Klinik Mastitis">Klinik Mastitis (Meme İltihabı)</option>
+                <option value="Metritis (Rahim İltihabı)">Metritis (Rahim İltihabı)</option>
+                <option value="BRD (Zatürre / Solunum)">BRD (Zatürre / Solunum)</option>
+                <option value="Ayak Çürüğü (Lameness)">Ayak Hastalığı / Çürük</option>
+                <option value="Ketozis / Abomasum">Ketozis / Deplasman</option>
+                <option value="Hipokalsemi (Süt Humması)">Süt Humması (Felç)</option>
+                <option value="Buzağı İshali">Buzağı İshali / Septisemi</option>
+                <option value="Diğer Teşhis">Diğer Tedavi</option>
+              </select>
+            </div>
+            <div>
+              <label for="cost-date">Kayıt Tarihi:</label>
+              <input type="date" id="cost-date">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="cost-vet-fee">Veteriner Vizitesi / Emek (TL):</label>
+              <input type="number" id="cost-vet-fee" value="500" step="50" oninput="calculateLiveCostEntry()">
+            </div>
+            <div>
+              <label for="cost-drug-fee">Kullanılan İlaç / Serum Bedeli (TL):</label>
+              <input type="number" id="cost-drug-fee" value="850" step="50" oninput="calculateLiveCostEntry()">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="cost-daily-milk">Günlük Verimi (Litre/Gün):</label>
+              <input type="number" id="cost-daily-milk" value="28" step="1" oninput="calculateLiveCostEntry()">
+            </div>
+            <div>
+              <label for="cost-dump-days">Dökülen / İKAS Gün Sayısı:</label>
+              <input type="number" id="cost-dump-days" value="5" step="1" oninput="calculateLiveCostEntry()">
+            </div>
+          </div>
+
+          <!-- Canlı Önizleme Kartı -->
+          <div id="cost-live-preview" style="background:#fee2e2; border:1px solid #ef4444; border-radius:8px; padding:10px; margin-top:8px; font-size:0.85rem; color:#991b1b;">
+            <!-- Dinamik doldurulur -->
+          </div>
+
+          <button class="btn btn-danger" style="margin-top:10px;" onclick="saveCostRecord()">💾 Zarar Kaydını Deftere İşle</button>
+        </div>
+      </div>
+
+      <!-- Kümülatif Çiftlik Zarar Özeti -->
+      <div class="grid-2">
+        <div class="stat-card" style="border-left: 4px solid #b91c1c;">
+          <div class="stat-val" style="color:#b91c1c;" id="stat-total-loss">0 ₺</div>
+          <div class="stat-label">Toplam Hastalık Zararı</div>
+        </div>
+        <div class="stat-card" style="border-left: 4px solid #d97706;">
+          <div class="stat-val" style="color:#d97706;" id="stat-dumped-milk-total">0 L</div>
+          <div class="stat-label">Dökülen Süt Kaybı</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="stat-card">
+          <div class="stat-val" style="color:#2563eb;" id="stat-vet-drug-total">0 ₺</div>
+          <div class="stat-label">Toplam İlaç & Veteriner</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" style="color:#dc2626;" id="stat-milk-money-loss">0 ₺</div>
+          <div class="stat-label">Süt Ciro Kaybı</div>
+        </div>
+      </div>
+
+      <!-- Kayıtlı Maliyet Defteri Tablosu -->
+      <div class="card">
+        <div class="card-title">📖 Hastalık Tedavi & Kayıp Defteri</div>
+        <div class="table-container">
+          <table id="cost-records-table">
+            <thead>
+              <tr>
+                <th>Küpe No</th>
+                <th>Teşhis</th>
+                <th>Tarih</th>
+                <th>İlaç + Vet</th>
+                <th>Dökülen Süt (L)</th>
+                <th>Toplam Zarar</th>
+                <th>İşlem</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -952,6 +1085,10 @@
       <span class="nav-icon">💊</span>
       <span>İKAS/İlaç</span>
     </button>
+    <button class="nav-item" onclick="switchTab('cost')">
+      <span class="nav-icon">💰</span>
+      <span>Maliyet</span>
+    </button>
     <button class="nav-item" onclick="switchTab('repro')">
       <span class="nav-icon">🩸</span>
       <span>Üreme</span>
@@ -1138,6 +1275,10 @@
       { id: 1, animalId: "TR16001", earTag: "TR16001", date: "2026-09-01", bull: "Simental TR99", heatDate: "2026-09-22", pregCheckDate: "2026-10-11", dryDate: "2027-04-09", calvingDate: "2027-06-08", status: "Kızgınlık Takibinde" }
     ]);
 
+    let costRecords = getStore("costs", [
+      { id: 1, animalId: "TR16002", earTag: "TR16002", disease: "Klinik Mastitis", date: "2026-09-28", vetFee: 600, drugFee: 950, dailyMilk: 30, dumpDays: 5, dumpedLiters: 150, milkLossTl: 2475, totalLossTl: 4025 }
+    ]);
+
     // DART Skorları için anlık seçimler
     let currentDart = { d: 0, a: 0, r: 0, t: 0 };
 
@@ -1150,6 +1291,8 @@
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
       document.getElementById("treatment-date").value = now.toISOString().slice(0, 16);
       document.getElementById("vac-date").value = now.toISOString().slice(0, 10);
+      const costDateEl = document.getElementById("cost-date");
+      if (costDateEl) costDateEl.value = now.toISOString().slice(0, 10);
       const reproDateEl = document.getElementById("repro-date");
       if (reproDateEl) reproDateEl.value = now.toISOString().slice(0, 10);
 
@@ -1159,9 +1302,11 @@
       renderActiveIkasTable();
       renderVaccineRecords();
       renderReproRecords();
+      renderCostRecords();
       updateDashboardStats();
       calculateTriage();
       calculateEpiDose();
+      calculateLiveCostEntry();
 
       // Periyodik kontrol (Canlı sayaçlar için her dakika çalışır)
       setInterval(() => {
@@ -1180,13 +1325,14 @@
 
       // Menü aktifliği
       const navButtons = document.querySelectorAll(".nav-item");
-      const mapping = { dashboard: 0, triage: 1, ikas: 2, repro: 3, calf: 4, weight: 5, vaccine: 6, emergency: 7, milker: 8 };
+      const mapping = { dashboard: 0, triage: 1, ikas: 2, cost: 3, repro: 4, calf: 5, weight: 6, vaccine: 7, emergency: 8, milker: 9 };
       if (navButtons[mapping[tabId]]) {
         navButtons[mapping[tabId]].classList.add("active");
       }
 
       window.scrollTo(0, 0);
       if (tabId === "milker") checkMilkerStatus();
+      if (tabId === "cost") renderCostRecords();
       if (tabId === "repro") renderReproRecords();
       if (tabId === "weight") calculateSchaefferWeight();
       if (tabId === "calf") { calculateColostrumQuality(); calculateCalfRehydration(); }
@@ -1212,8 +1358,9 @@
       const reproSelect = document.getElementById("repro-animal-select");
       const weightSelect = document.getElementById("weight-animal-select");
       const vacSelect = document.getElementById("vac-animal-select");
+      const costSelect = document.getElementById("cost-animal-select");
 
-      [triageSelect, treatSelect, reproSelect, weightSelect, vacSelect].forEach(sel => {
+      [triageSelect, treatSelect, reproSelect, weightSelect, vacSelect, costSelect].forEach(sel => {
         if (!sel) return;
         sel.innerHTML = "";
         animals.forEach(a => {
@@ -1860,6 +2007,128 @@
     }
 
     /* =========================================================================
+       HASTALIK, DÖKÜLEN SÜT & TEDAVİ MALİYET DEFTERİ MOTORU
+       ========================================================================= */
+    function calculateLiveCostEntry() {
+      const milkPrice = parseFloat(document.getElementById("farm-milk-price").value) || 0;
+      const vetFee = parseFloat(document.getElementById("cost-vet-fee").value) || 0;
+      const drugFee = parseFloat(document.getElementById("cost-drug-fee").value) || 0;
+      const dailyMilk = parseFloat(document.getElementById("cost-daily-milk").value) || 0;
+      const dumpDays = parseFloat(document.getElementById("cost-dump-days").value) || 0;
+
+      const dumpedLiters = (dailyMilk * dumpDays);
+      const milkLoss = (dumpedLiters * milkPrice);
+      const medicalCost = (vetFee + drugFee);
+      const totalLoss = (medicalCost + milkLoss);
+
+      const previewBox = document.getElementById("cost-live-preview");
+      if (previewBox) {
+        previewBox.innerHTML = `
+          <strong>📊 Tahmini Vaka Maliyeti:</strong><br>
+          • <strong>İmha Edilen / Dökülen Süt:</strong> ${dumpedLiters.toFixed(1)} Litre (${milkLoss.toLocaleString('tr-TR', {minimumFractionDigits: 1, maximumFractionDigits: 1})} ₺ Kayıp)<br>
+          • <strong>Veteriner + İlaç Masrafı:</strong> ${medicalCost.toLocaleString('tr-TR')} ₺<br>
+          • <strong style="font-size:0.95rem; color:#b91c1c;">Vakanın Toplam Ekonomik Zararı: ${totalLoss.toLocaleString('tr-TR', {minimumFractionDigits: 1, maximumFractionDigits: 1})} ₺</strong>
+        `;
+      }
+    }
+
+    function saveCostRecord() {
+      const animalId = document.getElementById("cost-animal-select").value;
+      const animal = animals.find(a => a.id === animalId) || { earTag: animalId };
+      const disease = document.getElementById("cost-disease").value;
+      const date = document.getElementById("cost-date").value || new Date().toISOString().slice(0, 10);
+      const milkPrice = parseFloat(document.getElementById("farm-milk-price").value) || 0;
+      const vetFee = parseFloat(document.getElementById("cost-vet-fee").value) || 0;
+      const drugFee = parseFloat(document.getElementById("cost-drug-fee").value) || 0;
+      const dailyMilk = parseFloat(document.getElementById("cost-daily-milk").value) || 0;
+      const dumpDays = parseFloat(document.getElementById("cost-dump-days").value) || 0;
+
+      const dumpedLiters = Math.round(dailyMilk * dumpDays * 10) / 10;
+      const milkLoss = Math.round(dumpedLiters * milkPrice * 10) / 10;
+      const totalLoss = Math.round((vetFee + drugFee + milkLoss) * 10) / 10;
+
+      const newRecord = {
+        id: Date.now(),
+        animalId: animal.id,
+        earTag: animal.earTag,
+        disease: disease,
+        date: date,
+        vetFee: vetFee,
+        drugFee: drugFee,
+        dailyMilk: dailyMilk,
+        dumpDays: dumpDays,
+        dumpedLiters: dumpedLiters,
+        milkLossTl: milkLoss,
+        totalLossTl: totalLoss
+      };
+
+      costRecords.unshift(newRecord);
+      setStore("costs", costRecords);
+      renderCostRecords();
+      alert(`✅ Maliyet kaydı işlendi!\n${animal.earTag} - ${disease}\nToplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
+    }
+
+    function renderCostRecords() {
+      const tbody = document.querySelector("#cost-records-table tbody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+
+      if (costRecords.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8;">Kayıtlı maliyet ve zarar verisi yok.</td></tr>`;
+      } else {
+        costRecords.forEach(c => {
+          const medCost = (c.vetFee + c.drugFee);
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><strong>${c.earTag}</strong></td>
+            <td><span class="tag tag-danger">${c.disease}</span></td>
+            <td><small>${c.date}</small></td>
+            <td>${medCost.toLocaleString('tr-TR')} ₺</td>
+            <td>${c.dumpedLiters} L (${c.dumpDays} gün)</td>
+            <td style="font-weight:800; color:#b91c1c;">${c.totalLossTl.toLocaleString('tr-TR')} ₺</td>
+            <td>
+              <button class="btn btn-outline" style="padding:3px 6px; font-size:0.75rem;" onclick="deleteCostRecord(${c.id})">Sil</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      updateCostSummary();
+    }
+
+    function updateCostSummary() {
+      let totalLoss = 0;
+      let totalDumpedMilk = 0;
+      let totalVetDrug = 0;
+      let totalMilkLoss = 0;
+
+      costRecords.forEach(c => {
+        totalLoss += (c.totalLossTl || 0);
+        totalDumpedMilk += (c.dumpedLiters || 0);
+        totalVetDrug += ((c.vetFee || 0) + (c.drugFee || 0));
+        totalMilkLoss += (c.milkLossTl || 0);
+      });
+
+      const elTotalLoss = document.getElementById("stat-total-loss");
+      const elDumpedTotal = document.getElementById("stat-dumped-milk-total");
+      const elVetDrugTotal = document.getElementById("stat-vet-drug-total");
+      const elMilkMoneyLoss = document.getElementById("stat-milk-money-loss");
+
+      if (elTotalLoss) elTotalLoss.textContent = totalLoss.toLocaleString('tr-TR', { maximumFractionDigits: 0 }) + " ₺";
+      if (elDumpedTotal) elDumpedTotal.textContent = totalDumpedMilk.toLocaleString('tr-TR', { maximumFractionDigits: 0 }) + " L";
+      if (elVetDrugTotal) elVetDrugTotal.textContent = totalVetDrug.toLocaleString('tr-TR', { maximumFractionDigits: 0 }) + " ₺";
+      if (elMilkMoneyLoss) elMilkMoneyLoss.textContent = totalMilkLoss.toLocaleString('tr-TR', { maximumFractionDigits: 0 }) + " ₺";
+    }
+
+    function deleteCostRecord(id) {
+      if (!confirm("Bu maliyet kaydını silmek istediğinize emin misiniz?")) return;
+      costRecords = costRecords.filter(c => c.id !== id);
+      setStore("costs", costRecords);
+      renderCostRecords();
+    }
+
+    /* =========================================================================
        5. ACİL İLK YARDIM FONKSİYONLARI
        ========================================================================= */
     function toggleEmergency(id) {
@@ -2001,6 +2270,7 @@
         vaccines: vaccineRecords,
         repro: reproRecords,
         triage: triageRecords,
+        costs: costRecords,
         exportedAt: new Date().toISOString()
       };
       const blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
@@ -2039,12 +2309,17 @@
             triageRecords = parsed.triage;
             setStore("triage", triageRecords);
           }
+          if (parsed.costs && Array.isArray(parsed.costs)) {
+            costRecords = parsed.costs;
+            setStore("costs", costRecords);
+          }
 
           populateAnimalSelects();
           renderAnimalTable();
           renderActiveIkasTable();
           renderVaccineRecords();
           renderReproRecords();
+          renderCostRecords();
           updateDashboardStats();
           alert("✅ Yedek veriler başarıyla cihaza yüklendi!");
         } catch (err) {
@@ -2137,6 +2412,8 @@
         setAnimalSelectValue("triage-animal-select", cleanTag);
       } else if (activeScanTarget === 'treatment') {
         setAnimalSelectValue("treatment-animal-select", cleanTag);
+      } else if (activeScanTarget === 'cost') {
+        setAnimalSelectValue("cost-animal-select", cleanTag);
       } else if (activeScanTarget === 'repro') {
         setAnimalSelectValue("repro-animal-select", cleanTag);
       } else if (activeScanTarget === 'weight') {
