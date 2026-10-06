@@ -1,5 +1,8 @@
 # Sığır Sağlık, Saha Triyajı ve İKAS Sistemi (Offline-First)
 
+🌐 **Canlı Yayın (Web & Mobil):** [https://mserman90.github.io/sigir-saglik-rehberi/](https://mserman90.github.io/sigir-saglik-rehberi/)  
+📦 **GitHub Deposu:** [https://github.com/mserman90/sigir-saglik-rehberi](https://github.com/mserman90/sigir-saglik-rehberi)
+
 Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü bilgisayarlara kadar** her cihazda **hiçbir internet bağlantısı veya sunucu kurulumu gerektirmeden** çalışmak üzere tasarlanmıştır.
 
 ## 🚀 Nasıl Çalıştırılır?
