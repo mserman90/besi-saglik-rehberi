@@ -46,12 +46,18 @@ Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü b
    - **245 Gün Kolostrum Aşı Hazırlığı (Doğuma 5–3 Hafta):** Buzağı ishal aşısı uygulama zamanı.
    - **280 Gün Beklenen Doğum & Geri Sayım:** Canlı gün sayacı ve doğum padoğu hazırlık ikazı.
 
-5. **📅 Akıllı Aşı Takvimi & Rapel Motoru:**
+5. **⚖️ Şerit Metre ile Canlı Ağırlık (Kantar Yokken Kilo) Ölçer:**
+   - **Schaeffer Formülü:** Mezurayla göğüs çevresi (cm) ve vücut uzunluğu (cm) girildiğinde tahmini ağırlığı ($\pm \%5$ hata payıyla) kg cinsinden hesaplar:
+     $$\text{Ağırlık (kg)} = \frac{\text{Göğüs Çevresi}^2 \times \text{Vücut Uzunluğu}}{10838}$$
+   - **Otomatik Dozaj & Besleme Çıktıları:** Hesaplanan kiloya göre otomatik olarak Adrenalin ($1\text{ mL} / 45\text{ kg}$), Meloksikam, Fluniksin, Tulatromisin dozlarını ve günlük tahmini kuru madde (KM) tüketim miktarını listeler.
+   - **Tek Tıkla Aktarım:** Hesaplanan canlı ağırlık tek butonla acil müdahale formlarına otomatik aktarılır.
+
+6. **📅 Akıllı Aşı Takvimi & Rapel Motoru:**
    - Şap (FMD), Bruselloz (S19 - Dişi 3-6 ay), Sığır Çiçeği (LSD), BRD karma ve Buzağı İshali aşıları.
    - Rapel (tekrar) tarihini otomatik hesaplama (30 gün, 21 gün kuralı).
    - TÜRKVET resmi kayıt ve sevk 21 gün kuralı hatırlatması.
 
-5. **🆘 Acil İlk Yardım Rehberi & Protokoller (Merck Vet 11th Ed.):**
+7. **🆘 Acil İlk Yardım Rehberi & Protokoller (Merck Vet 11th Ed.):**
    - **Adrenalin Hesaplayıcı:** Canlı ağırlığı girildiğinde (her 45 kg için 1 mL Epinefrin 1:1000 / 0.01-0.02 mg/kg) anında mL dozu verir.
    - **Akut Rumen Şişkinliği (Timpani):** Mide sondası, köpük söndürücü ajanlar (Poloxalene 25-50 g PO, 250-500 mL bitkisel yağ drench) ve boğulma tehlikesinde trokar uygulaması.
    - **Uterus Prolapsusu (Rahim Düşmesi):** Organı yükseltme, nemli bezle sarma, ödem için gliserol, kornu uçlarının tam repozisyonu ve Oksitosin tonus protokolü.
