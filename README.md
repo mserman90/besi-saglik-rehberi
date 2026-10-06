@@ -39,7 +39,14 @@ Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü b
    - **Kombine Tedavi Kuralı:** Birden fazla ilaç yapıldığında otomatik olarak en uzun İKAS süresini baz alma.
    - Canlı saat/dakika geri sayımı.
 
-4. **📅 Akıllı Aşı Takvimi & Rapel Motoru:**
+4. **🩸 Üreme, Tohumlama ve Doğum Çarkı (Akıllı Takvim):**
+   - **21 Gün Kızgınlık Gözlemi (18–24. Günler):** Tohumlanan ineğin tutmama ihtimaline karşı tekrar kızgınlık döngüsü uyarısı.
+   - **40 Gün Gebelik Muayenesi (35–45. Günler):** Ultrason veya rektal muayene hatırlatıcısı.
+   - **220 Gün Kuruya Çıkarma (Doğuma 60 Gün):** Sağımı durdurma ve kuru dönem meme içi antibiyotik protokolü alarmı.
+   - **245 Gün Kolostrum Aşı Hazırlığı (Doğuma 5–3 Hafta):** Buzağı ishal aşısı uygulama zamanı.
+   - **280 Gün Beklenen Doğum & Geri Sayım:** Canlı gün sayacı ve doğum padoğu hazırlık ikazı.
+
+5. **📅 Akıllı Aşı Takvimi & Rapel Motoru:**
    - Şap (FMD), Bruselloz (S19 - Dişi 3-6 ay), Sığır Çiçeği (LSD), BRD karma ve Buzağı İshali aşıları.
    - Rapel (tekrar) tarihini otomatik hesaplama (30 gün, 21 gün kuralı).
    - TÜRKVET resmi kayıt ve sevk 21 gün kuralı hatırlatması.

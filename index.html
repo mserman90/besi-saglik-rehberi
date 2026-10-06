@@ -401,8 +401,10 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <button class="btn btn-primary" onclick="switchTab('triage')">➕ Yeni Triyaj</button>
           <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç & İKAS</button>
+          <button class="btn btn-info" onclick="switchTab('repro')">🩸 Üreme & Doğum</button>
           <button class="btn btn-info" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
           <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil Müdahale</button>
+          <button class="btn btn-outline" onclick="switchTab('milker')">🥛 Sağımcı Modu</button>
         </div>
       </div>
 
@@ -637,12 +639,66 @@
           <p><strong>• Bruselloz (S19):</strong> 3–6 aylık dişi buzağılara konjunktival (göz damlası). Zorunlu.</p>
           <p><strong>• LSD (Sığır Çiçeği):</strong> 3. aydan itibaren her ilkbahar. Yıllık zorunlu aşı.</p>
           <p><strong>• BRD Karma (Solunum):</strong> Sütten kesim öncesi ve risk döneminde 2–4 hafta arayla 2 doz.</p>
-          <p><strong>• Gebe İnek İshal Aşısı:</strong> Doğuma 7-5 hafta kala ilk doz, 4-2 hafta kala rapel (Kolostrum koruması).</p>
         </div>
       </div>
     </section>
 
-    <!-- ================= 5. ACİL İLK YARDIM ================= -->
+    <!-- ================= 5. ÜREME, TOHUMLAMA VE DOĞUM ÇARKI ================= -->
+    <section id="tab-repro" class="tab-section">
+      <div class="card">
+        <div class="card-title">🩸 Tohumlama & Üreme Takip Motoru</div>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
+          21 gün kızgınlık döngüsü, 40 gün gebelik kontrolü, 220 gün kuruya alma ve 280 gün doğum geri sayımı.
+        </p>
+
+        <label for="repro-animal-select">Tohumlanan / Kızgınlıktaki Hayvanı Seç:</label>
+        <div style="display:flex; gap:6px; margin-bottom:10px;">
+          <select id="repro-animal-select" style="margin-bottom:0;"></select>
+          <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('repro')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <label for="repro-date">Tohumlama Tarihi:</label>
+            <input type="date" id="repro-date" onchange="previewReproTimeline()">
+          </div>
+          <div>
+            <label for="repro-bull">Boğa Küpe / Sperma Kodu:</label>
+            <input type="text" id="repro-bull" placeholder="Örn: US1234 Simental">
+          </div>
+        </div>
+
+        <!-- Canlı Hesaplanan Üreme Zaman Çizelgesi -->
+        <div id="repro-timeline-preview" class="card" style="background:#f8fafc; border:1px solid #cbd5e1; margin-top:8px; display:none;">
+          <div style="font-weight:700; color:var(--primary); font-size:0.9rem; margin-bottom:6px;">⏱️ Hesaplanan Otomatik Takvim & Alarmlar:</div>
+          <div id="repro-timeline-items" style="font-size:0.82rem; line-height:1.7;"></div>
+        </div>
+
+        <button class="btn btn-primary" onclick="saveReproRecord()" style="margin-top:10px;">💾 Tohumlamayı Kaydet & Alarmları Başlat</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🐄 Aktif Üreme & Gebelik Takip Listesi</div>
+        <div class="table-container">
+          <table id="repro-records-table">
+            <thead>
+              <tr>
+                <th>Küpe No</th>
+                <th>Tohumlama</th>
+                <th>Kızgınlık Dönüşü (21g)</th>
+                <th>Gebelik Kontrol (40g)</th>
+                <th>Kuruya Alma (220g)</th>
+                <th>Beklenen Doğum (280g)</th>
+                <th>İşlem</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. ACİL İLK YARDIM ================= -->
     <section id="tab-emergency" class="tab-section">
       <div class="banner-alert banner-danger">
         ⚠️ <strong>ÖNEMLİ:</strong> Bu protokoller veteriner hekim çiftliğe ulaşana kadar hastanın yaşama şansını artırmak için acil ilk yardım adımlarıdır.
@@ -777,6 +833,10 @@
     <button class="nav-item" onclick="switchTab('ikas')">
       <span class="nav-icon">💊</span>
       <span>İKAS/İlaç</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('repro')">
+      <span class="nav-icon">🩸</span>
+      <span>Üreme</span>
     </button>
     <button class="nav-item" onclick="switchTab('vaccine')">
       <span class="nav-icon">📅</span>
@@ -948,6 +1008,10 @@
       { id: 2, animalId: "TR16004", vaccine: "Bruselloz (S19)", date: "2026-09-15", boosterDate: "Tek Doz", mandatory: true, turkvet: true }
     ]);
 
+    let reproRecords = getStore("repro", [
+      { id: 1, animalId: "TR16001", earTag: "TR16001", date: "2026-09-01", bull: "Simental TR99", heatDate: "2026-09-22", pregCheckDate: "2026-10-11", dryDate: "2027-04-09", calvingDate: "2027-06-08", status: "Kızgınlık Takibinde" }
+    ]);
+
     // DART Skorları için anlık seçimler
     let currentDart = { d: 0, a: 0, r: 0, t: 0 };
 
@@ -960,12 +1024,15 @@
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
       document.getElementById("treatment-date").value = now.toISOString().slice(0, 16);
       document.getElementById("vac-date").value = now.toISOString().slice(0, 10);
+      const reproDateEl = document.getElementById("repro-date");
+      if (reproDateEl) reproDateEl.value = now.toISOString().slice(0, 10);
 
       initDrugSelect();
       populateAnimalSelects();
       renderAnimalTable();
       renderActiveIkasTable();
       renderVaccineRecords();
+      renderReproRecords();
       updateDashboardStats();
       calculateTriage();
       calculateEpiDose();
@@ -987,13 +1054,14 @@
 
       // Menü aktifliği
       const navButtons = document.querySelectorAll(".nav-item");
-      const mapping = { dashboard: 0, triage: 1, ikas: 2, vaccine: 3, emergency: 4, milker: 5 };
+      const mapping = { dashboard: 0, triage: 1, ikas: 2, repro: 3, vaccine: 4, emergency: 5, milker: 6 };
       if (navButtons[mapping[tabId]]) {
         navButtons[mapping[tabId]].classList.add("active");
       }
 
       window.scrollTo(0, 0);
       if (tabId === "milker") checkMilkerStatus();
+      if (tabId === "repro") renderReproRecords();
     }
 
     // İlaç Seçiciyi Doldur
@@ -1013,12 +1081,14 @@
     function populateAnimalSelects() {
       const triageSelect = document.getElementById("triage-animal-select");
       const treatSelect = document.getElementById("treatment-animal-select");
+      const reproSelect = document.getElementById("repro-animal-select");
       const vacSelect = document.getElementById("vac-animal-select");
 
-      [triageSelect, treatSelect, vacSelect].forEach(sel => {
+      [triageSelect, treatSelect, reproSelect, vacSelect].forEach(sel => {
         if (!sel) return;
         sel.innerHTML = "";
         animals.forEach(a => {
+          // Üreme modülünde sadece dişileri önceliklendirebiliriz
           const opt = document.createElement("option");
           opt.value = a.id;
           opt.textContent = `${a.earTag} (${a.type} - ${a.gender})`;
@@ -1435,6 +1505,120 @@
     }
 
     /* =========================================================================
+       ÜREME, TOHUMLAMA VE DOĞUM ÇARKI HESAPLAMA MOTORU
+       ========================================================================= */
+    function previewReproTimeline() {
+      const dateVal = document.getElementById("repro-date").value;
+      const previewDiv = document.getElementById("repro-timeline-preview");
+      const itemsDiv = document.getElementById("repro-timeline-items");
+
+      if (!dateVal) {
+        previewDiv.style.display = "none";
+        return;
+      }
+
+      const tDate = new Date(dateVal);
+      const heatDate = new Date(tDate.getTime() + 21 * 24 * 3600 * 1000);
+      const pregCheckDate = new Date(tDate.getTime() + 40 * 24 * 3600 * 1000);
+      const dryDate = new Date(tDate.getTime() + 220 * 24 * 3600 * 1000);
+      const vaccinePreCalve = new Date(tDate.getTime() + 245 * 24 * 3600 * 1000);
+      const calvingDate = new Date(tDate.getTime() + 280 * 24 * 3600 * 1000);
+
+      previewDiv.style.display = "block";
+      itemsDiv.innerHTML = `
+        <div>🔍 <strong>Kızgınlık Dönüşü (18-24. Günler):</strong> ${heatDate.toLocaleDateString('tr-TR')} (Tutmadıysa tekrar kızgınlık gösterir!)</div>
+        <div>🩺 <strong>Gebelik Muayenesi (35-45. Günler):</strong> ${pregCheckDate.toLocaleDateString('tr-TR')} (Ultrason / Rektal Kontrol)</div>
+        <div>🛑 <strong>Kuruya Çıkarma (Doğuma 60 gün):</strong> ${dryDate.toLocaleDateString('tr-TR')} (Sağımı kes, kuru dönem tüpü uygula)</div>
+        <div>💉 <strong>Buzağı İshali Profilaksisi:</strong> ${vaccinePreCalve.toLocaleDateString('tr-TR')} (Kuru dönem kombine aşı)</div>
+        <div>🎉 <strong>Beklenen Doğum (280. Gün):</strong> <span style="color:var(--primary); font-weight:800;">${calvingDate.toLocaleDateString('tr-TR')}</span></div>
+      `;
+    }
+
+    function saveReproRecord() {
+      const animalId = document.getElementById("repro-animal-select").value;
+      const dateVal = document.getElementById("repro-date").value;
+      const bull = (document.getElementById("repro-bull").value || "Bilinmiyor").trim();
+
+      if (!dateVal) {
+        alert("Lütfen tohumlama tarihini girin.");
+        return;
+      }
+
+      const animal = animals.find(a => a.id === animalId) || { earTag: animalId };
+      const tDate = new Date(dateVal);
+      const heatDate = new Date(tDate.getTime() + 21 * 24 * 3600 * 1000).toISOString().slice(0, 10);
+      const pregCheckDate = new Date(tDate.getTime() + 40 * 24 * 3600 * 1000).toISOString().slice(0, 10);
+      const dryDate = new Date(tDate.getTime() + 220 * 24 * 3600 * 1000).toISOString().slice(0, 10);
+      const calvingDate = new Date(tDate.getTime() + 280 * 24 * 3600 * 1000).toISOString().slice(0, 10);
+
+      const newRecord = {
+        id: Date.now(),
+        animalId: animal.id,
+        earTag: animal.earTag,
+        date: dateVal,
+        bull: bull,
+        heatDate: heatDate,
+        pregCheckDate: pregCheckDate,
+        dryDate: dryDate,
+        calvingDate: calvingDate,
+        status: "Tohumlandı (Kızgınlık Takibinde)"
+      };
+
+      reproRecords.unshift(newRecord);
+      setStore("repro", reproRecords);
+
+      // Hayvanın son durumunu güncelle
+      animal.lastStatus = `Tohumlandı (${bull}) - Doğum: ${new Date(calvingDate).toLocaleDateString('tr-TR')}`;
+      setStore("animals", animals);
+
+      renderReproRecords();
+      renderAnimalTable();
+      updateDashboardStats();
+      alert(`✅ ${animal.earTag} için üreme kaydı oluşturuldu!\nBeklenen Doğum: ${new Date(calvingDate).toLocaleDateString('tr-TR')}`);
+      document.getElementById("repro-timeline-preview").style.display = "none";
+    }
+
+    function renderReproRecords() {
+      const tbody = document.querySelector("#repro-records-table tbody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+
+      if (reproRecords.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8;">Kayıtlı üreme/tohumlama bulunmuyor.</td></tr>`;
+        return;
+      }
+
+      const now = new Date();
+
+      reproRecords.forEach(r => {
+        const tr = document.createElement("tr");
+
+        const calvD = new Date(r.calvingDate);
+        const daysToCalve = Math.ceil((calvD - now) / (24 * 3600 * 1000));
+        let badgeCalve = daysToCalve > 0 ? `<span class="tag tag-info">${daysToCalve} gün kaldı</span>` : `<span class="tag tag-danger">Günü Geldi!</span>`;
+
+        tr.innerHTML = `
+          <td><strong>${r.earTag}</strong><br><small style="color:#64748b;">${r.bull}</small></td>
+          <td>${r.date}</td>
+          <td>${r.heatDate}</td>
+          <td>${r.pregCheckDate}</td>
+          <td>${r.dryDate}</td>
+          <td><strong>${r.calvingDate}</strong><br>${badgeCalve}</td>
+          <td><button class="btn btn-outline" style="padding:4px 8px; font-size:0.75rem;" onclick="deleteReproRecord(${r.id})">Sil</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deleteReproRecord(id) {
+      if (!confirm("Bu tohumlama kaydını silmek istediğinize emin misiniz?")) return;
+      reproRecords = reproRecords.filter(r => r.id !== id);
+      setStore("repro", reproRecords);
+      renderReproRecords();
+      updateDashboardStats();
+    }
+
+    /* =========================================================================
        5. ACİL İLK YARDIM FONKSİYONLARI
        ========================================================================= */
     function toggleEmergency(id) {
@@ -1574,6 +1758,7 @@
         animals: animals,
         treatments: treatments,
         vaccines: vaccineRecords,
+        repro: reproRecords,
         triage: triageRecords,
         exportedAt: new Date().toISOString()
       };
@@ -1605,6 +1790,10 @@
             vaccineRecords = parsed.vaccines;
             setStore("vaccines", vaccineRecords);
           }
+          if (parsed.repro && Array.isArray(parsed.repro)) {
+            reproRecords = parsed.repro;
+            setStore("repro", reproRecords);
+          }
           if (parsed.triage && Array.isArray(parsed.triage)) {
             triageRecords = parsed.triage;
             setStore("triage", triageRecords);
@@ -1614,6 +1803,7 @@
           renderAnimalTable();
           renderActiveIkasTable();
           renderVaccineRecords();
+          renderReproRecords();
           updateDashboardStats();
           alert("✅ Yedek veriler başarıyla cihaza yüklendi!");
         } catch (err) {
@@ -1706,6 +1896,8 @@
         setAnimalSelectValue("triage-animal-select", cleanTag);
       } else if (activeScanTarget === 'treatment') {
         setAnimalSelectValue("treatment-animal-select", cleanTag);
+      } else if (activeScanTarget === 'repro') {
+        setAnimalSelectValue("repro-animal-select", cleanTag);
       } else if (activeScanTarget === 'new_animal') {
         document.getElementById("new-eartag").value = cleanTag;
       }
