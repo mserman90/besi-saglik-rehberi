@@ -94,10 +94,15 @@ Ahırda veya yaylada baskül yokken terzi mezurası veya şerit metreyle kilo he
 
 ### 9. 🆘 Acil İlk Yardım
 Veteriner hekim ahıra ulaşana kadar hayat kurtaracak ilk adımlar:
-- **İğne / Aşı Şoku (Anafilaksi):** Kilo bazında otomatik adrenalin dozu ve müdahale.
-- **İşkembe Şişmesi (Timpani):** Sıvı yağ içirme ve trokar şişleme tekniği.
-- **Rahim Düşmesi:** Döl yatağını ıslak bezle havaya kaldırma kuralı.
-- **Doğum Felci (Süt Humması):** Kalsiyum serumu uygulama uyarısı.
+- **İğne / Aşı Şoku (Anafilaksi):** Canlı ağırlığa göre otomatik adrenalin dozu hesaplama ve hava yolu açma.
+- **İşkembe Şişmesi (Timpani):** Sıvı yağ içirme, ağızdan hortum salma ve sol açlık çukurundan trokar (şişleme) tekniği.
+- **Rahim Düşmesi (Prolapsus):** Döl yatağını ıslak bezle havaya kaldırma ve arkasını yüksekte tutma kuralı.
+- **Doğum Felci (Süt Humması):** Damardan çok yavaş kalsiyum serumu ve oturur vaziyette tutma uyarısı.
+- **Yemek Borusu Tıkanması (Patates / Pancar Boğulması):** Boğazı sıvazlayarak cismi çıkarma, zorlamama ve acil şişkinlik önlemi.
+- **Şiddetli Kanama & Boynuz / Tırnak Kırılması:** Basınçlı tampon, boynuz kökü bağlama ve atardamar turnikesi.
+- **Yeni Doğan Buzağıyı Canlandırma:** Balgam temizliği, kısa süreli baş aşağı tahliye, soğuk su ve saman çöpü şoku.
+- **Sıcak Çarpması:** Gölgelik alan, havalandırma, baş-boyun-bacak ıslatma ve elektrolitli serin su.
+- **Zehirlenme & Gübre / Üre Yutma:** Üre gübresi için sulandırılmış ev sirkesi içirme, zehirli ot için aktif kömür ve sıvı yağ desteği.
 
 ---
 
