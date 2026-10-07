@@ -368,10 +368,10 @@
   <!-- Başlık -->
   <header>
     <div>
-      <h1>🐄 Sığır Sağlık & Saha Sistemi</h1>
-      <small style="opacity:0.85; font-size:0.75rem;">Saha Triyajı • İKAS Gıda Güvenliği • Aşı Takvimi</small>
+      <h1>🐄 Ahır & Çiftlik Sağlık Rehberi</h1>
+      <small style="opacity:0.85; font-size:0.75rem;">Hasta Muayenesi • İlaçlı Süt Takibi • Aşı & Doğum Takvimi</small>
     </div>
-    <span class="badge-offline">⚡ Çevrimdışı (Offline)</span>
+    <span class="badge-offline">⚡ İnternetsiz Çalışır</span>
   </header>
 
   <main>
@@ -383,51 +383,51 @@
       <div class="grid-2">
         <div class="stat-card">
           <div class="stat-val" id="stat-total-animals">0</div>
-          <div class="stat-label">Kayıtlı Hayvan</div>
+          <div class="stat-label">Toplam Hayvan</div>
         </div>
         <div class="stat-card">
           <div class="stat-val" style="color:var(--danger);" id="stat-ikas-blocked">0</div>
-          <div class="stat-label">Sütü Yasak (İKAS)</div>
+          <div class="stat-label">Sütü Yasaklı (İlaçlı)</div>
         </div>
         <div class="stat-card">
           <div class="stat-val" style="color:var(--warning);" id="stat-quarantine">0</div>
-          <div class="stat-label">Karantinada</div>
+          <div class="stat-label">Ayrı Bölmede (Karantina)</div>
         </div>
         <div class="stat-card">
           <div class="stat-val" style="color:var(--info);" id="stat-upcoming-vaccines">0</div>
-          <div class="stat-label">Yaklaşan Aşı</div>
+          <div class="stat-label">Günü Gelen Aşı</div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">⚡ Hızlı Saha Eylemleri</div>
+        <div class="card-title">⚡ Hızlı İşlemler</div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <button class="btn btn-primary" onclick="switchTab('triage')">➕ Yeni Triyaj</button>
-          <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç & İKAS</button>
-          <button class="btn btn-danger" style="background:#b91c1c; color:white;" onclick="switchTab('cost')">💰 Zarar & Maliyet Defteri</button>
-          <button class="btn btn-success" style="background:#15803d; color:white;" onclick="switchTab('feed')">🌾 Yemlik & Asidoz (SARA)</button>
-          <button class="btn btn-info" onclick="switchTab('repro')">🩸 Üreme & Doğum</button>
-          <button class="btn btn-warning" style="background:#e65100; color:white;" onclick="switchTab('calf')">🍼 Buzağı & Kolostrum</button>
-          <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Şerit Metre Kilo</button>
+          <button class="btn btn-primary" onclick="switchTab('triage')">🩺 Hasta Muayene Et</button>
+          <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç Yap & Süt Kilitle</button>
+          <button class="btn btn-danger" style="background:#b91c1c; color:white;" onclick="switchTab('cost')">💰 Zarar & Masraf Defteri</button>
+          <button class="btn btn-success" style="background:#15803d; color:white;" onclick="switchTab('feed')">🌾 Yemlik & İşkembem / Geviş</button>
+          <button class="btn btn-info" onclick="switchTab('repro')">🩸 Tohumlama & Doğum</button>
+          <button class="btn btn-warning" style="background:#e65100; color:white;" onclick="switchTab('calf')">🍼 Buzağı & Ağız Sütü</button>
+          <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Şerit Metreyle Kilo Ölç</button>
           <button class="btn btn-info" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
-          <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil Müdahale</button>
-          <button class="btn btn-outline" style="grid-column: span 2;" onclick="switchTab('milker')">🥛 Sağımcı Modu</button>
+          <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil İlk Yardım</button>
+          <button class="btn btn-outline" style="grid-column: span 2;" onclick="switchTab('milker')">🥛 Sağımcı Ekranı (Büyük Yazı)</button>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">🚨 Kritik Kalıntılı Süt (İKAS) Durumu</div>
+        <div class="card-title">🚨 Tanka Katılması Yasak İlaçlı Sütler</div>
         <div id="dashboard-ikas-list" style="font-size:0.85rem; color:#475569;">
-          Kayıtlı aktif süt arınma kısıtı bulunmuyor.
+          Şu an sütü yasaklı inek bulunmuyor.
         </div>
       </div>
 
       <div class="card">
         <div class="card-title">📋 Hayvan Listesi & Durumlar</div>
         <div style="display:flex; gap:6px; margin-bottom:8px;">
-          <input type="text" id="animal-search" placeholder="Küpe No Ara (örn: TR16001)" oninput="renderAnimalTable()" style="margin-bottom:0;">
+          <input type="text" id="animal-search" placeholder="Küpe No Yaz veya Ara (örn: TR16001)" oninput="renderAnimalTable()" style="margin-bottom:0;">
           <button class="btn btn-warning" style="width:auto; padding:0 12px;" onclick="startQrScanner('search')" title="Kamerayla Küpe Oku">📷 Oku</button>
-          <button class="btn btn-primary" style="width:auto; padding:0 14px;" onclick="openNewAnimalModal()">+ Ekle</button>
+          <button class="btn btn-primary" style="width:auto; padding:0 14px;" onclick="openNewAnimalModal()">+ Yeni Ekle</button>
         </div>
         <div class="table-container">
           <table id="animal-table">
@@ -435,9 +435,9 @@
               <tr>
                 <th>Küpe No</th>
                 <th>Cinsiyet/Yaş</th>
-                <th>VKS</th>
-                <th>Karantina</th>
-                <th>Durum</th>
+                <th>Et-Yağ Durumu</th>
+                <th>Ayrı Bölme</th>
+                <th>Sağlık Durumu</th>
                 <th>İşlem</th>
               </tr>
             </thead>
@@ -450,9 +450,12 @@
     <!-- ================= 2. SAHA TRİYAJI VE DART SKORLAMA ================= -->
     <section id="tab-triage" class="tab-section">
       <div class="card">
-        <div class="card-title">🚨 Saha Triyajı & Vital Muayene</div>
+        <div class="card-title">🩺 Hasta Hayvan Kontrolü & Ateş Ölçümü</div>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
+          Hasta görünen ineğin ateşini, nabzını ve işkembesini ölçüp aciliyet derecesini anlayın:
+        </p>
         
-        <label for="triage-animal-select">Hayvan Seç (Küpe No):</label>
+        <label for="triage-animal-select">Muayene Edilen Hayvan (Küpe No):</label>
         <div style="display:flex; gap:6px; margin-bottom:10px;">
           <select id="triage-animal-select" style="margin-bottom:0;"></select>
           <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('triage')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
@@ -460,149 +463,150 @@
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <div>
-            <label for="vital-temp">Rektal Ateş (°C):</label>
+            <label for="vital-temp">Makat Ateşi (°C):</label>
             <input type="number" id="vital-temp" step="0.1" value="38.8" oninput="calculateTriage()">
             <small id="temp-hint" style="font-size:0.75rem; color:#64748b;">Normal: 38.0 - 39.3°C</small>
           </div>
           <div>
-            <label for="vital-pulse">Kalp/Nabız (atım/dk):</label>
+            <label for="vital-pulse">Kalp / Nabız (1 dakikada):</label>
             <input type="number" id="vital-pulse" value="65" oninput="calculateTriage()">
-            <small style="font-size:0.75rem; color:#64748b;">Normal: 48 - 84/dk</small>
+            <small style="font-size:0.75rem; color:#64748b;">Normal: 48 - 84 atım</small>
           </div>
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <div>
-            <label for="vital-resp">Solunum (nefes/dk):</label>
+            <label for="vital-resp">Nefes Sayısı (1 dakikada):</label>
             <input type="number" id="vital-resp" value="32" oninput="calculateTriage()">
-            <small style="font-size:0.75rem; color:#64748b;">Normal: 26 - 50/dk</small>
+            <small style="font-size:0.75rem; color:#64748b;">Normal: 26 - 50 nefes</small>
           </div>
           <div>
-            <label for="vital-rumen">Rumen Motilite (2 dk):</label>
+            <label for="vital-rumen">İşkembe Çalışması (Sol Boşluk):</label>
             <select id="vital-rumen" onchange="calculateTriage()">
-              <option value="2-3">Normal (2 - 3 hareket)</option>
-              <option value="1">Zayıf (1 hareket)</option>
-              <option value="0">Atonik / Durmuş (0 hareket)</option>
+              <option value="2-3">İyi Çalışıyor (2 dakikada 2-3 dalga)</option>
+              <option value="1">Tembel / Zayıf (2 dakikada 1 dalga)</option>
+              <option value="0">Tamamen Durmuş (Hiç ses/hareket yok)</option>
             </select>
           </div>
         </div>
 
-        <label for="vital-dehydration">Dehidrasyon (Sıvı Kaybı - Göz Çökmesi / Deri Çadırı):</label>
+        <label for="vital-dehydration">Su Kaybı (Göz Çökmesi / Boyun Derisi Çekme):</label>
         <select id="vital-dehydration" onchange="calculateTriage()">
-          <option value="0">Normal (< %5)</option>
-          <option value="6">Hafif Dehidrasyon (%6 - %7)</option>
-          <option value="9">Orta / Şiddetli (%8 - %10 Sıvı Tedavisi Şart)</option>
-          <option value="12">Kritik Hipovolemik Şok (> %10)</option>
+          <option value="0">Normal (Deri hemen yerine oturuyor, göz canlı)</option>
+          <option value="6">Hafif Susuz (%6 - Deri 2-3 saniyede düzelir)</option>
+          <option value="9">Orta / Şiddetli (%8-10 - Göz çökmüş, acil serum lazım)</option>
+          <option value="12">Çok Ağır / Komada (Göz yuvasına batmış, kalkamıyor)</option>
         </select>
       </div>
 
       <div class="card">
-        <div class="card-title">🩺 BRD / Solunum Yolu İçin DART Skorlama Algoritması</div>
+        <div class="card-title">🫁 Ciğer ve Öksürük / Zatürre Tehlike Derecesi</div>
         
         <div class="score-group">
-          <div class="score-label"><span>D - Depresyon (Durgunluk)</span><span id="score-val-d">0/3</span></div>
+          <div class="score-label"><span>1. Keyifsizlik / Durgunluk</span><span id="score-val-d">0/3</span></div>
           <div class="score-buttons" data-metric="d">
-            <button class="score-btn selected" onclick="setScore('d',0,this)">0: Normal</button>
-            <button class="score-btn" onclick="setScore('d',1,this)">1: Hafif Durgun</button>
-            <button class="score-btn" onclick="setScore('d',2,this)">2: Belirgin Durgun</button>
-            <button class="score-btn" onclick="setScore('d',3,this)">3: Başını Kaldırmaz</button>
+            <button class="score-btn selected" onclick="setScore('d',0,this)">0: Canlı</button>
+            <button class="score-btn" onclick="setScore('d',1,this)">1: Biraz Durgun</button>
+            <button class="score-btn" onclick="setScore('d',2,this)">2: Başı Yerde</button>
+            <button class="score-btn" onclick="setScore('d',3,this)">3: Yatar, Kalkmaz</button>
           </div>
         </div>
 
         <div class="score-group">
-          <div class="score-label"><span>A - İştahsızlık (Appetite)</span><span id="score-val-a">0/3</span></div>
+          <div class="score-label"><span>2. Yem Yeme İsteği</span><span id="score-val-a">0/3</span></div>
           <div class="score-buttons" data-metric="a">
-            <button class="score-btn selected" onclick="setScore('a',0,this)">0: İştahlı</button>
-            <button class="score-btn" onclick="setScore('a',1,this)">1: Yavaş Yiyor</button>
-            <button class="score-btn" onclick="setScore('a',2,this)">2: Yarı Yem Bırakır</button>
-            <button class="score-btn" onclick="setScore('a',3,this)">3: Tamamen Yemez</button>
+            <button class="score-btn selected" onclick="setScore('a',0,this)">0: İştahı İyi</button>
+            <button class="score-btn" onclick="setScore('a',1,this)">1: Ağır Yiyor</button>
+            <button class="score-btn" onclick="setScore('a',2,this)">2: Yarıda Bıraktı</button>
+            <button class="score-btn" onclick="setScore('a',3,this)">3: Ağzını Sürmez</button>
           </div>
         </div>
 
         <div class="score-group">
-          <div class="score-label"><span>R - Solunum (Respiration)</span><span id="score-val-r">0/3</span></div>
+          <div class="score-label"><span>3. Nefes Alıp Verme & Öksürük</span><span id="score-val-r">0/3</span></div>
           <div class="score-buttons" data-metric="r">
-            <button class="score-btn selected" onclick="setScore('r',0,this)">0: Normal</button>
-            <button class="score-btn" onclick="setScore('r',1,this)">1: Hafif Öksürük</button>
-            <button class="score-btn" onclick="setScore('r',2,this)">2: Kesik/Hızlı Nefes</button>
-            <button class="score-btn" onclick="setScore('r',3,this)">3: Ağızdan Soluma</button>
+            <button class="score-btn selected" onclick="setScore('r',0,this)">0: Rahat</button>
+            <button class="score-btn" onclick="setScore('r',1,this)">1: Tek Tük Öksürük</button>
+            <button class="score-btn" onclick="setScore('r',2,this)">2: Hızlı / Hırıltılı</button>
+            <button class="score-btn" onclick="setScore('r',3,this)">3: Ağız Açık / Dili Dışarda</button>
           </div>
         </div>
 
         <div class="score-group">
-          <div class="score-label"><span>T - Vücut Sıcaklığı (Otomatik)</span><span id="score-val-t">0/3</span></div>
-          <small style="color:#64748b; font-size:0.75rem;">Yukarıdaki rektal ateşten otomatik hesaplanır (39.5°C+ skor üretir)</small>
+          <div class="score-label"><span>4. Ateş Puanı (Yukarıdaki dereceden gelir)</span><span id="score-val-t">0/3</span></div>
+          <small style="color:#64748b; font-size:0.75rem;">Ateş 39.5°C ve üstü ise otomatik puan eklenir</small>
         </div>
 
-        <!-- Triyaj Çıktı Karar Kutusu -->
+        <!-- Karar Kutusu -->
         <div id="triage-result-box" style="margin-top:12px;"></div>
 
-        <button class="btn btn-primary" onclick="saveTriageRecord()" style="margin-top:10px;">💾 Triyajı Kaydet & Hayvan Durumunu Güncelle</button>
+        <button class="btn btn-primary" onclick="saveTriageRecord()" style="margin-top:10px;">💾 Muayeneyi Kaydet & Hayvan Durumunu İşle</button>
       </div>
     </section>
 
     <!-- ================= 3. İKAS VE İLAÇ YÖNETİMİ ================= -->
     <section id="tab-ikas" class="tab-section">
       <div class="card">
-        <div class="card-title">💊 Yeni Tedavi & Otomatik İKAS Hesaplayıcı</div>
+        <div class="card-title">💊 İlaç Kaydı & Sütü/Eti Tanka Yasaklama (İKAS)</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
-          5996 Sayılı Kanun gereği gıda güvenliğini korur. Kombine tedavilerde en uzun arınma süresini baz alır.
+          İğne veya meme tüpü yapıldığında sütü ve eti ne kadar süre satamayacağınızı otomatik hesaplar. Aynı anda iki ilaç yapıldıysa süresi en uzun olanı bekletir.
         </p>
 
-        <label for="treatment-animal-select">Hasta Hayvanı Seç:</label>
+        <label for="treatment-animal-select">İlaç Yapılan Hayvanı Seç:</label>
         <div style="display:flex; gap:6px; margin-bottom:10px;">
           <select id="treatment-animal-select" style="margin-bottom:0;"></select>
           <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('treatment')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
         </div>
 
-        <label for="treatment-drug-select">Uygulanan İlaç (Etken Madde):</label>
+        <label for="treatment-drug-select">Yapılan İlaç (İğne / Şurup / Meme Tüpü):</label>
         <select id="treatment-drug-select" onchange="onDrugSelectChange()"></select>
 
         <div id="drug-warning-banner"></div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <div>
-            <label for="treatment-dose">Uygulanan Doz (mL):</label>
+            <label for="treatment-dose">Vurulan Doz (cc / mL):</label>
             <input type="number" id="treatment-dose" value="15" step="0.5">
           </div>
           <div>
-            <label for="treatment-route">Uygulama Yolu:</label>
+            <label for="treatment-route">Vurulma Yeri / Şekli:</label>
             <select id="treatment-route">
-              <option value="IM">Kas İçi (IM)</option>
-              <option value="SC">Deri Altı (SC)</option>
-              <option value="IV">Damar İçi (IV)</option>
-              <option value="IMM">Meme İçi</option>
+              <option value="Kas İçi">Kas İçi (Ete / Buta)</option>
+              <option value="Deri Altı">Deri Altı (Boyuna)</option>
+              <option value="Damar İçi">Damar İçi (Boyun Damarına Serum)</option>
+              <option value="Meme İçi">Meme İçi (Tüp)</option>
             </select>
           </div>
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <div>
-            <label for="treatment-date">Uygulama Tarihi / Saati:</label>
+            <label for="treatment-date">İlacın Yapıldığı Gün ve Saat:</label>
             <input type="datetime-local" id="treatment-date">
           </div>
           <div>
-            <label for="treatment-vet">Reçete / Hekim Onayı:</label>
-            <input type="text" id="treatment-vet" placeholder="Vet. Hekim Onaylı (VCPR)">
+            <label for="treatment-vet">Reçete Veren Veteriner Hekim:</label>
+            <input type="text" id="treatment-vet" placeholder="Veteriner Adı / Klinik">
           </div>
         </div>
 
         <div id="calculated-ikas-preview" class="banner-alert banner-warning" style="display:none;"></div>
 
-        <button class="btn btn-warning" onclick="saveTreatment()">🔒 Tedaviyi Uygula & Süt/Et Kilidini Başlat</button>
+        <button class="btn btn-warning" onclick="saveTreatment()">🔒 İlacı Kaydet & Süt/Et Kilidini Başlat</button>
       </div>
 
       <div class="card">
-        <div class="card-title">🚫 Aktif İKAS Engelleri ve Canlı Geri Sayımlar</div>
+        <div class="card-title">🚫 Şuan Sütü ve Eti Yasaklı Olan Hayvanlar</div>
         <div class="table-container">
           <table id="active-ikas-table">
             <thead>
               <tr>
                 <th>Küpe No</th>
-                <th>İlaç</th>
-                <th>Süt Bitiş</th>
-                <th>Et Bitiş</th>
+                <th>İlaç Adı</th>
+                <th>Süt Ne Zaman Temiz?</th>
+                <th>Et Ne Zaman Serbest?</th>
                 <th>Durum</th>
+                <th>İşlem</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -614,17 +618,17 @@
     <!-- ================= 4. HASTALIK, DÖKÜLEN SÜT & TEDAVİ MALİYET DEFTERİ ================= -->
     <section id="tab-cost" class="tab-section">
       <div class="card" style="border-top: 4px solid #b91c1c;">
-        <div class="card-title" style="color:#b91c1c;">💰 Hastalık & Dökülen Süt Ekonomik Zarar Defteri</div>
+        <div class="card-title" style="color:#b91c1c;">💰 Hastalık Masrafı & Dökülen Süt Zarar Defteri</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
-          Tedavi edilen ineğin veteriner hekim vizitesi, ilaç bedeli ve <strong>antibiyotik nedeniyle imha edilen/dökülen sütün</strong> parasal kaybını otomatik hesaplar.
+          Hasta ineğin veteriner parası, ilaç masrafı ve <strong>ilaç yüzünden lavaboya dökülen sütün cebinizden götürdüğü parayı</strong> kuruşu kuruşuna hesaplar.
         </p>
 
         <!-- Çiftlik Referans Fiyat Ayarları -->
         <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:10px; margin-bottom:12px;">
-          <div style="font-weight:700; font-size:0.85rem; color:#1e293b; margin-bottom:6px;">⚙️ Çiftlik Birim Fiyatları:</div>
+          <div style="font-weight:700; font-size:0.85rem; color:#1e293b; margin-bottom:6px;">⚙️ Süt Satış Fiyatınız:</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
-              <label for="farm-milk-price">Çiğ Süt Satış Fiyatı (TL / Litre):</label>
+              <label for="farm-milk-price">Sütün Litre Satış Fiyatı (TL):</label>
               <input type="number" id="farm-milk-price" value="16.5" step="0.5" oninput="updateCostSummary()">
             </div>
             <div>
@@ -636,9 +640,9 @@
 
         <!-- Yeni Maliyet & Zarar Kaydı Formu -->
         <div class="card" style="background:#fff; border:1px solid #e2e8f0;">
-          <div style="font-weight:700; color:var(--primary); font-size:0.9rem; margin-bottom:8px;">➕ Yeni Tedavi & Zarar Kaydı Ekle</div>
+          <div style="font-weight:700; color:var(--primary); font-size:0.9rem; margin-bottom:8px;">➕ Yeni Masraf & Zarar Yaz</div>
 
-          <label for="cost-animal-select">Hasta / Tedavi Edilen Hayvan:</label>
+          <label for="cost-animal-select">Tedavi Olan İnek (Küpe No):</label>
           <div style="display:flex; gap:6px; margin-bottom:10px;">
             <select id="cost-animal-select" style="margin-bottom:0;"></select>
             <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('cost')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
@@ -646,42 +650,42 @@
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
-              <label for="cost-disease">Hastalık / Teşhis:</label>
+              <label for="cost-disease">Nesi Vardı? (Hastalık):</label>
               <select id="cost-disease">
-                <option value="Klinik Mastitis">Klinik Mastitis (Meme İltihabı)</option>
-                <option value="Metritis (Rahim İltihabı)">Metritis (Rahim İltihabı)</option>
-                <option value="BRD (Zatürre / Solunum)">BRD (Zatürre / Solunum)</option>
-                <option value="Ayak Çürüğü (Lameness)">Ayak Hastalığı / Çürük</option>
-                <option value="Ketozis / Abomasum">Ketozis / Deplasman</option>
-                <option value="Hipokalsemi (Süt Humması)">Süt Humması (Felç)</option>
-                <option value="Buzağı İshali">Buzağı İshali / Septisemi</option>
-                <option value="Diğer Teşhis">Diğer Tedavi</option>
+                <option value="Meme İltihabı (Mastitis)">Meme Yangısı / İltihabı (Mastitis)</option>
+                <option value="Rahim İltihabı (Metritis)">Rahim İltihabı / Eş Kalması</option>
+                <option value="Zatürre / Ciğer Hastalığı">Zatürre / Öksürük / Ciğer (BRD)</option>
+                <option value="Ayak Çürüğü / Tırnak">Ayak Çürüğü / Tırnak Yarası</option>
+                <option value="Mide Dönmesi / Ketozis">İşkembe / Mide Dönmesi / Ketozis</option>
+                <option value="Doğum Felci (Süt Humması)">Doğum Felci (Kalsiyum Eksikliği)</option>
+                <option value="Buzağı İshali">Buzağı İshali</option>
+                <option value="Diğer Tedavi">Diğer Hastalık / İğne</option>
               </select>
             </div>
             <div>
-              <label for="cost-date">Kayıt Tarihi:</label>
+              <label for="cost-date">Hastalık Tarihi:</label>
               <input type="date" id="cost-date">
             </div>
           </div>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
-              <label for="cost-vet-fee">Veteriner Vizitesi / Emek (TL):</label>
+              <label for="cost-vet-fee">Veterinere Verilen Para (TL):</label>
               <input type="number" id="cost-vet-fee" value="500" step="50" oninput="calculateLiveCostEntry()">
             </div>
             <div>
-              <label for="cost-drug-fee">Kullanılan İlaç / Serum Bedeli (TL):</label>
+              <label for="cost-drug-fee">Alınan İlaç / Serum Parası (TL):</label>
               <input type="number" id="cost-drug-fee" value="850" step="50" oninput="calculateLiveCostEntry()">
             </div>
           </div>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
-              <label for="cost-daily-milk">Günlük Verimi (Litre/Gün):</label>
+              <label for="cost-daily-milk">Günde Kaç Litre Süt Veriyordu?:</label>
               <input type="number" id="cost-daily-milk" value="28" step="1" oninput="calculateLiveCostEntry()">
             </div>
             <div>
-              <label for="cost-dump-days">Dökülen / İKAS Gün Sayısı:</label>
+              <label for="cost-dump-days">Kaç Günün Sütü Döküldü / İmha Edildi?:</label>
               <input type="number" id="cost-dump-days" value="5" step="1" oninput="calculateLiveCostEntry()">
             </div>
           </div>
@@ -743,27 +747,27 @@
     <!-- ================= 5. YEMLİK, ASİDOZ (SARA) & RUMEN İŞKEMBESİ TAKİPÇİSİ ================= -->
     <section id="tab-feed" class="tab-section">
       <div class="card" style="border-top: 4px solid #15803d;">
-        <div class="card-title" style="color:#15803d;">🌾 Yemlik Yönetimi, Rumen & Asidoz (SARA) Takipçisi</div>
+        <div class="card-title" style="color:#15803d;">🌾 Yemlik Düzeni, İşkembem Ekşimesi & Geviş Sayacı</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
-          Süt inekçiliğinde ve beside en sık rastlanan gizli katil: <strong>Subakut Rumen Asidozu (SARA / Rumen pH &lt; 5.5-5.8)</strong>, geviş getirme (rumination) indeksi ve dışkı kıvamı (Zaaijer &amp; Noordhuizen 1-5 skoru) erken uyarı motoru.
+          Fabrika yemi fazla gelip saman az kaldığında işkembe ekşir <strong>(Asidoz / SARA)</strong>. Geviş getirme oranına ve tezek kıvamına bakarak erkenden önlem alın.
         </p>
 
         <!-- 1. Geviş Getirme (Rumination) İndeksi -->
         <div class="card" style="background:#f0fdf4; border:1px solid #86efac; margin-bottom:12px;">
           <div style="font-weight:700; color:#166534; font-size:0.9rem; margin-bottom:6px;">
-            🐄 1. Sürü Geviş Getirme (Gefer) İndeksi (Altın Kural: &gt; %58)
+            🐄 1. Yatan İneklerin Geviş Getirme Oranı (Hedef: En Az 10 İnekten 6'sı)
           </div>
           <p style="font-size:0.78rem; color:#374151; margin-bottom:8px;">
-            Yemleme veya sağımdan 2 saat sonra padokta yatan inekleri sayın. Yatanların en az %58–60'ı aktif geviş getiriyor olmalıdır.
+            Yem döküldükten veya sağımdan 2 saat sonra içeri girin. Yatan inekleri sayın; en az yarısından fazlası (%58-60) ağzını gevişle geveliyor olmalıdır.
           </p>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
-              <label for="feed-lying-cows">Padokta Yatan Toplam İnek:</label>
+              <label for="feed-lying-cows">Yerde Yatan Toplam İnek:</label>
               <input type="number" id="feed-lying-cows" value="30" min="1" step="1" oninput="calculateRuminationIndex()">
             </div>
             <div>
-              <label for="feed-chewing-cows">Yatıp Geviş Getiren İnek:</label>
+              <label for="feed-chewing-cows">Yatarken Ağzı Çiğneyen (Geviş Getiren):</label>
               <input type="number" id="feed-chewing-cows" value="20" min="0" step="1" oninput="calculateRuminationIndex()">
             </div>
           </div>
@@ -776,21 +780,21 @@
         <!-- 2. Dışkı Skoru ve Sindirim Eleği Değerlendirmesi -->
         <div class="card" style="background:#fff; border:1px solid #e2e8f0; margin-bottom:12px;">
           <div style="font-weight:700; color:#1e293b; font-size:0.9rem; margin-bottom:6px;">
-            💩 2. Dışkı Kıvamı &amp; Sindirilmemiş Tane Analizi (1-5 Skoru)
+            💩 2. Gübre / Tezek Kıvamı Kontrolü (1-5 Puanı)
           </div>
-          <label for="feed-manure-score">Sürü Genel Dışkı Durumu:</label>
+          <label for="feed-manure-score">Ahırdaki Tezeklerin Genel Hali Nasıl?:</label>
           <select id="feed-manure-score" onchange="evaluateManureScore()">
-            <option value="1">Skor 1 - Cıvık/Su Gibi (Gözleme yapmaz, fışkırır - Akut Asidoz / Şiddetli İshal)</option>
-            <option value="2">Skor 2 - Yayvan/Cıvık (Ayak çizmeyi kirletir, formsuz - SARA Şüphesi / Fazla Protein)</option>
-            <option value="3" selected>Skor 3 - İdeal Pasta (3-4 cm yükseklik, merkezde çukurcuk - Dengeli Rasyon)</option>
-            <option value="4">Skor 4 - Koyu/Kıvamlı (Halka halka yığılır, sert - Lif fazla, düşük verim/kuru dönem)</option>
-            <option value="5">Skor 5 - At Dışkısı Gibi Kuru (Topak topak - Şiddetli Dehidrasyon / Lif stazı)</option>
+            <option value="1">1: Su Gibi Cıvık / Fışkırıyor (Tehlike! İshal veya Zehirlenme/Ağır Asidoz)</option>
+            <option value="2">2: Yayvan ve Sulu (Çizmeye sıçrar - Yem fazla/Saman az, işkembe ekşimesi)</option>
+            <option value="3" selected>3: İdeal Kıvam (Pasta gibi kabarık, ortası hafif çukur - Tam Dengeli)</option>
+            <option value="4">4: Koyu ve Katı (Halka halka tezek, sert - Saman çok fazla, yem az)</option>
+            <option value="5">5: At Tezeği Gibi Kuru ve Topak (Susuz kalmış / İşkembe tıkanmış)</option>
           </select>
 
           <div style="margin-top:8px;">
             <label style="display:flex; align-items:center; gap:8px; font-size:0.82rem; font-weight:600; cursor:pointer;">
               <input type="checkbox" id="feed-undigested-grains" onchange="evaluateManureScore()" style="width:auto; margin:0;">
-              ⚠️ Dışkıda sindirilmemiş bütün mısır/arpa taneleri veya gaz kabarcıkları var
+              ⚠️ Tezeğin içinde ezilmemiş/öğütülmemiş bütün mısır veya arpa taneleri var
             </label>
           </div>
 
@@ -802,19 +806,19 @@
         <!-- 3. Yemlik Kalan Yem (Ortus) & Seçme Kontrolü -->
         <div class="card" style="background:#fff; border:1px solid #e2e8f0; margin-bottom:12px;">
           <div style="font-weight:700; color:#1e293b; font-size:0.9rem; margin-bottom:6px;">
-            🥣 3. Yemlik Kalan Yem (Ortus) Oranı ve Yem Seçme (Sorting)
+            🥣 3. Yemlikte Kalan Artık Yem Miktarı
           </div>
           <p style="font-size:0.78rem; color:#475569; margin-bottom:8px;">
-            Yem dağıtıldıktan 24 saat sonra (yeni yem dökülmeden önce) yemlikte kalan yem oranı hedeflenen %3–5 bandında olmalıdır.
+            Yeni yem dökmeden hemen önce yemliğin dibinde dökülen yemin %3 ila %5'i kadar artık kalmalıdır (Yemlik ne bomboş ne de tepeleme olmalı).
           </p>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
-              <label for="feed-given-kg">Verilen Toplam Yem (kg TMR):</label>
+              <label for="feed-given-kg">Dökülen Toplam Karışım Yem (kg):</label>
               <input type="number" id="feed-given-kg" value="1200" step="50" oninput="calculateFeedRefusal()">
             </div>
             <div>
-              <label for="feed-refusal-kg">Yemlikte Kalan Yem (kg):</label>
+              <label for="feed-refusal-kg">24 Saat Sonra Dipte Kalan Yem (kg):</label>
               <input type="number" id="feed-refusal-kg" value="48" step="5" oninput="calculateFeedRefusal()">
             </div>
           </div>
@@ -827,10 +831,10 @@
         <!-- 4. Rumen Tamponlayıcı (Sodyum Bikarbonat) Hesaplayıcı -->
         <div class="card" style="background:#eff6ff; border:1px solid #93c5fd;">
           <div style="font-weight:700; color:#1d4ed8; font-size:0.9rem; margin-bottom:6px;">
-            🧪 4. Asidoz Önleyici Tamponlayıcı (Karbonat / Tampon) Dozu
+            🧪 4. Yeme Katılacak Karbonat (Sodyum Bikarbonat) Miktarı
           </div>
           <p style="font-size:0.78rem; color:#1e40af; margin-bottom:8px;">
-            Rasyon enerjisi yüksek veya SARA riski tespit edildiğinde hayvan başı günde <strong>150–250 g Sodyum Bikarbonat</strong> ilave edilmelidir (Merck Vet &amp; NRC).
+            İşkembenin ekşimesini ve ayak yanmasını önlemek için inek başına günde 150–250 gram yem karbonatı verilir.
           </p>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
@@ -839,11 +843,11 @@
               <input type="number" id="feed-cow-count" value="40" step="1" oninput="calculateBufferDose()">
             </div>
             <div>
-              <label for="feed-bicarb-target">Hayvan Başı Doz (g/gün):</label>
+              <label for="feed-bicarb-target">İnek Başı Günlük Karbonat:</label>
               <select id="feed-bicarb-target" onchange="calculateBufferDose()">
-                <option value="150">150 g (Koruyucu / Hafif Risk)</option>
-                <option value="200" selected>200 g (Standart SARA Önleme)</option>
-                <option value="250">250 g (Akut Tehdit / Sıcaklık Stresi)</option>
+                <option value="150">150 gram (Hafif Koruyucu)</option>
+                <option value="200" selected>200 gram (Standart Önleme)</option>
+                <option value="250">250 gram (Yaz Sıcağında / Ağır Riskte)</option>
               </select>
             </div>
           </div>
@@ -1096,58 +1100,53 @@
 
       <!-- Acil Kartlar -->
       <div class="emergency-card" onclick="toggleEmergency('em-anaphylaxis')">
-        <h3><span>💉 Anafilaktik Şok (Aşı/İlaç Sonrası Yere Yıkılma)</span> <span>▼</span></h3>
+        <h3><span>💉 İğne / Aşı Şoku (Alerji & Yere Yıkılma)</span> <span>▼</span></h3>
         <div id="em-anaphylaxis" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>Kaynak:</strong> Merck Veterinary Manual 11th Ed. - Emergency & Critical Care Protocol</p>
+          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Aşı veya iğne yapılır yapılmaz hayvan aniden titreyip yere devrilirse:</p>
           <ol style="padding-left:18px; line-height:1.6;">
-            <li><strong>Enjeksiyonu Derhal Durdurun!</strong> Hayvan aşı veya ilaç sırasında/hemen sonrasında titreyip düşmüşse ilacı kesin.</li>
-            <li><strong>Epinefrin (Adrenalin 1:1000):</strong> Yukarıdaki hesaplayıcıdan çıkan dozu (her 45 kg canlı ağırlık için 1 mL / 0.01-0.02 mg/kg) derhal Deri Altı (SC) veya Kas İçi (IM) uygulayın.</li>
-            <li><strong>Solunum Yolunu Açın:</strong> Baş ve boynu düz bir hat halinde uzatın, dili yana çekin, salya akışını sağlayın.</li>
-            <li>Veteriner hekimi derhal arayın. Cevap alınamazsa 15–20 dakika sonra adrenalin dozunun yarısı tekrarlanabilir.</li>
+            <li><strong>İğneyi Derhal Durdurun!</strong> İlaç vermeyi hemen kesin.</li>
+            <li><strong>Adrenalin İğnesi Vurun:</strong> Yukarıdaki hesaplayıcıdan çıkan miktarı (örneğin 450 kiloluk hayvana 10 cc Adrenalin) derhal boyundan deri altına veya ete vurun.</li>
+            <li><strong>Boynunu Düzeltin:</strong> Hayvanın dilini dışarı çekin, salyası aksın, nefes borusu tıkanmasın.</li>
+            <li>Veterineri hemen arayın. Hayvan 15 dakika içinde kendine gelmezse ilk dozun yarısı kadar daha adrenalin vurulabilir.</li>
           </ol>
         </div>
       </div>
 
       <div class="emergency-card" onclick="toggleEmergency('em-bloat')">
-        <h3><span>🎈 Akut Rumen Şişkinliği (Gaz & Köpüklü Bloat / Timpani)</span> <span>▼</span></h3>
+        <h3><span>🎈 İşkembe Şişmesi & Gaz Patlaması (Timpani / Şişkinlik)</span> <span>▼</span></h3>
         <div id="em-bloat" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>Kaynak:</strong> Merck Veterinary Manual 11th Ed. - Diseases of the Forestomach (p. 227-230)</p>
+          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Yonca veya taze ot yedikten sonra sol açlık çukuru davul gibi şişip hayvan nefes alamıyorsa:</p>
           <ol style="padding-left:18px; line-height:1.6;">
-            <li><strong>Sol Açlık Çukurunu İnceleyin:</strong> Sol karın duvarı omurga hizasını geçmişse ve nefes darlığı (ağızdan soluma, dil dışarıda) varsa hayati tehlike vardır.</li>
-            <li><strong>Mide Sondası (Stomach Tube):</strong> En kalın boy sonda takılarak serbest gaz tahliyesi denenir.</li>
-            <li><strong>Köpüklü Şişkinlik (Frothy Bloat) Sağıtımı:</strong> Sondayla köpük söndürücü yüzey aktif ajan verilir:
-              <br>• <strong>Poloxalene:</strong> 25–50 g PO (Merck Vet standart protokolü) veya
-              <br>• <strong>Bitkisel Yağlar (Soya, Fıstık, Ayçiçek yağı):</strong> 250–500 mL drench olarak verilir.</li>
-            <li><strong>Acil Trokar Uygulaması:</strong> Boğulma riski olan ve sondanın rahatlatmadığı vakalarda sol açlık çukurunun en kabarık noktasına geniş çaplı steril trokar/kanül batırılarak gaz yavaşça tahliye edilir; kanülden köpük kırıcı yağ verilebilir.</li>
+            <li><strong>Sol Boşluğu Kontrol Edin:</strong> Sol karın sırt çizgisinden yukarı taşmışsa, hayvan ağzını açıp dilini dışarı çıkarıyorsa boğulma tehlikesi vardır.</li>
+            <li><strong>Hortum (Mide Sondası) Salın:</strong> Ağzından kalın temiz hortum salarak gazı çıkarmayı deneyin.</li>
+            <li><strong>Köpük Varsa Sıvı Yağ İçirin:</strong> Gaz köpüklü ise hortumdan veya şişeyle <strong>yarım litre temiz çiçek yağı / zeytinyağı</strong> veya gaz söndürücü ilaç içirin (köpüğü patlatır).</li>
+            <li><strong>Boğulmak Üzereyse Trokar (Şişleme):</strong> Hayvan yere düşüp boğuluyorsa vakit kaybetmeden sol açlık çukurunun en tepe noktasına trokar veya kalın şiş saplayarak gazı yavaşça tahliye edin.</li>
           </ol>
         </div>
       </div>
 
       <div class="emergency-card" onclick="toggleEmergency('em-prolapse')">
-        <h3><span>🔴 Uterus Prolapsusu (Rahim Düşmesi / Doğum Sonrası)</span> <span>▼</span></h3>
+        <h3><span>🔴 Doğum Sonrası Rahim Çıkması / Rahim Düşmesi</span> <span>▼</span></h3>
         <div id="em-prolapse" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>Kaynak:</strong> Merck Veterinary Manual 11th Ed. - Uterine Prolapse & Eversion (p. 1390)</p>
+          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Doğumdan hemen sonra döl yatağı (rahim) dışarıya sarkıp çıkmışsa:</p>
           <ol style="padding-left:18px; line-height:1.6;">
-            <li><strong>Organı Koruyun:</strong> Dışarı çıkan rahmi asla kuru bırakmayın, toprak/çamur/dışkı ile temasını engelleyin.</li>
-            <li><strong>Temiz Nemli Bezle Örtün ve Yükseltin:</strong> Ilık steril/temiz tuzlu suyla ıslatılmış çarşaf ile organı sarın. Uterin arter yırtılmasını ve mesane basıncını önlemek için rahmi vulva hizasına yükseltin. Hayvan yatıyorsa arka tarafı yüksek pozisyona getirin.</li>
-            <li><strong>Ödem Azaltıcı:</strong> Merck Vet önerisi: Rahim yüzeyine gliserol uygulanması ödemi azaltır ve kayganlık sağlar.</li>
-            <li><strong>Hekim Müdahalesi:</strong> Epidural anestezi sonrası organ serviksten başlayarak kornu uçlarına doğru içeri itilir. Organ yerine oturtulduktan sonra kornu uçlarında kıvrım kalmadığı elle kontrol edilir ve tonus artışı için Oksitosin uygulanır.</li>
+            <li><strong>Pisliğe Değdirmeyin:</strong> Dışarı çıkan rahmi asla toprağa, gübreye veya çamura değdirmeyin, kurutmayın!</li>
+            <li><strong>Ilık Tuzlu Bezle Örtün ve Kaldırın:</strong> Temiz bir çarşafı ılık temiz suyla ıslatıp rahmin etrafına sarın. İki kişi çarşafın uçlarından tutup rahmi hayvanın kıç hizasına yukarı kaldırın (damarlar kopmasın ve idrar torbası rahatlasın).</li>
+            <li><strong>Arkası Yüksekte Kalsın:</strong> İnek yatıyorsa arka ayaklarının altına bol saman yığıp arkasını havaya kaldırın.</li>
+            <li>Kendi başınıza içeri tıkmaya çalışmayın, rahmi yırtabilirsiniz. Veteriner hekim gelene kadar nemli çarşafla havada tutun.</li>
           </ol>
         </div>
       </div>
 
       <div class="emergency-card" onclick="toggleEmergency('em-milk-fever')">
-        <h3><span>📉 Süt Humması (Hipokalsemi / Doğum Felci - Parturient Paresis)</span> <span>▼</span></h3>
+        <h3><span>📉 Doğum Felci & Yatma (Süt Humması / Kalsiyum Çökmesi)</span> <span>▼</span></h3>
         <div id="em-milk-fever" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>Kaynak:</strong> Merck Veterinary Manual 11th Ed. - Disorders of Calcium Metabolism (p. 988-990)</p>
+          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Doğum yapan inek ayağa kalkamıyor, burnu kuru ve kulakları buz gibiyse:</p>
           <ol style="padding-left:18px; line-height:1.6;">
-            <li><strong>Evre Değerlendirmesi:</strong>
-              <br>• <em>Evre 1:</em> Ayakta, titreme, huzursuzluk.
-              <br>• <em>Evre 2:</em> Göğüs üstü (sternal) yatan, başını böğrüne dayayan, kuru burun, soğuk kulaklar/ekstremiteler, zayıf nabız.
-              <br>• <em>Evre 3:</em> Yan yatan, koma, şişkinlik ve tam felç hali.</li>
-            <li><strong>Kalsiyum Boroglukonat (%23) IV Tedavisi:</strong> Yatan ineğe 500 mL şişe (8-11 g kalsiyum - 1 g Ca / 45 kg canlı ağırlık) <strong>en az 10–20 dakikada çok yavaş</strong> IV verilir. Hızlı verilirse kardiyotoksiktir (kalp durur)! Kalp dinlenmeli, ritim bozulursa durulmalıdır.</li>
-            <li><strong>Nüksün Önlenmesi ve Oral Kalsiyum:</strong> İyileşen ineklerin %25-30'u 24-48 saatte nükseder. Ayakta olan veya yutkunabilen ineklere kalsiyum propiyonat jeli/bolusu verilir. Yutkunamayan veya komadaki hayvana kesinlikle oral verilmez (aspirasyon pnömonisi riski).</li>
-            <li>Yatan ineğin mutlaka sternal (göğüs üstü) pozisyonda kalması sağlanmalı, yan yatırılmamalıdır.</li>
+            <li><strong>Belirtiler:</strong> İnek göğsünün üstüne yatmış, başını böğrüne dayamış, kulakları soğuk ve titriyor ise kalsiyumu bitmiştir.</li>
+            <li><strong>Kalsiyum Serumu Damardan (Çok Yavaş!):</strong> Veteriner kontrolünde kalsiyum şişesi (500 cc) boyun damarından <strong>en az 15–20 dakikada çok yavaş</strong> verilmelidir. Hızlı verilirse ineğin kalbi durur!</li>
+            <li><strong>Yan Yıkmayın:</strong> İneği asla yan devirmeyin; göğsü üstünde oturur vaziyette tutun ki işkembesi şişmesin.</li>
+            <li><strong>Yutkunamayan Hayvana Ağızdan İlaç Vermeyin:</strong> Yerde yatan ve yutkunamayan ineğe şişeyle su veya ilaç içirmeyin, ciğerine kaçıp boğulur!</li>
           </ol>
         </div>
       </div>
@@ -1201,27 +1200,27 @@
   <nav class="bottom-nav">
     <button class="nav-item active" onclick="switchTab('dashboard')">
       <span class="nav-icon">📊</span>
-      <span>Özet</span>
+      <span>Ahır Durumu</span>
     </button>
     <button class="nav-item" onclick="switchTab('triage')">
-      <span class="nav-icon">🚨</span>
-      <span>Triyaj</span>
+      <span class="nav-icon">🩺</span>
+      <span>Muayene</span>
     </button>
     <button class="nav-item" onclick="switchTab('ikas')">
       <span class="nav-icon">💊</span>
-      <span>İKAS/İlaç</span>
+      <span>İlaç & Süt</span>
     </button>
     <button class="nav-item" onclick="switchTab('cost')">
       <span class="nav-icon">💰</span>
-      <span>Maliyet</span>
+      <span>Zarar Defteri</span>
     </button>
     <button class="nav-item" onclick="switchTab('feed')">
       <span class="nav-icon">🌾</span>
-      <span>Yem/SARA</span>
+      <span>Yem & Geviş</span>
     </button>
     <button class="nav-item" onclick="switchTab('repro')">
       <span class="nav-icon">🩸</span>
-      <span>Üreme</span>
+      <span>Tohum/Doğum</span>
     </button>
     <button class="nav-item" onclick="switchTab('calf')">
       <span class="nav-icon">🍼</span>
@@ -1229,11 +1228,11 @@
     </button>
     <button class="nav-item" onclick="switchTab('weight')">
       <span class="nav-icon">⚖️</span>
-      <span>Kilo</span>
+      <span>Kilo Ölç</span>
     </button>
     <button class="nav-item" onclick="switchTab('vaccine')">
       <span class="nav-icon">📅</span>
-      <span>Aşı</span>
+      <span>Aşı Takvimi</span>
     </button>
     <button class="nav-item" onclick="switchTab('emergency')">
       <span class="nav-icon">🆘</span>
@@ -1248,9 +1247,9 @@
   <!-- Hayvan Ekleme Modalı (Sadeleştirilmiş Div) -->
   <div id="modal-animal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:200; align-items:center; justify-content:center; padding:16px;">
     <div style="background:white; border-radius:10px; max-width:400px; width:100%; padding:16px;">
-      <h3 style="margin-bottom:10px; color:var(--primary);">➕ Yeni Hayvan Kaydı</h3>
+      <h3 style="margin-bottom:10px; color:var(--primary);">➕ Yeni Hayvan Kaydet</h3>
       
-      <label for="new-eartag">Kulak Küpe No (TÜRKVET):</label>
+      <label for="new-eartag">Sarı Kulak Küpe Numarası:</label>
       <div style="display:flex; gap:6px; margin-bottom:10px;">
         <input type="text" id="new-eartag" placeholder="TR1600123456" style="margin-bottom:0;">
         <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('new_animal')" title="Kamerayla Küpe Oku">📷 Oku</button>
@@ -1258,40 +1257,46 @@
 
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
         <div>
-          <label for="new-gender">Cinsiyet:</label>
+          <label for="new-gender">Cinsiyeti:</label>
           <select id="new-gender">
-            <option value="Dişi">Dişi</option>
-            <option value="Erkek">Erkek</option>
+            <option value="Dişi (İnek/Düve)">Dişi (İnek/Düve)</option>
+            <option value="Erkek (Dana/Boğa)">Erkek (Dana/Boğa)</option>
           </select>
         </div>
         <div>
-          <label for="new-type">Üretim:</label>
+          <label for="new-type">Irkı / Yönü:</label>
           <select id="new-type">
-            <option value="Süt">Süt</option>
-            <option value="Besi">Besi</option>
-            <option value="Damızlık">Damızlık</option>
+            <option value="Süt İneği">Süt İneği</option>
+            <option value="Besi Danası">Besi Danası</option>
+            <option value="Damızlık Düve">Damızlık Düve</option>
           </select>
         </div>
       </div>
 
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
         <div>
-          <label for="new-age">Yaş / Ay:</label>
+          <label for="new-age">Kaç Aylık? (Yaşı):</label>
           <input type="number" id="new-age" value="24">
         </div>
         <div>
-          <label for="new-bcs">VKS (1.0 - 5.0):</label>
-          <input type="number" id="new-bcs" step="0.25" value="3.0">
+          <label for="new-bcs">Et-Yağ Durumu (Kondisyon):</label>
+          <select id="new-bcs">
+            <option value="1.5">Çok Zayıf (Kaburgalar Sayılıyor)</option>
+            <option value="2.5">Biraz Zayıf</option>
+            <option value="3.0" selected>İdeal / Ne Zayıf Ne Şişman</option>
+            <option value="3.5">İyi Besili</option>
+            <option value="4.5">Aşırı Yağlı / Şişman</option>
+          </select>
         </div>
       </div>
 
-      <label>
+      <label style="margin-top:8px; display:flex; align-items:center;">
         <input type="checkbox" id="new-quarantine" style="width:auto; margin-right:6px;">
-        Yeni geldi, 30–42 günlük karantinaya al
+        Pazardan yeni alındı, ayrı bölmede bekleyecek (Karantina)
       </label>
 
       <div style="display:flex; gap:8px; margin-top:12px;">
-        <button class="btn btn-outline" onclick="closeAnimalModal()">İptal</button>
+        <button class="btn btn-outline" onclick="closeAnimalModal()">Vazgeç</button>
         <button class="btn btn-primary" onclick="saveNewAnimal()">Kaydet</button>
       </div>
     </div>
@@ -1355,23 +1360,23 @@
        VERİTABANI VE YEREL DEPOLAMA (LOCALSTORAGE - ÇEVRİMDIŞI)
        ========================================================================= */
 
-    // Referans İlaç Kataloğu (Merck Veterinary Manual 11. Baskı ve Yasal İKAS Değerleri)
+    // Referans İlaç Kataloğu (Merck Veterinary Manual ve Yasal Süt/Et Bekleme Süreleri)
     const DRUG_CATALOG = [
-      { id: "florfenicol", name: "Florfenikol", milkHours: 0, meatDays: 30, lactatingForbidden: true, note: "Merck Vet: Laktasyondaki süt ineklerinde kullanılmaz! Et arınma: 28-30 gün." },
-      { id: "meloxicam", name: "Meloksikam (NSAID)", milkHours: 120, meatDays: 15, lactatingForbidden: false, note: "Merck Vet: Süt İKAS: 120 saat (5 gün). Et İKAS: 15 gün." },
-      { id: "flunixin", name: "Fluniksin Meglumin", milkHours: 48, meatDays: 5, lactatingForbidden: false, note: "Merck Vet: Süt İKAS: 48 saat (36-48 sa). Et İKAS: 4-5 gün." },
-      { id: "ketoprofen", name: "Ketoprofen", milkHours: 0, meatDays: 4, lactatingForbidden: false, note: "Merck Vet: Süt İKAS: 0 saat. Et İKAS: 1-4 gün." },
-      { id: "ceftiofur", name: "Seftiofur", milkHours: 0, meatDays: 4, lactatingForbidden: false, note: "Merck Vet Tablo: Süt İKAS: 0 saat. Et İKAS: 2-4 gün." },
-      { id: "tulathromycin", name: "Tulatromisin (Makrolid)", milkHours: 0, meatDays: 18, lactatingForbidden: true, note: "Merck Vet Tablo 50: Doz: 2.5 mg/kg SC tek doz. Et İKAS: 18 gün. Süt ineklerinde kullanılmaz." },
-      { id: "tilmicosin", name: "Tilmikosin (Makrolid)", milkHours: 0, meatDays: 28, lactatingForbidden: true, note: "Merck Vet Tablo 50: Doz: 10 mg/kg SC tek doz. Et İKAS: 28 gün. Süt veren ineklerde kullanılmaz." },
-      { id: "tylosin", name: "Tilosin (Makrolid)", milkHours: 96, meatDays: 21, lactatingForbidden: false, note: "Merck Vet Tablo 50: Doz: 10-20 mg/kg IM. Süt İKAS: 96 saat (4 gün). Et İKAS: 21 gün." },
-      { id: "penicillin_g", name: "Prokain Penisilin G", milkHours: 72, meatDays: 10, lactatingForbidden: false, note: "Merck Vet Tablo: Doz etiketinde Süt İKAS: 72 saat (3 gün). Et İKAS: 10 gün (Yüksek dozda 30 gün)." },
-      { id: "amoxicillin", name: "Amoksisilin", milkHours: 48, meatDays: 30, lactatingForbidden: false, note: "Merck Vet Tablo: Süt İKAS: 48 saat (2 gün). Et İKAS: 30 gün." },
-      { id: "oxytetracycline_la", name: "Oksitetrasiklin (Uzun Etkili LA)", milkHours: 0, meatDays: 28, lactatingForbidden: true, note: "Merck Vet Tablo 43: Doz: 20 mg/kg IM/SC. Süt veren ineklerde kullanılmaz! Et İKAS: 28 gün." },
-      { id: "cephapirin_imm", name: "Sodyum Sefapirin (Meme İçi)", milkHours: 96, meatDays: 4, lactatingForbidden: false, note: "Merck Vet Tablo: Meme içi mastitis sağıtımı. Süt İKAS: 96 saat (4 gün). Et İKAS: 4 gün." },
-      { id: "sulfamethazine", name: "Sülfametazin (Sülfonamid)", milkHours: 96, meatDays: 10, lactatingForbidden: false, note: "Merck Vet Tablo 42: Süt İKAS: 96 saat (4 gün). Et İKAS: 10 gün." },
-      { id: "enrofloxacin", name: "Enrofloksasin (Florokinolon)", milkHours: 168, meatDays: 14, lactatingForbidden: true, note: "Merck Vet: YASAK: Tüketime süt veren laktasyondaki sığırlarda kesinlikle kullanılmaz!" },
-      { id: "ivermectin", name: "İvermektin (Antiparaziter)", milkHours: 672, meatDays: 28, lactatingForbidden: true, note: "Merck Vet: YASAK: Süt veren ineklerde kesinlikle kullanılmaz! Et arınma: 28 gün." }
+      { id: "florfenicol", name: "Florfenikol (Zatürre İğnesi)", milkHours: 0, meatDays: 30, lactatingForbidden: true, note: "Sütü sağılan ineğe KESİNLİKLE VURULMAZ! Eti için kasaba gitme süresi: 30 gün." },
+      { id: "meloxicam", name: "Meloksikam (Ağrı Kesici & Ateş Düşürücü)", milkHours: 120, meatDays: 15, lactatingForbidden: false, note: "Sütü 5 gün (120 saat) boyunca tanka dökülmez! Et arınması: 15 gün." },
+      { id: "flunixin", name: "Fluniksin (Hızlı Ateş Düşürücü)", milkHours: 48, meatDays: 5, lactatingForbidden: false, note: "Sütü 2 gün (48 saat) tanka katılmaz. Et arınması: 5 gün." },
+      { id: "ketoprofen", name: "Ketoprofen (Sütü Kilitlemeyen Ağrı Kesici)", milkHours: 0, meatDays: 4, lactatingForbidden: false, note: "Sütü dökülmez (Sıfır saat süt cezası). Et için 4 gün beklenir." },
+      { id: "ceftiofur", name: "Seftiofur (Sütü Kilitlemeyen Antibiyotik)", milkHours: 0, meatDays: 4, lactatingForbidden: false, note: "Sütü dökülmez (Sıfır saat). Ayak çürüğü ve lohusa iltihabında sütü tanka verilebilir. Et: 4 gün." },
+      { id: "tulathromycin", name: "Draxxin / Tulatromisin (Tek Doz Ciğer İğnesi)", milkHours: 0, meatDays: 18, lactatingForbidden: true, note: "Sütü sağılan inekte YASAKTIR. Besi danasında et bekleme: 18 gün." },
+      { id: "tilmicosin", name: "Micotil / Tilmikosin (Ağır Ciğer İğnesi)", milkHours: 0, meatDays: 28, lactatingForbidden: true, note: "Süt ineklerine VURULMAZ. Sadece besi danasına deri altı vurulur. Et: 28 gün." },
+      { id: "tylosin", name: "Tilosin (Meme & Ciğer İğnesi)", milkHours: 96, meatDays: 21, lactatingForbidden: false, note: "Sütü 4 gün (96 saat) dökülür. Et için 21 gün kasaba verilmez." },
+      { id: "penicillin_g", name: "Penisilin İğnesi", milkHours: 72, meatDays: 10, lactatingForbidden: false, note: "Sütü 3 gün (72 saat) boyunca tanka katılmaz. Et: 10 gün." },
+      { id: "amoxicillin", name: "Amoksisilin İğnesi", milkHours: 48, meatDays: 30, lactatingForbidden: false, note: "Sütü 2 gün (48 saat) dökülür. Et arınması: 30 gün." },
+      { id: "oxytetracycline_la", name: "Koyu Sarı LA İğne (Oksitetrasiklin)", milkHours: 0, meatDays: 28, lactatingForbidden: true, note: "Sütü sağılan ineğe VURULMAZ! Çok uzun süre süte geçer. Et: 28 gün." },
+      { id: "cephapirin_imm", name: "Meme İçi Tüp (Kırmızı/Beyaz Tüp)", milkHours: 96, meatDays: 4, lactatingForbidden: false, note: "Meme içine sıkılır. Tedavi bitiminden sonra 4 gün (96 saat) süt dökülür. Et: 4 gün." },
+      { id: "sulfamethazine", name: "Sülfa Grubu İğne / Toz", milkHours: 96, meatDays: 10, lactatingForbidden: false, note: "Sütü 4 gün (96 saat) tanka verilmez. Et: 10 gün." },
+      { id: "enrofloxacin", name: "Baytril / Enrofloksasin (Sert Antibiyotik)", milkHours: 168, meatDays: 14, lactatingForbidden: true, note: "YASAK: Tüketime süt veren sağmal ineklerde kesinlikle kullanılmaz!" },
+      { id: "ivermectin", name: "Dectomax / İvermektin (Kurt / Uyuz İğnesi)", milkHours: 672, meatDays: 28, lactatingForbidden: true, note: "YASAK: Sütü sağılan ineklere asla vurulmaz! Sadece kurudaki veya besi hayvanına vurulur. Et: 28 gün." }
     ];
 
     // Varsayılan Başlangıç Verileri (Temiz Sürü - Demo Veri Yok)
@@ -1643,28 +1648,28 @@
 
       // Karar Algoritması
       const resultBox = document.getElementById("triage-result-box");
-      let category = "HAFİF / NORMAL";
+      let category = "DURUMU İYİ / NORMAL";
       let bannerType = "banner-success";
-      let actionText = "Rutin gözleme devam edin. Belirgin bir acil patoloji saptanmadı.";
+      let actionText = "Hayvan genel olarak sağlıklı görünüyor. Normal takibe devam edin.";
 
       // Hayati Tehlike / Şiddetli Triyaj Kriterleri
       const isShock = pulse > 90 || temp > 40.5 || dehydration >= 9 || rumen === "0";
 
       if (isShock || totalDart >= 7) {
-        category = "ŞİDDETLİ (SİSTEMİK ŞOK & KRİTİK BRD)";
+        category = "ÇOK ACİL & AĞIR HASTA (VETERİNERİ HEMEN ÇAĞIR!)";
         bannerType = "banner-danger";
-        actionText = `🚨 <strong>ACİL MÜDAHALE GEREKLİ!</strong><br>
-        • DART Skoru: <strong>${totalDart}/12</strong> (Yüksek Risk)<br>
-        • Hayvanı derhal İzolasyon Padoğuna alın.<br>
-        • Serum/Sıvı Tedavisi ve Hekim Onaylı Agresif Antibiyotik + NSAID (Meloksikam) protokolü uygulayın.<br>
-        • Rumen durmuş ise sindirim stazı protokolü başlatın.`;
+        actionText = `🚨 <strong>HAYATİ TEHLİKE VAR!</strong><br>
+        • Hastalık Puanı: <strong>${totalDart}/12</strong> (Çok Yüksek Tehlike)<br>
+        • Hayvanı derhal diğer ineklerden ayırıp temiz ve kuru bir bölmeye (revire) çekin.<br>
+        • Derhal damardan serum ve veteriner hekimin yazacağı ciğer iğnesi + ateş düşürücü yapılmalı.<br>
+        • İşkembesi durmuşsa gazını ve sindirimini kontrol edin.`;
       } else if (totalDart >= 4 || temp >= 39.5 || rumen === "1" || dehydration >= 6) {
-        category = "ORTA DERECE (TEDAVİ BAŞLAT)";
+        category = "ORTA DERECE HASTA (İLAÇ / TEDAVİ LAZIM)";
         bannerType = "banner-warning";
-        actionText = `⚠️ <strong>TEDAVİ BAŞLATILMALI:</strong><br>
-        • DART Skoru: <strong>${totalDart}/12</strong><br>
-        • Ateş düşürücü ve veteriner hekim reçeteli antibiyotik tedavisi uygulayın.<br>
-        • 24 saat sonra DART skorunu tekrar kaydedin.`;
+        actionText = `⚠️ <strong>HAYVAN HASTALANMIŞ, MÜDAHALE EDİN:</strong><br>
+        • Hastalık Puanı: <strong>${totalDart}/12</strong><br>
+        • Ateşi varsa ateş düşürücü vurun, veteriner hekiminize danışarak uygun antibiyotik başlatın.<br>
+        • Yarına kadar düzelip düzelmediğini tekrar buradan puanlayarak takip edin.`;
       }
 
       resultBox.innerHTML = `
@@ -1724,7 +1729,7 @@
       if (drug.lactatingForbidden) {
         warnBox.innerHTML = `
           <div class="banner-alert banner-danger">
-            ⛔ <strong>GIDA GÜVENLİĞİ YASAĞI:</strong> ${drug.name} etken maddesi laktasyondaki süt ineklerinde kesinlikle kullanılamaz!
+            ⛔ <strong>DİKKAT! SÜT VEREN İNEĞE YASAK İLAÇ:</strong> ${drug.name} ilacı sağılan süt ineklerine kesinlikle vurulamaz! Süte zehirli kalıntı bırakır.
           </div>
         `;
       } else {
@@ -1744,9 +1749,9 @@
 
         previewBox.style.display = "block";
         previewBox.innerHTML = `
-          ⏱️ <strong>Hesaplanan İKAS Süreleri:</strong><br>
-          • <strong>Süt Satışına Uygun Tarih:</strong> ${drug.milkHours === 0 ? 'Sıfır Gün (Serbest)' : milkEnd.toLocaleString('tr-TR')}<br>
-          • <strong>Kesime Uygun Tarih:</strong> ${meatEnd.toLocaleDateString('tr-TR')} (${drug.meatDays} Gün Sonra)
+          ⏱️ <strong>Hesaplanan Bekleme Süresi:</strong><br>
+          • <strong>Sütü Ne Zaman Tanka Katılabilir?:</strong> ${drug.milkHours === 0 ? 'Hemen Sağılabilir (Süte Geçmez)' : milkEnd.toLocaleString('tr-TR') + ' saatine kadar dökülecek'}<br>
+          • <strong>Kesime / Kasaba Ne Zaman Gidebilir?:</strong> ${meatEnd.toLocaleDateString('tr-TR')} (${drug.meatDays} gün sonra etten temizlenir)
         `;
       }
     }
