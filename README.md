@@ -1,93 +1,79 @@
-# Sığır Sağlık Rehberi (Offline-First)
+# Sığır Sağlık Rehberi (Offline-First & PWA)
 
-🌐 **Canlı Yayın (Web & Mobil):** [https://mserman90.github.io/sigir-saglik-rehberi/](https://mserman90.github.io/sigir-saglik-rehberi/)  
-📦 **GitHub Deposu:** [https://github.com/mserman90/sigir-saglik-rehberi](https://github.com/mserman90/sigir-saglik-rehberi)
+🌐 **Canlı Yayın (Web & Mobil PWA):** [https://mserman90.github.io/sigir-saglik-rehberi/](https://mserman90.github.io/sigir-saglik-rehberi/)  
+📦 **GitHub Deposu:** [https://github.com/mserman90/sigir-saglik-rehberi](https://github.com/mserman90/sigir-saglik-rehberi)  
+📖 **Detaylı Kullanım Kılavuzu:** [KULLANIM_KILAVUZU.md](./KULLANIM_KILAVUZU.md)
 
-Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü bilgisayarlara kadar** her cihazda **hiçbir internet bağlantısı veya sunucu kurulumu gerektirmeden** çalışmak üzere tasarlanmıştır.
+Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü bilgisayarlara kadar** her cihazda **hiçbir internet bağlantısı veya sunucu kurulumu gerektirmeden** çalışan, Progressive Web App (PWA) mimarili çevrimdışı bir sürü ve besi sağlığı asistanıdır.
 
-## 🚀 Nasıl Çalıştırılır?
+---
 
-1. **Bilgisayarda:**
-   - [`index.html`](file:///C:/Users/mert/.gemini/antigravity/scratch/sigir-saglik-rehberi/index.html) dosyasına çift tıklayın (Chrome, Edge, Firefox veya Safari ile doğrudan açılır).
+## 🚀 Nasıl Çalıştırılır & Kurulur?
 
-2. **Cep Telefonunda (Android / iOS):**
-   - Bu `index.html` dosyasını WhatsApp, Bluetooth veya USB kablosu ile telefona atın.
-   - Dosyaya dokunup herhangi bir tarayıcıyla açın.
-   - **Ana Ekrana Ekleme (İsteğe Bağlı):** Tarayıcı menüsünden *"Ana Ekrana Ekle"* (Add to Home Screen) dediğinizde telefonunuzda tıpkı App Store / Play Store'dan yüklenmiş bir uygulama gibi tam ekran ikonla çalışır.
+1. **Cep Telefonunda (Android / iOS):**
+   - [https://mserman90.github.io/sigir-saglik-rehberi/](https://mserman90.github.io/sigir-saglik-rehberi/) adresini açın.
+   - Tarayıcı menüsünden *"Ana Ekrana Ekle"* (Add to Home Screen) veya *"Uygulamayı Yükle"* seçeneğine dokunun.
+   - Uygulama telefonun hafızasına yüklenir. İnternetsiz dağda, yaylada ve bodrum ahırda bağımsız çalışır.
+
+2. **Bilgisayarda:**
+   - [`index.html`](./index.html) dosyasına çift tıklayarak tarayıcınızda doğrudan çalıştırabilirsiniz.
+
+---
+
+## 🧭 Saha Öncelikli Buton ve Menü Hiyerarşisi
+
+Uygulama arayüzü, ahır şartlarındaki **klinik aciliyet** ve eldivenli kullanıma göre optimize edilmiştir:
+- **Alt Menü (Bottom Navigation):** `📊 Ahır Özeti` $\rightarrow$ `🆘 İlk Yardım` $\rightarrow$ `🩺 Muayene` $\rightarrow$ `💊 İlaç & Süt` $\rightarrow$ `🥛 Sağımcı` $\rightarrow$ `🌾 Yem & Geviş` $\rightarrow$ `🍼 Buzağı` $\rightarrow$ `🚛 Dana Giriş` $\rightarrow$ `⚖️ Kilo/CAAG` $\rightarrow$ `🩸 Tohum/Doğum` $\rightarrow$ `📅 Aşı Takvimi` $\rightarrow$ `💰 Zarar Defteri`.
+- **Hızlı İşlemler Paneli:** Hayat kurtaran `🆘 Acil İlk Yardım` en üstte çift genişlikli buton olarak öne çıkarılmıştır.
+- **Eldiven & Saha Uyumu:** Min. 48px dokunma alanları, koyu mod desteği ve yüksek kontrastlı renkler.
 
 ---
 
 ## 📱 Barındırdığı Temel Saha Modülleri
 
-0. **📷 Cep Telefonu Kamerasıyla Küpe Okuma (Barkod & QR):**
-   - Hayvan arama, Saha Triyajı, İlaç/İKAS girişi, Sağımcı kontrolü ve Yeni Hayvan ekleme ekranlarında yer alan **"📷 Oku"** butonuyla telefon kamerası anında açılır.
-   - Kulak küpesindeki barkod veya QR kod okunduğu anda küpe numarası ekrana otomatik aktarılır, titreşimli bildirim verilir ve ilgili hayvanın sağlık durumu anında ekrana gelir.
-   - Harici internet bağlantısı gerekmez; yerel kütüphane sayesinde **%100 çevrimdışı** çalışır.
+0. **📷 Kamerayla Küpe Okuma (Barkod & QR):**
+   - Hayvan arama, muayene, ilaç/İKAS, sağımcı kontrolü ve yeni hayvan ekleme ekranlarında yerel kamera kütüphanesiyle küpeleri otomatik okur (%100 offline).
 
 1. **📊 Gösterge Paneli (Dashboard):**
-   - Toplam sürü sayısı, karantinadaki hayvanlar, aktif kalıntılı süt engelleri (İKAS) ve yaklaşan aşılar.
-   - Kritik kırmızı alarm başlığı: Antibiyotikli ineklerin küpe listesi.
+   - Toplam sürü mevcudu, karantina, ilaçlı süt engelleri (İKAS), mezbaha/kesim kilitleri ve yaklaşan aşılar.
 
-2. **🚨 Saha Triyajı & DART Skorlama:**
-   - Rektal ateş (38.0–39.3 °C referansı, >39.5 °C alarmı).
-   - Kalp, solunum, rumen motilitesi ve dehidrasyon kontrolü.
-   - **BRD için DART Algoritması:** Depresyon (0–3), İştah (0–3), Solunum (0–3), Ateş (0–3). Skor $\ge 4$ ise otomatik tedavi ve karantina tetikleyicisi; $\ge 7$ ise sistemik şok/agresif müdahale kararı.
+2. **🆘 Acil İlk Yardım & Besi Hastalıkları (Merck Vet Entegreli):**
+   - **Canlı Ağırlık Adrenalin Hesaplayıcı:** Anafilaksi durumunda anında mL dozu verir.
+   - **Hayat Kurtaran Kartlar:** Aşı şoku, işkembe gaz patlaması (timpani/trokar), rahim düşmesi (prolapsus), doğum felci (süt humması), patates/pancar boğulması, şiddetli kanama, buzağı canlandırma, sıcak çarpması, üre zehirlenmesi.
+   - **Besi Danası Hastalıkları:** **CCN / Polio** (B1 Tiamin eksikliği & yıldız gözleme), **İdrar Taşı / Sidik Zoru** (ürolitiyazis & amonyum klorür) ve **Besi Laminitisi** (arpa vurması & tırnak yanması).
 
-3. **💊 İKAS (İlaç Kalıntı Arınma Süresi) & Farmakoloji (Merck Vet 11. Baskı Entegreli):**
-   - **Genişletilmiş İlaç Kataloğu:** Florfenikol, Meloksikam, Fluniksin, Ketoprofen, Seftiofur, Tulatromisin (Tablo 50), Tilmikosin (Tablo 50), Tilosin (Tablo 50), Prokain Penisilin G, Amoksisilin, Oksitetrasiklin LA (Tablo 43), Sodyum Sefapirin Meme İçi, Sülfametazin (Tablo 42), Enrofloksasin ve İvermektin.
-   - Laktasyondaki süt ineklerinde yasaklı ilaçlar için kırmızı bariyer uyarısı.
-   - **Kombine Tedavi Kuralı:** Birden fazla ilaç yapıldığında otomatik olarak en uzun İKAS süresini baz alma.
-   - Canlı saat/dakika geri sayımı.
+3. **🩺 Saha Triyajı & DART Skorlama:**
+   - Rektal ateş ölçümü, nabız, solunum, işkembe hareketleri ve BRD/DART algoritmasıyla otomatik vaka derecelendirmesi.
 
-4. **💰 Hastalık, Dökülen Süt & Tedavi Maliyet Defteri (Ekonomik Zarar Analizi):**
-   - **Gerçek Çiftlik Maliyet Takibi:** Veteriner hekim vizitesi, kullanılan ilaç bedeli ve **antibiyotik nedeniyle imha edilen/dökülen sütün parasal kaybı**.
-   - **Kayıp Formülü:** $\text{Zarar} = \text{Veteriner} + \text{İlaç} + (\text{Günlük Süt Litresi} \times \text{Dökülen Gün} \times \text{Süt Satış Fiyatı})$.
-   - **Kümülatif Çiftlik Özeti:** Sürü genelinde hastalıklara harcanan toplam para, dökülen toplam süt litresi ve ciro kaybı göstergeleri.
+4. **💊 İKAS (İlaç Kalıntı Arınma Süresi) & Süt/Et Kilitleme:**
+   - Genişletilmiş veteriner ilaç kataloğu (Merck Vet 11. Baskı). Süt ve et arınması için saat/dakika canlı geri sayım; kombine ilaçlarda en uzun süreyi kilitler.
 
-5. **🌾 Yemlik Yönetimi, Rumen & Asidoz (SARA) Takipçisi (Merck Vet 11th Ed.):**
-   - **Geviş Getirme (Gefer) İndeksi:** Yatan ineklerde geviş getirme oranı kontrolü (Altın Kural: $\ge \%58$). Tükürük tamponu yetersiz kaldığında erken SARA alarmı.
-   - **Tezek Kıvamı & Tezeğe Kaçan Bütün Tane (1-5 Puanı):** Tezek sertliği/kıvamı değerlendirmesi ve sindirilmeden tezekle bütün halde atılan mısır/arpa tanesi uyarısı.
-   - **Yemlik Kalan Yem (Ortus) & Seçme (Sorting) Kontrolü:** İdeal %3-5 kalan yem oranı, açlık veya yem seçme riski analizi.
-   - **Sodyum Bikarbonat Tamponlayıcı Doz Hesaplayıcı:** Sürü mevcuduna göre günlük TMR'ye ilave edilecek çuval ve kg bazlı karbonat dozu (150-250 g/baş/gün).
+5. **🥛 Sağımcı Ekranı (Büyük Puntolu Hızlı Kontrol):**
+   - Sağımhane personeli için tek bakışta dev harflerle "🟢 SAĞIMA UYGUN" veya "🔴 BU İNEĞİ TANKA SAĞMA" onayı. Mezbaha kesim kilitleri anlık listelenir.
 
-6. **🩸 Üreme, Tohumlama ve Doğum Çarkı (Akıllı Takvim):**
-   - **21 Gün Kızgınlık Gözlemi (18–24. Günler):** Tohumlanan ineğin tutmama ihtimaline karşı tekrar kızgınlık döngüsü uyarısı.
-   - **40 Gün Gebelik Muayenesi (35–45. Günler):** Ultrason veya rektal muayene hatırlatıcısı.
-   - **220 Gün Kuruya Çıkarma (Doğuma 60 Gün):** Sağımı durdurma ve kuru dönem meme içi antibiyotik protokolü alarmı.
-   - **245 Gün Kolostrum Aşı Hazırlığı (Doğuma 5–3 Hafta):** Buzağı ishal aşısı uygulama zamanı.
-   - **280 Gün Beklenen Doğum & Geri Sayım:** Canlı gün sayacı ve doğum padoğu hazırlık ikazı.
+6. **🌾 Yemlik Yönetimi, İşkembe & Asidoz (SARA) Takibi:**
+   - Geviş getirme indeksi ($\ge \%58$ kuralı), tezek kıvamı ve tüm sürü için yemliğe katılacak günlük sodyum bikarbonat dozu hesabı.
 
-7. **🍼 Buzağı Hayatta Tutma & Kolostrum Kalite Motoru:**
-   - **İlk 2 Saat Altın Kuralı:** Doğumdan sonraki ilk 2 saatte canlı ağırlığın %10'u kadar (3–4 Litre) ağız sütü içirilmesi takibi.
-   - **Brix Refraktometre Hesaplayıcı:** Ölçülen Brix değerine göre kalite sınıflandırması ($\ge \%22$ Mükemmel antikor - IgG $>50\text{ g/L}$, $\%18-21$ Orta, $<\%18$ Yetersiz/Düşük - dondurulmuş kolostrum çözdür ikazı).
-   - **Buzağı İshali Sıvı & Elektrolit Hesaplayıcı:** Dehidrasyon yüzdesi ve buzağı kilosuna göre 24 saatlik sıvı açığı, yaşama payı ve oral/IV serum karar motoru.
-   - **Göbek İpi Dezenfeksiyon Protokolü:** Doğum anında ve 1-2 saat sonra %7'lik tentürdiyota daldırma kontrol listesi.
+7. **🍼 Buzağı Hayatta Tutma & Ağız Sütü:**
+   - İlk 2 saat altın kuralı, Brix refraktometre kalite ölçümü ve buzağı ishalinde su kaybı (kuruma) / damar-ağız can suyu hesabı.
 
-8. **⚖️ Şerit Metre ile Canlı Ağırlık (Kantar Yokken Kilo) Ölçer:**
-   - **Schaeffer Formülü:** Mezurayla göğüs çevresi (cm) ve vücut uzunluğu (cm) girildiğinde tahmini ağırlığı ($\pm \%5$ hata payıyla) kg cinsinden hesaplar:
-     $$\text{Ağırlık (kg)} = \frac{\text{Göğüs Çevresi}^2 \times \text{Vücut Uzunluğu}}{10838}$$
-   - **Otomatik Dozaj & Besleme Çıktıları:** Hesaplanan kiloya göre otomatik olarak Adrenalin ($1\text{ mL} / 45\text{ kg}$), Meloksikam, Fluniksin, Tulatromisin dozlarını ve günlük tahmini kuru madde (KM) tüketim miktarını listeler.
-   - **Tek Tıkla Aktarım:** Hesaplanan canlı ağırlık tek butonla acil müdahale formlarına otomatik aktarılır.
+8. **🚛 Yeni Dana Giriş & Besiye Alıştırma Protokolü:**
+   - Kamyondan inişte ilk 2 saat kuru ot, tuzlu-pekmezli can suyu karşılama protokolü, metafilaksi ciğer kalkanı ve 21 günlük kademeli yem geçiş takvimi.
 
-7. **📅 Akıllı Aşı Takvimi & Rapel Motoru:**
-   - Şap (FMD), Bruselloz (S19 - Dişi 3-6 ay), Sığır Çiçeği (LSD), BRD karma ve Buzağı İshali aşıları.
-   - Rapel (tekrar) tarihini otomatik hesaplama (30 gün, 21 gün kuralı).
-   - TÜRKVET resmi kayıt ve sevk 21 gün kuralı hatırlatması.
+9. **⚖️ Canlı Kilo & Besi CAAG Takip Motoru:**
+   - Baskül tartımı veya şerit metreyle *Schaeffer Formülü* ile kilo tespiti; Günlük Canlı Ağırlık Artışı (CAAG) takibi, karkas randımanı ve kesim geliri projeksiyonu.
 
-8. **🆘 Acil İlk Yardım Rehberi & Protokoller (Merck Vet 11th Ed.):**
-   - **Adrenalin Hesaplayıcı:** Canlı ağırlığı girildiğinde (her 45 kg için 1 mL Epinefrin 1:1000 / 0.01-0.02 mg/kg) anında mL dozu verir.
-   - **Akut Rumen Şişkinliği (Timpani):** Mide sondası, köpük söndürücü ajanlar (Poloxalene 25-50 g PO, 250-500 mL bitkisel yağ drench) ve boğulma tehlikesinde trokar uygulaması.
-   - **Uterus Prolapsusu (Rahim Düşmesi):** Organı yükseltme, nemli bezle sarma, ödem için gliserol, kornu uçlarının tam repozisyonu ve Oksitosin tonus protokolü.
-   - **Süt Humması (Hipokalsemi / Parturient Paresis):** Evre 1-3 sınıflandırması, %23 Kalsiyum Boroglukonat (10-20 dk yavaş IV perfüzyon), kardiyotoksisite uyarısı ve relaps önleyici oral Ca jeli.
+10. **🩸 Üreme, Tohumlama & Doğum Çarkı:**
+    - 21. gün kızgınlık dönüşü, 40. gün ultrason/gebelik, 220. gün kuruya alma ve 280. gün beklenen doğum tarihi hesaplayıcısı.
 
-6. **🥛 Sade Sağımcı Ekranı:**
-   - Sağımhane personeli için küpe numarasını girdiği anda dev puntolarla:
-     - 🔴 **BU İNEĞİ TANKA SAĞMA!** (Antibiyotikli)
-     - 🟢 **SAĞIMA UYGUN** (Temiz)
-   - Tanka sağılması yasak olan tüm ineklerin anlık canlı listesi.
+11. **📅 Akıllı Aşı Takvimi & Hatırlatıcı:**
+    - Şap, Bruselloz, Çiçek, BRD karma ve buzağı ishal aşıları için 21/30 gün rapel takibi ve TÜRKVET kuralları.
+
+12. **💰 Hastalık Masrafı & Dökülen Süt Zarar Defteri:**
+    - Veteriner, ilaç ve dökülen sütün litre fiyatına göre parasal maliyetini hesaplayıp deftere işler.
 
 ---
 
-## 💾 Çevrimdışı Veri Güvenliği
-- Tüm kayıtlar telefonun veya bilgisayarın dahili hafızasında (`localStorage`) saklanır.
-- İnternet gitse de, telefon uçak moduna alınsa da hiçbir veri kaybolmaz.
+## 💾 Çevrimdışı Veri Güvenliği & Yedekleme
+- Tüm veriler telefonunuzun yerel hafızasında (`localStorage`) saklanır.
+- Sağımcı ekranından tek tıkla JSON formatında yedek alabilir, başka bir telefona verilerinizi kayıpsız aktarabilirsiniz.
