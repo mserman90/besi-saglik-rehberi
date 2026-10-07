@@ -1,7 +1,9 @@
-const CACHE_NAME = 'cattlesys-offline-v17';
+const CACHE_NAME = 'cattlesys-offline-v18';
 const ASSETS_TO_CACHE = [
   './index.html',
   './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
   './html5-qrcode.min.js',
   './robots.txt',
   './sitemap.xml',
