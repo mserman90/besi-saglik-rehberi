@@ -780,7 +780,7 @@
         <!-- 2. Dışkı Skoru ve Sindirim Eleği Değerlendirmesi -->
         <div class="card" style="background:#fff; border:1px solid #e2e8f0; margin-bottom:12px;">
           <div style="font-weight:700; color:#1e293b; font-size:0.9rem; margin-bottom:6px;">
-            💩 2. Gübre / Tezek Kıvamı Kontrolü (1-5 Puanı)
+            💩 2. Tezek Kıvamı &amp; Tezeğe Kaçan Bütün Yem Tanesi (1-5 Puanı)
           </div>
           <label for="feed-manure-score">Ahırdaki Tezeklerin Genel Hali Nasıl?:</label>
           <select id="feed-manure-score" onchange="evaluateManureScore()">
@@ -794,7 +794,7 @@
           <div style="margin-top:8px;">
             <label style="display:flex; align-items:center; gap:8px; font-size:0.82rem; font-weight:600; cursor:pointer;">
               <input type="checkbox" id="feed-undigested-grains" onchange="evaluateManureScore()" style="width:auto; margin:0;">
-              ⚠️ Tezeğin içinde ezilmemiş/öğütülmemiş bütün mısır veya arpa taneleri var
+              ⚠️ Tezeğin içinde sindirilmemiş, bütün halde mısır/arpa taneleri çıkıyor (Yem boşa gidiyor)
             </label>
           </div>
 
@@ -2368,7 +2368,7 @@
       }
 
       if (grains) {
-        msg += `<br><br><span style="color:#b91c1c; font-weight:700;">⚠️ TANE GEÇİŞİ ALARMI:</span> Dışkıda sindirilmemiş tane görülmesi; yem mikserinde aşırı parçalama veya dane yemlerin kırıcısının ayarsız olduğunu, nişastanın rumende parçalanmayıp dışkıya kaçtığını gösterir (Yem parası boşa gidiyor!).`;
+        msg += `<br><br><span style="color:#b91c1c; font-weight:700;">⚠️ TEZEĞE KAÇAN TANE ALARMI:</span> Tezeğin içinde sindirilmeden bütün halde çıkan tane görülmesi; kırıcının ayarsız olduğunu veya yem karma makinesinin iyi ezmediğini gösterir. Nişasta işkembede sindirilemeyip tezekle doğrudan dışarı atılmaktadır (Verdiğiniz pahalı yem boşa gidiyor!).`;
       }
 
       resultBox.style.background = bg;

@@ -46,7 +46,7 @@ Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü b
 
 5. **🌾 Yemlik Yönetimi, Rumen & Asidoz (SARA) Takipçisi (Merck Vet 11th Ed.):**
    - **Geviş Getirme (Gefer) İndeksi:** Yatan ineklerde geviş getirme oranı kontrolü (Altın Kural: $\ge \%58$). Tükürük tamponu yetersiz kaldığında erken SARA alarmı.
-   - **Dışkı Kıvamı & Sindirilmemiş Tane Analizi (1-5 Skoru):** Zaaijer & Noordhuizen 1-5 dışkı skoru değerlendirmesi ve sindirilmemiş yem/mısır tanesi kaçışı uyarısı.
+   - **Tezek Kıvamı & Tezeğe Kaçan Bütün Tane (1-5 Puanı):** Tezek sertliği/kıvamı değerlendirmesi ve sindirilmeden tezekle bütün halde atılan mısır/arpa tanesi uyarısı.
    - **Yemlik Kalan Yem (Ortus) & Seçme (Sorting) Kontrolü:** İdeal %3-5 kalan yem oranı, açlık veya yem seçme riski analizi.
    - **Sodyum Bikarbonat Tamponlayıcı Doz Hesaplayıcı:** Sürü mevcuduna göre günlük TMR'ye ilave edilecek çuval ve kg bazlı karbonat dozu (150-250 g/baş/gün).
 
