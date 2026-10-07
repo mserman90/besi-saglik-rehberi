@@ -1,10 +1,11 @@
-const CACHE_NAME = 'cattlesys-offline-v9';
+const CACHE_NAME = 'cattlesys-offline-v10';
 const ASSETS_TO_CACHE = [
   './index.html',
   './manifest.json',
   './html5-qrcode.min.js',
   './robots.txt',
-  './sitemap.xml'
+  './sitemap.xml',
+  './KULLANIM_KILAVUZU.md'
 ];
 
 self.addEventListener('install', (event) => {

@@ -403,7 +403,10 @@
       <h1>🐄 Sığır Sağlık Rehberi</h1>
       <small style="opacity:0.85; font-size:0.75rem;">Hasta Muayenesi • İlaçlı Süt Takibi • Aşı & Doğum Takvimi</small>
     </div>
-    <span class="badge-offline">⚡ İnternetsiz Çalışır</span>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <button onclick="openGuideModal()" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.4); padding:4px 8px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer;">📖 Kılavuz</button>
+      <span class="badge-offline">⚡ İnternetsiz</span>
+    </div>
   </header>
 
   <main>
@@ -444,6 +447,7 @@
           <button class="btn btn-info" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
           <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil İlk Yardım</button>
           <button class="btn btn-outline" style="grid-column: span 2;" onclick="switchTab('milker')">🥛 Sağımcı Ekranı (Büyük Yazı)</button>
+          <button class="btn btn-outline" style="grid-column: span 2; border: 1.5px dashed var(--primary); color:var(--primary); font-weight:700;" onclick="openGuideModal()">📖 Resimli / Detaylı Kullanım Kılavuzu</button>
         </div>
       </div>
 
@@ -1382,7 +1386,51 @@
       </div>
 
       <div style="margin-top:12px; display:flex; gap:8px;">
-        <button class="btn btn-outline" onclick="stopQrScanner()">Kapat</button>
+  <!-- Uygulama İçi Kullanım Kılavuzu Modalı -->
+  <div id="modal-guide" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:400; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:white; border-radius:12px; max-width:600px; width:100%; max-height:85vh; display:flex; flex-direction:column; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+      <div style="padding:14px 18px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border-top-left-radius:12px; border-top-right-radius:12px;">
+        <h3 style="font-size:1.05rem; color:var(--primary); font-weight:800; display:flex; align-items:center; gap:6px;">
+          📖 Sığır Sağlık Rehberi - Kullanım Kılavuzu
+        </h3>
+        <button onclick="closeGuideModal()" style="background:transparent; border:none; font-size:1.3rem; font-weight:800; cursor:pointer; color:#64748b;">✕</button>
+      </div>
+      <div style="padding:16px 18px; overflow-y:auto; font-size:0.85rem; line-height:1.7; color:#334155;">
+        <h4 style="color:var(--primary); margin-bottom:6px;">🚀 1. İnternetsiz Telefonda Çalıştırma</h4>
+        <p>• Bu uygulama <strong>%100 internetsiz</strong> çalışır. Tarayıcı menüsünden <strong>"Ana Ekrana Ekle"</strong> diyerek telefonunuza indirebilirsiniz. Merada veya bodrum ahırda şebeke çekmese bile çalışır.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">📷 2. Kamerayla Küpe Okuma</h4>
+        <p>• Muayene, ilaç yapma veya arama ekranlarında <strong>"📷 Oku"</strong> butonuna basın. Telefon kamerasını sarı kulak küpesindeki barkoda veya karekoda doğrulttuğunuzda numara anında otomatik yazılır.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">🩺 3. Hasta Muayenesi (Triyaj)</h4>
+        <p>• Şüpheli ineğin makat ateşini dereceyle ölçüp yazın (Normal: 38.0–39.3°C). Keyifsizlik ve öksürüğü puanlayın. Sistem ineğin ne kadar ağır hasta olduğunu ve hangi acil adımları atmanız gerektiğini söyler.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">💊 4. İlaç Yapma & Süt Kilitleme (İKAS)</h4>
+        <p>• İğne veya meme tüpü yaptığınızda ineğin küpesini ve ilacı seçin. Sistem sütün kaç gün/saat boyunca tanka dökülmeyeceğini canlı sayaçla gösterir. Aynı gün 2 ilaç yapılmışsa cezası en uzun olan ilacı kilitler.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">💰 5. Zarar & Masraf Defteri</h4>
+        <p>• Çiğ süt satış fiyatınızı girin. İlaç yüzünden lavaboya dökülen süt ile veteriner ve ilaç masrafını kuruşu kuruşuna hesaplayıp deftere kaydedin.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">🌾 6. Yemlik, İşkembe Ekşimesi & Geviş</h4>
+        <p>• Yemden 2 saat sonra yerde yatan ineklerin geviş getirmesini sayın (Hedef: En az 10 inekten 6'sı). Tezek kıvamını (1-5) seçerek arpa fazla mı saman az mı kontrol edin. Sürüye katılacak günlük karbonat miktarını hesaplayın.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">🩸 7. Tohumlama & Doğum Çarkı</h4>
+        <p>• Tohumlama gününü girin: <strong>21. gün</strong> kızgınlık dönüşü, <strong>40. gün</strong> gebelik kontrolü, <strong>220. gün</strong> kuruya alma ve <strong>280. gün</strong> beklenen doğum tarihi otomatik hesaplanır.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">⚖️ 8. Şerit Metreyle Canlı Kilo Ölçümü</h4>
+        <p>• Kantar yokken ineğin göğüs çevresini ve boyunu mezurayla ölçün. Bilimsel formülle canlı ağırlığı hesaplanır ve hayvana vurulacak iğne dozları ekrana gelir.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">🍼 9. Buzağı Hayatta Tutma</h4>
+        <p>• Doğumdan sonraki ilk 2 saatte en az 3-4 litre koyu ağız sütü içirilmelidir. İshal olan buzağının kilosuna ve göz çökmesine göre 24 saatte kaç litre serum verilmesi gerektiğini hesaplayın.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">🆘 10. Acil İlk Yardım</h4>
+        <p>• Aşı şoku (adrenalin dozu), işkembe gaz şişmesi (sıvı yağ ve trokar), rahim düşmesi ve doğum felci (kalsiyum) gibi ölümcül acillerde ilk yardım adımları yer alır.</p>
+
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">💾 11. Veri Yedekleme</h4>
+        <p>• Sağımcı ekranının altındaki <strong>"📥 Yedeği İndir"</strong> butonuyla kayıtlarınızı indirebilir, başka bir telefona geçerken <strong>"📤 Yedeği Yükle"</strong> ile anında geri yükleyebilirsiniz.</p>
+      </div>
+      <div style="padding:10px 18px; border-top:1px solid #e2e8f0; background:#f8fafc; border-bottom-left-radius:12px; border-bottom-right-radius:12px; text-align:right;">
+        <button class="btn btn-primary" style="width:auto; padding:6px 16px;" onclick="closeGuideModal()">Anladım, Kapat</button>
       </div>
     </div>
   </div>
@@ -1929,6 +1977,15 @@
     }
     function closeVaccineModal() {
       document.getElementById("modal-vaccine").style.display = "none";
+    }
+
+    function openGuideModal() {
+      const m = document.getElementById("modal-guide");
+      if (m) m.style.display = "flex";
+    }
+    function closeGuideModal() {
+      const m = document.getElementById("modal-guide");
+      if (m) m.style.display = "none";
     }
 
     function saveVaccineRecord() {
