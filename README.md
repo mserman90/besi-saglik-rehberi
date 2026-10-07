@@ -1,4 +1,4 @@
-# Sığır Sağlık, Saha Triyajı ve İKAS Sistemi (Offline-First)
+# Sığır Sağlık Rehberi (Offline-First)
 
 🌐 **Canlı Yayın (Web & Mobil):** [https://mserman90.github.io/sigir-saglik-rehberi/](https://mserman90.github.io/sigir-saglik-rehberi/)  
 📦 **GitHub Deposu:** [https://github.com/mserman90/sigir-saglik-rehberi](https://github.com/mserman90/sigir-saglik-rehberi)

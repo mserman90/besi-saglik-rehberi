@@ -1,7 +1,7 @@
 {
-  "name": "Sığır Sağlık & Saha Sistemi",
-  "short_name": "SığırSağlık",
-  "description": "Sığırlarda Hastalık Önleme, Saha Triyajı, Aşı ve İKAS Takip Sistemi - %100 Çevrimdışı",
+  "name": "Sığır Sağlık Rehberi",
+  "short_name": "SağlıkRehberi",
+  "description": "Sığır Sağlık Rehberi - Ahır ve Çiftlikler İçin %100 İnternetsiz Sağlık, Aşı, İKAS ve Doğum Takip Sistemi",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
