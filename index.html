@@ -438,6 +438,7 @@
                 <th>VKS</th>
                 <th>Karantina</th>
                 <th>Durum</th>
+                <th>İşlem</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -1373,14 +1374,8 @@
       { id: "ivermectin", name: "İvermektin (Antiparaziter)", milkHours: 672, meatDays: 28, lactatingForbidden: true, note: "Merck Vet: YASAK: Süt veren ineklerde kesinlikle kullanılmaz! Et arınma: 28 gün." }
     ];
 
-    // Varsayılan Başlangıç Verileri (İlk açılışta yüklenir)
-    const DEFAULT_ANIMALS = [
-      { id: "TR16001", earTag: "TR16001", gender: "Dişi", type: "Süt", ageMonths: 36, bcs: 3.25, quarantine: false, lastStatus: "Sağlıklı" },
-      { id: "TR16002", earTag: "TR16002", gender: "Dişi", type: "Süt", ageMonths: 28, bcs: 2.75, quarantine: false, lastStatus: "Sağlıklı" },
-      { id: "TR16003", earTag: "TR16003", gender: "Erkek", type: "Besi", ageMonths: 14, bcs: 3.5, quarantine: false, lastStatus: "Sağlıklı" },
-      { id: "TR16004", earTag: "TR16004", gender: "Dişi", type: "Damızlık", ageMonths: 4, bcs: 3.0, quarantine: true, lastStatus: "Karantinada (38 gün kaldı)" },
-      { id: "TR16005", earTag: "TR16005", gender: "Dişi", type: "Süt", ageMonths: 42, bcs: 3.0, quarantine: false, lastStatus: "Sağlıklı" }
-    ];
+    // Varsayılan Başlangıç Verileri (Temiz Sürü - Demo Veri Yok)
+    const DEFAULT_ANIMALS = [];
 
     // LocalStorage Yardımcıları
     function getStore(key, defaultVal) {
@@ -1392,21 +1387,29 @@
     }
 
     // Uygulama Durumu (State)
-    let animals = getStore("animals", DEFAULT_ANIMALS);
+    let animals = getStore("animals", []);
     let treatments = getStore("treatments", []);
     let triageRecords = getStore("triage", []);
-    let vaccineRecords = getStore("vaccines", [
-      { id: 1, animalId: "TR16001", vaccine: "Şap (FMD)", date: "2026-08-10", boosterDate: "2026-09-10", mandatory: true, turkvet: true },
-      { id: 2, animalId: "TR16004", vaccine: "Bruselloz (S19)", date: "2026-09-15", boosterDate: "Tek Doz", mandatory: true, turkvet: true }
-    ]);
+    let vaccineRecords = getStore("vaccines", []);
+    let reproRecords = getStore("repro", []);
+    let costRecords = getStore("costs", []);
 
-    let reproRecords = getStore("repro", [
-      { id: 1, animalId: "TR16001", earTag: "TR16001", date: "2026-09-01", bull: "Simental TR99", heatDate: "2026-09-22", pregCheckDate: "2026-10-11", dryDate: "2027-04-09", calvingDate: "2027-06-08", status: "Kızgınlık Takibinde" }
-    ]);
+    // Eski tarayıcı önbelleğindeki TR16001..TR16005 demo verilerini temizleme
+    if (!localStorage.getItem("cattlesys_cleaned_demo_v1")) {
+      const demoIds = ["TR16001", "TR16002", "TR16003", "TR16004", "TR16005"];
+      animals = animals.filter(a => !demoIds.includes(a.earTag) && !demoIds.includes(a.id));
+      treatments = treatments.filter(t => !demoIds.includes(t.earTag) && !demoIds.includes(t.animalId));
+      vaccineRecords = vaccineRecords.filter(v => !demoIds.includes(v.animalId));
+      reproRecords = reproRecords.filter(r => !demoIds.includes(r.animalId) && !demoIds.includes(r.earTag));
+      costRecords = costRecords.filter(c => !demoIds.includes(c.animalId) && !demoIds.includes(c.earTag));
 
-    let costRecords = getStore("costs", [
-      { id: 1, animalId: "TR16002", earTag: "TR16002", disease: "Klinik Mastitis", date: "2026-09-28", vetFee: 600, drugFee: 950, dailyMilk: 30, dumpDays: 5, dumpedLiters: 150, milkLossTl: 2475, totalLossTl: 4025 }
-    ]);
+      setStore("animals", animals);
+      setStore("treatments", treatments);
+      setStore("vaccines", vaccineRecords);
+      setStore("repro", reproRecords);
+      setStore("costs", costRecords);
+      localStorage.setItem("cattlesys_cleaned_demo_v1", "true");
+    }
 
     // DART Skorları için anlık seçimler
     let currentDart = { d: 0, a: 0, r: 0, t: 0 };
@@ -1493,12 +1496,19 @@
       [triageSelect, treatSelect, reproSelect, weightSelect, vacSelect, costSelect].forEach(sel => {
         if (!sel) return;
         sel.innerHTML = "";
-        animals.forEach(a => {
+        if (animals.length === 0) {
           const opt = document.createElement("option");
-          opt.value = a.id;
-          opt.textContent = `${a.earTag} (${a.type} - ${a.gender})`;
+          opt.value = "";
+          opt.textContent = "-- Kayıtlı Hayvan Yok (Önce Hayvan Ekleyin) --";
           sel.appendChild(opt);
-        });
+        } else {
+          animals.forEach(a => {
+            const opt = document.createElement("option");
+            opt.value = a.id;
+            opt.textContent = `${a.earTag} (${a.type} - ${a.gender})`;
+            sel.appendChild(opt);
+          });
+        }
       });
     }
 
@@ -1556,6 +1566,11 @@
 
       const filtered = animals.filter(a => a.earTag.toLowerCase().includes(search));
 
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:16px;">Henüz kayıtlı hayvan bulunmamaktadır.<br><small>Sağ üstteki <strong>"+ Ekle"</strong> butonundan veya kamerayla küpe okutarak yeni hayvan ekleyebilirsiniz.</small></td></tr>`;
+        return;
+      }
+
       filtered.forEach(a => {
         const tr = document.createElement("tr");
 
@@ -1568,9 +1583,21 @@
           <td><span class="tag ${bcsClass}">${a.bcs.toFixed(2)}</span></td>
           <td>${a.quarantine ? '<span class="tag tag-warning">Karantinada</span>' : 'Hayır'}</td>
           <td><small>${a.lastStatus || 'Normal'}</small></td>
+          <td>
+            <button class="btn btn-outline" style="padding:2px 6px; font-size:0.75rem; color:#dc2626; border-color:#fca5a5;" onclick="deleteAnimal('${a.id}')">Sil</button>
+          </td>
         `;
         tbody.appendChild(tr);
       });
+    }
+
+    function deleteAnimal(id) {
+      if (!confirm(`${id} küpeli hayvanı silmek istediğinize emin misiniz?`)) return;
+      animals = animals.filter(a => a.id !== id && a.earTag !== id);
+      setStore("animals", animals);
+      populateAnimalSelects();
+      renderAnimalTable();
+      updateDashboardStats();
     }
 
     /* =========================================================================
