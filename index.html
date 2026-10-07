@@ -1406,7 +1406,7 @@
         <div class="banner-alert banner-warning" style="margin-bottom:12px;">
           ⚠️ <strong>İLK 24 SAATTE KESİNLİKLE YAPILMAYACAKLAR:</strong><br>
           1. Kamyondan iner inmez <strong>arpa / fabrika yemi verilmez</strong> (İşkembeyi asit yakar!).<br>
-          2. İlk 2 saat buz gibi soğuk kuyu suyu içirilmez (Krampa ve ateşe yol açar). Ilık ve elektrolitli su verin.<br>
+          2. İlk 2 saat buz gibi soğuk kuyu suyu içirilmez (Krampa ve ateşe yol açar). Ilık ve mineral-tuz katkılı dinlenme suyu verin.<br>
           3. Hemen karma aşı vurulmaz! Nakliye stresi varken bağışıklık çökmüştür; aşı tutmaz, hayvanı hasta edebilir.
         </div>
 
@@ -1476,7 +1476,7 @@
                   <td><strong>1. – 3. Gün</strong><br><small>(İniş & Dinlenme)</small></td>
                   <td><strong>%100 Serbest Kuru Ot / Saman</strong><br>(Mideyi doldurur, gazı engeller)</td>
                   <td><span class="tag tag-danger">SIFIR (0 kg)</span><br>Hiç kesif yem verilmez!</td>
-                  <td>Ilık suya elektrolit + C vitamini + pekmez/glikoz</td>
+                  <td>Ilık suya can suyu (tuz + karbonat + pekmezli enerji suyu)</td>
                 </tr>
                 <tr>
                   <td><strong>4. – 7. Gün</strong><br><small>(1. Hafta)</small></td>
@@ -1572,9 +1572,9 @@
           </div>
         </div>
 
-        <!-- Buzağı Dehidrasyon & İshal Sıvı Hesaplayıcı -->
+        <!-- Buzağı İshali: Su Kaybı (Kuruma) & Damar/Ağız Serumu Hesabı -->
         <div style="background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:12px;">
-          <div style="font-weight:700; color:var(--danger); font-size:0.92rem; margin-bottom:8px;">🚨 Buzağı İshali: Su Kaybı & Damar/Ağız Serumu Hesabı</div>
+          <div style="font-weight:700; color:var(--danger); font-size:0.92rem; margin-bottom:8px;">🚨 Buzağı İshali: Su Kaybı (Kuruma) & Damar/Ağız Serumu Hesabı</div>
           
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
@@ -1598,7 +1598,7 @@
             <div style="font-size:0.8rem; color:#334155; margin-top:4px; line-height:1.6;">
               • <strong>İshalle Kaybolan Su Açığı:</strong> 2.4 Litre<br>
               • <strong>Günlük Normal Yaşama Payı:</strong> 2.0 Litre<br>
-              • <strong>Nasıl Verilecek?:</strong> Emme gücü varsa ılık ağız tozu/tuzlu su (oral elektrolit) içirin; ememiyor ve ayağa kalkamıyorsa hiç beklemeden damardan tuzlu/karbonatlı serum bağlatın.
+              • <strong>Nasıl Verilecek?:</strong> Emme gücü varsa ılık ağız tozu/tuzlu su (ağızdan ishal tozu / can suyu) içirin; ememiyor ve ayağa kalkamıyorsa hiç beklemeden damardan tuzlu/karbonatlı serum bağlatın.
             </div>
           </div>
         </div>
@@ -1731,7 +1731,7 @@
           <ol style="padding-left:18px; line-height:1.6;">
             <li><strong>Hemen Gölgelik ve Havadar Yere Alın:</strong> Hayvanı doğrudan güneşten uzaklaştırın, ahırda fan ve havalandırmayı sonuna kadar açın.</li>
             <li><strong>Kafasını ve Bacaklarını Islatın:</strong> Hortumla ineğin <strong>başına, boynuna ve bacaklarına</strong> serin su tutun (sırtına aniden buz gibi su boca etmeyin, şok yapabilir; boyun damarlarından soğutun).</li>
-            <li><strong>Önüne Temiz Serin Su ve Elektrolit Koyun:</strong> İçebileceği kadar serin su sağlayın, zorla hortumla dökmeyin.</li>
+            <li><strong>Önüne Temiz Serin Su ve Tuzlu/Pekmezli Can Suyu Koyun:</strong> İçebileceği kadar serin su sağlayın, zorla hortumla dökmeyin.</li>
             <li>Ateş 40.5°C'nin üstündeyse veteriner hekimden ateş düşürücü ve damar içi sıvı desteği talep edin.</li>
           </ol>
         </div>
@@ -3252,7 +3252,7 @@
           <div style="background:#fff; border-left:4px solid #f59e0b; padding:6px 10px; border-radius:4px;">
             <strong>1. Gün (${addDays(arrivalD, 0)}) - Kamyondan İniş & Şoktan Çıkış:</strong><br>
             • İlk 2 saat su teknelerini kapalı tutun; sadece serbest kaliteli kuru çayır otu / saman yesinler.<br>
-            • 2 saat sonra ılık suya elektrolit + C vitamini + şeker/pekmez karıştırıp içirin (${travelHrs} saatlik yol dehidrasyonunu çözer).<br>
+            • 2 saat sonra ılık suya tuz + karbonat + pekmez (veya toz can suyu) karıştırıp içirin (${travelHrs} saatlik yol susuzluğunu, halsizliği ve vücut kurumasını çözer).<br>
             • ⚠️ <strong>KESİNLİKLE KESİF YEM (ARPA/FABRİKA YEMİ) VE AŞI YOKTUR!</strong>
           </div>
           <div style="background:#fff; border-left:4px solid #3b82f6; padding:6px 10px; border-radius:4px;">
@@ -3288,15 +3288,15 @@
       const iverDose = (weight / 50).toFixed(1);
       // AD3E Vitamin: her 50 kg için 1 mL (genelde 5-10 mL)
       const vitDose = Math.min(10, Math.max(4, Math.round(weight / 50)));
-      // Elektrolit Tozu: Günlük başa 100-150 gr suya
-      const bicarbDay = Math.round(weight * 0.2); // ~50 gr karbonat
+      // Günlük yemlik karbonat: ~50 gr karbonat
+      const bicarbDay = Math.round(weight * 0.2);
 
       box.innerHTML = `
         <ul style="padding-left:18px; line-height:1.7;">
           <li>🛡️ <strong>Tulatromisin (Metafilaksi Ciğer Kalkanı - Yüksek Riskte):</strong> <strong>${tulaDose} mL</strong> (Tek doz deri altı boyna). Nakliye ateşi ve zatürre mikroplarını 14 gün boyunca akciğerde öldürür.</li>
           <li>🪱 <strong>İvermektin (İç & Dış Kurt-Uyuz-Kene İğnesi):</strong> <strong>${iverDose} mL</strong> (Deri altı boyna). 2. veya 3. gün uygulanır.</li>
           <li>✨ <strong>AD3E + Selenyum / B Vitamini:</strong> <strong>${vitDose} mL</strong> (Kas içi - IM). Yolda harcanan vitamin depolarını doldurur.</li>
-          <li>🧂 <strong>Geliş & Karşılama Suyu Elektroliti (Nakliye Sonrası Sıvı Takviyesi):</strong> 10 litre ılık suya 1 çay bardağı pekmez + 50 gr tuz + 50 gr karbonat karıştırılıp içirilir (nakliye dehidrasyonunu ve asidoz riskini önler).</li>
+          <li>🧂 <strong>Geliş & Karşılama Suyu (Tuzlu-Pekmezli Can Suyu):</strong> 10 litre ılık suya 1 çay bardağı pekmez + 50 gr tuz + 50 gr karbonat (veya veterinerden alınan 1 paket can suyu tozu) karıştırılıp içirilir. Dananın yol yorgunluğunu ve su kaybını giderir, işkembeyi ekşitmez.</li>
           <li>🥣 <strong>Alıştırma Dönemi Günlük Karbonat:</strong> Günde ~${bicarbDay} gr / baş yemliğe serpilerek işkembe asitleşmesi (asidoz) engellenir.</li>
         </ul>
       `;
