@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cattlesys-offline-v14';
+const CACHE_NAME = 'cattlesys-offline-v15';
 const ASSETS_TO_CACHE = [
   './index.html',
   './manifest.json',
