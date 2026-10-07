@@ -44,20 +44,26 @@ Bu uygulama, **en eski ve en basit akıllı telefonlardan masaüstü/dizüstü b
    - **Kayıp Formülü:** $\text{Zarar} = \text{Veteriner} + \text{İlaç} + (\text{Günlük Süt Litresi} \times \text{Dökülen Gün} \times \text{Süt Satış Fiyatı})$.
    - **Kümülatif Çiftlik Özeti:** Sürü genelinde hastalıklara harcanan toplam para, dökülen toplam süt litresi ve ciro kaybı göstergeleri.
 
-5. **🩸 Üreme, Tohumlama ve Doğum Çarkı (Akıllı Takvim):**
+5. **🌾 Yemlik Yönetimi, Rumen & Asidoz (SARA) Takipçisi (Merck Vet 11th Ed.):**
+   - **Geviş Getirme (Gefer) İndeksi:** Yatan ineklerde geviş getirme oranı kontrolü (Altın Kural: $\ge \%58$). Tükürük tamponu yetersiz kaldığında erken SARA alarmı.
+   - **Dışkı Kıvamı & Sindirilmemiş Tane Analizi (1-5 Skoru):** Zaaijer & Noordhuizen 1-5 dışkı skoru değerlendirmesi ve sindirilmemiş yem/mısır tanesi kaçışı uyarısı.
+   - **Yemlik Kalan Yem (Ortus) & Seçme (Sorting) Kontrolü:** İdeal %3-5 kalan yem oranı, açlık veya yem seçme riski analizi.
+   - **Sodyum Bikarbonat Tamponlayıcı Doz Hesaplayıcı:** Sürü mevcuduna göre günlük TMR'ye ilave edilecek çuval ve kg bazlı karbonat dozu (150-250 g/baş/gün).
+
+6. **🩸 Üreme, Tohumlama ve Doğum Çarkı (Akıllı Takvim):**
    - **21 Gün Kızgınlık Gözlemi (18–24. Günler):** Tohumlanan ineğin tutmama ihtimaline karşı tekrar kızgınlık döngüsü uyarısı.
    - **40 Gün Gebelik Muayenesi (35–45. Günler):** Ultrason veya rektal muayene hatırlatıcısı.
    - **220 Gün Kuruya Çıkarma (Doğuma 60 Gün):** Sağımı durdurma ve kuru dönem meme içi antibiyotik protokolü alarmı.
    - **245 Gün Kolostrum Aşı Hazırlığı (Doğuma 5–3 Hafta):** Buzağı ishal aşısı uygulama zamanı.
    - **280 Gün Beklenen Doğum & Geri Sayım:** Canlı gün sayacı ve doğum padoğu hazırlık ikazı.
 
-5. **🍼 Buzağı Hayatta Tutma & Kolostrum Kalite Motoru:**
+7. **🍼 Buzağı Hayatta Tutma & Kolostrum Kalite Motoru:**
    - **İlk 2 Saat Altın Kuralı:** Doğumdan sonraki ilk 2 saatte canlı ağırlığın %10'u kadar (3–4 Litre) ağız sütü içirilmesi takibi.
    - **Brix Refraktometre Hesaplayıcı:** Ölçülen Brix değerine göre kalite sınıflandırması ($\ge \%22$ Mükemmel antikor - IgG $>50\text{ g/L}$, $\%18-21$ Orta, $<\%18$ Yetersiz/Düşük - dondurulmuş kolostrum çözdür ikazı).
    - **Buzağı İshali Sıvı & Elektrolit Hesaplayıcı:** Dehidrasyon yüzdesi ve buzağı kilosuna göre 24 saatlik sıvı açığı, yaşama payı ve oral/IV serum karar motoru.
    - **Göbek İpi Dezenfeksiyon Protokolü:** Doğum anında ve 1-2 saat sonra %7'lik tentürdiyota daldırma kontrol listesi.
 
-6. **⚖️ Şerit Metre ile Canlı Ağırlık (Kantar Yokken Kilo) Ölçer:**
+8. **⚖️ Şerit Metre ile Canlı Ağırlık (Kantar Yokken Kilo) Ölçer:**
    - **Schaeffer Formülü:** Mezurayla göğüs çevresi (cm) ve vücut uzunluğu (cm) girildiğinde tahmini ağırlığı ($\pm \%5$ hata payıyla) kg cinsinden hesaplar:
      $$\text{Ağırlık (kg)} = \frac{\text{Göğüs Çevresi}^2 \times \text{Vücut Uzunluğu}}{10838}$$
    - **Otomatik Dozaj & Besleme Çıktıları:** Hesaplanan kiloya göre otomatik olarak Adrenalin ($1\text{ mL} / 45\text{ kg}$), Meloksikam, Fluniksin, Tulatromisin dozlarını ve günlük tahmini kuru madde (KM) tüketim miktarını listeler.

@@ -405,6 +405,7 @@
           <button class="btn btn-primary" onclick="switchTab('triage')">➕ Yeni Triyaj</button>
           <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç & İKAS</button>
           <button class="btn btn-danger" style="background:#b91c1c; color:white;" onclick="switchTab('cost')">💰 Zarar & Maliyet Defteri</button>
+          <button class="btn btn-success" style="background:#15803d; color:white;" onclick="switchTab('feed')">🌾 Yemlik & Asidoz (SARA)</button>
           <button class="btn btn-info" onclick="switchTab('repro')">🩸 Üreme & Doğum</button>
           <button class="btn btn-warning" style="background:#e65100; color:white;" onclick="switchTab('calf')">🍼 Buzağı & Kolostrum</button>
           <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Şerit Metre Kilo</button>
@@ -735,6 +736,130 @@
             <tbody></tbody>
           </table>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= 5. YEMLİK, ASİDOZ (SARA) & RUMEN İŞKEMBESİ TAKİPÇİSİ ================= -->
+    <section id="tab-feed" class="tab-section">
+      <div class="card" style="border-top: 4px solid #15803d;">
+        <div class="card-title" style="color:#15803d;">🌾 Yemlik Yönetimi, Rumen & Asidoz (SARA) Takipçisi</div>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
+          Süt inekçiliğinde ve beside en sık rastlanan gizli katil: <strong>Subakut Rumen Asidozu (SARA / Rumen pH &lt; 5.5-5.8)</strong>, geviş getirme (rumination) indeksi ve dışkı kıvamı (Zaaijer &amp; Noordhuizen 1-5 skoru) erken uyarı motoru.
+        </p>
+
+        <!-- 1. Geviş Getirme (Rumination) İndeksi -->
+        <div class="card" style="background:#f0fdf4; border:1px solid #86efac; margin-bottom:12px;">
+          <div style="font-weight:700; color:#166534; font-size:0.9rem; margin-bottom:6px;">
+            🐄 1. Sürü Geviş Getirme (Gefer) İndeksi (Altın Kural: &gt; %58)
+          </div>
+          <p style="font-size:0.78rem; color:#374151; margin-bottom:8px;">
+            Yemleme veya sağımdan 2 saat sonra padokta yatan inekleri sayın. Yatanların en az %58–60'ı aktif geviş getiriyor olmalıdır.
+          </p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="feed-lying-cows">Padokta Yatan Toplam İnek:</label>
+              <input type="number" id="feed-lying-cows" value="30" min="1" step="1" oninput="calculateRuminationIndex()">
+            </div>
+            <div>
+              <label for="feed-chewing-cows">Yatıp Geviş Getiren İnek:</label>
+              <input type="number" id="feed-chewing-cows" value="20" min="0" step="1" oninput="calculateRuminationIndex()">
+            </div>
+          </div>
+
+          <div id="feed-rumination-result" style="border-radius:8px; padding:10px; margin-top:8px; font-size:0.85rem;">
+            <!-- Dinamik doldurulur -->
+          </div>
+        </div>
+
+        <!-- 2. Dışkı Skoru ve Sindirim Eleği Değerlendirmesi -->
+        <div class="card" style="background:#fff; border:1px solid #e2e8f0; margin-bottom:12px;">
+          <div style="font-weight:700; color:#1e293b; font-size:0.9rem; margin-bottom:6px;">
+            💩 2. Dışkı Kıvamı &amp; Sindirilmemiş Tane Analizi (1-5 Skoru)
+          </div>
+          <label for="feed-manure-score">Sürü Genel Dışkı Durumu:</label>
+          <select id="feed-manure-score" onchange="evaluateManureScore()">
+            <option value="1">Skor 1 - Cıvık/Su Gibi (Gözleme yapmaz, fışkırır - Akut Asidoz / Şiddetli İshal)</option>
+            <option value="2">Skor 2 - Yayvan/Cıvık (Ayak çizmeyi kirletir, formsuz - SARA Şüphesi / Fazla Protein)</option>
+            <option value="3" selected>Skor 3 - İdeal Pasta (3-4 cm yükseklik, merkezde çukurcuk - Dengeli Rasyon)</option>
+            <option value="4">Skor 4 - Koyu/Kıvamlı (Halka halka yığılır, sert - Lif fazla, düşük verim/kuru dönem)</option>
+            <option value="5">Skor 5 - At Dışkısı Gibi Kuru (Topak topak - Şiddetli Dehidrasyon / Lif stazı)</option>
+          </select>
+
+          <div style="margin-top:8px;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.82rem; font-weight:600; cursor:pointer;">
+              <input type="checkbox" id="feed-undigested-grains" onchange="evaluateManureScore()" style="width:auto; margin:0;">
+              ⚠️ Dışkıda sindirilmemiş bütün mısır/arpa taneleri veya gaz kabarcıkları var
+            </label>
+          </div>
+
+          <div id="feed-manure-evaluation" style="border-radius:8px; padding:10px; margin-top:8px; font-size:0.85rem;">
+            <!-- Dinamik doldurulur -->
+          </div>
+        </div>
+
+        <!-- 3. Yemlik Kalan Yem (Ortus) & Seçme Kontrolü -->
+        <div class="card" style="background:#fff; border:1px solid #e2e8f0; margin-bottom:12px;">
+          <div style="font-weight:700; color:#1e293b; font-size:0.9rem; margin-bottom:6px;">
+            🥣 3. Yemlik Kalan Yem (Ortus) Oranı ve Yem Seçme (Sorting)
+          </div>
+          <p style="font-size:0.78rem; color:#475569; margin-bottom:8px;">
+            Yem dağıtıldıktan 24 saat sonra (yeni yem dökülmeden önce) yemlikte kalan yem oranı hedeflenen %3–5 bandında olmalıdır.
+          </p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="feed-given-kg">Verilen Toplam Yem (kg TMR):</label>
+              <input type="number" id="feed-given-kg" value="1200" step="50" oninput="calculateFeedRefusal()">
+            </div>
+            <div>
+              <label for="feed-refusal-kg">Yemlikte Kalan Yem (kg):</label>
+              <input type="number" id="feed-refusal-kg" value="48" step="5" oninput="calculateFeedRefusal()">
+            </div>
+          </div>
+
+          <div id="feed-refusal-result" style="border-radius:8px; padding:10px; margin-top:8px; font-size:0.85rem;">
+            <!-- Dinamik doldurulur -->
+          </div>
+        </div>
+
+        <!-- 4. Rumen Tamponlayıcı (Sodyum Bikarbonat) Hesaplayıcı -->
+        <div class="card" style="background:#eff6ff; border:1px solid #93c5fd;">
+          <div style="font-weight:700; color:#1d4ed8; font-size:0.9rem; margin-bottom:6px;">
+            🧪 4. Asidoz Önleyici Tamponlayıcı (Karbonat / Tampon) Dozu
+          </div>
+          <p style="font-size:0.78rem; color:#1e40af; margin-bottom:8px;">
+            Rasyon enerjisi yüksek veya SARA riski tespit edildiğinde hayvan başı günde <strong>150–250 g Sodyum Bikarbonat</strong> ilave edilmelidir (Merck Vet &amp; NRC).
+          </p>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="feed-cow-count">Gruptaki Sağılan İnek Sayısı:</label>
+              <input type="number" id="feed-cow-count" value="40" step="1" oninput="calculateBufferDose()">
+            </div>
+            <div>
+              <label for="feed-bicarb-target">Hayvan Başı Doz (g/gün):</label>
+              <select id="feed-bicarb-target" onchange="calculateBufferDose()">
+                <option value="150">150 g (Koruyucu / Hafif Risk)</option>
+                <option value="200" selected>200 g (Standart SARA Önleme)</option>
+                <option value="250">250 g (Akut Tehdit / Sıcaklık Stresi)</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="feed-buffer-result" style="background:#fff; border:1px solid #bfdbfe; border-radius:8px; padding:10px; margin-top:8px; font-size:0.85rem; color:#1e3a8a;">
+            <!-- Dinamik doldurulur -->
+          </div>
+        </div>
+
+        <!-- Bilimsel Saha İpuçları (Merck Vet) -->
+        <div class="card" style="background:#fafafa; border:1px dashed #cbd5e1; margin-top:12px; font-size:0.8rem; line-height:1.6; color:#334155;">
+          <strong>📚 Merck Veterinary Manual 11th Ed. - Subacute Ruminal Acidosis (SARA) Rehberi:</strong>
+          <br>• <strong>Rumen pH Eşiği:</strong> Rumen pH'sı gün içinde 5.5'in altına düştüğünde lif sindirimi durur, laktik asit birikir.
+          <br>• <strong>Klinik Belirtiler:</strong> Değişken yem tüketimi, süt yağında ani düşüş (Süt Yağı / Protein oranı &lt; 1.0), topallık (laminitis) ve köpüklü-sarımsı dışkı.
+          <br>• <strong>Fiziksel Etkili Lif (peNDF):</strong> Rasyonda 3 cm'den uzun kuru ot/yonca parçacıkları geviş getirmeyi uyararak hayvanın günde 150-200 litre tükürük (doğal sodyum bikarbonat) üretmesini sağlar.
+        </div>
+
       </div>
     </section>
 
@@ -1089,6 +1214,10 @@
       <span class="nav-icon">💰</span>
       <span>Maliyet</span>
     </button>
+    <button class="nav-item" onclick="switchTab('feed')">
+      <span class="nav-icon">🌾</span>
+      <span>Yem/SARA</span>
+    </button>
     <button class="nav-item" onclick="switchTab('repro')">
       <span class="nav-icon">🩸</span>
       <span>Üreme</span>
@@ -1325,7 +1454,7 @@
 
       // Menü aktifliği
       const navButtons = document.querySelectorAll(".nav-item");
-      const mapping = { dashboard: 0, triage: 1, ikas: 2, cost: 3, repro: 4, calf: 5, weight: 6, vaccine: 7, emergency: 8, milker: 9 };
+      const mapping = { dashboard: 0, triage: 1, ikas: 2, cost: 3, feed: 4, repro: 5, calf: 6, weight: 7, vaccine: 8, emergency: 9, milker: 10 };
       if (navButtons[mapping[tabId]]) {
         navButtons[mapping[tabId]].classList.add("active");
       }
@@ -1333,6 +1462,7 @@
       window.scrollTo(0, 0);
       if (tabId === "milker") checkMilkerStatus();
       if (tabId === "cost") renderCostRecords();
+      if (tabId === "feed") { calculateRuminationIndex(); evaluateManureScore(); calculateFeedRefusal(); calculateBufferDose(); }
       if (tabId === "repro") renderReproRecords();
       if (tabId === "weight") calculateSchaefferWeight();
       if (tabId === "calf") { calculateColostrumQuality(); calculateCalfRehydration(); }
@@ -2126,6 +2256,141 @@
       costRecords = costRecords.filter(c => c.id !== id);
       setStore("costs", costRecords);
       renderCostRecords();
+    }
+
+    /* =========================================================================
+       YEMLİK, ASİDOZ (SARA) & RUMEN İŞKEMBESİ TAKİP MOTORU
+       ========================================================================= */
+    function calculateRuminationIndex() {
+      const lying = parseInt(document.getElementById("feed-lying-cows").value) || 0;
+      const chewing = parseInt(document.getElementById("feed-chewing-cows").value) || 0;
+      const resultBox = document.getElementById("feed-rumination-result");
+      if (!resultBox) return;
+
+      if (lying <= 0) {
+        resultBox.style.background = "#f1f5f9";
+        resultBox.style.border = "1px solid #cbd5e1";
+        resultBox.style.color = "#475569";
+        resultBox.innerHTML = "Lütfen yatan inek sayısını girin.";
+        return;
+      }
+
+      const ratio = Math.round((chewing / lying) * 100);
+
+      if (ratio >= 58) {
+        resultBox.style.background = "#dcfce7";
+        resultBox.style.border = "1.5px solid #22c55e";
+        resultBox.style.color = "#15803d";
+        resultBox.innerHTML = `
+          <strong>🟢 GEVİŞ GETİRME MÜKEMMEL (%${ratio}):</strong><br>
+          • Yatan ineklerin %${ratio}'si geviş getiriyor (Hedef: &gt; %58).<br>
+          • <strong>Rumen Durumu:</strong> İşkembede lif sindirimi sağlıklı, tükürük salgısı yeterli. Asidoz riski düşük.
+        `;
+      } else if (ratio >= 45) {
+        resultBox.style.background = "#fef9c3";
+        resultBox.style.border = "1.5px solid #eab308";
+        resultBox.style.color = "#854d0e";
+        resultBox.innerHTML = `
+          <strong>🟡 UYARI: DÜŞÜK GEVİŞ GETİRME (%${ratio}):</strong><br>
+          • Yatan ineklerin %${ratio}'si geviş getiriyor (Hedef: &gt; %58).<br>
+          • <strong>Öneri:</strong> Rasyonda fiziksel etkili lif (kaba yem/yonca/saman) boyunu kontrol edin; ineklerin yem seçip seçmediğini (sorting) inceleyin.
+        `;
+      } else {
+        resultBox.style.background = "#fee2e2";
+        resultBox.style.border = "1.5px solid #ef4444";
+        resultBox.style.color = "#b91c1c";
+        resultBox.innerHTML = `
+          <strong>🔴 ALARM: ŞİDDETLİ ASİDOZ / SARA RİSKİ (%${ratio})!</strong><br>
+          • Yatan ineklerin sadece %${ratio}'si geviş getiriyor (Kritik sınır: %58 altı).<br>
+          • <strong>Tehlike:</strong> Yetersiz tükürük salgısı nedeniyle rumen pH'sı 5.5'in altına düşebilir. Acil rasyona kaba yem ve 200 g/gün Sodyum Bikarbonat ilave edin!
+        `;
+      }
+    }
+
+    function evaluateManureScore() {
+      const score = document.getElementById("feed-manure-score").value;
+      const grains = document.getElementById("feed-undigested-grains").checked;
+      const resultBox = document.getElementById("feed-manure-evaluation");
+      if (!resultBox) return;
+
+      let msg = "";
+      let bg = "#f8fafc";
+      let border = "#cbd5e1";
+      let color = "#1e293b";
+
+      if (score === "1") {
+        bg = "#fee2e2"; border = "#ef4444"; color = "#991b1b";
+        msg = "<strong>🔴 SKOR 1 - TEHLİKELİ (Cıvık / Fışkıran):</strong> Akut rumen asidozu, toksin veya mikrobiyal enterit şüphesi. Bağırsak geçiş hızı çok yüksek, besin emilimi çökmüş durumda.";
+      } else if (score === "2") {
+        bg = "#ffedd5"; border = "#f97316"; color = "#9a3412";
+        msg = "<strong>🟠 SKOR 2 - DİKKAT (Yayvan / Cıvık):</strong> Yüksek konsantre yem, yetersiz lif veya aşırı hızlı rumen fermantasyonu (Subakut Asidoz - SARA şüphesi). Ayak lezyonları (laminitis) riski taşır.";
+      } else if (score === "3") {
+        bg = "#dcfce7"; border = "#22c55e"; color = "#166534";
+        msg = "<strong>🟢 SKOR 3 - İDEAL (Dengeli Pasta):</strong> Mükemmel lif-enerji-protein dengesi. Rumen mikroflorası tam kapasite çalışıyor.";
+      } else if (score === "4") {
+        bg = "#fef9c3"; border = "#eab308"; color = "#854d0e";
+        msg = "<strong>🟡 SKOR 4 - SERT / HALKALI:</strong> Kaba yem / sindirilemeyen lif fazla, konsantre yem veya su tüketimi yetersiz. Süt verimi baskılanabilir (Kuru dönem için kabul edilebilir).";
+      } else if (score === "5") {
+        bg = "#fee2e2"; border = "#ef4444"; color = "#991b1b";
+        msg = "<strong>🔴 SKOR 5 - AT DIŞKISI GİBİ TOPAK:</strong> Şiddetli su kısıtı, su donması veya abomasum tıkanması/kabızlık. Su teknelerini derhal kontrol edin.";
+      }
+
+      if (grains) {
+        msg += `<br><br><span style="color:#b91c1c; font-weight:700;">⚠️ TANE GEÇİŞİ ALARMI:</span> Dışkıda sindirilmemiş tane görülmesi; yem mikserinde aşırı parçalama veya dane yemlerin kırıcısının ayarsız olduğunu, nişastanın rumende parçalanmayıp dışkıya kaçtığını gösterir (Yem parası boşa gidiyor!).`;
+      }
+
+      resultBox.style.background = bg;
+      resultBox.style.border = "1px solid " + border;
+      resultBox.style.color = color;
+      resultBox.innerHTML = msg;
+    }
+
+    function calculateFeedRefusal() {
+      const given = parseFloat(document.getElementById("feed-given-kg").value) || 0;
+      const refusal = parseFloat(document.getElementById("feed-refusal-kg").value) || 0;
+      const resultBox = document.getElementById("feed-refusal-result");
+      if (!resultBox) return;
+
+      if (given <= 0) {
+        resultBox.innerHTML = "Lütfen verilen yem miktarını girin.";
+        return;
+      }
+
+      const pct = ((refusal / given) * 100).toFixed(1);
+
+      if (pct >= 3.0 && pct <= 5.0) {
+        resultBox.style.background = "#dcfce7";
+        resultBox.style.border = "1px solid #86efac";
+        resultBox.style.color = "#15803d";
+        resultBox.innerHTML = `<strong>🟢 İDEAL YEMLİK (%${pct}):</strong> Kalan yem %3–5 hedef aralığında. Hayvanlar kapasitelerince yem tüketmiş ve yem israfı en az düzeyde.`;
+      } else if (pct < 3.0) {
+        resultBox.style.background = "#fee2e2";
+        resultBox.style.border = "1px solid #fca5a5";
+        resultBox.style.color = "#b91c1c";
+        resultBox.innerHTML = `<strong>🔴 YEMLİK BOŞ / AÇLIK RİSKİ (%${pct}):</strong> Kalan yem %3'ün altında (Yemlik süpürülmüş!). İnekler aç kalmış olabilir, ertesi gün yeme aşırı yüklenip asidoz geçirebilirler. Yem miktarını %5 artırın.`;
+      } else {
+        resultBox.style.background = "#fef9c3";
+        resultBox.style.border = "1px solid #fde047";
+        resultBox.style.color = "#854d0e";
+        resultBox.innerHTML = `<strong>🟡 YEM İSRAFI / SEÇME (%${pct}):</strong> Kalan yem %5'in üzerinde. İnekler kaba yemi bırakıp tane yemi seçmiş olabilir (Yem seçme / sorting). Kalan yemdeki partikül boyutunu kontrol edin.`;
+      }
+    }
+
+    function calculateBufferDose() {
+      const cows = parseInt(document.getElementById("feed-cow-count").value) || 0;
+      const doseGrams = parseInt(document.getElementById("feed-bicarb-target").value) || 200;
+      const resultBox = document.getElementById("feed-buffer-result");
+      if (!resultBox) return;
+
+      const totalKg = ((cows * doseGrams) / 1000).toFixed(1);
+      const bag25Kg = (totalKg / 25).toFixed(1);
+
+      resultBox.innerHTML = `
+        <strong>🥣 TMR Karıştırıcıya Eklenecek Günlük Karbonat:</strong><br>
+        • <strong>Toplam Doz:</strong> ${totalKg} kg Sodyum Bikarbonat / gün (${cows} baş için)<br>
+        • <strong>Çuval Karşılığı (25 kg standart çuval):</strong> ~${bag25Kg} çuval<br>
+        • <em>Uygulama:</em> Yem karmaya (TMR) homojen dağılacak şekilde karıştırın. Tükürük tamponlama kapasitesini destekleyerek rumen pH'sını 6.0–6.4 seviyesinde stabilize eder.
+      `;
     }
 
     /* =========================================================================
