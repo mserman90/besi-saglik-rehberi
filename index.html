@@ -662,11 +662,15 @@
           <div class="stat-val" style="color:var(--danger);" id="stat-ikas-blocked">0</div>
           <div class="stat-label">Sütü Yasaklı (İlaçlı)</div>
         </div>
+        <div class="stat-card" style="border-left: 4px solid #b91c1c;">
+          <div class="stat-val" style="color:#b91c1c;" id="stat-meat-blocked">0</div>
+          <div class="stat-label">🥩 Kesim Kilitli (Et İKAS)</div>
+        </div>
         <div class="stat-card">
           <div class="stat-val" style="color:var(--warning);" id="stat-quarantine">0</div>
           <div class="stat-label">Ayrı Bölmede (Karantina)</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card" style="grid-column: span 2;">
           <div class="stat-val" style="color:var(--info);" id="stat-upcoming-vaccines">0</div>
           <div class="stat-label">Günü Gelen Aşı</div>
         </div>
@@ -692,6 +696,14 @@
         <div class="card-title">🚨 Tanka Katılması Yasak İlaçlı Sütler</div>
         <div id="dashboard-ikas-list" style="font-size:0.85rem; color:#475569;">
           Şu an sütü yasaklı inek bulunmuyor.
+        </div>
+      </div>
+
+      <div class="card" style="border-left: 4px solid #b91c1c;">
+        <div class="card-title" style="color:#b91c1c;">🥩 Mezbahaya / Kesime Gönderilmesi Yasak Hayvanlar (Et İKAS)</div>
+        <p style="font-size:0.78rem; color:#64748b; margin-bottom:8px;">İlaç yapıldıktan sonra karkasta antibiyotik/ağrı kesici kalıntısı kalan hayvanlar yasal olarak kesilemez.</p>
+        <div id="dashboard-meat-list" style="font-size:0.85rem; color:#475569;">
+          Şu an kesim kilidi olan hayvan bulunmuyor.
         </div>
       </div>
 
@@ -1516,6 +1528,13 @@
             <li>Yasaklı hayvan yok.</li>
           </ul>
         </div>
+
+        <div class="card" style="margin-top:12px; border: 1.5px solid #b91c1c; background:#fff5f5;">
+          <div style="font-weight:700; color:#b91c1c; margin-bottom:6px;">🥩 KESİME / MEZBAHAYA GÖNDERİLMESİ YASAK OLANLAR (ET İKAS):</div>
+          <ul id="slaughter-blocked-list" style="padding-left:18px; font-weight:700; font-size:0.95rem; color:#b91c1c;">
+            <li>Kesim kilidi olan hayvan yok.</li>
+          </ul>
+        </div>
       </div>
       <div class="card" style="border: 1px dashed #94a3b8; background: #f8fafc;">
         <div class="card-title" style="font-size:0.9rem; color:#475569;">💾 Çevrimdışı Veri Yedekleme & Aktarım</div>
@@ -1915,6 +1934,7 @@
       const now = new Date();
       let activeIkasCount = 0;
       let blockedEarTags = [];
+      let blockedMeatTags = [];
 
       treatments.forEach(t => {
         const milkEnd = new Date(t.milkSafeDate);
@@ -1922,34 +1942,60 @@
           activeIkasCount++;
           if (!blockedEarTags.includes(t.earTag)) blockedEarTags.push(t.earTag);
         }
+        const meatEnd = new Date(t.meatSafeDate);
+        if (meatEnd > now) {
+          if (!blockedMeatTags.includes(t.earTag)) blockedMeatTags.push(t.earTag);
+        }
       });
 
       document.getElementById("stat-ikas-blocked").textContent = blockedEarTags.length;
+      const elMeatStat = document.getElementById("stat-meat-blocked");
+      if (elMeatStat) elMeatStat.textContent = blockedMeatTags.length;
       document.getElementById("stat-quarantine").textContent = animals.filter(a => a.quarantine).length;
       document.getElementById("stat-upcoming-vaccines").textContent = vaccineRecords.length;
 
       // Kritik Bildirim Kutusu
       const alertBox = document.getElementById("active-alert-box");
+      let alertHtml = "";
       if (blockedEarTags.length > 0) {
-        alertBox.innerHTML = `
+        alertHtml += `
           <div class="banner-alert banner-danger">
-            🚫 <strong>DİKKAT:</strong> ${blockedEarTags.join(", ")} küpeli ineklerin sütünde antibiyotik kısıtı vardır! Tank sütüne sağmayın!
-          </div>
-        `;
-      } else {
-        alertBox.innerHTML = `
-          <div class="banner-alert banner-success">
-            ✅ Sürüde aktif süt arınma kısıtı (İKAS) bulunmamaktadır. Tüm sütler tanka uygundur.
+            🚫 <strong>SÜT UYARISI:</strong> ${blockedEarTags.join(", ")} küpeli hayvanların sütünde ilaç kısıtı vardır! Tank sütüne sağmayın!
           </div>
         `;
       }
+      if (blockedMeatTags.length > 0) {
+        alertHtml += `
+          <div class="banner-alert banner-danger" style="background:#450a0a; color:#fca5a5; border:1px solid #991b1b;">
+            🥩 <strong>KESİM / MEZBAHA KİLİDİ:</strong> ${blockedMeatTags.join(", ")} küpeli hayvanlarda karkas/et kalıntısı vardır! Yasal olarak kesime sevk edilemez!
+          </div>
+        `;
+      }
+      if (!alertHtml) {
+        alertHtml = `
+          <div class="banner-alert banner-success">
+            ✅ Sürüde aktif süt veya kesim kısıtı bulunmamaktadır. Tüm süt ve besi karkasları uygundur.
+          </div>
+        `;
+      }
+      alertBox.innerHTML = alertHtml;
 
-      // İKAS Özet Listesi
+      // Süt İKAS Özet Listesi
       const ikasList = document.getElementById("dashboard-ikas-list");
       if (blockedEarTags.length > 0) {
-        ikasList.innerHTML = `<strong>Kısıtlı Hayvanlar:</strong> ` + blockedEarTags.map(tag => `<span class="tag tag-danger">${tag}</span>`).join(" ");
+        ikasList.innerHTML = `<strong>Sütü Yasaklılar:</strong> ` + blockedEarTags.map(tag => `<span class="tag tag-danger">${tag}</span>`).join(" ");
       } else {
         ikasList.innerHTML = "Aktif süt arınma kısıtı yok.";
+      }
+
+      // Et İKAS Özet Listesi
+      const meatList = document.getElementById("dashboard-meat-list");
+      if (meatList) {
+        if (blockedMeatTags.length > 0) {
+          meatList.innerHTML = `<strong>Kesimi Yasaklılar:</strong> ` + blockedMeatTags.map(tag => `<span class="tag tag-danger" style="background:#fee2e2; color:#b91c1c;">🥩 ${tag}</span>`).join(" ");
+        } else {
+          meatList.innerHTML = "Aktif kesim/et arınma kilidi olan hayvan yok. Kesime uygundur.";
+        }
       }
     }
 
@@ -2231,9 +2277,14 @@
           remainingMilkText = `<span class="tag tag-success">Serbest</span>`;
         }
 
-        let remainingMeatText = isMeatBlocked 
-          ? `<span class="tag tag-warning">${meatEnd.toLocaleDateString('tr-TR')}</span>`
-          : `<span class="tag tag-success">Serbest</span>`;
+        let remainingMeatText = "Serbest";
+        if (isMeatBlocked) {
+          const diffMsMeat = meatEnd - now;
+          const diffDaysMeat = Math.ceil(diffMsMeat / (24 * 3600 * 1000));
+          remainingMeatText = `<span class="tag tag-danger" style="background:#fee2e2; color:#b91c1c;">🥩 KESİLEMEZ (${diffDaysMeat} gün kaldı - ${meatEnd.toLocaleDateString('tr-TR')})</span>`;
+        } else {
+          remainingMeatText = `<span class="tag tag-success">Kesime Uygun</span>`;
+        }
 
         tr.innerHTML = `
           <td><strong>${t.earTag}</strong></td>
@@ -2861,19 +2912,25 @@
       const blockedUl = document.getElementById("milker-blocked-list");
       const now = new Date();
 
-      // Tüm aktif yasaklı hayvanları bul
+      // Tüm aktif yasaklı hayvanları bul (Süt ve Et)
       let blockedMap = {};
+      let blockedMeatMap = {};
       treatments.forEach(t => {
         const milkEnd = new Date(t.milkSafeDate);
         if (milkEnd > now) {
           const diffMs = milkEnd - now;
           const diffHrs = Math.floor(diffMs / (3600 * 1000));
           const diffMins = Math.floor((diffMs % (3600 * 1000)) / (60 * 1000));
-          blockedMap[t.earTag.toUpperCase()] = `${diffHrs} saat ${diffMins} dakika kaldı (${t.drugName})`;
+          blockedMap[t.earTag.toUpperCase()] = `${diffHrs} saat ${diffMins} dk kaldı (${t.drugName})`;
+        }
+        const meatEnd = new Date(t.meatSafeDate);
+        if (meatEnd > now) {
+          const diffDays = Math.ceil((meatEnd - now) / (24 * 3600 * 1000));
+          blockedMeatMap[t.earTag.toUpperCase()] = `${diffDays} gün kaldı (${t.drugName} - ${meatEnd.toLocaleDateString('tr-TR')})`;
         }
       });
 
-      // Yasaklı listeyi güncelle
+      // Yasaklı süt listesini güncelle
       const blockedKeys = Object.keys(blockedMap);
       if (blockedKeys.length === 0) {
         blockedUl.innerHTML = `<li>Şu an antibiyotikli veya yasaklı inek bulunmamaktadır.</li>`;
@@ -2881,23 +2938,43 @@
         blockedUl.innerHTML = blockedKeys.map(tag => `<li>🚫 ${tag} : ${blockedMap[tag]}</li>`).join("");
       }
 
+      // Yasaklı et/kesim listesini güncelle
+      const slaughterUl = document.getElementById("slaughter-blocked-list");
+      if (slaughterUl) {
+        const meatBlockedKeys = Object.keys(blockedMeatMap);
+        if (meatBlockedKeys.length === 0) {
+          slaughterUl.innerHTML = `<li>Şu an kesim kilitli veya et arınma süresinde hayvan bulunmamaktadır.</li>`;
+        } else {
+          slaughterUl.innerHTML = meatBlockedKeys.map(tag => `<li>🥩 ${tag} : ${blockedMeatMap[tag]}</li>`).join("");
+        }
+      }
+
       // Arama yapılmışsa tek hayvan kontrolü
       if (!search) {
         resBox.innerHTML = `
           <div class="milker-status-box milker-green">
-            🟢 SAĞIMA UYGUN
-            <div style="font-size:0.85rem; font-weight:400; margin-top:4px;">Lütfen kontrol etmek için yukarıya inek küpe numarasını yazın.</div>
+            🟢 KONTROLE HAZIR
+            <div style="font-size:0.85rem; font-weight:400; margin-top:4px;">Sağım ve kesim kontrolü için yukarıya küpe numarasını yazın veya kamerayla okutun.</div>
           </div>
         `;
         return;
       }
 
-      if (blockedMap[search]) {
+      const hasMilkBlock = !!blockedMap[search];
+      const hasMeatBlock = !!blockedMeatMap[search];
+
+      if (hasMilkBlock || hasMeatBlock) {
+        let warnings = [];
+        if (hasMilkBlock) {
+          warnings.push(`🔴 <strong>TANKA SAĞILAMAZ:</strong> Süt İKAS Kısıtı: ${blockedMap[search]}`);
+        }
+        if (hasMeatBlock) {
+          warnings.push(`🥩 <strong>MEZBAHAYA / KESİME GÖNDERİLEMEZ:</strong> Et İKAS Kısıtı: ${blockedMeatMap[search]}`);
+        }
         resBox.innerHTML = `
           <div class="milker-status-box milker-red">
-            🔴 BU İNEĞİ TANKA SAĞMA!
-            <div style="font-size:1rem; font-weight:600; margin-top:6px;">ANTİBİYOTİKLİ SÜT - TANKA KARIŞTIRILAMAZ!</div>
-            <div style="font-size:0.85rem; font-weight:400; margin-top:4px;">Kalan Kısıt Süresi: ${blockedMap[search]}</div>
+            ⛔ DİKKAT: YASAKLI / KISITLI HAYVAN!
+            <div style="font-size:0.95rem; font-weight:600; margin-top:8px; line-height:1.5;">${warnings.join("<br>")}</div>
           </div>
         `;
       } else {
@@ -2905,9 +2982,9 @@
         if (animalExists) {
           resBox.innerHTML = `
             <div class="milker-status-box milker-green">
-              🟢 SAĞIMA UYGUN
-              <div style="font-size:1rem; font-weight:600; margin-top:4px;">${search} KÜPELİ İNEK TEMİZ</div>
-              <div style="font-size:0.85rem; font-weight:400;">Kalıntı engeli yoktur, tanka sağılabilir.</div>
+              🟢 SAĞIMA VE KESİME UYGUN
+              <div style="font-size:1rem; font-weight:600; margin-top:4px;">${search} KÜPELİ HAYVAN TEMİZ</div>
+              <div style="font-size:0.85rem; font-weight:400;">Süt ve et arınma kısıtı bulunmamaktadır. Tanka sağılabilir, kesime uygundur.</div>
             </div>
           `;
         } else {
