@@ -685,7 +685,7 @@
           <button class="btn btn-success" style="background:#15803d; color:white;" onclick="switchTab('feed')">🌾 Yemlik & İşkembe & Geviş</button>
           <button class="btn btn-info" onclick="switchTab('repro')">🩸 Tohumlama & Doğum</button>
           <button class="btn btn-warning" style="background:#e65100; color:white;" onclick="switchTab('calf')">🍼 Buzağı & Ağız Sütü</button>
-          <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Şerit Metreyle Kilo Ölç</button>
+          <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Kilo Ölçer & CAAG Takibi</button>
           <button class="btn btn-info" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
           <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil İlk Yardım</button>
           <button class="btn btn-outline" style="grid-column: span 2;" onclick="switchTab('milker')">🥛 Sağımcı Ekranı (Büyük Yazı)</button>
@@ -1248,50 +1248,148 @@
       </div>
     </section>
 
-    <!-- ================= 6. ŞERİT METRE İLE CANLI AĞIRLIK (KİLO) HESAPLAYICI ================= -->
+    <!-- ================= 6. CANLI AĞIRLIK & CAAG (GÜNLÜK KİLO ARTIŞI) TAKİP MOTORU ================= -->
     <section id="tab-weight" class="tab-section">
       <div class="card">
-        <div class="card-title">⚖️ Şerit Metre ile Canlı Ağırlık Ölçer (Kantar Yokken!)</div>
-        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
-          Baskülün olmadığı saha ve mera şartlarında bilimsel <strong>Schaeffer Formülü</strong> ile canlı ağırlık tahmini ve otomatik ilaç dozajı.
+        <div class="card-title">⚖️ Canlı Ağırlık & Besi CAAG Takip Motoru</div>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
+          İster <strong>Kantar/Baskül</strong> tartımı yapın, ister şerit metreyle <strong>Schaeffer Formülü</strong> kullanın. Periyodik tartımlarla Günlük Canlı Ağırlık Artışını (CAAG) hesaplayın ve besi performansını izleyin.
         </p>
 
-        <label for="weight-animal-select">Ölçülen Hayvanı Seç (İsteğe Bağlı):</label>
-        <div style="display:flex; gap:6px; margin-bottom:10px;">
-          <select id="weight-animal-select" style="margin-bottom:0;"></select>
-          <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('weight')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
+        <!-- Hayvan Seçimi -->
+        <label for="weight-animal-select">Tartılacak Hayvan:</label>
+        <div style="display:flex; gap:6px; margin-bottom:12px;">
+          <select id="weight-animal-select" style="margin-bottom:0;" onchange="onWeightAnimalChange()"></select>
+          <button class="btn btn-warning" style="width:auto; padding:0 14px; white-space:nowrap;" onclick="startQrScanner('weight')" title="Kamerayla Küpe Oku">📷 Küpe Oku</button>
         </div>
 
-        <div style="background:#f1f5f9; padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#334155;">
-          📏 <strong>Nasıl Ölçülür?</strong><br>
-          1. <strong>Göğüs Çevresi:</strong> Ön ayakların hemen arkasından, kürek kemiği üzerinden mezurayla sarın.<br>
-          2. <strong>Vücut Uzunluğu:</strong> Omuz başı (kürek kemiği çıkıntısı) ile kalça yumrusu (oturga kemiği) arası mesafe.
+        <!-- Seçilen Hayvanın Önceki Tartım Özeti (Varsa) -->
+        <div id="weight-animal-history-summary" style="display:none; background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:10px; margin-bottom:12px; font-size:0.85rem; color:#1e40af;">
+          <!-- Dinamik doldurulur -->
         </div>
 
+        <!-- Tartım Yöntemi Seçimi -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+          <button type="button" id="btn-mode-scale" class="btn btn-primary" onclick="setWeightInputMode('scale')">🏢 Kantar / Baskül Tartımı</button>
+          <button type="button" id="btn-mode-tape" class="btn btn-outline" onclick="setWeightInputMode('tape')">📏 Şerit Metre (Ölçüm)</button>
+        </div>
+
+        <!-- 1. Mod: Doğrudan Kantar Tartımı -->
+        <div id="weight-scale-box" style="display:block;">
+          <label for="direct-scale-weight">Kantarda Çıkan Canlı Ağırlık (kg):</label>
+          <input type="number" id="direct-scale-weight" value="450" step="1" min="20" max="1500" oninput="calculateWeightFromScale()">
+        </div>
+
+        <!-- 2. Mod: Şerit Metre / Mezurayla Ölçüm -->
+        <div id="weight-tape-box" style="display:none;">
+          <div style="background:#f8fafc; padding:10px; border-radius:8px; margin-bottom:10px; font-size:0.8rem; color:#334155; border:1px solid #e2e8f0;">
+            📏 <strong>Şerit Metre Ölçüm Rehberi (Schaeffer Formülü):</strong><br>
+            • <strong>Göğüs Çevresi:</strong> Ön ayakların hemen arkasından, kürek kemiği üzerinden mezurayla sıkmadan sarın.<br>
+            • <strong>Vücut Uzunluğu:</strong> Omuz başı çıkıntısı ile kalça oturga yumrusu arası düz mesafe.
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="measure-heartgirth">Göğüs Çevresi (cm):</label>
+              <input type="number" id="measure-heartgirth" value="180" step="1" oninput="calculateSchaefferWeight()">
+            </div>
+            <div>
+              <label for="measure-bodylength">Vücut Uzunluğu (cm):</label>
+              <input type="number" id="measure-bodylength" value="150" step="1" oninput="calculateSchaefferWeight()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tartım Tarihi ve Notu -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <div>
-            <label for="measure-heartgirth">Göğüs Çevresi (cm):</label>
-            <input type="number" id="measure-heartgirth" value="180" step="1" oninput="calculateSchaefferWeight()">
+            <label for="weight-date">Tartım Tarihi:</label>
+            <input type="date" id="weight-date">
           </div>
           <div>
-            <label for="measure-bodylength">Vücut Uzunluğu (cm):</label>
-            <input type="number" id="measure-bodylength" value="150" step="1" oninput="calculateSchaefferWeight()">
+            <label for="weight-note">Tartım Dönemi / Not:</label>
+            <select id="weight-note">
+              <option value="Rutin Besi Tartımı">Rutin Besi Tartımı</option>
+              <option value="Besiye Giriş Tartımı">Besiye Giriş Tartımı</option>
+              <option value="Aylık Kontrol">Aylık Kontrol</option>
+              <option value="Rasyon Değişimi Öncesi">Rasyon Değişimi Öncesi</option>
+              <option value="Hastalık / İyileşme Takibi">Hastalık / İyileşme Takibi</option>
+              <option value="Kesim Öncesi Son Tartım">Kesim Öncesi Son Tartım</option>
+            </select>
           </div>
         </div>
 
-        <!-- Canlı Ağırlık Sonuç Kartı -->
-        <div class="card" style="background:#e8f5e9; border:2px solid #2e7d32; text-align:center; padding:14px; margin-top:8px;">
-          <div style="font-size:0.85rem; font-weight:700; color:#1b5e20;">TAHMİNİ CANLI AĞIRLIK:</div>
-          <div id="calculated-live-weight" style="font-size:2rem; font-weight:900; color:#1b5e20; margin:4px 0;">448 kg</div>
-          <div id="weight-ranges-note" style="font-size:0.75rem; color:#475569;">(Hata payı yaklaşık ±%5 civarındadır)</div>
+        <!-- Canlı Ağırlık Gösterge Kartı -->
+        <div class="card" style="background:#e8f5e9; border:2px solid #2e7d32; text-align:center; padding:12px; margin-top:4px;">
+          <div style="font-size:0.85rem; font-weight:700; color:#1b5e20;">GÜNCEL CANLI AĞIRLIK:</div>
+          <div id="calculated-live-weight" style="font-size:2.2rem; font-weight:900; color:#1b5e20; margin:2px 0;">450 kg</div>
+          <div id="weight-method-badge" style="font-size:0.75rem; color:#475569;">Kantar Tartımı</div>
         </div>
 
-        <!-- Otomatik Dozaj ve Yem Tüketimi Rehberi -->
-        <div class="card" style="background:#fff; border:1px solid #cbd5e1; margin-top:10px;">
-          <div style="font-weight:700; color:#334155; font-size:0.88rem; margin-bottom:6px;">💊 Bu Kiloya Göre Otomatik Klinik Dozlar:</div>
+        <!-- CAAG Önizleme ve Besi Performans Kartı -->
+        <div id="caag-live-preview" style="background:#fff7ed; border:1.5px solid #f97316; border-radius:8px; padding:12px; margin-top:10px;">
+          <div style="font-weight:800; color:#9a3412; font-size:0.95rem;">📈 Günlük Canlı Ağırlık Artışı (CAAG) Analizi:</div>
+          <div id="caag-preview-content" style="font-size:0.85rem; color:#334155; margin-top:6px; line-height:1.6;">
+            Bu hayvan için henüz önceki bir tartım kaydı bulunmuyor. Bu kayıt <strong>"Başlangıç Tartımı"</strong> olarak referans alınacaktır.
+          </div>
+        </div>
+
+        <!-- Kaydet Butonu -->
+        <div style="margin-top:12px;">
+          <button class="btn btn-primary" onclick="saveWeightRecord()">💾 Bu Tartımı Kaydet & CAAG Takibine Ekle</button>
+        </div>
+
+        <!-- Otomatik Dozaj ve Besi Kuru Madde İhtiyacı -->
+        <div class="card" style="background:#fff; border:1px solid #cbd5e1; margin-top:14px;">
+          <div style="font-weight:700; color:#334155; font-size:0.88rem; margin-bottom:6px;">💊 Bu Kiloya Göre Otomatik Klinik Dozlar & Besi İhtiyacı:</div>
           <ul id="weight-drug-doses" style="font-size:0.82rem; line-height:1.7; padding-left:18px; color:#334155;"></ul>
         </div>
 
+        <!-- Kesim Randımanı & Karkas Tahmin Kartı -->
+        <div class="card" style="background:#f8fafc; border:1px solid #cbd5e1; margin-top:12px;">
+          <div style="font-weight:700; color:#1e293b; font-size:0.88rem; margin-bottom:6px;">🥩 Kesim / Karkas & Randıman Simülatörü:</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div>
+              <label for="slaughter-yield-percent">Tahmini Karkas Randımanı (%):</label>
+              <select id="slaughter-yield-percent" onchange="updateCarcassEstimate()">
+                <option value="56">Yerli / Kırık Irk (~%56)</option>
+                <option value="58" selected>Simental / Melez (~%58)</option>
+                <option value="60">Şarole / Limusin / Angus (~%60)</option>
+                <option value="62">Süper Besili Etçi Irk (~%62)</option>
+              </select>
+            </div>
+            <div>
+              <label for="carcass-meat-price">Karkas Kesim Fiyatı (TL/kg):</label>
+              <input type="number" id="carcass-meat-price" value="380" step="5" oninput="updateCarcassEstimate()">
+            </div>
+          </div>
+          <div id="carcass-estimate-result" style="background:#f1f5f9; border-radius:6px; padding:10px; margin-top:6px; font-size:0.85rem; color:#334155; line-height:1.6;">
+            <!-- Dinamik doldurulur -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Kayıtlı Tartım Geçmişi & CAAG Tablosu -->
+      <div class="card">
+        <div class="card-title">📊 Sürü Canlı Ağırlık & CAAG Tartım Defteri</div>
+        <div class="table-container">
+          <table id="weight-records-table">
+            <thead>
+              <tr>
+                <th>Küpe No</th>
+                <th>Tartım Tarihi</th>
+                <th>Canlı Ağırlık</th>
+                <th>Yöntem</th>
+                <th>Önceki Tartım</th>
+                <th>Geçen Gün</th>
+                <th>Günlük Artış (CAAG)</th>
+                <th>Dönem / Not</th>
+                <th>İşlem</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -1585,7 +1683,7 @@
     </button>
     <button class="nav-item" onclick="switchTab('weight')">
       <span class="nav-icon">⚖️</span>
-      <span>Kilo Ölç</span>
+      <span>Kilo / CAAG</span>
     </button>
     <button class="nav-item" onclick="switchTab('vaccine')">
       <span class="nav-icon">📅</span>
@@ -1738,8 +1836,8 @@
         <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">🩸 7. Tohumlama & Doğum Çarkı</h4>
         <p>• Tohumlama gününü girin: <strong>21. gün</strong> kızgınlık dönüşü, <strong>40. gün</strong> gebelik kontrolü, <strong>220. gün</strong> kuruya alma ve <strong>280. gün</strong> beklenen doğum tarihi otomatik hesaplanır.</p>
 
-        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">⚖️ 8. Şerit Metreyle Canlı Kilo Ölçümü</h4>
-        <p>• Kantar yokken ineğin göğüs çevresini ve boyunu mezurayla ölçün. Bilimsel formülle canlı ağırlığı hesaplanır ve hayvana vurulacak iğne dozları ekrana gelir.</p>
+        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">⚖️ 8. Canlı Kilo & Besi CAAG Takip Motoru</h4>
+        <p>• İster <strong>kantar / baskül</strong> tartımı yapın, ister baskül yokken şerit metreyle <strong>Schaeffer Formülü</strong> (Göğüs² × Boy / 10838) kullanın. Periyodik tartımlarla <strong>Günlük Canlı Ağırlık Artışı (CAAG)</strong>, besi performansı (hedef: 1.2–1.4 kg/gün) ve kesim karkas randımanı/geliri otomatik hesaplanır.</p>
 
         <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">🍼 9. Buzağı Hayatta Tutma</h4>
         <p>• Doğumdan sonraki ilk 2 saatte en az 3-4 litre koyu ağız sütü içirilmelidir. İshal olan buzağının kilosuna ve göz çökmesine göre 24 saatte kaç litre serum verilmesi gerektiğini hesaplayın.</p>
@@ -1799,6 +1897,7 @@
     let vaccineRecords = getStore("vaccines", []);
     let reproRecords = getStore("repro", []);
     let costRecords = getStore("costs", []);
+    let weightRecords = getStore("weights", []);
 
     // Eski tarayıcı önbelleğindeki TR16001..TR16005 demo verilerini temizleme
     if (!localStorage.getItem("cattlesys_cleaned_demo_v1")) {
@@ -1808,12 +1907,14 @@
       vaccineRecords = vaccineRecords.filter(v => !demoIds.includes(v.animalId));
       reproRecords = reproRecords.filter(r => !demoIds.includes(r.animalId) && !demoIds.includes(r.earTag));
       costRecords = costRecords.filter(c => !demoIds.includes(c.animalId) && !demoIds.includes(c.earTag));
+      weightRecords = weightRecords.filter(w => !demoIds.includes(w.animalId) && !demoIds.includes(w.earTag));
 
       setStore("animals", animals);
       setStore("treatments", treatments);
       setStore("vaccines", vaccineRecords);
       setStore("repro", reproRecords);
       setStore("costs", costRecords);
+      setStore("weights", weightRecords);
       localStorage.setItem("cattlesys_cleaned_demo_v1", "true");
     }
 
@@ -1833,6 +1934,8 @@
       if (costDateEl) costDateEl.value = now.toISOString().slice(0, 10);
       const reproDateEl = document.getElementById("repro-date");
       if (reproDateEl) reproDateEl.value = now.toISOString().slice(0, 10);
+      const weightDateEl = document.getElementById("weight-date");
+      if (weightDateEl) weightDateEl.value = now.toISOString().slice(0, 10);
 
       // Kayıtlı Tema (Gece / Gündüz) Kontrolü
       const savedTheme = localStorage.getItem("cattlesys_theme");
@@ -1848,10 +1951,12 @@
       renderVaccineRecords();
       renderReproRecords();
       renderCostRecords();
+      renderWeightRecords();
       updateDashboardStats();
       calculateTriage();
       calculateEpiDose();
       calculateLiveCostEntry();
+      setWeightInputMode("scale");
 
       // Periyodik kontrol (Canlı sayaçlar için her dakika çalışır)
       setInterval(() => {
@@ -1880,7 +1985,7 @@
       if (tabId === "cost") renderCostRecords();
       if (tabId === "feed") { calculateRuminationIndex(); evaluateManureScore(); calculateFeedRefusal(); calculateBufferDose(); }
       if (tabId === "repro") renderReproRecords();
-      if (tabId === "weight") calculateSchaefferWeight();
+      if (tabId === "weight") { renderWeightRecords(); onWeightAnimalChange(); }
       if (tabId === "calf") { calculateColostrumQuality(); calculateCalfRehydration(); }
     }
 
@@ -2519,47 +2624,340 @@
     }
 
     /* =========================================================================
-       ŞERİT METRE İLE CANLI AĞIRLIK (SCHAEFFER FORMÜLÜ) HESAPLAMA MOTORU
+       CANLI AĞIRLIK (KANTAR / SCHAEFFER) & CAAG BESİ TAKİP MOTORU
        ========================================================================= */
-    let lastCalculatedWeightKg = 448;
+    let lastCalculatedWeightKg = 450;
+    let currentWeightInputMode = "scale"; // 'scale' veya 'tape'
+
+    function setWeightInputMode(mode) {
+      currentWeightInputMode = mode;
+      const btnScale = document.getElementById("btn-mode-scale");
+      const btnTape = document.getElementById("btn-mode-tape");
+      const boxScale = document.getElementById("weight-scale-box");
+      const boxTape = document.getElementById("weight-tape-box");
+      const methodBadge = document.getElementById("weight-method-badge");
+
+      if (mode === "scale") {
+        if (btnScale) { btnScale.className = "btn btn-primary"; }
+        if (btnTape) { btnTape.className = "btn btn-outline"; }
+        if (boxScale) boxScale.style.display = "block";
+        if (boxTape) boxTape.style.display = "none";
+        if (methodBadge) methodBadge.textContent = "Kantar / Baskül Tartımı";
+        calculateWeightFromScale();
+      } else {
+        if (btnScale) { btnScale.className = "btn btn-outline"; }
+        if (btnTape) { btnTape.className = "btn btn-primary"; }
+        if (boxScale) boxScale.style.display = "none";
+        if (boxTape) boxTape.style.display = "block";
+        if (methodBadge) methodBadge.textContent = "Şerit Metre (Schaeffer Formülü: Göğüs² × Boy / 10838)";
+        calculateSchaefferWeight();
+      }
+    }
+
+    function calculateWeightFromScale() {
+      const inputVal = parseFloat(document.getElementById("direct-scale-weight").value) || 0;
+      updateCalculatedWeight(inputVal, "Kantar / Baskül Tartımı");
+    }
 
     function calculateSchaefferWeight() {
       const girth = parseFloat(document.getElementById("measure-heartgirth").value) || 0;
       const length = parseFloat(document.getElementById("measure-bodylength").value) || 0;
-      const weightDisplay = document.getElementById("calculated-live-weight");
-      const dosesUl = document.getElementById("weight-drug-doses");
 
       if (girth <= 0 || length <= 0) {
-        weightDisplay.textContent = "0 kg";
+        updateCalculatedWeight(0, "Şerit Metre Ölçümü");
         return;
       }
 
       // Schaeffer Formülü (Metrik versiyon):
       // Ağırlık (kg) = (Göğüs Çevresi (cm)^2 * Vücut Uzunluğu (cm)) / 10838
       const weightKg = Math.round((Math.pow(girth, 2) * length) / 10838);
+      updateCalculatedWeight(weightKg, "Şerit Metre (Schaeffer Formülü ±%5)");
+    }
+
+    function updateCalculatedWeight(weightKg, methodText) {
       lastCalculatedWeightKg = weightKg;
+      const weightDisplay = document.getElementById("calculated-live-weight");
+      const methodBadge = document.getElementById("weight-method-badge");
+      const dosesUl = document.getElementById("weight-drug-doses");
 
-      weightDisplay.textContent = `${weightKg} kg`;
+      if (weightDisplay) weightDisplay.textContent = `${weightKg} kg`;
+      if (methodBadge && methodText) methodBadge.textContent = methodText;
 
-      // Otomatik Dozaj ve Yem Rasyonu Hesaplamaları
-      // 1. Adrenalin 1:1000: her 45 kg için 1 mL
-      const epiDose = (weightKg / 45).toFixed(1);
-      // 2. Meloksikam (%2): 0.5 mg/kg -> her 100 kg için 2.5 mL (yaklaşık)
-      const meloxDose = ((weightKg * 0.5) / 20).toFixed(1);
-      // 3. Fluniksin Meglumin (%5): 2.2 mg/kg -> her 45 kg için 2 mL
-      const flunixinDose = ((weightKg * 2.2) / 50).toFixed(1);
-      // 4. Tulatromisin (Draxxin): 2.5 mg/kg -> her 40 kg için 1 mL
-      const tulaDose = (weightKg / 40).toFixed(1);
-      // 5. Günlük Kuru Madde İhtiyacı: Canlı ağırlığın %3.5'i
-      const dmiKg = (weightKg * 0.035).toFixed(1);
+      // Otomatik Dozaj ve Besi İhtiyacı
+      if (dosesUl && weightKg > 0) {
+        const epiDose = (weightKg / 45).toFixed(1);
+        const meloxDose = ((weightKg * 0.5) / 20).toFixed(1);
+        const flunixinDose = ((weightKg * 2.2) / 50).toFixed(1);
+        const tulaDose = (weightKg / 40).toFixed(1);
+        // Besi kuru madde tüketimi: Canlı ağırlığın ortalama %2.2 - %2.5'i
+        const dmiBesiKg = (weightKg * 0.024).toFixed(1);
 
-      dosesUl.innerHTML = `
-        <li>💉 <strong>Adrenalin (1:1000 - Anafilaksi):</strong> <span style="color:var(--danger); font-weight:700;">${epiDose} mL</span> (SC / IM)</li>
-        <li>💊 <strong>Meloksikam (Ateş/Ağrı):</strong> <strong>${meloxDose} mL</strong> (SC / IV)</li>
-        <li>💊 <strong>Fluniksin (Toksemi/Ateş):</strong> <strong>${flunixinDose} mL</strong> (Yavaş IV)</li>
-        <li>💊 <strong>Tulatromisin (BRD Solunum):</strong> <strong>${tulaDose} mL</strong> (Tek doz SC)</li>
-        <li>🌾 <strong>Tahmini Günlük Kuru Madde İhtiyacı:</strong> ~${dmiKg} kg KM / gün</li>
+        dosesUl.innerHTML = `
+          <li>💉 <strong>Adrenalin (1:1000 - Anafilaksi):</strong> <span style="color:var(--danger); font-weight:700;">${epiDose} mL</span> (SC / IM)</li>
+          <li>💊 <strong>Meloksikam (Ateş/Ağrı):</strong> <strong>${meloxDose} mL</strong> (SC / IV)</li>
+          <li>💊 <strong>Fluniksin (Toksemi/Ateş):</strong> <strong>${flunixinDose} mL</strong> (Yavaş IV)</li>
+          <li>💊 <strong>Tulatromisin (Besi Ciğer İğnesi - BRD):</strong> <strong>${tulaDose} mL</strong> (Tek doz SC)</li>
+          <li>🌾 <strong>Besi Danası Günlük Kuru Madde İhtiyacı:</strong> ~${dmiBesiKg} kg KM / gün (Canlı ağırlığın ~%2.4'ü)</li>
+        `;
+      }
+
+      updateCaagLivePreview();
+      updateCarcassEstimate();
+    }
+
+    function onWeightAnimalChange() {
+      const select = document.getElementById("weight-animal-select");
+      const animalId = select ? select.value : "";
+      const historyCard = document.getElementById("weight-animal-history-summary");
+
+      if (!animalId) {
+        if (historyCard) historyCard.style.display = "none";
+        updateCaagLivePreview();
+        return;
+      }
+
+      const animalRecords = weightRecords
+        .filter(w => w.animalId === animalId || w.earTag === animalId)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      if (animalRecords.length > 0) {
+        const lastRecord = animalRecords[animalRecords.length - 1];
+        const firstRecord = animalRecords[0];
+        const daysDiffTotal = Math.max(1, Math.round((new Date() - new Date(firstRecord.date)) / (24 * 3600 * 1000)));
+        const totalGain = (lastRecord.weight - firstRecord.weight);
+
+        if (historyCard) {
+          historyCard.style.display = "block";
+          historyCard.innerHTML = `
+            <strong>📋 ${lastRecord.earTag} Önceki Tartım Kayıtları (${animalRecords.length} adet):</strong><br>
+            • <strong>Son Tartım:</strong> ${lastRecord.weight} kg (${new Date(lastRecord.date).toLocaleDateString('tr-TR')})<br>
+            • <strong>İlk Tartım:</strong> ${firstRecord.weight} kg (${new Date(firstRecord.date).toLocaleDateString('tr-TR')})<br>
+            • <strong>Toplam Besi Kazanımı:</strong> ${totalGain >= 0 ? '+' : ''}${totalGain} kg (${daysDiffTotal} günde)
+          `;
+        }
+      } else {
+        if (historyCard) historyCard.style.display = "none";
+      }
+
+      updateCaagLivePreview();
+    }
+
+    function updateCaagLivePreview() {
+      const previewBox = document.getElementById("caag-preview-content");
+      if (!previewBox) return;
+
+      const select = document.getElementById("weight-animal-select");
+      const animalId = select ? select.value : "";
+      const currentDateVal = document.getElementById("weight-date") ? document.getElementById("weight-date").value : "";
+      const currentWeight = lastCalculatedWeightKg;
+
+      if (!animalId) {
+        previewBox.innerHTML = `Yukarıdan bir hayvan seçtiğinizde geçmiş tartımı ile bu tartım arasındaki <strong>Günlük Canlı Ağırlık Artışı (CAAG)</strong> anlık olarak analiz edilecektir.`;
+        return;
+      }
+
+      const animalRecords = weightRecords
+        .filter(w => w.animalId === animalId || w.earTag === animalId)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      if (animalRecords.length === 0) {
+        previewBox.innerHTML = `Bu hayvan için kayıtlı önceki tartım bulunmuyor. Kaydedildiğinde bu ağırlık (<strong>${currentWeight} kg</strong>) <strong>Başlangıç Tartımı</strong> olarak baz alınacaktır.`;
+        return;
+      }
+
+      const prev = animalRecords[animalRecords.length - 1];
+      const prevDate = new Date(prev.date);
+      const currDate = currentDateVal ? new Date(currentDateVal) : new Date();
+
+      const diffTime = currDate - prevDate;
+      const daysPassed = Math.round(diffTime / (1000 * 3600 * 24));
+
+      if (daysPassed <= 0) {
+        previewBox.innerHTML = `⚠️ <em>Seçilen tartım tarihi önceki tartımla aynı gün veya daha eski (${daysPassed} gün). CAAG hesaplamak için tartımlar arasında en az 1 gün olmalıdır.</em>`;
+        return;
+      }
+
+      const weightDiff = (currentWeight - prev.weight);
+      const caagDaily = (weightDiff / daysPassed);
+      const caagGrams = Math.round(caagDaily * 1000);
+
+      let evaluationHtml = "";
+      if (caagGrams >= 1300) {
+        evaluationHtml = `<span style="color:#15803d; font-weight:800;">🟢 MÜKEMMEL BESİ PERFORMANSI (+${caagGrams} gr/gün):</span> Hayvan genetik potansiyelinin zirvesinde kilo alıyor (1.3 kg/gün ve üzeri). Rasyon ve işkembe dengesi harika.`;
+      } else if (caagGrams >= 1000) {
+        evaluationHtml = `<span style="color:#1d4ed8; font-weight:800;">🔵 İYİ BESİ PERFORMANSI (+${caagGrams} gr/gün):</span> Hedef besi aralığında (1.0 - 1.3 kg/gün).`;
+      } else if (caagGrams >= 600) {
+        evaluationHtml = `<span style="color:#d97706; font-weight:800;">🟡 ORTA / YAVAŞ KİLO ARTIŞI (+${caagGrams} gr/gün):</span> Hedefin altında. Yem seçme, parazit, asidoz veya rasyondaki enerji/protein yetersizliğini kontrol edin.`;
+      } else if (caagGrams > 0) {
+        evaluationHtml = `<span style="color:#b91c1c; font-weight:800;">🔴 ÇOK DÜŞÜK BESİ ARTIŞI (+${caagGrams} gr/gün):</span> Hayvan besiye yanıt vermiyor veya gizli bir hastalık (ciğer iltihabı/BVD/parazit) geçiriyor!`;
+      } else {
+        evaluationHtml = `<span style="color:#b91c1c; font-weight:800;">🚨 KİLO KAYBI ALARMI (${caagGrams} gr/gün):</span> Hayvan önceki tartımdan daha zayıf çıkmış (${weightDiff} kg kayıp)! Akut hastalık veya şiddetli yem yememe durumu var!`;
+      }
+
+      previewBox.innerHTML = `
+        • <strong>Önceki Tartım:</strong> ${prev.weight} kg (${new Date(prev.date).toLocaleDateString('tr-TR')})<br>
+        • <strong>Geçen Süre:</strong> <strong>${daysPassed} gün</strong><br>
+        • <strong>Toplam Kilo Değişimi:</strong> <strong>${weightDiff >= 0 ? '+' : ''}${weightDiff} kg</strong><br>
+        • <strong>Günlük Canlı Ağırlık Artışı (CAAG):</strong> <strong>${(caagDaily).toFixed(3)} kg/gün</strong> (${caagGrams} gr/gün)<br>
+        <div style="margin-top:6px; padding:6px 10px; background:#fff; border-radius:6px; border:1px solid #fed7aa;">
+          ${evaluationHtml}
+        </div>
       `;
+    }
+
+    function updateCarcassEstimate() {
+      const resultBox = document.getElementById("carcass-estimate-result");
+      if (!resultBox) return;
+
+      const liveWeight = lastCalculatedWeightKg;
+      const yieldPct = parseFloat(document.getElementById("slaughter-yield-percent").value) || 58;
+      const meatPrice = parseFloat(document.getElementById("carcass-meat-price").value) || 380;
+
+      if (liveWeight <= 0) {
+        resultBox.innerHTML = "Canlı ağırlık hesaplanamadı.";
+        return;
+      }
+
+      const carcassWeightKg = Math.round(liveWeight * (yieldPct / 100));
+      const totalRevenueTl = Math.round(carcassWeightKg * meatPrice);
+
+      resultBox.innerHTML = `
+        • <strong>Tahmini Soğuk Karkas (Et) Ağırlığı:</strong> <strong>~${carcassWeightKg} kg karkas et</strong> (%${yieldPct} randımanla)<br>
+        • <strong>Tahmini Kesim Geliri:</strong> <strong>${totalRevenueTl.toLocaleString('tr-TR')} ₺</strong> (${meatPrice} ₺/kg karkas fiyattan)<br>
+        • <em>Not: Randıman; hayvanın açlık/doluluk durumuna, ırkına ve kondisyonuna göre ±%2 değişebilir.</em>
+      `;
+    }
+
+    function saveWeightRecord() {
+      const select = document.getElementById("weight-animal-select");
+      const animalId = select ? select.value : "";
+      if (!animalId) {
+        alert("Lütfen tartımı kaydedilecek hayvanı seçin (veya önce Hayvan Ekle bölümünden hayvan ekleyin).");
+        return;
+      }
+
+      const animal = animals.find(a => a.id === animalId || a.earTag === animalId);
+      const earTag = animal ? animal.earTag : animalId;
+      const dateVal = document.getElementById("weight-date").value || new Date().toISOString().slice(0, 10);
+      const noteVal = document.getElementById("weight-note").value || "Rutin Tartım";
+      const weightVal = lastCalculatedWeightKg;
+      const methodVal = currentWeightInputMode === "scale" ? "Kantar" : "Şerit Metre";
+
+      if (weightVal <= 0) {
+        alert("Lütfen geçerli bir canlı ağırlık girin!");
+        return;
+      }
+
+      // Önceki kaydı bulup CAAG hesapla
+      const prevRecords = weightRecords
+        .filter(w => w.animalId === animalId || w.earTag === earTag)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      let prevWeight = null;
+      let daysPassed = null;
+      let caagDaily = null;
+
+      if (prevRecords.length > 0) {
+        const lastRec = prevRecords[prevRecords.length - 1];
+        const diffDays = Math.round((new Date(dateVal) - new Date(lastRec.date)) / (24 * 3600 * 1000));
+        if (diffDays > 0) {
+          prevWeight = lastRec.weight;
+          daysPassed = diffDays;
+          caagDaily = parseFloat(((weightVal - lastRec.weight) / diffDays).toFixed(3));
+        }
+      }
+
+      const newRecord = {
+        id: Date.now(),
+        animalId: animal ? animal.id : earTag,
+        earTag: earTag,
+        date: dateVal,
+        weight: weightVal,
+        method: methodVal,
+        prevWeight: prevWeight,
+        daysPassed: daysPassed,
+        caagDaily: caagDaily,
+        note: noteVal
+      };
+
+      weightRecords.unshift(newRecord);
+      setStore("weights", weightRecords);
+
+      // Hayvanın son durumunu güncelle
+      if (animal) {
+        let caagText = caagDaily !== null ? ` (CAAG: ${(caagDaily * 1000).toFixed(0)} gr/g)` : "";
+        animal.lastStatus = `Tartıldı: ${weightVal} kg${caagText}`;
+        setStore("animals", animals);
+        renderAnimalTable();
+      }
+
+      renderWeightRecords();
+      onWeightAnimalChange();
+
+      let alertMsg = `✅ ${earTag} için tartım kaydedildi!\nCanlı Ağırlık: ${weightVal} kg (${methodVal})`;
+      if (caagDaily !== null) {
+        alertMsg += `\nGünlük Artış (CAAG): ${(caagDaily * 1000).toFixed(0)} gr/gün (${daysPassed} günde)`;
+      }
+      alert(alertMsg);
+    }
+
+    function renderWeightRecords() {
+      const tbody = document.querySelector("#weight-records-table tbody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+
+      if (weightRecords.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:#94a3b8; padding:16px;">Kayıtlı tartım ve CAAG verisi bulunmuyor.<br><small>Yukarıdan tartım yaparak ilk kaydı ekleyebilirsiniz.</small></td></tr>`;
+        return;
+      }
+
+      // Tarihe göre yeniden eskiye sıralı
+      const sorted = [...weightRecords].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      sorted.forEach(r => {
+        const tr = document.createElement("tr");
+
+        let caagBadge = `<span style="color:#94a3b8;">- (İlk Tartım)</span>`;
+        if (r.caagDaily !== null && r.caagDaily !== undefined) {
+          const grams = Math.round(r.caagDaily * 1000);
+          if (grams >= 1200) {
+            caagBadge = `<span class="tag tag-success" style="font-weight:800;">+${grams} gr/gün</span>`;
+          } else if (grams >= 800) {
+            caagBadge = `<span class="tag tag-info" style="font-weight:700;">+${grams} gr/gün</span>`;
+          } else if (grams > 0) {
+            caagBadge = `<span class="tag tag-warning" style="font-weight:700;">+${grams} gr/gün</span>`;
+          } else {
+            caagBadge = `<span class="tag tag-danger" style="font-weight:800;">${grams} gr/gün</span>`;
+          }
+        }
+
+        const methodBadge = r.method === "Kantar" 
+          ? `<span class="tag tag-info" style="font-size:0.75rem;">Kantar</span>` 
+          : `<span class="tag tag-warning" style="font-size:0.75rem;">Şerit Metre</span>`;
+
+        tr.innerHTML = `
+          <td><strong>${r.earTag}</strong></td>
+          <td><small>${new Date(r.date).toLocaleDateString('tr-TR')}</small></td>
+          <td><strong style="color:var(--primary); font-size:1rem;">${r.weight} kg</strong></td>
+          <td>${methodBadge}</td>
+          <td>${r.prevWeight ? r.prevWeight + " kg" : "-"}</td>
+          <td>${r.daysPassed ? r.daysPassed + " gün" : "-"}</td>
+          <td>${caagBadge}</td>
+          <td><small style="color:#475569;">${r.note || '-'}</small></td>
+          <td>
+            <button class="btn btn-outline" style="min-height:36px; padding:6px 12px; font-size:0.8rem; font-weight:700; color:#dc2626; border-color:#fca5a5; touch-action:manipulation;" onclick="deleteWeightRecord(${r.id})">Sil</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deleteWeightRecord(id) {
+      if (!confirm("Bu tartım kaydını silmek istediğinize emin misiniz?")) return;
+      weightRecords = weightRecords.filter(w => w.id !== id);
+      setStore("weights", weightRecords);
+      renderWeightRecords();
+      onWeightAnimalChange();
     }
 
     function applyWeightToEmergency() {
@@ -3057,6 +3455,7 @@
         repro: reproRecords,
         triage: triageRecords,
         costs: costRecords,
+        weights: weightRecords,
         exportedAt: new Date().toISOString()
       };
       const blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
@@ -3099,6 +3498,10 @@
             costRecords = parsed.costs;
             setStore("costs", costRecords);
           }
+          if (parsed.weights && Array.isArray(parsed.weights)) {
+            weightRecords = parsed.weights;
+            setStore("weights", weightRecords);
+          }
 
           populateAnimalSelects();
           renderAnimalTable();
@@ -3106,6 +3509,7 @@
           renderVaccineRecords();
           renderReproRecords();
           renderCostRecords();
+          renderWeightRecords();
           updateDashboardStats();
           alert("✅ Yedek veriler başarıyla cihaza yüklendi!");
         } catch (err) {
