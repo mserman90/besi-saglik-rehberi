@@ -642,8 +642,8 @@
       <small style="opacity:0.85; font-size:0.75rem;">Hasta Muayenesi • İlaçlı Süt Takibi • Aşı & Doğum Takvimi</small>
     </div>
     <div style="display:flex; align-items:center; gap:8px;">
-      <button id="theme-toggle-btn" onclick="toggleTheme()" title="Koyu / Açık Mod" style="background:rgba(255,255,255,0.2); color:white; border:1.5px solid rgba(255,255,255,0.5); padding:8px 12px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; min-height:40px; touch-action:manipulation;">🌙 Gece</button>
-      <button onclick="openGuideModal()" style="background:rgba(255,255,255,0.2); color:white; border:1.5px solid rgba(255,255,255,0.5); padding:8px 12px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; min-height:40px; touch-action:manipulation;">📖 Kılavuz</button>
+      <button onclick="openGuideModal()" style="background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:8px 14px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; min-height:44px; touch-action:manipulation;">📖 Kılavuz</button>
+      <button id="theme-toggle-btn" onclick="toggleTheme()" title="Koyu / Açık Mod" style="background:rgba(255,255,255,0.18); color:white; border:1.5px solid rgba(255,255,255,0.4); padding:8px 12px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; min-height:44px; touch-action:manipulation;">🌙 Gece</button>
     </div>
   </header>
 
@@ -679,17 +679,17 @@
       <div class="card">
         <div class="card-title">⚡ Hızlı İşlemler</div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <button class="btn btn-danger" style="grid-column: span 2; font-size:1.05rem;" onclick="switchTab('emergency')">🆘 Acil İlk Yardım & Hayat Kurtarma</button>
           <button class="btn btn-primary" onclick="switchTab('triage')">🩺 Hasta Muayene Et</button>
           <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç Yap & Süt Kilitle</button>
-          <button class="btn btn-danger" style="background:#b91c1c; color:white;" onclick="switchTab('cost')">💰 Zarar & Masraf Defteri</button>
-          <button class="btn btn-success" style="background:#15803d; color:white;" onclick="switchTab('feed')">🌾 Yemlik & İşkembe & Geviş</button>
-          <button class="btn btn-info" onclick="switchTab('repro')">🩸 Tohumlama & Doğum</button>
+          <button class="btn btn-outline" style="font-weight:800; border-color:#0284c7; color:#0284c7;" onclick="switchTab('milker')">🥛 Sağımcı Ekranı (Büyük)</button>
           <button class="btn btn-warning" style="background:#e65100; color:white;" onclick="switchTab('calf')">🍼 Buzağı & Ağız Sütü</button>
-          <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Kilo Ölçer & CAAG Takibi</button>
+          <button class="btn btn-success" style="background:#15803d; color:white;" onclick="switchTab('feed')">🌾 Yemlik & İşkembe & Geviş</button>
           <button class="btn btn-info" style="background:#0284c7; color:white;" onclick="switchTab('arrival')">🚛 Yeni Dana Giriş & Alıştırma</button>
-          <button class="btn btn-info" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
-          <button class="btn btn-danger" onclick="switchTab('emergency')">🆘 Acil İlk Yardım</button>
-          <button class="btn btn-outline" style="grid-column: span 2;" onclick="switchTab('milker')">🥛 Sağımcı Ekranı (Büyük Yazı)</button>
+          <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Kilo Ölçer & CAAG Takibi</button>
+          <button class="btn btn-info" onclick="switchTab('repro')">🩸 Tohumlama & Doğum</button>
+          <button class="btn btn-info" style="background:#475569; color:white;" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
+          <button class="btn btn-danger" style="background:#b91c1c; color:white;" onclick="switchTab('cost')">💰 Zarar & Masraf Defteri</button>
         </div>
       </div>
 
@@ -712,8 +712,8 @@
         <div class="card-title">📋 Hayvan Listesi & Durumlar</div>
         <div style="display:flex; gap:6px; margin-bottom:8px;">
           <input type="text" id="animal-search" placeholder="Küpe No Yaz veya Ara (örn: TR16001)" oninput="renderAnimalTable()" style="margin-bottom:0;">
-          <button class="btn btn-warning" style="width:auto; padding:0 12px;" onclick="startQrScanner('search')" title="Kamerayla Küpe Oku">📷 Oku</button>
-          <button class="btn btn-primary" style="width:auto; padding:0 14px;" onclick="openNewAnimalModal()">+ Yeni Ekle</button>
+          <button class="btn btn-primary" style="width:auto; padding:0 14px; white-space:nowrap;" onclick="openNewAnimalModal()">+ Yeni Ekle</button>
+          <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('search')" title="Kamerayla Küpe Oku">📷 Oku</button>
         </div>
         <div class="table-container">
           <table id="animal-table">
@@ -1860,7 +1860,11 @@
   <nav class="bottom-nav">
     <button class="nav-item active" onclick="switchTab('dashboard')">
       <span class="nav-icon">📊</span>
-      <span>Ahır Durumu</span>
+      <span>Ahır Özeti</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('emergency')">
+      <span class="nav-icon">🆘</span>
+      <span>İlk Yardım</span>
     </button>
     <button class="nav-item" onclick="switchTab('triage')">
       <span class="nav-icon">🩺</span>
@@ -1870,41 +1874,37 @@
       <span class="nav-icon">💊</span>
       <span>İlaç & Süt</span>
     </button>
-    <button class="nav-item" onclick="switchTab('cost')">
-      <span class="nav-icon">💰</span>
-      <span>Zarar Defteri</span>
+    <button class="nav-item" onclick="switchTab('milker')">
+      <span class="nav-icon">🥛</span>
+      <span>Sağımcı</span>
     </button>
     <button class="nav-item" onclick="switchTab('feed')">
       <span class="nav-icon">🌾</span>
       <span>Yem & Geviş</span>
     </button>
-    <button class="nav-item" onclick="switchTab('repro')">
-      <span class="nav-icon">🩸</span>
-      <span>Tohum/Doğum</span>
-    </button>
     <button class="nav-item" onclick="switchTab('calf')">
       <span class="nav-icon">🍼</span>
       <span>Buzağı</span>
-    </button>
-    <button class="nav-item" onclick="switchTab('weight')">
-      <span class="nav-icon">⚖️</span>
-      <span>Kilo/CAAG</span>
     </button>
     <button class="nav-item" onclick="switchTab('arrival')">
       <span class="nav-icon">🚛</span>
       <span>Dana Giriş</span>
     </button>
+    <button class="nav-item" onclick="switchTab('weight')">
+      <span class="nav-icon">⚖️</span>
+      <span>Kilo/CAAG</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('repro')">
+      <span class="nav-icon">🩸</span>
+      <span>Tohum/Doğum</span>
+    </button>
     <button class="nav-item" onclick="switchTab('vaccine')">
       <span class="nav-icon">📅</span>
       <span>Aşı Takvimi</span>
     </button>
-    <button class="nav-item" onclick="switchTab('emergency')">
-      <span class="nav-icon">🆘</span>
-      <span>İlk Yardım</span>
-    </button>
-    <button class="nav-item" onclick="switchTab('milker')">
-      <span class="nav-icon">🥛</span>
-      <span>Sağımcı</span>
+    <button class="nav-item" onclick="switchTab('cost')">
+      <span class="nav-icon">💰</span>
+      <span>Zarar Defteri</span>
     </button>
   </nav>
 
