@@ -393,6 +393,120 @@
       border-radius: 4px;
       font-weight: 700;
     }
+
+    /* ================= KOYU MOD (DARK MODE) ================= */
+    body.dark-mode {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --primary-light: #064e3b;
+      --shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    body.dark-mode header {
+      background: #14532d;
+      border-bottom: 1px solid #1e293b;
+    }
+    body.dark-mode label {
+      color: #cbd5e1;
+    }
+    body.dark-mode input,
+    body.dark-mode select,
+    body.dark-mode textarea {
+      background: #0f172a;
+      color: #f8fafc;
+      border-color: #334155;
+    }
+    body.dark-mode input:focus,
+    body.dark-mode select:focus,
+    body.dark-mode textarea:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+    }
+    body.dark-mode .stat-card {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    body.dark-mode th {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-bottom-color: #334155;
+    }
+    body.dark-mode td {
+      border-bottom-color: #334155;
+      color: #cbd5e1;
+    }
+    body.dark-mode .bottom-nav {
+      background: #1e293b;
+      border-top-color: #334155;
+    }
+    body.dark-mode .nav-item {
+      color: #94a3b8;
+    }
+    body.dark-mode .nav-item.active {
+      color: #4ade80;
+      background: #064e3b;
+    }
+    body.dark-mode .score-btn {
+      background: #0f172a;
+      color: #cbd5e1;
+      border-color: #334155;
+    }
+    body.dark-mode .score-btn.selected {
+      background: #15803d;
+      color: white;
+      border-color: #15803d;
+    }
+    body.dark-mode .score-group {
+      border-bottom-color: #334155;
+    }
+    body.dark-mode .emergency-card {
+      background: #1e293b;
+      border-color: #334155;
+      border-left: 5px solid #ef4444;
+    }
+    body.dark-mode .emergency-details {
+      border-top-color: #334155;
+      color: #cbd5e1;
+    }
+    body.dark-mode .btn-outline {
+      border-color: #475569;
+      color: #e2e8f0;
+    }
+    body.dark-mode div[style*="background:#fff"],
+    body.dark-mode div[style*="background: #fff"],
+    body.dark-mode div[style*="background:#f8fafc"],
+    body.dark-mode div[style*="background: #f8fafc"],
+    body.dark-mode div[style*="background:#fafafa"],
+    body.dark-mode div[style*="background: #fafafa"] {
+      background: #1e293b !important;
+      border-color: #334155 !important;
+      color: #cbd5e1 !important;
+    }
+    body.dark-mode #modal-guide > div,
+    body.dark-mode #modal-animal > div,
+    body.dark-mode #modal-vaccine > div,
+    body.dark-mode #modal-scanner > div {
+      background: #1e293b !important;
+      color: #f1f5f9 !important;
+      border: 1px solid #475569;
+    }
+    body.dark-mode #modal-guide div,
+    body.dark-mode #modal-guide p,
+    body.dark-mode #modal-guide li {
+      color: #cbd5e1 !important;
+    }
+    body.dark-mode #modal-guide h3,
+    body.dark-mode #modal-guide h4 {
+      color: #4ade80 !important;
+    }
+    body.dark-mode div[style*="background:#f1f5f9"],
+    body.dark-mode div[style*="background: #f1f5f9"] {
+      background: #0f172a !important;
+      color: #94a3b8 !important;
+      border-color: #334155 !important;
+    }
   </style>
 </head>
 <body>
@@ -403,7 +517,8 @@
       <h1>🐄 Sığır Sağlık Rehberi</h1>
       <small style="opacity:0.85; font-size:0.75rem;">Hasta Muayenesi • İlaçlı Süt Takibi • Aşı & Doğum Takvimi</small>
     </div>
-    <div style="display:flex; align-items:center; gap:8px;">
+    <div style="display:flex; align-items:center; gap:6px;">
+      <button id="theme-toggle-btn" onclick="toggleTheme()" title="Koyu / Açık Mod" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.4); padding:4px 8px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer;">🌙 Gece</button>
       <button onclick="openGuideModal()" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.4); padding:4px 8px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer;">📖 Kılavuz</button>
       <span class="badge-offline">⚡ İnternetsiz</span>
     </div>
@@ -1513,6 +1628,13 @@
       const reproDateEl = document.getElementById("repro-date");
       if (reproDateEl) reproDateEl.value = now.toISOString().slice(0, 10);
 
+      // Kayıtlı Tema (Gece / Gündüz) Kontrolü
+      const savedTheme = localStorage.getItem("cattlesys_theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+      updateThemeButton();
+
       initDrugSelect();
       populateAnimalSelects();
       renderAnimalTable();
@@ -1986,6 +2108,20 @@
     function closeGuideModal() {
       const m = document.getElementById("modal-guide");
       if (m) m.style.display = "none";
+    }
+
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle("dark-mode");
+      localStorage.setItem("cattlesys_theme", isDark ? "dark" : "light");
+      updateThemeButton();
+    }
+
+    function updateThemeButton() {
+      const btn = document.getElementById("theme-toggle-btn");
+      if (!btn) return;
+      const isDark = document.body.classList.contains("dark-mode");
+      btn.innerHTML = isDark ? "☀️ Gündüz" : "🌙 Gece";
+      btn.title = isDark ? "Açık Moda Geç" : "Koyu (Gece) Moda Geç";
     }
 
     function saveVaccineRecord() {
