@@ -1,6 +1,6 @@
-# 🐄 Sığır Sağlık Rehberi - Kullanım Kılavuzu
+# 🐂 Besi Sağlık Rehberi - Kullanım Kılavuzu
 
-**Sığır Sağlık Rehberi**, internet bağlantısı ve sunucu kurulumu gerektirmeyen, doğrudan telefon ve bilgisayar tarayıcısında çalışan, Progressive Web App (PWA) mimarisine sahip %100 çevrimdışı bir büyükbaş sürü sağlığı, acil müdahale, besi ve süt yönetim asistanıdır.
+**Besi Sağlık Rehberi**, internet bağlantısı ve sunucu kurulumu gerektirmeyen, doğrudan telefon ve bilgisayar tarayıcısında çalışan, Progressive Web App (PWA) mimarisine sahip %100 çevrimdışı bir besi danacılığı, 21 günlük karşılama protokolü, CAAG kilo artışı, Et İKAS mezbaha kilitleri ve acil müdahale asistanıdır.
 
 ---
 
@@ -9,107 +9,110 @@
 Uygulamayı ilk defa açtıysanız ve nereden başlayacağınızı bilmiyorsanız şu 3 basit adımı takip edin:
 
 ### 1. Adım: Uygulamayı Telefonunuza Yükleyin (%100 Çevrimdışı Çalışma)
-1. Telefonunuzun tarayıcısından **[https://mserman90.github.io/sigir-saglik-rehberi/](https://mserman90.github.io/sigir-saglik-rehberi/)** adresine girin.
+1. Telefonunuzun tarayıcısından **[https://mserman90.github.io/besi-saglik-rehberi/](https://mserman90.github.io/besi-saglik-rehberi/)** adresine girin.
 2. Tarayıcı menüsünden (üç nokta veya paylaş ikonu) **"Ana Ekrana Ekle"** veya **"Uygulamayı Yükle"** butonuna dokunun.
 3. Uygulama telefonunuza kurulur. Artık internetin ve baz istasyonunun hiç çekmediği bodrum ahırlarda, dağda ve yaylada dahi tam ekran ve jet hızında çalışır.
 
-### 2. Adım: Tüm Sürüyü Tek Tek Girmek Zorunda mıyım? (KESİNLİKLE HAYIR!)
-- **Korkmayın:** İlk günden 50–100 hayvanı tek tek sisteme yazarak saatlerinizi harcamanıza gerek yoktur.
-- Uygulamayı hemen o an **işlem yapacağınız hayvanla** kullanmaya başlayın:
-  - Hasta olan, iğne yapacağınız, tohumlanan veya yeni doğan buzağının küpe numarasını ekrandaki **"+ Yeni Ekle"** veya sarı **"📷 Oku"** butonuyla (kulak küpesindeki barkod/QR okutarak) saniyeler içinde kaydedin.
-  - Siz günlük işlerinizi yaptıkça sürünüz arka planda kendiliğinden eksiksiz oluşacaktır.
+### 2. Adım: Tüm Danaları Tek Tek Girmek Zorunda mıyım? (KESİNLİKLE HAYIR!)
+- **Korkmayın:** İlk günden 50–100 danayı tek tek sisteme yazarak saatlerinizi harcamanıza gerek yoktur.
+- Uygulamayı hemen o an **işlem yapacağınız danayla** kullanmaya başlayın:
+  - Yeni kamyondan inen, hasta olan, tarttığınız veya iğne yaptığınız dananın küpe numarasını ekrandaki **"+ Yeni Ekle"** veya sarı **"📷 Oku"** butonuyla (kulak küpesindeki barkod/QR okutarak) saniyeler içinde kaydedin.
+  - Siz günlük işlerinizi yaptıkça besi sürünüz arka planda kendiliğinden eksiksiz oluşacaktır.
 
 ### 3. Adım: Şu An Ahırda Hangi Durumdasınız? (Doğru Kapıyı Seçin)
-Uygulama ana ekranında işlemler 3 ana öncelik kapısına göre dizilmiştir:
-- 🚨 **Ölüm-kalım, şok veya kaza anı mı var?** $\rightarrow$ Doğrudan **1. Kapı: Acil Durum & Hayat Kurtarma**'ya girin.
-- 🥛 **Veteriner geldi, hayvana iğne mi yapıldı?** $\rightarrow$ Sütü ve eti korumak için **2. Kapı: Günlük İlaç & Süt/Et Güvenliği**'ne girin.
-- 📋 **Sakin bir gün, rutin bakım mı yapacaksınız?** $\rightarrow$ **3. Kapı: Sürü Yönetimi, Büyüme & Rutin Takip**'e girin.
+Uygulama ana ekranında işlemler 4 ana durum merkezine (Status Hubs) göre dizilmiştir:
+- 🚨 **Dana yıkıldı, nefes alamıyor veya acil durum mu var?** $\rightarrow$ **1. Kapı: HASTA / ACİL DANA**
+- 🚛 **Kamyondan yeni parti dana mı indi?** $\rightarrow$ **2. Kapı: YENİ DANA GİRİŞ & 21 GÜN KARŞILAMA**
+- ⚖️ **Kantar tartımı veya mezbaha satışı mı yapacaksınız?** $\rightarrow$ **3. Kapı: KİLO, CAAG & MEZBAHA GELİRİ**
+- 🌾 **Yemlik durumu, dışkı kıvamı, aşı veya masraf hesabı mı yapacaksınız?** $\rightarrow$ **4. Kapı: YEMLİK, ASİDOZ & MASRAF DEFTERİ**
 
 ---
 
-## 🔄 2. Nasıl Devam Etmeliyim? (Ahırda 4 Günlük Senaryo ve İş Akışı)
+## 🔄 2. Nasıl Devam Etmeliyim? (Besi Ahırında Günlük Senaryolar ve İş Akışı)
 
-Ahır koşullarında karşılaştığınız her duruma göre adım adım izleyeceğiniz iş akışları şunlardır:
+Besi ahırı koşullarında karşılaştığınız her duruma göre adım adım izleyeceğiniz iş akışları şunlardır:
 
 ---
 
-### 🚨 SENARYO 1: Ahırda Alarm / Acil Durum & Hayat Kurtarma (Kapı A)
+### 🚨 SENARYO 1: Ahırda Alarm / Acil Durum & Hayat Kurtarma (1. Kapı)
 Veteriner hekim ahıra ulaşana kadar geçen kritik dakikalarda hayat kurtarır:
 
 #### 🆘 1.1. Acil İlk Yardım
-- **Aşı Şoku / İğne Alerjisi (Anafilaksi):** Hayvan titremeye ve nefes darlığı çekmeye başlarsa ekrandaki kilo kutusuna hayvanın kilosunu yazın. Sistem hayat kurtaran **Adrenalin Dozunu** (1:1000 Adrenalin, her 45 kg için 1 mL) otomatik hesaplar.
-- **İşkembe Gazı (Timpani):** Sol açlık çukuru davul gibi şişmişse hortum salma, köpük varsa 250-500 mL bitkisel sıvı yağ içirme ve boğulma tehlikesinde trokarla şişleme talimatını uygulayın.
-- **Rahim Çıkması (Prolapsus):** Döl yatağını pisliğe değdirmeyin, ılık temiz tuzlu bezle yukarı kaldırıp ineğin arkasını samanla yüksekte tutun.
-- **Süt Humması (Doğum Felci):** Kalsiyum serumunu damardan çok yavaş verin (en az 15–20 dakika); ineği oturur vaziyette sabitleyin.
-- **Buzağı Canlandırma:** Nefes almayan yeni doğan buzağının ağız balgamını temizleyin, başını kısa süreli aşağı eğin, sırtına soğuk su ve saman çöpü uyarısı yapın.
-- **Besi Danası Acilleri:**
-  - *CCN / Polio (B1 Tiamin Eksikliği):* Kafayı sırtına büküp yıldız gözleyen danaya acil B1 vitamini desteği.
-  - *İdrar Taşı / Sidik Zoru:* Damla damla işeyen danada amonyum klorür ve penis kontrolü.
-  - *Besi Laminitisi:* Fazla arpa sonrası tırnak felcinde yemliği boşaltma, karbonat içirme ve ayaklara 20-30 dakika soğuk su banyosu.
+- **Besi Danası CCN / Polio (Beyin Dönmesi & B1 Tiamin Eksikliği):** Dana kör gibi gezer, kafasını geriye atar (yıldız gözleme) ve diş gıcırdatır. Yüksek tahıl beslemesi sonucu oluşur. Acil damardan ve kas içine **Tiamin (B1 Vitamini)** dozu hayat kurtarır.
+- **İdrar Taşı / Sidik Zoru (Ürolitiyazis):** Sürekli kuyruk sallayan, damla damla kanlı işeyen danada amonyum klorür ve idrar asitleştirici desteği uygulanır. 48 saatte idrar kesesi patlaması (su karnı) riskini önler.
+- **Besi Laminitisi (Arpa Vurması / Ayak Yanması):** Fazla arpa ve akut asidoz sonrası ayak tabanları el yakacak kadar ısınır, hayvan köz üstünde yürür gibi basar. Kesif yem derhal kesilir, ağızdan karbonat içirilir, yangı giderici iğne vurulur ve ayaklara 20-30 dakika hortumla soğuk su tutulur.
+- **İşkembe Gazı (Timpani):** Sol açlık çukuru davul gibi şiştiğinde mide sondası salma, köpük varsa bitkisel sıvı yağ içirme ve boğulma anında sol böğre trokar saplama adımları.
+- **Yemek Borusu Tıkanması (Patates / Pancar Boğulması):** Boğaz oluğunu elle yukarı sıvazlama ve soluk borusu emniyeti.
+- **Aşı Şoku / İğne Alerjisi (Anafilaktik Şok):** Kiloya göre otomatik **Adrenalin Dozu** hesaplayıcı (her 45 kg canlı ağırlığa 1 mL 1:1000 Adrenalin).
 
-#### 🩺 1.2. Hasta Hayvan Muayenesi (Saha Triyajı)
-Durgunlaşan veya yem yemeyen inek gördüğünüzde:
+#### 🩺 1.2. Muayene & BRD Solunum Triyajı
+Durgunlaşan veya burnu akan dana gördüğünüzde:
 1. Dereceyle makat ateşini ölçüp yazın (Normal: 38.0–39.3 °C. 39.5 °C üzeri kırmızı alarmdır).
-2. Nabız ve nefes sayısını girin, sol açlık çukurundan işkembe dalgasını dinleyin.
-3. DART skorunu (Keyifsizlik, iştahsızlık, öksürük) işaretleyin.
-4. Sistem anında **"DURUMU İYİ"**, **"ORTA DERECE HASTA (İlaç Lazım)"** veya **"ÇOK ACİL & AĞIR HASTA (Veterineri Çağır)"** kararı verir ve yapılacakları listeler.
+2. DART skorunu (Keyifsizlik, yem yeme isteği, nefes sayısı/öksürük) işaretleyin.
+3. Sistem anında **"DURUMU İYİ"**, **"ORTA DERECE HASTA (İlaç Lazım)"** veya **"ÇOK ACİL & AĞIR HASTA (Veterineri Çağır)"** kararı verir ve yapılacakları listeler.
 
 ---
 
-### 🥛 SENARYO 2: İğne / İlaç Yaptığınızda - Zararı ve Cezayı Önleyin (Kapı B)
-Bir hayvana ilaç yapıldığı an çiftliğin mali güvenliğini devreye sokun:
+### 🚛 SENARYO 2: Kamyondan Yeni Dana İndirme & 21 Günlük Karşılama (2. Kapı)
+Pazardan veya başka ilden gelen danalarda nakliye humması (Shipping Fever / BRD) ve ölümcül asidozu önleyin:
 
-#### 💊 2.1. İlaç Yap & Süt Kilitle (İKAS)
-1. Hayvanın küpesini seçin ve vurulan ilacı (Florfenikol, Meloksikam, Seftiofur, Tilosin vb.) listeden işaretleyin.
-2. Vurulan dozu ve saati onaylayıp kaydedin.
-3. Sistem yasal arınma süresine göre **saat ve dakika bazında geri sayım** başlatır. Hayvana aynı gün 2 farklı ilaç yapılmışsa süresi en uzun olanı baz alır.
+#### 🚛 2.1. İlk 24 Saatin Altın Kuralları
+- **ASLA Kesif Yem / Arpa Verilmez:** İşkembeyi asit yakar! Sadece serbest kaliteli kuru ot ve saman verilir.
+- **Soğuk Su Verilmez:** İlk 2 saat dinlendirilir, ardından ılık can suyu (su + kaya tuzu + karbonat + pekmez) verilir.
+- **Hemen Aşı Vurulmaz:** Nakliye stresi varken bağışıklık çökmüştür; aşı tutmaz, hayvanı hasta eder.
 
-#### 🥛 2.2. Sağımcı Ekranı (Büyük Puntolu Hızlı Kontrol)
-Sağımhane personeli sağım yaparken:
-- İneğin küpe numarasını yazar veya kamerayla okutur.
-- Eğer hayvanda antibiyotik varsa dev ekranda **"🔴 BU İNEĞİ TANKA SAĞMA!"** kırmızı alarmı ve kalan saat görünür.
-- İlaçsızsa **"🟢 SAĞIMA UYGUN"** yeşil onayı çıkar.
-- Mezbahaya gönderilmesi yasak olan kesim kilitli hayvanlar anlık listelenir.
-
-#### 💰 2.3. Zarar & Masraf Defteri
-- Çiğ süt satış fiyatınızı girin.
-- İlaç yüzünden lavaboya dökülen günlük sütü ve veteriner masrafını kaydedin; cebinizden çıkan zararı kuruşu kuruşuna görün.
+#### 📅 2.2. Adım Adım 21 Günlük Takvim & Yem Tablosu
+- **1. – 3. Gün:** %100 Serbest kuru ot/saman, dinlenme, ılık elektrolitli su. Sıfır kesif yem.
+- **4. – 7. Gün:** Günde 0.5–1.0 kg hafif ezme başlangıcı, veteriner kontrolünde uzun etkili ciğer koruma iğnesi (metafilaksi) ve aşılar.
+- **8. – 14. Gün:** Kademeli kesif yem artışı (2.0–2.5 kg/gün), iç-dış parazit (İvermektin) uygulaması.
+- **15. – 21. Gün:** Günde 3.5–4.0 kg kesif yem, tam besiye geçiş hazırlığı ve dışkı kıvamı kontrolü.
+- **22. Gün ve Sonrası:** Tam besi rasyonu ve CAAG tartım takibine geçiş.
 
 ---
 
-### 📋 SENARYO 3: Günlük Çiftlik Rutini, Üreme & Büyüme (Kapı C)
-Normal çiftlik günlerinde sürünün verimini, üremesini ve büyümesini takip edin:
+### ⚖️ SENARYO 3: Tartım, Günlük Kilo Artışı (CAAG) & Mezbaha Satış Geliri (3. Kapı)
+Besi performansını ve karkas gelirini kuruşu kuruşuna takip edin:
 
-#### 🩸 3.1. Tohumlama & Doğum Çarkı
-- Tohumlanan ineği ve tarihi kaydedin:
-  - **21. Gün:** Kızgınlık dönüş kontrolü (Tutmadıysa tohum tekrarlanır).
-  - **40. Gün:** Ultrason / rektal gebelik muayenesi.
-  - **220. Gün:** Kuruya alma ve kuru dönem meme tüpü.
-  - **280. Gün:** Beklenen doğum günü.
+#### ⚖️ 3.1. Kilo / CAAG Ölçer
+- **Kantar / Baskül Tartımı:** Kantarda çıkan kiloyu girin.
+- **Şerit Metre (Schaeffer Formülü):** Kantar yoksa göğüs çevresi ve vücut uzunluğunu mezurayla ölçüp cm olarak girin; bilimsel Schaeffer formülüyle canlı ağırlığı bulun.
+- **CAAG (Günlük Canlı Ağırlık Artışı):** İki tartım arasındaki gün farkına göre dananın günde kaç gram/kg et tuttuğunu (Örn: 1.45 kg/gün) otomatik hesaplar.
 
-#### 🍼 3.2. Buzağı Hayatta Tutma & İlk Ağız Sütü (Kolostrum)
-- **İlk 2 Saat Kuralı:** Doğumdan sonraki ilk 2 saatte ananın koyu ağız sütünden en az 3-4 litre mutlaka içirilmelidir!
-- **Brix Kalite Ölçer:** Refraktometre ile ölçülen değeri girin (%22 ve üstü mükemmel kalitedir).
-- **Buzağı İshali Sıvı & Serum Hesabı:** Kilosunu ve göz çökme derecesini seçin; 24 saatte kaç litre ağızdan can suyu / damardan serum verilmesi gerektiğini hesaplayın.
-- **Göbek Kordonu:** Doğum anında %7'lik tentürdiyota daldırarak kurutun.
-
-#### 📅 3.3. Akıllı Aşı Takvimi
-- Şap, LSD Çiçek, BRD solunum karması ve Buzağı İshali aşıları için 21 ve 30 günlük rapel (tekrar) tarihlerini hesaplar; TÜRKVET kurallarını hatırlatır.
-
-#### ⚖️ 3.4. Canlı Kilo Ölçer & Besi CAAG Takip Motoru
-- Kantar baskülünüz varsa tartımı yazın; kantar yoksa şerit metreyle göğüs ve boy ölçüsünü girerek bilimsel *Schaeffer Formülü* ile canlı ağırlık hesaplayın.
-- Danaların Günlük Canlı Ağırlık Artışını (CAAG) ve karkas randımanı/gelirini otomatik izleyin.
-
-#### 🌾 3.5. Yemlik Düzeni, İşkembe Sağlığı & Geviş Sayacı
-- Yem döküldükten 2 saat sonra yerde yatan ineklerin geviş getirmesini sayın (Hedef: En az 10 inekten 6'sı).
-- Tezek kıvamını (1-5) puanlayarak arpa/saman dengesini görün; yem karmaya katılacak günlük karbonat miktarını hesaplayın.
-
-#### 🚛 3.6. Yeni Dana Giriş & Besiye Alıştırma Protokolü
-- Kamyondan yeni inen danaların 21 günlük gün-gün takvimini uygulayın: İlk gün karşılama suyu (can suyu), Tulatromisin ciğer kalkanı, iç-dış parazit ve kademeli rasyon geçişi.
+#### 🥩 3.2. Kesim / Karkas & Satış Simülatörü
+- Dananın canlı ağırlığına göre ırk bazlı karkas randımanı (%56–62, standart Simental melezi %58) üzerinden:
+  - Tahmini Karkas Ağırlığı (kg)
+  - Güncel karkas kesim fiyatına göre toplam karkas satış gelirini (TL) anında hesaplar.
 
 ---
 
-### 💾 SENARYO 4: Günün Sonunda / Hafta Sonu (Veri Güvenliği)
-- Sağımcı ekranının en altında yer alan **"📥 Yedeği İndir (JSON)"** butonuna basarak tüm verilerinizi telefonunuza yedekleyin.
-- Başka bir telefona geçtiğinizde **"📤 Yedeği Yükle"** diyerek saniyeler içinde tüm çiftlik hafızanızı geri yükleyin.
-- Verileriniz telefonunuzda %100 güvende kalır, hiçbir sunucuya gönderilmez.
+### 🥩 SENARYO 4: İğne / İlaç Yaptığınızda - Mezbaha Kesim Kilitleri (Et İKAS)
+Antibiyotik kalıntısı nedeniyle mezbahada karkasın imha edilmesini ve cezaları önleyin:
+
+#### 🥩 4.1. Et İKAS Kilidi
+1. Dananın küpesini ve vurulan ilacı (Florfenikol, Tulatromisin, Oksitetrasiklin LA, Meloksikam vb.) seçin.
+2. Dozu ve saati onaylayıp kaydedin.
+3. Sistem yasal et arınma süresine göre gün sayacını başlatır.
+4. Kesim kilidi bitene kadar dananın kasap veya mezbahaya gönderilmesi engellenir, ahır özetinde **"🥩 KESİM KİLİTLİ"** kırmızı alarmı yanar.
+
+---
+
+### 🌾 SENARYO 5: Yemlik Düzeni, Dışkı Skoru & Besi Masraf Defteri (4. Kapı)
+Besi randımanını ve maliyetlerini tam kontrol altında tutun:
+
+#### 🌾 5.1. Yemlik & Dışkı Skoru
+- **Geviş Getirme Sayacı:** Yemden 2 saat sonra yerde yatan danaların en az %58–60'ı geviş getiriyor olmalıdır.
+- **Tezek Kıvamı (1–5 Skoru):** Cıvık dışkı işkembe ekşimesini (asidoz), sert kuru dışkı lif fazlasını gösterir. Tezekte bütün tahıl danesi kontrolü yapın.
+- **Bunk Skoru (Artık Yem):** Yemlikte kalan %3–5 artık yem oranına göre rasyon miktarını ayarlayın.
+- **Tampon Karbonat Dozlayıcı:** Dana başına günde 150–250 gr sodyum bikarbonat ihtiyacını hesaplayın.
+
+#### 💰 5.2. Besi Masraf & Fire Defteri
+- Çiftliğin canlı baskül satış fiyatını (TL/kg) belirleyin.
+- Hastalanan dananın veteriner, ilaç ve hastalık yüzünden yaşanan **canlı kilo kaybı / duraklama firesini** kaydedin.
+- Cebinizden çıkan toplam ekonomik zararı kuruşu kuruşuna görün.
+
+---
+
+### 💾 SENARYO 6: Veri Güvenliği ve Çevrimdışı Yedekleme
+- Ahır Özeti sayfasının altındaki **"📥 Yedeği İndir (JSON)"** butonuna basarak tüm besi danalarınızı, tartımlarınızı ve aşılarınızı telefonunuza tek dosyada yedekleyin.
+- Telefon değiştirdiğinizde **"📤 Yedeği Yükle"** diyerek tüm besi kayıtlarınızı 2 saniyede eksiksiz geri yükleyin.
+- Verileriniz telefonunuzda %100 yerel saklanır, internete veya yabancı sunuculara asla sızmaz.

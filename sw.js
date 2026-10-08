@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cattlesys-offline-v34';
+const CACHE_NAME = 'besisys-offline-v1';
 const ASSETS_TO_CACHE = [
   './index.html',
   './manifest.json',

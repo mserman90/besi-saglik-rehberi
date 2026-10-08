@@ -1,13 +1,13 @@
 {
-  "name": "Sığır Sağlık Rehberi",
-  "short_name": "SığırRehberi",
-  "description": "Ahır ve çiftlikler için %100 internetsiz çalışan sığır sağlık teşhisi, acil ilk yardım, aşı takvimi, ilaçlı süt arınma süresi ve sürü yönetim rehberi.",
+  "name": "Besi Sağlık Rehberi",
+  "short_name": "BesiRehberi",
+  "description": "Besi danacılığı ve besi çiftlikleri için %100 internetsiz çalışan 21 günlük dana karşılama, kantar ve CAAG kilo artışı, Et İKAS kesim kilitleri ve besi acil müdahale rehberi.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0f172a",
-  "theme_color": "#1b5e20",
+  "theme_color": "#b91c1c",
   "categories": ["medical", "business", "utilities", "productivity"],
   "icons": [
     {

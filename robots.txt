@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mserman90.github.io/sigir-saglik-rehberi/sitemap.xml
+Sitemap: https://mserman90.github.io/besi-saglik-rehberi/sitemap.xml
