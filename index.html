@@ -2313,28 +2313,60 @@
         <button onclick="closeGuideModal()" style="background:transparent; border:none; font-size:1.3rem; font-weight:800; cursor:pointer; color:#64748b;">✕</button>
       </div>
       <div style="padding:16px 18px; overflow-y:auto; font-size:0.85rem; line-height:1.7; color:#334155;">
-        <h4 style="color:var(--primary); margin-bottom:6px;">🚀 1. Hızlı Başlangıç & Telefona Yükleme (PWA)</h4>
-        <p>• Bu uygulama <strong>%100 internetsiz</strong> çalışır. Tarayıcı menüsünden <strong>"Ana Ekrana Ekle"</strong> veya <strong>"Uygulamayı Yükle"</strong> diyerek telefonunuza kurabilirsiniz. Yaylada veya bodrum ahırda şebeke olmasa bile tam ekran ve jet hızında çalışır.</p>
+        <!-- 1. NEREDEN BAŞLAMALIYIM? -->
+        <div style="background:#eff6ff; border-left:4px solid #2563eb; padding:10px 14px; border-radius:6px; margin-bottom:14px;">
+          <h4 style="color:#1d4ed8; margin:0 0 6px 0; font-size:0.95rem; display:flex; align-items:center; gap:6px;">
+            🏁 1. Nereden Başlamalıyım? (İlk Kez Açanlar İçin)
+          </h4>
+          <p style="margin:0 0 6px 0;"><strong>• 1. Adım (Telefona İndir):</strong> Tarayıcı menüsünden <em>"Ana Ekrana Ekle"</em> veya <em>"Uygulamayı Yükle"</em> deyin. Artık internetsiz dağda, yaylada ve bodrum ahırda şebeke hiç çekmese bile %100 çevrimdışı ve jet hızında çalışır.</p>
+          <p style="margin:0 0 6px 0;"><strong>• 2. Adım (Tüm sürüyü tek tek girmene gerek YOK!):</strong> 50-100 hayvanı baştan girmekle vakit kaybetmeyin. İlk etapta sadece o an işlem yapacağınız hayvanı (hasta olanı, iğne yaptığınızı, tohumlanan ineği) <strong>"+ Yeni Ekle"</strong> veya sarı <strong>"📷 Oku"</strong> butonuyla saniyeler içinde kaydedin. Sürünüz çalıştıkça kendiliğinden oluşacaktır.</p>
+          <p style="margin:0;"><strong>• 3. Adım (Doğru Kapıyı Seç):</strong> Şu anki ihtiyacınıza göre ana sayfadaki 3 öncelik kapısından birine dokunarak başlayın.</p>
+        </div>
 
-        <h4 style="color:var(--danger); margin-top:14px; margin-bottom:6px;">🚨 2. Kapı A: Acil Durum & Hayat Kurtarma (Hayati Öncelikli)</h4>
-        <p>• <strong>🆘 Acil İlk Yardım:</strong> Canlı ağırlıkla <strong>Adrenalin Doz Hesabı</strong> (Anafilaksi/aşı şoku), İşkembe Gazı (şişleme & sıvı yağ), Rahim Düşmesi, Süt Humması, Buzağı Canlandırma ve besi danalarına özel <strong>CCN / Polio (B1 Tiamin eksikliği)</strong>, <strong>İdrar Taşı / Sidik Zoru (Amonyum klorür)</strong> ve <strong>Besi Laminitisi (soğuk su banyosu & fluniksin)</strong> gibi hayat kurtaran acil protokolleri içerir.</p>
-        <p>• <strong>🩺 Hasta Muayenesi (Triyaj & Ateş):</strong> Şüpheli ineğin makat ateşini dereceyle ölçüp yazın (Normal: 38.0–39.3°C). Keyifsizlik, iştah ve öksürüğü puanlayın (DART). Sistem ineğin durumunu ve atılacak adımları anında bildirir.</p>
+        <!-- 2. NASIL DEVAM ETMELİYİM? -->
+        <h4 style="color:#0f172a; margin:14px 0 8px 0; font-size:0.95rem; font-weight:800; border-bottom:2px solid #e2e8f0; padding-bottom:4px;">
+          🔄 2. Nasıl Devam Etmeliyim? (Ahırda Günlük İş Akışı)
+        </h4>
 
-        <h4 style="color:#d97706; margin-top:14px; margin-bottom:6px;">🥛 3. Kapı B: Günlük İlaç & Süt/Et Güvenliği (Zararı & Cezayı Önleme)</h4>
-        <p>• <strong>💊 İlaç Yap & Süt Kilitle (İKAS):</strong> İğne veya meme tüpü yaptığınızda ineğin küpesini ve ilacı seçin. Sistem sütün ve karkas etin kaç gün/saat boyunca yasaklı olduğunu canlı sayaçla gösterir. Aynı gün 2 ilaç yapılmışsa süresi en uzun olanı baz alır.</p>
-        <p>• <strong>🥛 Sağımcı Ekranı (Büyük Puntolu Hızlı Kontrol):</strong> Sağımhane personeli için küpe numarasını yazınca dev ekranda <strong>"🟢 SAĞIMA UYGUN"</strong> veya <strong>"🔴 BU İNEĞİ TANKA SAĞMA"</strong> uyarısı verir. Tanka sağılması ve kasaba kesilmesi yasak hayvanları canlı listeler.</p>
-        <p>• <strong>💰 Zarar & Masraf Defteri:</strong> Çiğ süt satış fiyatınızı girin. İlaç yüzünden lavaboya dökülen süt ile veteriner ve ilaç masrafını kuruşu kuruşuna hesaplayıp deftere kaydedin.</p>
+        <!-- Senaryo 1: Acil Durum -->
+        <div style="margin-bottom:12px; padding-left:4px;">
+          <h5 style="color:#dc2626; margin:0 0 4px 0; font-size:0.88rem; font-weight:800;">
+            🚨 Senaryo 1: Ahırda Acil Durum & Hayat Kurtarma (Kapı A)
+          </h5>
+          <p style="margin:0 0 4px 0;">• <strong>🆘 Acil İlk Yardım:</strong> Hayvan yıkıldıysa veya aşı şokuna girdiyse kiloyu yazıp anında <strong>Adrenalin Dozunu</strong> hesaplayın. İşkembe gazı (timpani), rahim düşmesi, süt humması, buzağı canlandırma ve besi danalarında <strong>CCN (B1 Tiamin eksikliği)</strong>, <strong>idrar taşı/sidik zoru</strong> ve <strong>besi laminitisi</strong> protokollerini adım adım uygulayın.</p>
+          <p style="margin:0;">• <strong>🩺 Hasta Muayene Et (Triyaj):</strong> İnek keyifsizse makat ateşini dereceyle ölçüp yazın (Normal: 38.0–39.3°C), DART skorunu işaretleyin; sistem hastalığın ciddiyetini ve atılacak adımları anında bildirsin.</p>
+        </div>
 
-        <h4 style="color:#15803d; margin-top:14px; margin-bottom:6px;">📋 4. Kapı C: Sürü Yönetimi, Büyüme & Rutin Takip</h4>
-        <p>• <strong>🩸 Tohumlama & Doğum Çarkı:</strong> Tohumlama gününü girin: <strong>21. gün</strong> kızgınlık dönüşü, <strong>40. gün</strong> gebelik kontrolü, <strong>220. gün</strong> kuruya alma ve <strong>280. gün</strong> beklenen doğum tarihi otomatik hesaplanır.</p>
-        <p>• <strong>🍼 Buzağı Hayatta Tutma & İlk Ağız Sütü:</strong> Doğumdan sonraki ilk 2 saatte en az 3-4 litre koyu ağız sütü içirilmelidir. Brix optik refraktometre kalitesini ölçün. İshal olan buzağının kilosuna ve göz çökmesine göre 24 saatte kaç litre serum / can suyu verilmesi gerektiğini hesaplayın.</p>
-        <p>• <strong>📅 Akıllı Aşı Takvimi:</strong> Şap, Bruselloz, Çiçek, BRD karma ve buzağı ishal aşıları için 21 ve 30 günlük rapel (tekrar) tarihlerini hesaplar; TÜRKVET resmi kurallarını hatırlatır.</p>
-        <p>• <strong>⚖️ Canlı Kilo & Besi CAAG Takip Motoru:</strong> İster <strong>kantar/baskül</strong> tartımı yapın, ister baskül yokken şerit metreyle <strong>Schaeffer Formülü</strong> (Göğüs² × Boy / 10838) kullanın. Periyodik tartımlarla <strong>Günlük Canlı Ağırlık Artışı (CAAG)</strong>, besi performansı ve karkas randımanı/geliri otomatik hesaplanır.</p>
-        <p>• <strong>🌾 Yemlik, İşkembe Sağlığı & Geviş:</strong> Yemden 2 saat sonra yerde yatan ineklerin geviş getirmesini sayın (Hedef: En az 10 inekten 6'sı). Tezek kıvamını (1-5) seçerek arpa/saman dengesini kontrol edin. Sürüye katılacak günlük karbonat miktarını otomatik hesaplayın.</p>
-        <p>• <strong>🚛 Yeni Dana Giriş & Besiye Alıştırma Protokolü:</strong> Kamyondan yeni inen danaların nakliye stresini, yol hummasını ve ani yem asidozunu önlemek için <strong>21 günlük gün-gün sağlık, karşılama suyu (can suyu), Tulatromisin ciğer kalkanı ve kademeli yem geçiş</strong> takvimi sunar.</p>
+        <!-- Senaryo 2: İlaç Yapıldığında -->
+        <div style="margin-bottom:12px; padding-left:4px;">
+          <h5 style="color:#d97706; margin:0 0 4px 0; font-size:0.88rem; font-weight:800;">
+            🥛 Senaryo 2: İğne / İlaç Yaptığınızda - Zararı ve Cezayı Önleyin (Kapı B)
+          </h5>
+          <p style="margin:0 0 4px 0;">• <strong>💊 İlaç Yap & Süt Kilitle (İKAS):</strong> İğne veya meme tüpü vurduğunuz an ineği ve ilacı seçin. Sistem yasal süt ve et arınma süresini canlı saat-dakika geri sayımıyla kilitler.</p>
+          <p style="margin:0 0 4px 0;">• <strong>🥛 Sağımcı Ekranı:</strong> Sağımhane personeli için küpeyi yazınca dev ekranda <strong>"🟢 SAĞIMA UYGUN"</strong> veya <strong>"🔴 BU İNEĞİ TANKA SAĞMA"</strong> uyarısı verir. Tanka süt dökülmesini ve mezbaha cezasını engeller.</p>
+          <p style="margin:0;">• <strong>💰 Zarar & Masraf Defteri:</strong> Dökülen süt litresini ve veteriner masrafını girin; cebinizden çıkan net ekonomik zararı kuruşu kuruşuna görün.</p>
+        </div>
 
-        <h4 style="color:var(--primary); margin-top:14px; margin-bottom:6px;">💾 5. Veri Yedekleme & Telefona Aktarma</h4>
-        <p>• Sağımcı ekranının altındaki <strong>"📥 Yedeği İndir"</strong> butonuyla kayıtlarınızı JSON dosyası olarak indirebilir, başka bir telefona geçerken <strong>"📤 Yedeği Yükle"</strong> ile anında geri yükleyebilirsiniz. Tüm veriler telefonunuzda şifresiz ve çevrimdışı kalır.</p>
+        <!-- Senaryo 3: Günlük Rutin -->
+        <div style="margin-bottom:12px; padding-left:4px;">
+          <h5 style="color:#15803d; margin:0 0 4px 0; font-size:0.88rem; font-weight:800;">
+            📋 Senaryo 3: Günlük Çiftlik Rutini, Üreme & Büyüme (Kapı C)
+          </h5>
+          <p style="margin:0 0 4px 0;">• <strong>🩸 Tohumlama & Doğum:</strong> Tohumlanan ineği kaydedin; 21. gün kızgınlık dönüşünü, 40. gün gebelik kontrolünü, 220. gün kuruya almayı ve 280. gün doğumu otomatik takip edin.</p>
+          <p style="margin:0 0 4px 0;">• <strong>🍼 Buzağı & Ağız Sütü:</strong> İlk 2 saatte en az 3-4 L koyu ağız sütünü içirin. Brix optik refraktometreyle kaliteyi ölçün; ishal buzağılarda kuruma derecesine göre 24 saatlik serum/sıvı litresini hesaplayın.</p>
+          <p style="margin:0 0 4px 0;">• <strong>📅 Akıllı Aşı Takvimi:</strong> Şap, LSD Çiçek, BRD karma ve ishal aşılarının 21-30 günlük tekrar (rapel) tarihlerini kaçırmayın.</p>
+          <p style="margin:0 0 4px 0;">• <strong>⚖️ Kilo Ölçer & CAAG:</strong> Baskülle veya baskül yokken şerit metreyle (Schaeffer formülü) danaların Günlük Canlı Ağırlık Artışını (CAAG) ve karkas gelirini görün.</p>
+          <p style="margin:0 0 4px 0;">• <strong>🌾 Yemlik & Geviş:</strong> Yemden 2 saat sonra geviş getirmeyi sayın (Hedef: %58-60); tezek kıvamını puanlayıp günlük karbonat ihtiyacını hesaplayın.</p>
+          <p style="margin:0;">• <strong>🚛 Yeni Dana Giriş:</strong> Pazardan veya kamyondan yeni gelen danaların 21 günlük can suyu, ciğer kalkanı ve kademeli yem geçiş protokolünü uygulayın.</p>
+        </div>
+
+        <!-- Senaryo 4: Veri Yedekleme -->
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 14px; border-radius:6px;">
+          <h5 style="color:#475569; margin:0 0 4px 0; font-size:0.85rem; font-weight:800;">
+            💾 Senaryo 4: Günün Sonunda / Hafta Sonu (Veri Güvenliği)
+          </h5>
+          <p style="margin:0;">• Sağımcı ekranının en altındaki <strong>"📥 Yedeği İndir"</strong> butonuyla kayıtlarınızı JSON dosyası olarak telefonunuza kaydedin. Telefon değiştiğinde <strong>"📤 Yedeği Yükle"</strong> ile tüm çiftlik verilerinizi 2 saniyede geri yükleyin.</p>
+        </div>
       </div>
       <div style="padding:10px 18px; border-top:1px solid #e2e8f0; background:#f8fafc; border-bottom-left-radius:12px; border-bottom-right-radius:12px; text-align:right;">
         <button class="btn btn-primary" style="width:auto; padding:6px 16px;" onclick="closeGuideModal()">Anladım, Kapat</button>
