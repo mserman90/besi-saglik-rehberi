@@ -1053,8 +1053,31 @@
       
 
       <div class="card" style="border-left: 4px solid #b91c1c;">
-        <div class="card-title" style="color:#b91c1c;">🥩 Mezbahaya / Kesime Gönderilmesi Yasak Hayvanlar (Et İKAS)</div>
-        <p style="font-size:0.78rem; color:#64748b; margin-bottom:8px;">İlaç yapıldıktan sonra karkasta antibiyotik/ağrı kesici kalıntısı kalan hayvanlar yasal olarak kesilemez.</p>
+        <div class="card-title" style="color:#b91c1c;">🥩 Mezbaha & Kesim İzni Hızlı Kontrol Paneli (Et İKAS)</div>
+        <p style="font-size:0.78rem; color:#64748b; margin-bottom:8px;">İlaç yapıldıktan sonra karkasta antibiyotik/ağrı kesici kalıntısı kalan danalar yasal olarak kesilemez. Küpe numarasını yazın, okutun veya sesle söyleyin:</p>
+        
+        <div style="display:flex; gap:6px; margin-bottom:8px;">
+          <input type="text" id="slaughter-search" placeholder="Örn: TR16001" oninput="checkSlaughterStatus()" style="font-size:1.15rem; font-weight:800; padding:10px; text-transform:uppercase; margin-bottom:0;">
+          <button class="btn btn-warning" style="width:auto; padding:0 14px; font-size:1rem; white-space:nowrap;" onclick="startQrScanner('slaughter')" title="Kamerayla Küpe Oku">📷 Oku</button>
+          <button id="btn-slaughter-voice" class="btn btn-primary" style="width:auto; padding:0 14px; font-size:1rem; white-space:nowrap; background:#b91c1c;" onclick="startVoiceSlaughterSearch()" title="Sesle Kesim İzni Sor">🎙️ Sor</button>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:0.8rem; background:#f8fafc; padding:6px 10px; border-radius:6px; border:1px solid #e2e8f0; flex-wrap:wrap; gap:6px;">
+          <div id="voice-slaughter-status" style="color:#64748b; font-weight:600;">
+            🎙️ <strong>Eller Serbest:</strong> Kırmızı mikrofona dokunun ve küpeyi söyleyin
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0; cursor:pointer; color:#475569; font-weight:700;">
+              <input type="checkbox" id="slaughter-voice-feedback-toggle" checked style="margin-bottom:0; width:16px; height:16px; accent-color:#b91c1c;">
+              🔊 Sesli Cevap
+            </label>
+            <button class="btn btn-outline" style="width:auto; padding:2px 8px; font-size:0.75rem;" onclick="checkSlaughterStatus(true)" title="Tekrar seslendir">🔊 Oku</button>
+          </div>
+        </div>
+
+        <div id="slaughter-result-box" style="margin-bottom:12px;"></div>
+
+        <div style="font-weight:700; color:#b91c1c; margin-bottom:4px; font-size:0.85rem;">🚫 ŞU AN KESİM KİLİDİ OLAN TÜM DANALAR:</div>
         <div id="dashboard-meat-list" style="font-size:0.85rem; color:#475569;">
           Şu an kesim kilidi olan hayvan bulunmuyor.
         </div>
@@ -1098,6 +1121,7 @@
           <input type="text" id="animal-search" placeholder="Küpe No Yaz veya Ara (örn: TR16001)" oninput="renderAnimalTable()" style="margin-bottom:0;">
           <button class="btn btn-primary" style="width:auto; padding:0 14px; white-space:nowrap;" onclick="openNewAnimalModal()">+ Yeni Ekle</button>
           <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('search')" title="Kamerayla Küpe Oku">📷 Oku</button>
+          <button id="btn-animal-search-voice" class="btn btn-primary" style="width:auto; padding:0 12px; font-size:1.05rem; white-space:nowrap; background:#2563eb;" onclick="startVoiceAnimalSearch()" title="Sesle Küpe Ara">🎙️</button>
         </div>
         <div class="table-container">
           <table id="animal-table">
@@ -2770,6 +2794,268 @@
 
       alerts.sort((a, b) => a.urgency - b.urgency);
       return alerts;
+    }
+
+    /* =========================================================================
+       ELLER SERBEST SESLİ KÜPE SORGULAMA VE MEZBAHA KESİM UYARI MOTORU
+       ========================================================================= */
+
+    function speakVoiceMessage(text, isAlarm = false) {
+      if (!('speechSynthesis' in window)) return;
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'tr-TR';
+        utterance.rate = 0.95;
+        utterance.pitch = isAlarm ? 1.15 : 1.0;
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        console.warn("SpeechSynthesis hatası:", e);
+      }
+    }
+
+    function parseTurkishEarTagVoiceInput(rawText) {
+      if (!rawText) return "";
+      let text = rawText.toLowerCase().trim();
+
+      text = text.replace(/^(küpe|numara|dana|boğa|tosun|hayvan|kesim|mezbaha|et|uygun\s*mu|bak)\s+/gi, "")
+                 .replace(/\s+(uygun\s*mu|kesilir\s*mi|gider\s*mi|serbest\s*mi|temiz\s*mi|var\s*mı)$/gi, "")
+                 .trim();
+
+      const ones = { "sıfır": 0, "bir": 1, "iki": 2, "üç": 3, "dört": 4, "beş": 5, "altı": 6, "yedi": 7, "sekiz": 8, "dokuz": 9 };
+      const tens = { "on": 10, "yirmi": 20, "otuz": 30, "kırk": 40, "elli": 50, "altmış": 60, "yetmiş": 70, "seksen": 80, "doksan": 90 };
+
+      const tokens = text.replace(/[^a-z0-9çğıöşü\s]/g, " ").trim().split(/\s+/);
+      let total = 0;
+      let currentGroup = 0;
+
+      for (let i = 0; i < tokens.length; i++) {
+        const t = tokens[i];
+        if (ones[t] !== undefined) {
+          currentGroup += ones[t];
+        } else if (tens[t] !== undefined) {
+          currentGroup += tens[t];
+        } else if (t === "yüz") {
+          currentGroup = (currentGroup === 0 ? 1 : currentGroup) * 100;
+        } else if (t === "bin") {
+          total += (currentGroup === 0 ? 1 : currentGroup) * 1000;
+          currentGroup = 0;
+        }
+      }
+      total += currentGroup;
+
+      const rawDigits = text.replace(/[^0-9]/g, "");
+      let candidateNumber = "";
+      if (total > 0) {
+        candidateNumber = total.toString();
+      } else if (rawDigits) {
+        candidateNumber = rawDigits;
+      }
+
+      if (typeof animals !== 'undefined' && Array.isArray(animals) && animals.length > 0) {
+        const exact = animals.find(a => a.earTag.toUpperCase() === rawText.toUpperCase().replace(/\s+/g, ''));
+        if (exact) return exact.earTag.toUpperCase();
+
+        if (candidateNumber) {
+          const numMatch = animals.find(a => a.earTag.toUpperCase() === candidateNumber.toUpperCase());
+          if (numMatch) return numMatch.earTag.toUpperCase();
+
+          const endMatch = animals.find(a => a.earTag.toUpperCase().endsWith(candidateNumber.toUpperCase()));
+          if (endMatch) return endMatch.earTag.toUpperCase();
+
+          const containsMatch = animals.find(a => a.earTag.toUpperCase().includes(candidateNumber.toUpperCase()));
+          if (containsMatch) return containsMatch.earTag.toUpperCase();
+        }
+      }
+
+      if (candidateNumber) return candidateNumber;
+      return rawText.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+    }
+
+    let activeSpeechRecognition = null;
+
+    function startVoiceSlaughterSearch() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const statusEl = document.getElementById("voice-slaughter-status");
+      const btnEl = document.getElementById("btn-slaughter-voice");
+
+      if (!SpeechRecognition) {
+        alert("Tarayıcınız yerel ses tanımayı desteklemiyor. Güncel Google Chrome, Microsoft Edge veya Safari kullanabilirsiniz.");
+        return;
+      }
+
+      if (activeSpeechRecognition) {
+        try { activeSpeechRecognition.stop(); } catch(e) {}
+        activeSpeechRecognition = null;
+        if (btnEl) {
+          btnEl.style.background = "#b91c1c";
+          btnEl.innerHTML = `🎙️ Sor`;
+        }
+        if (statusEl) statusEl.innerHTML = `<span>🎙️ Ses tanıma durduruldu.</span>`;
+        return;
+      }
+
+      try {
+        const recognition = new SpeechRecognition();
+        recognition.lang = "tr-TR";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 3;
+
+        recognition.onstart = function() {
+          activeSpeechRecognition = recognition;
+          if (btnEl) {
+            btnEl.style.background = "#dc2626";
+            btnEl.innerHTML = `🛑 Dinliyor...`;
+          }
+          if (statusEl) {
+            statusEl.innerHTML = `<span style="color:#dc2626; font-weight:800;">🔴 Dinleniyor... Dana küpesini söyleyin (Örn: "145" veya "yüz kırk beş")</span>`;
+          }
+        };
+
+        recognition.onresult = function(event) {
+          let rawTranscript = "";
+          if (event.results && event.results[0] && event.results[0][0]) {
+            rawTranscript = event.results[0][0].transcript;
+          }
+
+          const parsedTag = parseTurkishEarTagVoiceInput(rawTranscript);
+          const searchInput = document.getElementById("slaughter-search");
+
+          if (searchInput && parsedTag) {
+            searchInput.value = parsedTag;
+            if (statusEl) {
+              statusEl.innerHTML = `<span>✅ Algılandı: "<strong>${rawTranscript}</strong>" ➔ <strong>${parsedTag}</strong></span>`;
+            }
+            checkSlaughterStatus(true);
+          } else if (statusEl) {
+            statusEl.innerHTML = `<span style="color:#d97706;">⚠️ Anlaşılamadı ("${rawTranscript}"). Tekrar deneyin.</span>`;
+            speakVoiceMessage("Küpe numarası anlaşılamadı, lütfen tekrar söyleyiniz.");
+          }
+        };
+
+        recognition.onerror = function(event) {
+          console.warn("Ses tanıma hatası:", event.error);
+          if (statusEl) {
+            if (event.error === "not-allowed") {
+              statusEl.innerHTML = `<span style="color:#dc2626;">❌ Mikrofon izni verilmedi. Lütfen tarayıcı ayarlarından mikrofona izin verin.</span>`;
+            } else {
+              statusEl.innerHTML = `<span style="color:#d97706;">⚠️ Ses algılanamadı (${event.error}). Tekrar deneyebilirsiniz.</span>`;
+            }
+          }
+        };
+
+        recognition.onend = function() {
+          activeSpeechRecognition = null;
+          if (btnEl) {
+            btnEl.style.background = "#b91c1c";
+            btnEl.innerHTML = `🎙️ Sor`;
+          }
+        };
+
+        recognition.start();
+      } catch (err) {
+        console.error("Speech recognition başlatma hatası:", err);
+        if (statusEl) statusEl.innerHTML = `<span style="color:#dc2626;">Mikrofon başlatılamadı: ${err.message}</span>`;
+      }
+    }
+
+    function checkSlaughterStatus(autoSpeak = false) {
+      const search = (document.getElementById("slaughter-search").value || "").trim().toUpperCase();
+      const resBox = document.getElementById("slaughter-result-box");
+      const voiceToggle = document.getElementById("slaughter-voice-feedback-toggle");
+      const shouldSpeak = autoSpeak === true || (voiceToggle && voiceToggle.checked && autoSpeak);
+      const now = new Date();
+
+      if (!resBox) return;
+
+      if (!search) {
+        resBox.innerHTML = "";
+        return;
+      }
+
+      // Aktif et engeli var mı?
+      let meatBlock = null;
+      treatments.forEach(t => {
+        if (t.earTag.toUpperCase() === search) {
+          const meatEnd = new Date(t.meatSafeDate);
+          if (meatEnd > now) {
+            const diffDays = Math.ceil((meatEnd - now) / (24 * 3600 * 1000));
+            meatBlock = `${diffDays} gün kaldı (${t.drugName} - ${meatEnd.toLocaleDateString('tr-TR')})`;
+          }
+        }
+      });
+
+      if (meatBlock) {
+        resBox.innerHTML = `
+          <div class="banner-alert banner-danger" style="margin-bottom:0; font-size:0.95rem;">
+            ⛔ <strong>DİKKAT: KESİME GÖNDERİLEMEZ!</strong><br>
+            <strong>${search}</strong> numaralı danada aktif Et İKAS kısıtı var: ${meatBlock}
+          </div>
+        `;
+        if (shouldSpeak) {
+          speakVoiceMessage(`Dikkat! Kırmızı Alarm! ${search} numaralı danada aktif kesim kilidi var. Mezbaha kısıtı: ${meatBlock}.`, true);
+        }
+      } else {
+        const animalExists = animals.some(a => a.earTag.toUpperCase() === search);
+        if (animalExists) {
+          resBox.innerHTML = `
+            <div class="banner-alert banner-success" style="margin-bottom:0; font-size:0.95rem;">
+              🟢 <strong>KESİME UYGUNDUR</strong><br>
+              <strong>${search}</strong> numaralı dana temiz. Aktif ilaç ve kesim kısıtı bulunmamaktadır.
+            </div>
+          `;
+          if (shouldSpeak) {
+            speakVoiceMessage(`${search} numaralı dana temiz. Kesim kilidi yok, mezbahaya ve kesime uygundur.`, false);
+          }
+        } else {
+          resBox.innerHTML = `
+            <div class="banner-alert banner-warning" style="margin-bottom:0; font-size:0.9rem;">
+              🟡 <strong>${search}</strong> küpe numarası sürü listesinde bulunamadı. Aktif kesim kilidi görünmüyor.
+            </div>
+          `;
+          if (shouldSpeak) {
+            speakVoiceMessage(`${search} numaralı dana sürü listesinde kayıtlı değil. Aktif kesim engeli görünmüyor.`, false);
+          }
+        }
+      }
+    }
+
+    function startVoiceAnimalSearch() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const btnEl = document.getElementById("btn-animal-search-voice");
+
+      if (!SpeechRecognition) {
+        alert("Tarayıcınız yerel ses tanımayı desteklemiyor. Güncel Google Chrome, Edge veya Safari önerilir.");
+        return;
+      }
+
+      try {
+        const recognition = new SpeechRecognition();
+        recognition.lang = "tr-TR";
+        recognition.interimResults = false;
+
+        if (btnEl) btnEl.style.background = "#dc2626";
+
+        recognition.onresult = function(event) {
+          const raw = event.results[0][0].transcript;
+          const parsedTag = parseTurkishEarTagVoiceInput(raw);
+          const inp = document.getElementById("animal-search");
+          if (inp && parsedTag) {
+            inp.value = parsedTag;
+            renderAnimalTable();
+            speakVoiceMessage(parsedTag + " danası arandı.");
+          }
+        };
+
+        recognition.onend = function() {
+          if (btnEl) btnEl.style.background = "#2563eb";
+        };
+
+        recognition.start();
+      } catch (e) {
+        console.warn("startVoiceAnimalSearch hatası:", e);
+        if (btnEl) btnEl.style.background = "#2563eb";
+      }
     }
 
     function updateDashboardStats() {
@@ -4829,6 +5115,9 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
         checkMilkerStatus();
       } else if (activeScanTarget === 'triage') {
         setAnimalSelectValue("triage-animal-select", cleanTag);
+      } else if (activeScanTarget === 'slaughter') {
+        const slaughterInput = document.getElementById('slaughter-search');
+        if (slaughterInput) { slaughterInput.value = cleanTag; checkSlaughterStatus(true); }
       } else if (activeScanTarget === 'treatment') {
         setAnimalSelectValue("treatment-animal-select", cleanTag);
       } else if (activeScanTarget === 'cost') {

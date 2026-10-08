@@ -96,11 +96,13 @@ Besi performansını ve karkas gelirini kuruşu kuruşuna takip edin:
 ### 🥩 SENARYO 4: İğne / İlaç Yaptığınızda - Mezbaha Kesim Kilitleri (Et İKAS)
 Antibiyotik kalıntısı nedeniyle mezbahada karkasın imha edilmesini ve cezaları önleyin:
 
-#### 🥩 4.1. Et İKAS Kilidi
-1. Dananın küpesini ve vurulan ilacı (Florfenikol, Tulatromisin, Oksitetrasiklin LA, Meloksikam vb.) seçin.
-2. Dozu ve saati onaylayıp kaydedin.
-3. Sistem yasal et arınma süresine göre gün sayacını başlatır.
-4. Kesim kilidi bitene kadar dananın kasap veya mezbahaya gönderilmesi engellenir, ahır özetinde **"🥩 KESİM KİLİTLİ"** kırmızı alarmı yanar.
+#### 🥩 4.1. Et İKAS Kilidi & Mezbaha Hızlı Kontrol Paneli
+1. **İlaç Kaydı:** Dananın küpesini ve vurulan ilacı (Florfenikol, Tulatromisin, Oksitetrasiklin LA, Meloksikam vb.) seçip dozu kaydedin.
+2. **Canlı Sayaç:** Sistem yasal et arınma süresine göre gün sayacını başlatır. Kesim kilidi bitene kadar dananın kasap veya mezbahaya gönderilmesi engellenir.
+3. **🎙️ Eller Serbest Sesli Mezbaha Kontrolü:** Kırmızı mikrofona dokunup dana küpesini söyleyin (örn: *"145"* veya *"yüz kırk beş"*). Hoparlörden anında sesli cevap verir:
+   - 🔴 *"Dikkat! Kırmızı Alarm! 145 numaralı danada aktif kesim kilidi var. Mezbaha kısıtı: 18 gün."*
+   - 🟢 *"145 numaralı dana temiz. Kesim kilidi yok, mezbahaya ve kesime uygundur."*
+4. **Kamerayla Okuma:** Sarı butona dokunarak kulak küpesini kameraya gösterebilir veya klavyeden yazabilirsiniz.
 
 ---
 

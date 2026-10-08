@@ -42,8 +42,9 @@ Besi ahırı şartlarındaki **klinik aciliyet** ve tek elle eldivenli kullanım
 
 ## 📱 Barındırdığı Temel Besi Danacılığı Modülleri
 
-0. **📷 Kamerayla Küpe Okuma (Barkod & QR):**
-   - Dana arama, muayene, ilaç/Et İKAS, tartım ve yeni hayvan ekleme ekranlarında yerel kamera kütüphanesiyle küpeleri otomatik okur (%100 offline).
+0. **🎙️ & 📷 Eller Serbest Sesli Küpe Sorgulama ve Barkod/QR Okuma:**
+   - **🎙️ Sesli Küpe Sorgulama (Web Speech API):** Besi ahırında eller çamurlu veya yem tozuyken ekrana dokunmadan *"yüz kırk beş"* veya *"TR 16 00 12"* deyin. Sistem danayı anında bulur ve hoparlörden sesli olarak yanıtlar: *"🔴 Dikkat! 145 numaralı danada aktif kesim kilidi var. Mezbaha kısıtı: 18 gün"* veya *"🟢 145 temiz, kesime uygundur."*
+   - **📷 Barkod & QR Kamera Okuma:** Dana arama, muayene, ilaç/Et İKAS, tartım ve yeni hayvan ekleme ekranlarında yerel kamera kütüphanesiyle küpeleri otomatik okur (%100 offline).
 
 1. **🆘 Acil İlk Yardım & Besi Hastalıkları (Merck Vet Entegreli):**
    - **Besi Danası CCN / Polio:** Yüksek tahıl ve asidoz sonrası B1 Tiamin eksikliği, yıldız gözleme ilk yardımı.
