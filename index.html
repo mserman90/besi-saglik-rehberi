@@ -897,39 +897,99 @@
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-title">⚡ Hızlı İşlemler (Öncelik Sırasıyla)</div>
-
-        <!-- Kapı A: Acil Durum & Hayat Kurtarma -->
-        <div style="font-size:0.75rem; font-weight:800; color:#b91c1c; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; align-items:center; gap:4px;">
-          <span>🚨 1. Acil Durum & Hayat Kurtarma</span>
-        </div>
-        <div class="quick-actions-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
-          <button class="btn btn-danger" style="grid-column: 1 / -1; font-size:1.02rem;" onclick="switchTab('emergency')">🆘 Acil İlk Yardım & Hayat Kurtarma</button>
-          <button class="btn btn-primary" style="grid-column: 1 / -1;" onclick="switchTab('triage')">🩺 Hasta Muayene Et (Ateş & Triyaj)</button>
+      <!-- Hayvan Durumuna Göre Ana İşlem Merkezleri (Status Hubs) -->
+      <div class="status-hubs-section" style="margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:0 2px;">
+          <h3 style="font-size:1.05rem; font-weight:800; color:var(--primary); margin:0; display:flex; align-items:center; gap:6px;">
+            <span>🐾 Hayvan Durumu Ana Menüsü</span>
+          </h3>
+          <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Duruma göre tek tıkla işlem</span>
         </div>
 
-        <!-- Kapı B: Günlük İlaç & Süt/Et Güvenliği -->
-        <div style="font-size:0.75rem; font-weight:800; color:#d97706; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; align-items:center; gap:4px;">
-          <span>🥛 2. Günlük İlaç & Süt/Et Güvenliği (Zarar Önleme)</span>
-        </div>
-        <div class="quick-actions-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
-          <button class="btn btn-warning" onclick="switchTab('ikas')">💊 İlaç Yap & Süt Kilitle</button>
-          <button class="btn btn-outline" style="font-weight:800; border-color:#0284c7; color:#0284c7;" onclick="switchTab('milker')">🥛 Sağımcı Ekranı (Büyük)</button>
-          <button class="btn btn-danger" style="grid-column: 1 / -1; background:#b91c1c; color:white;" onclick="switchTab('cost')">💰 Zarar & Masraf Defteri (Dökülen Süt)</button>
-        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
 
-        <!-- Kapı C: Sürü Yönetimi, Büyüme & Rutin Takip -->
-        <div style="font-size:0.75rem; font-weight:800; color:#15803d; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; align-items:center; gap:4px;">
-          <span>📋 3. Sürü Yönetimi, Büyüme & Rutin Takip</span>
-        </div>
-        <div class="quick-actions-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <button class="btn btn-info" onclick="switchTab('repro')">🩸 Tohumlama & Doğum</button>
-          <button class="btn btn-warning" style="background:#e65100; color:white;" onclick="switchTab('calf')">🍼 Buzağı & Ağız Sütü</button>
-          <button class="btn btn-info" style="background:#475569; color:white;" onclick="switchTab('vaccine')">📅 Akıllı Aşı Takvimi</button>
-          <button class="btn btn-success" style="background:#2e7d32; color:white;" onclick="switchTab('weight')">⚖️ Kilo Ölçer & CAAG</button>
-          <button class="btn btn-success" style="background:#15803d; color:white;" onclick="switchTab('feed')">🌾 Yemlik & Geviş</button>
-          <button class="btn btn-info" style="background:#0284c7; color:white;" onclick="switchTab('arrival')">🚛 Yeni Dana Giriş</button>
+          <!-- 1. HASTA / ACİL HAYVAN -->
+          <div class="card" style="margin-bottom:0; border-left:5px solid #dc2626; padding:12px 14px; background:linear-gradient(to right, #fef2f2, #ffffff);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div>
+                <div style="font-weight:800; font-size:0.98rem; color:#b91c1c; display:flex; align-items:center; gap:6px;">
+                  🚨 HASTA / ACİL HAYVAN
+                </div>
+                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">İlk yardım, klinik triyaj ve sütü kilitleyen tedaviler</div>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
+              <button class="btn btn-danger" style="padding:10px 4px; font-size:0.82rem; font-weight:700;" onclick="switchTab('emergency')">🆘 İlk Yardım</button>
+              <button class="btn btn-primary" style="padding:10px 4px; font-size:0.82rem; font-weight:700;" onclick="switchTab('triage')">🩺 Muayene</button>
+              <button class="btn btn-warning" style="padding:10px 4px; font-size:0.82rem; font-weight:700;" onclick="switchTab('ikas')">💊 İlaç & Süt</button>
+            </div>
+          </div>
+
+          <!-- 2. SAĞIM & SÜT GÜVENLİĞİ -->
+          <div class="card" style="margin-bottom:0; border-left:5px solid #0284c7; padding:12px 14px; background:linear-gradient(to right, #f0f9ff, #ffffff);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div>
+                <div style="font-weight:800; font-size:0.98rem; color:#0369a1; display:flex; align-items:center; gap:6px;">
+                  🥛 SAĞIM & SÜT GÜVENLİĞİ
+                </div>
+                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Tanka antibiyotik dökülmesini ve cezaları önleyin</div>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <button class="btn btn-outline" style="border-color:#0284c7; color:#0284c7; font-weight:800; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('milker')">🥛 Sağımcı Ekranı (Büyük)</button>
+              <button class="btn btn-danger" style="background:#b91c1c; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('cost')">💰 Zarar & Masraf Defteri</button>
+            </div>
+          </div>
+
+          <!-- 3. YENİ DOĞUM, BUZAĞI & GEBELİK -->
+          <div class="card" style="margin-bottom:0; border-left:5px solid #ea580c; padding:12px 14px; background:linear-gradient(to right, #fff7ed, #ffffff);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div>
+                <div style="font-weight:800; font-size:0.98rem; color:#c2410c; display:flex; align-items:center; gap:6px;">
+                  🍼 YENİ DOĞUM, BUZAĞI & GEBELİK
+                </div>
+                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Ağız sütü kalitesi, buzağı ishal serumu ve tohumlama takibi</div>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <button class="btn btn-warning" style="background:#ea580c; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('calf')">🍼 Buzağı & Ağız Sütü</button>
+              <button class="btn btn-info" style="padding:10px 6px; font-size:0.83rem;" onclick="switchTab('repro')">🩸 Tohumlama & Doğum</button>
+            </div>
+          </div>
+
+          <!-- 4. YENİ GELEN / SÜRÜYE GİRİŞ & AŞI -->
+          <div class="card" style="margin-bottom:0; border-left:5px solid #475569; padding:12px 14px; background:linear-gradient(to right, #f8fafc, #ffffff);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div>
+                <div style="font-weight:800; font-size:0.98rem; color:#334155; display:flex; align-items:center; gap:6px;">
+                  🚛 YENİ GELEN / SÜRÜYE GİRİŞ & AŞI
+                </div>
+                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Yeni hayvan ekleme, 21 günlük besiye alıştırma ve aşı planı</div>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
+              <button class="btn btn-primary" style="background:#0f766e; color:white; padding:10px 4px; font-size:0.82rem;" onclick="openAnimalModal()">➕ Yeni Hayvan</button>
+              <button class="btn btn-info" style="background:#0284c7; color:white; padding:10px 4px; font-size:0.82rem;" onclick="switchTab('arrival')">🚛 Dana Giriş</button>
+              <button class="btn btn-info" style="background:#475569; color:white; padding:10px 4px; font-size:0.82rem;" onclick="switchTab('vaccine')">📅 Aşı Takvimi</button>
+            </div>
+          </div>
+
+          <!-- 5. BESİ, KİLO & YEMLİK TAKİBİ -->
+          <div class="card" style="margin-bottom:0; border-left:5px solid #16a34a; padding:12px 14px; background:linear-gradient(to right, #f0fdf4, #ffffff);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div>
+                <div style="font-weight:800; font-size:0.98rem; color:#15803d; display:flex; align-items:center; gap:6px;">
+                  ⚖️ BESİ, KİLO & YEMLİK TAKİBİ
+                </div>
+                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Kantar/şerit metre tartımı, günlük kilo artışı ve geviş sayacı</div>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <button class="btn btn-success" style="background:#2e7d32; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('weight')">⚖️ Kilo Ölçer & CAAG</button>
+              <button class="btn btn-success" style="background:#15803d; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('feed')">🌾 Yemlik & Geviş</button>
+            </div>
+          </div>
+
         </div>
       </div>
 
