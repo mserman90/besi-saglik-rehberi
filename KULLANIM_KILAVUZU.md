@@ -1,6 +1,6 @@
 # 🐂 Besi Sağlık Rehberi - Kullanım Kılavuzu
 
-**Besi Sağlık Rehberi**, internet bağlantısı ve sunucu kurulumu gerektirmeyen, doğrudan telefon ve bilgisayar tarayıcısında çalışan, Progressive Web App (PWA) mimarisine sahip %100 çevrimdışı bir besi danacılığı, 21 günlük karşılama protokolü, CAAG kilo artışı, Et İKAS mezbaha kilitleri ve acil müdahale asistanıdır.
+**Besi Sağlık Rehberi**, internet bağlantısı ve sunucu kurulumu gerektirmeyen, doğrudan telefon ve bilgisayar tarayıcısında çalışan, Progressive Web App (PWA) mimarisine sahip %100 çevrimdışı bir besi danacılığı, 21 günlük karşılama protokolü, CAAG günlük kilo artışı, Et İKAS mezbaha kilitleri ve acil müdahale asistanıdır.
 
 ---
 
@@ -20,7 +20,7 @@ Uygulamayı ilk defa açtıysanız ve nereden başlayacağınızı bilmiyorsanı
   - Siz günlük işlerinizi yaptıkça besi sürünüz arka planda kendiliğinden eksiksiz oluşacaktır.
 
 ### 3. Adım: Şu An Ahırda Hangi Durumdasınız? (Doğru Kapıyı Seçin)
-Uygulama ana ekranında işlemler 4 ana durum merkezine (Status Hubs) göre dizilmiştir:
+Uygulama ana ekranında işlemler 4 ana durum merkezine (**Dana Durumu Ana Menüsü**) göre dizilmiştir:
 - 🚨 **Dana yıkıldı, nefes alamıyor veya acil durum mu var?** $\rightarrow$ **1. Kapı: HASTA / ACİL DANA**
 - 🚛 **Kamyondan yeni parti dana mı indi?** $\rightarrow$ **2. Kapı: YENİ DANA GİRİŞ & 21 GÜN KARŞILAMA**
 - ⚖️ **Kantar tartımı veya mezbaha satışı mı yapacaksınız?** $\rightarrow$ **3. Kapı: KİLO, CAAG & MEZBAHA GELİRİ**
@@ -28,7 +28,15 @@ Uygulama ana ekranında işlemler 4 ana durum merkezine (Status Hubs) göre dizi
 
 ---
 
-## 🔄 2. Nasıl Devam Etmeliyim? (Besi Ahırında Günlük Senaryolar ve İş Akışı)
+## 📊 2. Gösterge Paneli ve Küpe Numaralı Takip
+
+- **📊 Anlık Sürü İstatistikleri:** Toplam Besi Mevcudu, Kesim Kilitli Danalar (Et İKAS), 21 Günlük Karşılamadaki Danalar ve Günü Gelen Aşılar tek bakışta görülür.
+- **🔔 Uyarılı Küpe Numaraları:** Sayfa başındaki kritik takip listesinde kafa karıştırıcı sayılar yerine doğrudan **Küpe Numaraları** listelenir.
+- **🏷️ Dana Uyarı & Sağlık Kartı:** Herhangi bir küpeye dokunduğunuzda dananın acil sağlık kartı açılır; kalan et arınma süresi, kesim kilidi durumu, alıştırma günü veya yaklaşan aşısı doğrudan ilgili aksiyon butonlarıyla incelenebilir.
+
+---
+
+## 🔄 3. Nasıl Devam Etmeliyim? (Besi Ahırında Günlük Senaryolar ve İş Akışı)
 
 Besi ahırı koşullarında karşılaştığınız her duruma göre adım adım izleyeceğiniz iş akışları şunlardır:
 
