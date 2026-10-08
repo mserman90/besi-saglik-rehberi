@@ -105,7 +105,7 @@
       color: var(--text);
       line-height: 1.5;
       min-height: 100dvh;
-      padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
     }
 
     /* Üst Başlık */
@@ -849,7 +849,7 @@
         margin-bottom: 0;
       }
       body {
-        padding-bottom: 64px;
+        padding-bottom: 24px;
       }
     }
   </style>
@@ -858,9 +858,12 @@
 
   <!-- Başlık -->
   <header>
-    <div>
-      <h1>🐂 Besi Sağlık Rehberi</h1>
-      <small style="opacity:0.85; font-size:0.75rem;">Besi Danacılığı • 21 Günlük Karşılama • CAAG Kilo • Et İKAS</small>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <button id="header-back-btn" onclick="switchTab('dashboard')" style="display:none; background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:800; cursor:pointer; min-height:38px; touch-action:manipulation;">⬅️ Ana Menü</button>
+      <div>
+        <h1>🐂 Besi Sağlık Rehberi</h1>
+        <small style="opacity:0.85; font-size:0.75rem;">Besi Danacılığı • 21 Günlük Karşılama • CAAG Kilo • Et İKAS</small>
+      </div>
     </div>
     <div style="display:flex; align-items:center; gap:8px;">
       <button onclick="openGuideModal()" style="background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:8px 14px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; min-height:44px; touch-action:manipulation;">📖 Kılavuz</button>
@@ -1120,6 +1123,13 @@
 
     <!-- ================= 2. SAHA TRİYAJI VE DART SKORLAMA ================= -->
     <section id="tab-triage" class="tab-section">
+      <!-- Üst Geri Dönüş Butonu -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:var(--primary); color:var(--primary); background:white; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ Ana Menüye Dön
+        </button>
+        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+      </div>
       <div class="card">
         <div class="card-title">🩺 Hasta Hayvan Kontrolü & Ateş Ölçümü</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
@@ -1213,10 +1223,23 @@
 
         <button class="btn btn-primary" onclick="saveTriageRecord()" style="margin-top:10px;">💾 Muayeneyi Kaydet & Hayvan Durumunu İşle</button>
       </div>
+    
+      <div style="text-align:center; margin:16px 0 8px 0;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:8px 20px; font-weight:800; font-size:0.84rem; border-color:var(--primary); color:var(--primary); background:white;">
+          ⬅️ Ana Menüye Dön (Besi Özeti)
+        </button>
+      </div>
     </section>
 
     <!-- ================= 3. İKAS VE İLAÇ YÖNETİMİ ================= -->
     <section id="tab-ikas" class="tab-section">
+      <!-- Üst Geri Dönüş Butonu -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:var(--primary); color:var(--primary); background:white; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ Ana Menüye Dön
+        </button>
+        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+      </div>
       <div class="card">
         <div class="card-title">🥩 İlaç Kaydı & Mezbaha Kesim Kilidi (Et İKAS)</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
@@ -1284,10 +1307,23 @@
           </table>
         </div>
       </div>
+    
+      <div style="text-align:center; margin:16px 0 8px 0;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:8px 20px; font-weight:800; font-size:0.84rem; border-color:var(--primary); color:var(--primary); background:white;">
+          ⬅️ Ana Menüye Dön (Besi Özeti)
+        </button>
+      </div>
     </section>
 
     <!-- ================= 4. BESİ MASRAF, TEDAVİ & KİLO KAYBI ZARAR DEFTERİ ================= -->
     <section id="tab-cost" class="tab-section">
+      <!-- Üst Geri Dönüş Butonu -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:var(--primary); color:var(--primary); background:white; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ Ana Menüye Dön
+        </button>
+        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+      </div>
       <div class="card" style="border-top: 4px solid #b91c1c;">
         <div class="card-title" style="color:#b91c1c;">💰 Besi Tedavi Masrafı & Büyüme/Fire Zarar Defteri</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
@@ -1415,10 +1451,23 @@
           </table>
         </div>
       </div>
+    
+      <div style="text-align:center; margin:16px 0 8px 0;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:8px 20px; font-weight:800; font-size:0.84rem; border-color:var(--primary); color:var(--primary); background:white;">
+          ⬅️ Ana Menüye Dön (Besi Özeti)
+        </button>
+      </div>
     </section>
 
     <!-- ================= 5. YEMLİK, ASİDOZ (SARA) & RUMEN İŞKEMBESİ TAKİPÇİSİ ================= -->
     <section id="tab-feed" class="tab-section">
+      <!-- Üst Geri Dönüş Butonu -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:var(--primary); color:var(--primary); background:white; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ Ana Menüye Dön
+        </button>
+        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+      </div>
       <div class="card" style="border-top: 4px solid #15803d;">
         <div class="card-title" style="color:#15803d;">🌾 Yemlik Düzeni, İşkembe Ekşimesi & Geviş Sayacı</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
@@ -1539,10 +1588,23 @@
         </div>
 
       </div>
+    
+      <div style="text-align:center; margin:16px 0 8px 0;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:8px 20px; font-weight:800; font-size:0.84rem; border-color:var(--primary); color:var(--primary); background:white;">
+          ⬅️ Ana Menüye Dön (Besi Özeti)
+        </button>
+      </div>
     </section>
 
     <!-- ================= 4. AŞI TAKVİMİ ================= -->
     <section id="tab-vaccine" class="tab-section">
+      <!-- Üst Geri Dönüş Butonu -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:var(--primary); color:var(--primary); background:white; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ Ana Menüye Dön
+        </button>
+        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+      </div>
       <div class="card">
         <div class="card-title">📅 Akıllı Sığır Aşı Takvimi</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
@@ -1579,12 +1641,25 @@
           <p><strong>• Solunum & Zatürre Karması (BRD / Öksürük Aşısı):</strong> Sütten kesilmeden önce ve havaların bozduğu riskli dönemde 3 hafta (21 gün) arayla 2 doz vurulur.</p>
         </div>
       </div>
+    
+      <div style="text-align:center; margin:16px 0 8px 0;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:8px 20px; font-weight:800; font-size:0.84rem; border-color:var(--primary); color:var(--primary); background:white;">
+          ⬅️ Ana Menüye Dön (Besi Özeti)
+        </button>
+      </div>
     </section>
 
     
 
     <!-- ================= 6. CANLI AĞIRLIK & CAAG (GÜNLÜK KİLO ARTIŞI) TAKİP MOTORU ================= -->
     <section id="tab-weight" class="tab-section">
+      <!-- Üst Geri Dönüş Butonu -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:var(--primary); color:var(--primary); background:white; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ Ana Menüye Dön
+        </button>
+        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+      </div>
       <div class="card">
         <div class="card-title">⚖️ Canlı Ağırlık & Besi CAAG Takip Motoru</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
@@ -1726,10 +1801,23 @@
           </table>
         </div>
       </div>
+    
+      <div style="text-align:center; margin:16px 0 8px 0;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:8px 20px; font-weight:800; font-size:0.84rem; border-color:var(--primary); color:var(--primary); background:white;">
+          ⬅️ Ana Menüye Dön (Besi Özeti)
+        </button>
+      </div>
     </section>
 
     <!-- ================= 6.1 YENİ DANA GİRİŞ & ALIŞTIRMA PROTOKOLÜ (METAFİLAKSİ & ASİDOZ KORUMA) ================= -->
     <section id="tab-arrival" class="tab-section">
+      <!-- Üst Geri Dönüş Butonu -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:var(--primary); color:var(--primary); background:white; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ Ana Menüye Dön
+        </button>
+        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+      </div>
       <div class="card">
         <div class="card-title">🚛 Yeni Dana Giriş & Besiye Alıştırma Protokolü</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
@@ -1876,12 +1964,25 @@
           </table>
         </div>
       </div>
+    
+      <div style="text-align:center; margin:16px 0 8px 0;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:8px 20px; font-weight:800; font-size:0.84rem; border-color:var(--primary); color:var(--primary); background:white;">
+          ⬅️ Ana Menüye Dön (Besi Özeti)
+        </button>
+      </div>
     </section>
 
     
 
     <!-- ================= 8. ACİL İLK YARDIM ================= -->
     <section id="tab-emergency" class="tab-section">
+      <!-- Üst Geri Dönüş Butonu -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:var(--primary); color:var(--primary); background:white; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ Ana Menüye Dön
+        </button>
+        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+      </div>
       <div class="banner-alert banner-danger">
         ⚠️ <strong>ÖNEMLİ:</strong> Bu protokoller veteriner hekim çiftliğe ulaşana kadar hastanın yaşama şansını artırmak için acil ilk yardım adımlarıdır.
       </div>
@@ -2037,51 +2138,19 @@
           </ol>
         </div>
       </div>
+    
+      <div style="text-align:center; margin:16px 0 8px 0;">
+        <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:8px 20px; font-weight:800; font-size:0.84rem; border-color:var(--primary); color:var(--primary); background:white;">
+          ⬅️ Ana Menüye Dön (Besi Özeti)
+        </button>
+      </div>
     </section>
 
     
 
   </main>
 
-  <!-- Alt Menü (Bottom Bar) -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
-      <span class="nav-icon">📊</span>
-      <span>Besi Özeti</span>
-    </button>
-    <button class="nav-item" data-tab="emergency" onclick="switchTab('emergency')">
-      <span class="nav-icon">🆘</span>
-      <span>İlk Yardım</span>
-    </button>
-    <button class="nav-item" data-tab="triage" onclick="switchTab('triage')">
-      <span class="nav-icon">🩺</span>
-      <span>Muayene</span>
-    </button>
-    <button class="nav-item" data-tab="arrival" onclick="switchTab('arrival')">
-      <span class="nav-icon">🚛</span>
-      <span>21 Gün Giriş</span>
-    </button>
-    <button class="nav-item" data-tab="weight" onclick="switchTab('weight')">
-      <span class="nav-icon">⚖️</span>
-      <span>Kilo / CAAG</span>
-    </button>
-    <button class="nav-item" data-tab="ikas" onclick="switchTab('ikas')">
-      <span class="nav-icon">🥩</span>
-      <span>Et İKAS</span>
-    </button>
-    <button class="nav-item" data-tab="feed" onclick="switchTab('feed')">
-      <span class="nav-icon">🌾</span>
-      <span>Yemlik & Asidoz</span>
-    </button>
-    <button class="nav-item" data-tab="vaccine" onclick="switchTab('vaccine')">
-      <span class="nav-icon">📅</span>
-      <span>Aşı & Parazit</span>
-    </button>
-    <button class="nav-item" data-tab="cost" onclick="switchTab('cost')">
-      <span class="nav-icon">💰</span>
-      <span>Masraf Defteri</span>
-    </button>
-  </nav>
+  
 
   <!-- Hayvan Ekleme Modalı (Sadeleştirilmiş Div) -->
   <div id="modal-animal" class="modal-overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:200; align-items:center; justify-content:center; padding:16px; overflow-y:auto; -webkit-overflow-scrolling:touch;">
@@ -2416,18 +2485,12 @@
     // Sekme Değiştirme
     function switchTab(tabId) {
       document.querySelectorAll(".tab-section").forEach(sec => sec.classList.remove("active"));
-      document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("active"));
-
       const targetSec = document.getElementById("tab-" + tabId);
       if (targetSec) targetSec.classList.add("active");
 
-      // Menü aktifliği
-      const activeBtn = document.querySelector('.bottom-nav .nav-item[data-tab="' + tabId + '"]');
-      if (activeBtn) {
-        activeBtn.classList.add("active");
-        try {
-          activeBtn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-        } catch (e) {}
+      const backBtn = document.getElementById("header-back-btn");
+      if (backBtn) {
+        backBtn.style.display = tabId === "dashboard" ? "none" : "inline-block";
       }
 
       window.scrollTo(0, 0);
