@@ -533,10 +533,73 @@
     body.dark-mode #modal-guide > div,
     body.dark-mode #modal-animal > div,
     body.dark-mode #modal-vaccine > div,
-    body.dark-mode #modal-scanner > div {
+    body.dark-mode #modal-scanner > div,
+    body.dark-mode #modal-animal-alerts > div {
       background: #1e293b !important;
       color: #f1f5f9 !important;
       border: 1px solid #475569;
+    }
+    body.dark-mode #modal-animal-alerts div,
+    body.dark-mode #modal-animal-alerts p,
+    body.dark-mode #modal-animal-alerts li {
+      color: #cbd5e1 !important;
+    }
+    body.dark-mode #modal-animal-alerts h3,
+    body.dark-mode #modal-animal-alerts h4 {
+      color: #38bdf8 !important;
+    }
+    .animal-alert-badge-danger {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+    .animal-alert-badge-warning {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fcd34d;
+    }
+    .animal-alert-badge-info {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #7dd3fc;
+    }
+    .animal-alert-badge-success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    body.dark-mode .animal-alert-badge-danger {
+      background: #450a0a !important;
+      color: #fca5a5 !important;
+      border-color: #991b1b !important;
+    }
+    body.dark-mode .animal-alert-badge-warning {
+      background: #451a03 !important;
+      color: #fde047 !important;
+      border-color: #854d0e !important;
+    }
+    body.dark-mode .animal-alert-badge-info {
+      background: #172554 !important;
+      color: #93c5fd !important;
+      border-color: #1e40af !important;
+    }
+    body.dark-mode .animal-alert-badge-success {
+      background: #052e16 !important;
+      color: #86efac !important;
+      border-color: #166534 !important;
+    }
+    .animal-alert-card-item {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+    body.dark-mode .animal-alert-card-item {
+      background: #1e293b !important;
+      border-color: #334155 !important;
+      color: #f1f5f9 !important;
     }
     body.dark-mode #modal-guide div,
     body.dark-mode #modal-guide p,
@@ -735,6 +798,29 @@
         </div>
       </div>
 
+      <!-- Hayvan Bazlı Aktif Uyarılar ve Klinik Görevler -->
+      <div class="card" id="card-animal-alerts" style="border-left: 4px solid var(--primary);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+          <div class="card-title" style="margin-bottom:0;">🔔 Hayvan Bazlı Kritik Uyarılar & Takip Listesi</div>
+          <span class="tag tag-danger" id="animal-alerts-count-badge" style="font-size:0.75rem; font-weight:800;">0 Uyarı</span>
+        </div>
+        <p style="font-size:0.78rem; color:#64748b; margin-bottom:10px;">
+          Süt yasağı, kesim kilidi, yaklaşan doğum, aşı zamanı veya sağlık riski bulunan hayvanların acil eylem listesi:
+        </p>
+        <div style="display:flex; gap:6px; margin-bottom:10px; overflow-x:auto; padding-bottom:4px;" id="animal-alert-filter-pills">
+          <button class="btn btn-primary" style="min-height:30px; padding:3px 10px; font-size:0.75rem; border-radius:15px; font-weight:700; width:auto;" onclick="filterAnimalAlerts('all', this)" id="filter-pill-all">Tümü (<span id="pill-count-all">0</span>)</button>
+          <button class="btn btn-outline" style="min-height:30px; padding:3px 10px; font-size:0.75rem; border-radius:15px; width:auto;" onclick="filterAnimalAlerts('ikas', this)">🚫 İlaç & İKAS (<span id="pill-count-ikas">0</span>)</button>
+          <button class="btn btn-outline" style="min-height:30px; padding:3px 10px; font-size:0.75rem; border-radius:15px; width:auto;" onclick="filterAnimalAlerts('repro', this)">🩸 Üreme & Doğum (<span id="pill-count-repro">0</span>)</button>
+          <button class="btn btn-outline" style="min-height:30px; padding:3px 10px; font-size:0.75rem; border-radius:15px; width:auto;" onclick="filterAnimalAlerts('vaccine', this)">💉 Aşı (<span id="pill-count-vaccine">0</span>)</button>
+          <button class="btn btn-outline" style="min-height:30px; padding:3px 10px; font-size:0.75rem; border-radius:15px; width:auto;" onclick="filterAnimalAlerts('health', this)">⚠️ Sağlık & Karantina (<span id="pill-count-health">0</span>)</button>
+        </div>
+        <div id="dashboard-animal-alerts-list">
+          <div style="text-align:center; padding:12px; color:#94a3b8; font-size:0.85rem;">
+            Aktif hayvan uyarısı bulunmamaktadır.
+          </div>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-title">📋 Hayvan Listesi & Durumlar</div>
         <div style="display:flex; gap:6px; margin-bottom:8px;">
@@ -750,7 +836,7 @@
                 <th>Cinsiyet/Yaş</th>
                 <th>Et-Yağ Durumu</th>
                 <th>Ayrı Bölme</th>
-                <th>Sağlık Durumu</th>
+                <th>⚡ Hayvan Uyarıları & Durumu</th>
                 <th>İşlem</th>
               </tr>
             </thead>
@@ -2046,6 +2132,27 @@
     </div>
   </div>
 
+  <!-- Hayvan Uyarı & Sağlık Kartı Modalı -->
+  <div id="modal-animal-alerts" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:450; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:white; border-radius:12px; max-width:540px; width:100%; max-height:88vh; display:flex; flex-direction:column; box-shadow:0 10px 30px rgba(0,0,0,0.4);">
+      <div style="padding:14px 18px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border-top-left-radius:12px; border-top-right-radius:12px;">
+        <h3 style="font-size:1.05rem; color:var(--primary); font-weight:800; margin:0; display:flex; align-items:center; gap:8px;" id="animal-alerts-modal-title">
+          🔔 Hayvan Uyarı & Sağlık Kartı
+        </h3>
+        <button onclick="closeAnimalAlertsModal()" style="background:transparent; border:none; font-size:1.4rem; font-weight:800; cursor:pointer; color:#64748b; padding:0 4px; line-height:1;">✕</button>
+      </div>
+      <div style="padding:16px 18px; overflow-y:auto; flex:1;" id="animal-alerts-modal-content">
+        <!-- Dinamik İçerik -->
+      </div>
+      <div style="padding:12px 18px; border-top:1px solid #e2e8f0; background:#f8fafc; border-bottom-left-radius:12px; border-bottom-right-radius:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <button class="btn btn-outline" style="width:auto; padding:6px 16px;" onclick="closeAnimalAlertsModal()">Kapat</button>
+        <div id="animal-alerts-modal-actions" style="display:flex; gap:6px; flex-wrap:wrap;">
+          <!-- Dinamik Eylem Butonları -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Uygulama İçi Kullanım Kılavuzu Modalı -->
   <div id="modal-guide" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); z-index:400; align-items:center; justify-content:center; padding:16px;">
     <div style="background:white; border-radius:12px; max-width:600px; width:100%; max-height:85vh; display:flex; flex-direction:column; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
@@ -2290,18 +2397,287 @@
     /* =========================================================================
        1. GÖSTERGE PANELİ VE İSTATİSTİKLER
        ========================================================================= */
+    /* =========================================================================
+       1. GÖSTERGE PANELİ, HAYVAN BAZLI UYARILAR VE İSTATİSTİKLER
+       ========================================================================= */
+    let currentAlertFilter = "all";
+
+    // Hayvan Bazında Kapsamlı Uyarı Motoru
+    function getAnimalAlerts(animal) {
+      if (!animal) return [];
+      const alerts = [];
+      const now = new Date();
+      const animalId = animal.id;
+      const earTag = animal.earTag;
+
+      // 1. Süt İKAS (Sütü Tanktan Yasaklama)
+      const milkTreatments = treatments.filter(t => (t.animalId === animalId || t.earTag === earTag) && new Date(t.milkSafeDate) > now);
+      if (milkTreatments.length > 0) {
+        let latestMilkEnd = new Date(0);
+        let causeDrug = "";
+        milkTreatments.forEach(t => {
+          const d = new Date(t.milkSafeDate);
+          if (d > latestMilkEnd) {
+            latestMilkEnd = d;
+            causeDrug = t.drugName || "Tedavi / Antibiyotik";
+          }
+        });
+        const msLeft = latestMilkEnd - now;
+        const hrsLeft = Math.ceil(msLeft / (1000 * 3600));
+        const daysLeft = Math.ceil(msLeft / (1000 * 3600 * 24));
+        const timeStr = hrsLeft <= 48 ? `${hrsLeft} saat` : `${daysLeft} gün`;
+
+        alerts.push({
+          id: "alert-milk-ikas",
+          type: "danger",
+          category: "ikas",
+          icon: "🚫",
+          badgeText: `🚫 Süt Kilidi: ${timeStr}`,
+          title: "🚫 Süt Arınma Kısıtı (İlaçlı Süt)",
+          desc: `Yapılan ${causeDrug} nedeniyle sütte ilaç kalıntısı vardır. Kesinlikle süt soğutma tankına katılmamalıdır!`,
+          timeInfo: `Kalan Süre: ${timeStr} (Serbest: ${latestMilkEnd.toLocaleString('tr-TR', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'})})`,
+          actionText: "Ayrı kovaya sağın, imha edin veya buzağıya kesinlikle içirmeyin.",
+          urgency: 1
+        });
+      }
+
+      // 2. Et İKAS (Kesim / Mezbaha Yasağı)
+      const meatTreatments = treatments.filter(t => (t.animalId === animalId || t.earTag === earTag) && new Date(t.meatSafeDate) > now);
+      if (meatTreatments.length > 0) {
+        let latestMeatEnd = new Date(0);
+        let causeDrug = "";
+        meatTreatments.forEach(t => {
+          const d = new Date(t.meatSafeDate);
+          if (d > latestMeatEnd) {
+            latestMeatEnd = d;
+            causeDrug = t.drugName || "İlaç";
+          }
+        });
+        const msLeft = latestMeatEnd - now;
+        const daysLeft = Math.ceil(msLeft / (1000 * 3600 * 24));
+
+        alerts.push({
+          id: "alert-meat-ikas",
+          type: "danger",
+          category: "ikas",
+          icon: "🥩",
+          badgeText: `🥩 Kesim Kilidi: ${daysLeft}g`,
+          title: "🥩 Kesim / Mezbaha Kilidi (Et İKAS)",
+          desc: `Karkasta yasal sınırın üzerinde ilaç kalıntısı bulunmaktadır. Mezbaha veya kasap kesimine sevk edilemez!`,
+          timeInfo: `Kalan Süre: ${daysLeft} gün (Serbest: ${latestMeatEnd.toLocaleDateString('tr-TR')})`,
+          actionText: "Arınma süresi tamamlanana kadar hayvanı kesime veya pazara göndermeyin.",
+          urgency: 1
+        });
+      }
+
+      // 3. Karantina / Tecrit
+      if (animal.quarantine) {
+        alerts.push({
+          id: "alert-quarantine",
+          type: "warning",
+          category: "health",
+          icon: "⚠️",
+          badgeText: "⚠️ Karantinada",
+          title: "⚠️ Ayrı Bölmede (Karantina / Tecrit)",
+          desc: "Bu hayvan yeni satın alma, nakil veya bulaşıcı hastalık riski nedeniyle sürüden ayrı bölmede tutulmaktadır.",
+          timeInfo: "Tecrit altında",
+          actionText: "Ortak suluk ve yemlik kullandırmayın, bakımı ve sağımı en son yapın.",
+          urgency: 2
+        });
+      }
+
+      // 4. Üreme & Tohumlama & Doğum Çarkı
+      const repros = reproRecords.filter(r => r.animalId === animalId || r.earTag === earTag);
+      if (repros.length > 0) {
+        const latestRepro = repros.reduce((a, b) => new Date(a.date) > new Date(b.date) ? a : b);
+        const reproDate = new Date(latestRepro.date);
+        const daysPassed = Math.floor((now - reproDate) / (1000 * 60 * 60 * 24));
+
+        if (daysPassed >= 18 && daysPassed <= 24) {
+          alerts.push({
+            id: "alert-repro-heat",
+            type: "info",
+            category: "repro",
+            icon: "🔍",
+            badgeText: `🔍 Kızgınlık Takibi (${daysPassed}.g)`,
+            title: `🔍 21. Gün Kızgınlık Dönüş Takibi (Gün ${daysPassed})`,
+            desc: "Tohumlama tutmadıysa inek bugünlerde tekrar boğaya / kızgınlığa gelecektir.",
+            timeInfo: `Tohumlama: ${new Date(latestRepro.date).toLocaleDateString('tr-TR')}`,
+            actionText: "Sabah-akşam çeleme, atlama, çara akıntısı ve huzursuzluk belirtilerini yakından izleyin.",
+            urgency: 2
+          });
+        } else if (daysPassed >= 35 && daysPassed <= 50) {
+          alerts.push({
+            id: "alert-repro-pregcheck",
+            type: "info",
+            category: "repro",
+            icon: "🩺",
+            badgeText: `🩺 Gebelik Kontrolü (${daysPassed}.g)`,
+            title: `🩺 Gebelik Muayenesi Zamanı (Gün ${daysPassed})`,
+            desc: "Embriyo ve yavru kesesi kontrolü için en elverişli muayene aralığı.",
+            timeInfo: `Tohumlama: ${new Date(latestRepro.date).toLocaleDateString('tr-TR')}`,
+            actionText: "Veteriner hekime ultrason veya rektal muayene yaptırarak gebeliği kesinleştirin.",
+            urgency: 3
+          });
+        } else if (daysPassed >= 215 && daysPassed <= 230) {
+          alerts.push({
+            id: "alert-repro-dry",
+            type: "warning",
+            category: "repro",
+            icon: "🛑",
+            badgeText: `🛑 Kuruya Çıkar (${daysPassed}.g)`,
+            title: "🛑 Kuruya Alma Zamanı (Doğuma ~60 gün)",
+            desc: "İneğin memelerinin dinlenmesi ve kaliteli ağız sütü yapabilmesi için sağım kesilmelidir.",
+            timeInfo: `Beklenen Doğum: ${new Date(latestRepro.calvingDate).toLocaleDateString('tr-TR')}`,
+            actionText: "Sağımı kesin, 4 meme lobuna da kuru dönem meme içi tüpü ve meme başı mührü uygulayın.",
+            urgency: 2
+          });
+        } else if (daysPassed >= 240 && daysPassed <= 255) {
+          alerts.push({
+            id: "alert-repro-precalve-vac",
+            type: "info",
+            category: "repro",
+            icon: "💉",
+            badgeText: "💉 Kuru Dönem Aşısı",
+            title: `💉 Doğum Öncesi Buzağı İshali Aşısı (Gün ${daysPassed})`,
+            desc: "Doğacak buzağının E.coli / Rota / Corona ishallerinden ölmemesi için anneye koruyucu aşı zamanı.",
+            timeInfo: "Doğuma ~1 ay kaldı",
+            actionText: "Kuru dönem kombine buzağı ishal aşısını uygulayın.",
+            urgency: 3
+          });
+        } else if (daysPassed >= 273 && daysPassed <= 285) {
+          const daysToBirth = 280 - daysPassed;
+          alerts.push({
+            id: "alert-repro-calving-near",
+            type: "danger",
+            category: "repro",
+            icon: "🎉",
+            badgeText: `🎉 Doğum Yaklaştı (${daysToBirth > 0 ? daysToBirth + ' gün' : 'Bugünlerde'})`,
+            title: `🎉 Doğum Çok Yaklaştı! (Gebelik ${daysPassed}. Gün / 280)`,
+            desc: "280 günlük gebelik süresi doluyor! İnek her an buzağılayabilir.",
+            timeInfo: `Beklenen Doğum: ${new Date(latestRepro.calvingDate).toLocaleDateString('tr-TR')}`,
+            actionText: "İneği temiz, bol altlıklı doğum padoğuna alın. Meme dolgunluğu ve vulva gevşemesini sık sık izleyin.",
+            urgency: 1
+          });
+        } else if (daysPassed > 285 && daysPassed <= 305) {
+          alerts.push({
+            id: "alert-repro-calving-overdue",
+            type: "danger",
+            category: "repro",
+            icon: "⏰",
+            badgeText: `⏰ Doğum Gecikti (${daysPassed - 280} gün)`,
+            title: `⏰ Beklenen Doğum Süresi Aşıldı (Gün ${daysPassed})`,
+            desc: "280 günlük gebelik süresi aşıldı. Güç doğum, yavru ölümü veya rahim bükülmesi kontrol edilmelidir.",
+            timeInfo: `Beklenen Tarih: ${new Date(latestRepro.calvingDate).toLocaleDateString('tr-TR')}`,
+            actionText: "Acilen veteriner hekime muayene ettirin.",
+            urgency: 1
+          });
+        }
+      }
+
+      // 5. Aşı Takvimi (Vaccine)
+      const myVaccines = vaccineRecords.filter(v => v.animalId === animalId || v.animalId === earTag);
+      myVaccines.forEach(v => {
+        if (v.boosterDate && v.boosterDate !== "Gerek Yok" && v.boosterDate !== "-") {
+          const bDate = new Date(v.boosterDate);
+          if (!isNaN(bDate.getTime())) {
+            const diffDays = Math.ceil((bDate - now) / (1000 * 60 * 60 * 24));
+            if (diffDays < 0) {
+              alerts.push({
+                id: `alert-vac-overdue-${v.id}`,
+                type: "danger",
+                category: "vaccine",
+                icon: "💉",
+                badgeText: `💉 ${v.vaccine}: Gecikti (${Math.abs(diffDays)}g)`,
+                title: `💉 Aşı Gecikti: ${v.vaccine}`,
+                desc: `Bu hayvanın tekrar/rapel aşısı ${Math.abs(diffDays)} gün önce yapılmalıydı!`,
+                timeInfo: `Planlanan: ${bDate.toLocaleDateString('tr-TR')}`,
+                actionText: "Sürü bağışıklığı zayıflamadan acilen aşıyı uygulayın.",
+                urgency: 1
+              });
+            } else if (diffDays <= 7) {
+              alerts.push({
+                id: `alert-vac-soon-${v.id}`,
+                type: "warning",
+                category: "vaccine",
+                icon: "💉",
+                badgeText: `💉 ${v.vaccine}: ${diffDays === 0 ? 'Bugün' : diffDays + 'g kaldı'}`,
+                title: `💉 Yaklaşan Aşı: ${v.vaccine}`,
+                desc: `Tekrar aşı tarihi yaklaşıyor (${diffDays === 0 ? 'BUGÜN' : diffDays + ' gün kaldı'}).`,
+                timeInfo: `Planlanan: ${bDate.toLocaleDateString('tr-TR')}`,
+                actionText: "Aşı flakonunu soğuk zincirde hazır bulundurun.",
+                urgency: 2
+              });
+            }
+          }
+        }
+      });
+
+      // 6. Kondisyon & Triyaj Sağlık Riski
+      if (animal.bcs <= 2.0) {
+        alerts.push({
+          id: "alert-bcs-low",
+          type: "danger",
+          category: "health",
+          icon: "⚠️",
+          badgeText: `⚠️ Çok Zayıf (BCS ${animal.bcs.toFixed(1)})`,
+          title: `⚠️ Kondisyon Tehlikesi: Aşırı Zayıf (BCS ${animal.bcs.toFixed(1)})`,
+          desc: "Kaburga kemikleri belirgin. Negatif enerji dengesi, ketozis ve döl tutmama riski yüksektir!",
+          timeInfo: "Kritik Kondisyon Kaybı",
+          actionText: "Rasyonun enerjisini artırın, iç parazit ve subklinik asidoz kontrolü yapın.",
+          urgency: 2
+        });
+      } else if (animal.bcs >= 3.75) {
+        alerts.push({
+          id: "alert-bcs-high",
+          type: "warning",
+          category: "health",
+          icon: "⚠️",
+          badgeText: `⚠️ Aşırı Yağlı (BCS ${animal.bcs.toFixed(1)})`,
+          title: `⚠️ Kondisyon Uyarısı: Aşırı Yağlı (BCS ${animal.bcs.toFixed(1)})`,
+          desc: "Karaciğer yağlanması, ketozis ve doğum felci riski yüksektir.",
+          timeInfo: "Yağlanma Eğilimi",
+          actionText: "Konsantre yem oranını kademeli düşürün, kaliteli kaba yeme ağırlık verin.",
+          urgency: 2
+        });
+      }
+
+      // Son Triyaj Muayenesi (Ateş / Hastalık kontrolü)
+      const myTriages = triageRecords.filter(t => t.animalId === animalId || t.earTag === earTag);
+      if (myTriages.length > 0) {
+        const latestTriage = myTriages.reduce((a, b) => new Date(a.date) > new Date(b.date) ? a : b);
+        const triageDate = new Date(latestTriage.date);
+        const daysSinceTriage = Math.floor((now - triageDate) / (1000 * 60 * 60 * 24));
+        if (daysSinceTriage <= 3 && (latestTriage.temp >= 39.5 || latestTriage.dartScore >= 4)) {
+          alerts.push({
+            id: "alert-triage-recent",
+            type: "danger",
+            category: "health",
+            icon: "🔥",
+            badgeText: `🔥 Hasta / Ateşli (${latestTriage.temp || '39.5+'}°C)`,
+            title: "🔥 Klinik Alarm: Yüksek Ateş / Hastalık Belirtisi",
+            desc: `Son muayenede ateş: ${latestTriage.temp}°C, DART hastalık skoru: ${latestTriage.dartScore}/12.`,
+            timeInfo: `Muayene: ${triageDate.toLocaleDateString('tr-TR')}`,
+            actionText: "Veteriner hekim tedavi protokolünü aksatmayın, ateşi sabah-akşam takip edin.",
+            urgency: 1
+          });
+        }
+      }
+
+      alerts.sort((a, b) => a.urgency - b.urgency);
+      return alerts;
+    }
+
     function updateDashboardStats() {
       document.getElementById("stat-total-animals").textContent = animals.length;
 
       const now = new Date();
-      let activeIkasCount = 0;
       let blockedEarTags = [];
       let blockedMeatTags = [];
 
       treatments.forEach(t => {
         const milkEnd = new Date(t.milkSafeDate);
         if (milkEnd > now) {
-          activeIkasCount++;
           if (!blockedEarTags.includes(t.earTag)) blockedEarTags.push(t.earTag);
         }
         const meatEnd = new Date(t.meatSafeDate);
@@ -2316,51 +2692,193 @@
       document.getElementById("stat-quarantine").textContent = animals.filter(a => a.quarantine).length;
       document.getElementById("stat-upcoming-vaccines").textContent = vaccineRecords.length;
 
-      // Kritik Bildirim Kutusu
+      // Tüm hayvanların uyarılarını topla
+      const animalAlertsMap = [];
+      let totalAlertCount = 0;
+      let countIkas = 0;
+      let countRepro = 0;
+      let countVac = 0;
+      let countHealth = 0;
+
+      animals.forEach(a => {
+        const alerts = getAnimalAlerts(a);
+        if (alerts.length > 0) {
+          animalAlertsMap.push({ animal: a, alerts: alerts });
+          totalAlertCount += alerts.length;
+          alerts.forEach(alt => {
+            if (alt.category === "ikas") countIkas++;
+            else if (alt.category === "repro") countRepro++;
+            else if (alt.category === "vaccine") countVac++;
+            else if (alt.category === "health") countHealth++;
+          });
+        }
+      });
+
+      // Filtre hapı sayaçları
+      const pillAll = document.getElementById("pill-count-all");
+      if (pillAll) pillAll.textContent = animalAlertsMap.length;
+      const pillIkas = document.getElementById("pill-count-ikas");
+      if (pillIkas) pillIkas.textContent = countIkas;
+      const pillRepro = document.getElementById("pill-count-repro");
+      if (pillRepro) pillRepro.textContent = countRepro;
+      const pillVac = document.getElementById("pill-count-vaccine");
+      if (pillVac) pillVac.textContent = countVac;
+      const pillHealth = document.getElementById("pill-count-health");
+      if (pillHealth) pillHealth.textContent = countHealth;
+
+      const badgeCount = document.getElementById("animal-alerts-count-badge");
+      if (badgeCount) {
+        badgeCount.textContent = `${animalAlertsMap.length} Hayvan / ${totalAlertCount} Uyarı`;
+        badgeCount.className = animalAlertsMap.length > 0 ? "tag tag-danger" : "tag tag-success";
+      }
+
+      // 1. Kritik Üst Bildirim Kutusu
       const alertBox = document.getElementById("active-alert-box");
       let alertHtml = "";
-      if (blockedEarTags.length > 0) {
-        alertHtml += `
-          <div class="banner-alert banner-danger">
-            🚫 <strong>SÜT UYARISI:</strong> ${blockedEarTags.join(", ")} küpeli hayvanların sütünde ilaç kısıtı vardır! Tank sütüne sağmayın!
+      if (animalAlertsMap.length > 0) {
+        const dangerCount = animalAlertsMap.filter(item => item.alerts.some(al => al.type === 'danger')).length;
+        alertHtml = `
+          <div class="banner-alert banner-danger" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <strong>🚨 HAYVAN BAZLI ALARM: ${animalAlertsMap.length} Hayvanda Toplam ${totalAlertCount} Kritik Uyarı Bulunmaktadır!</strong><br>
+              <small>(${blockedEarTags.length} Süt Kilidi, ${blockedMeatTags.length} Kesim Kilidi, ${dangerCount} Acil Müdahale Gerektiren Hayvan)</small>
+            </div>
+            <button class="btn btn-outline" style="min-height:32px; padding:4px 12px; font-size:0.8rem; background:white; color:#991b1b; border-color:#fca5a5; font-weight:800; width:auto;" onclick="document.getElementById('card-animal-alerts').scrollIntoView({behavior:'smooth'})">
+              Uyarıları İncele ↓
+            </button>
           </div>
         `;
-      }
-      if (blockedMeatTags.length > 0) {
-        alertHtml += `
-          <div class="banner-alert banner-danger" style="background:#450a0a; color:#fca5a5; border:1px solid #991b1b;">
-            🥩 <strong>KESİM / MEZBAHA KİLİDİ:</strong> ${blockedMeatTags.join(", ")} küpeli hayvanlarda karkas/et kalıntısı vardır! Yasal olarak kesime sevk edilemez!
-          </div>
-        `;
-      }
-      if (!alertHtml) {
+      } else {
         alertHtml = `
           <div class="banner-alert banner-success">
-            ✅ Sürüde aktif süt veya kesim kısıtı bulunmamaktadır. Tüm süt ve besi karkasları uygundur.
+            ✅ Sürüde hiçbir hayvanda aktif süt/kesim kısıtı, gecikmiş aşı veya kritik sağlık uyarısı bulunmamaktadır. Tüm hayvanlar güvendedir.
           </div>
         `;
       }
       alertBox.innerHTML = alertHtml;
 
-      // Süt İKAS Özet Listesi
+      // 2. Süt İKAS Özet Listesi
       const ikasList = document.getElementById("dashboard-ikas-list");
       if (blockedEarTags.length > 0) {
-        ikasList.innerHTML = `<strong>Sütü Yasaklılar:</strong> ` + blockedEarTags.map(tag => `<span class="tag tag-danger">${tag}</span>`).join(" ");
+        ikasList.innerHTML = `<strong>Sütü Yasaklılar:</strong> ` + blockedEarTags.map(tag => `<span class="tag tag-danger" style="cursor:pointer;" onclick="showAnimalAlertsByTag('${tag}')">🚫 ${tag}</span>`).join(" ");
       } else {
         ikasList.innerHTML = "Aktif süt arınma kısıtı yok.";
       }
 
-      // Et İKAS Özet Listesi
+      // 3. Et İKAS Özet Listesi
       const meatList = document.getElementById("dashboard-meat-list");
       if (meatList) {
         if (blockedMeatTags.length > 0) {
-          meatList.innerHTML = `<strong>Kesimi Yasaklılar:</strong> ` + blockedMeatTags.map(tag => `<span class="tag tag-danger" style="background:#fee2e2; color:#b91c1c;">🥩 ${tag}</span>`).join(" ");
+          meatList.innerHTML = `<strong>Kesimi Yasaklılar:</strong> ` + blockedMeatTags.map(tag => `<span class="tag tag-danger" style="background:#fee2e2; color:#b91c1c; cursor:pointer;" onclick="showAnimalAlertsByTag('${tag}')">🥩 ${tag}</span>`).join(" ");
         } else {
           meatList.innerHTML = "Aktif kesim/et arınma kilidi olan hayvan yok. Kesime uygundur.";
         }
       }
+
+      // 4. Gösterge Paneli Hayvan Bazlı Uyarı Kartları
+      renderDashboardAnimalAlerts(animalAlertsMap);
     }
 
+    // Gösterge Paneli Hayvan Bazlı Uyarı Listesi
+    function renderDashboardAnimalAlerts(animalAlertsMap) {
+      const container = document.getElementById("dashboard-animal-alerts-list");
+      if (!container) return;
+
+      if (!animalAlertsMap) {
+        animalAlertsMap = [];
+        animals.forEach(a => {
+          const alerts = getAnimalAlerts(a);
+          if (alerts.length > 0) animalAlertsMap.push({ animal: a, alerts: alerts });
+        });
+      }
+
+      // Filtreleme
+      let filtered = animalAlertsMap;
+      if (currentAlertFilter !== "all") {
+        filtered = animalAlertsMap.filter(item => item.alerts.some(al => al.category === currentAlertFilter));
+      }
+
+      if (filtered.length === 0) {
+        if (animalAlertsMap.length === 0) {
+          container.innerHTML = `
+            <div style="text-align:center; padding:16px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; color:#166534; font-size:0.85rem;">
+              ✅ <strong>Harika!</strong> Sürüde herhangi bir aktif hayvan uyarısı bulunmuyor.
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div style="text-align:center; padding:12px; color:#94a3b8; font-size:0.85rem;">
+              Bu kategoride aktif uyarı bulunmamaktadır.
+            </div>
+          `;
+        }
+        return;
+      }
+
+      let html = "";
+      filtered.forEach(item => {
+        const a = item.animal;
+        const matchingAlerts = currentAlertFilter === "all" ? item.alerts : item.alerts.filter(al => al.category === currentAlertFilter);
+        const topAlert = matchingAlerts[0] || item.alerts[0];
+
+        let borderColor = "#cbd5e1";
+        if (matchingAlerts.some(al => al.type === "danger")) borderColor = "#ef4444";
+        else if (matchingAlerts.some(al => al.type === "warning")) borderColor = "#f59e0b";
+        else borderColor = "#0284c7";
+
+        const badgesHtml = item.alerts.map(alt => {
+          const cls = alt.type === "danger" ? "animal-alert-badge-danger" : (alt.type === "warning" ? "animal-alert-badge-warning" : "animal-alert-badge-info");
+          return `<span class="tag ${cls}" style="font-size:0.75rem; padding:3px 7px; margin:2px;">${alt.badgeText}</span>`;
+        }).join(" ");
+
+        html += `
+          <div class="animal-alert-card-item" style="border-left: 5px solid ${borderColor};">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <strong style="font-size:0.95rem; color:var(--primary);">${a.earTag}</strong>
+                  <small style="color:#64748b;">(${a.type} • ${a.gender})</small>
+                </div>
+                <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:4px; align-items:center;">
+                  ${badgesHtml}
+                </div>
+                <div style="margin-top:6px; font-size:0.8rem; color:#475569;">
+                  <strong>⚡ Eylem:</strong> ${topAlert.actionText}
+                </div>
+              </div>
+              <button class="btn btn-outline" style="min-height:32px; padding:4px 12px; font-size:0.8rem; font-weight:700; color:var(--primary); border-color:var(--primary); width:auto;" onclick="showAnimalAlertsModal('${a.id}')">
+                📋 Detay & Eylem
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function filterAnimalAlerts(cat, btn) {
+      currentAlertFilter = cat;
+      const pillsContainer = document.getElementById("animal-alert-filter-pills");
+      if (pillsContainer) {
+        pillsContainer.querySelectorAll("button").forEach(b => {
+          b.className = "btn btn-outline";
+          b.style.fontWeight = "normal";
+        });
+      }
+      if (btn) {
+        btn.className = "btn btn-primary";
+        btn.style.fontWeight = "700";
+      }
+      renderDashboardAnimalAlerts();
+    }
+
+    function showAnimalAlertsByTag(tag) {
+      const animal = animals.find(a => a.earTag === tag || a.id === tag);
+      if (animal) showAnimalAlertsModal(animal.id);
+    }
+
+    // Hayvan Tablosu Render Motoru
     function renderAnimalTable() {
       const tbody = document.querySelector("#animal-table tbody");
       const search = (document.getElementById("animal-search").value || "").toLowerCase();
@@ -2379,14 +2897,32 @@
         let bcsClass = "tag-success";
         if (a.bcs <= 2.0 || a.bcs >= 3.75) bcsClass = "tag-danger";
 
+        const alerts = getAnimalAlerts(a);
+        let alertBadgesHtml = "";
+        if (alerts.length > 0) {
+          alertBadgesHtml = alerts.map(alt => {
+            const cls = alt.type === "danger" ? "animal-alert-badge-danger" : (alt.type === "warning" ? "animal-alert-badge-warning" : "animal-alert-badge-info");
+            return `<span class="tag ${cls}" style="cursor:pointer; font-size:0.75rem; padding:3px 7px; margin:2px;" onclick="showAnimalAlertsModal('${a.id}')" title="${alt.title}: ${alt.desc}">${alt.badgeText}</span>`;
+          }).join("");
+        } else {
+          alertBadgesHtml = `<span class="tag animal-alert-badge-success" style="font-size:0.75rem; padding:3px 7px; cursor:pointer;" onclick="showAnimalAlertsModal('${a.id}')">✅ Sorun Yok</span>`;
+        }
+
         tr.innerHTML = `
-          <td><strong>${a.earTag}</strong></td>
+          <td><strong style="cursor:pointer; color:var(--primary);" onclick="showAnimalAlertsModal('${a.id}')">${a.earTag}</strong></td>
           <td>${a.gender} / ${a.ageMonths} ay</td>
           <td><span class="tag ${bcsClass}">${a.bcs.toFixed(2)}</span></td>
           <td>${a.quarantine ? '<span class="tag tag-warning">Karantinada</span>' : 'Hayır'}</td>
-          <td><small>${a.lastStatus || 'Normal'}</small></td>
           <td>
-            <button class="btn btn-outline" style="min-height:36px; padding:6px 12px; font-size:0.8rem; font-weight:700; color:#dc2626; border-color:#fca5a5; touch-action:manipulation;" onclick="deleteAnimal('${a.id}')">Sil</button>
+            <div style="display:flex; flex-wrap:wrap; gap:3px; align-items:center;">
+              ${alertBadgesHtml}
+            </div>
+          </td>
+          <td>
+            <div style="display:flex; gap:4px; align-items:center;">
+              <button class="btn btn-outline" style="min-height:34px; padding:4px 10px; font-size:0.75rem; font-weight:700; color:var(--primary); border-color:#bae6fd; width:auto; touch-action:manipulation;" onclick="showAnimalAlertsModal('${a.id}')" title="Hayvan Uyarı ve Sağlık Kartı">📋 Uyarılar</button>
+              <button class="btn btn-outline" style="min-height:34px; padding:4px 8px; font-size:0.75rem; font-weight:700; color:#dc2626; border-color:#fca5a5; width:auto; touch-action:manipulation;" onclick="deleteAnimal('${a.id}')">Sil</button>
+            </div>
           </td>
         `;
         tbody.appendChild(tr);
@@ -2400,6 +2936,97 @@
       populateAnimalSelects();
       renderAnimalTable();
       updateDashboardStats();
+    }
+
+    // Hayvan Bazlı Uyarı ve Sağlık Kartı Modalı
+    function showAnimalAlertsModal(animalId) {
+      const animal = animals.find(a => a.id === animalId || a.earTag === animalId);
+      if (!animal) return;
+
+      const alerts = getAnimalAlerts(animal);
+      const titleEl = document.getElementById("animal-alerts-modal-title");
+      const contentEl = document.getElementById("animal-alerts-modal-content");
+      const actionsEl = document.getElementById("animal-alerts-modal-actions");
+
+      titleEl.innerHTML = `🔔 ${animal.earTag} • Sağlık & Uyarı Kartı`;
+
+      let alertsHtml = "";
+      if (alerts.length === 0) {
+        alertsHtml = `
+          <div style="padding:14px; background:#f0fdf4; border:1px solid #86efac; border-radius:8px; color:#166534; font-size:0.85rem; margin-bottom:12px;">
+            ✅ <strong>HERHANGİ BİR RİSK YOK:</strong> Bu hayvan için şu anda aktif süt yasağı, kesim kilidi, gecikmiş aşı veya kritik klinik uyarı bulunmamaktadır. Tüm sağlık parametreleri uygundur.
+          </div>
+        `;
+      } else {
+        alertsHtml = `<div style="margin-bottom:12px;">`;
+        alerts.forEach(alt => {
+          let bColor = "#cbd5e1";
+          let bgBox = "#f8fafc";
+          if (alt.type === "danger") { bColor = "#ef4444"; bgBox = "#fef2f2"; }
+          else if (alt.type === "warning") { bColor = "#f59e0b"; bgBox = "#fffbeb"; }
+          else { bColor = "#0284c7"; bgBox = "#f0f9ff"; }
+
+          alertsHtml += `
+            <div style="border-left:4px solid ${bColor}; background:${bgBox}; border-radius:8px; padding:10px 14px; margin-bottom:10px; border-top:1px solid #e2e8f0; border-right:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
+              <div style="font-weight:800; font-size:0.92rem; color:#1e293b; margin-bottom:4px;">
+                ${alt.title}
+              </div>
+              <div style="font-size:0.82rem; color:#475569; margin-bottom:6px;">
+                ${alt.desc}
+              </div>
+              <div style="font-size:0.78rem; font-weight:700; color:#0284c7; margin-bottom:6px;">
+                ⏱️ ${alt.timeInfo}
+              </div>
+              <div style="font-size:0.82rem; background:rgba(255,255,255,0.7); padding:6px 10px; border-radius:6px; border:1px dashed #cbd5e1; color:#0f172a;">
+                <strong>💡 Yapılacak İşlem:</strong> ${alt.actionText}
+              </div>
+            </div>
+          `;
+        });
+        alertsHtml += `</div>`;
+      }
+
+      contentEl.innerHTML = `
+        <div style="background:#f1f5f9; padding:12px; border-radius:8px; margin-bottom:14px; font-size:0.85rem; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div><strong>Küpe:</strong> ${animal.earTag}</div>
+          <div><strong>Irk/Yön:</strong> ${animal.type}</div>
+          <div><strong>Cinsiyet/Yaş:</strong> ${animal.gender} (${animal.ageMonths} ay)</div>
+          <div><strong>Kondisyon (BCS):</strong> ${animal.bcs.toFixed(2)} / 5.0</div>
+          <div><strong>Ayrı Bölme:</strong> ${animal.quarantine ? '⚠️ Evet (Karantina)' : 'Hayır'}</div>
+          <div><strong>Son Durum:</strong> ${animal.lastStatus || 'Normal'}</div>
+        </div>
+
+        <h4 style="font-size:0.9rem; margin-bottom:8px; color:var(--primary); font-weight:800;">Aktif Uyarılar & Klinik Görevler:</h4>
+        ${alertsHtml}
+      `;
+
+      // Hızlı Aksiyon Butonları
+      actionsEl.innerHTML = `
+        <button class="btn btn-warning" style="width:auto; padding:6px 10px; font-size:0.75rem; white-space:nowrap;" onclick="jumpToAnimalAction('ikas', '${animal.id}')">💊 İlaç Yap</button>
+        <button class="btn btn-info" style="width:auto; padding:6px 10px; font-size:0.75rem; white-space:nowrap;" onclick="jumpToAnimalAction('repro', '${animal.id}')">🩸 Tohum/Doğum</button>
+        <button class="btn btn-primary" style="width:auto; padding:6px 10px; font-size:0.75rem; white-space:nowrap;" onclick="jumpToAnimalAction('triage', '${animal.id}')">🩺 Muayene</button>
+      `;
+
+      document.getElementById("modal-animal-alerts").style.display = "flex";
+    }
+
+    function closeAnimalAlertsModal() {
+      document.getElementById("modal-animal-alerts").style.display = "none";
+    }
+
+    function jumpToAnimalAction(tabId, animalId) {
+      closeAnimalAlertsModal();
+      switchTab(tabId);
+      if (tabId === "ikas") {
+        const sel = document.getElementById("treatment-animal-select");
+        if (sel) sel.value = animalId;
+      } else if (tabId === "repro") {
+        const sel = document.getElementById("repro-animal-select");
+        if (sel) sel.value = animalId;
+      } else if (tabId === "triage") {
+        const sel = document.getElementById("triage-animal-select");
+        if (sel) sel.value = animalId;
+      }
     }
 
     /* =========================================================================
