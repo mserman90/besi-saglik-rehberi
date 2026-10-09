@@ -1876,7 +1876,6 @@
       <button id="header-back-btn" onclick="switchTab('dashboard')" style="display:none; background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:800; cursor:pointer; min-height:38px; touch-action:manipulation;">Ana Menü</button>
       <div>
         <h1>Besi Çiftliği Rehberi</h1>
-        <small style="opacity:0.85; font-size:0.75rem;">Besi Danacılığı • 21 Günlük Karşılama • CAAG Kilo • Et İKAS</small>
       </div>
     </div>
     <div style="display:flex; align-items:center; gap:8px;">
@@ -6182,7 +6181,7 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
     // PWA Service Worker Kaydı (Tam Çevrimdışı Çalışma)
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=2').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=3').then((reg) => {
           reg.update();
         }).catch(() => {});
       });
