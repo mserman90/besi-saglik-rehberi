@@ -230,7 +230,7 @@
       font-size: 0.82rem;
       font-weight: 600;
       margin-bottom: 4px;
-      color: #334155;
+      color:var(--text);
     }
 
     input, select, textarea {
@@ -346,7 +346,7 @@
     th {
       background: #f1f5f9;
       font-weight: 700;
-      color: #334155;
+      color:var(--text);
       position: sticky;
       top: 0;
       z-index: 2;
@@ -384,7 +384,7 @@
       justify-content: center;
       padding: 6px 4px;
       text-decoration: none;
-      color: #64748b;
+      color:var(--text-muted);
       font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
@@ -449,7 +449,7 @@
     .emergency-details {
       margin-top: 8px;
       font-size: 0.85rem;
-      color: #334155;
+      color:var(--text);
       display: none;
       padding-top: 8px;
       border-top: 1px solid #f1f5f9;
@@ -490,7 +490,7 @@
     body.dark-mode textarea {
       background: #0f172a;
       color: #f8fafc;
-      border-color: #334155;
+      border-color:var(--text);
     }
     body.dark-mode input:focus,
     body.dark-mode select:focus,
@@ -500,23 +500,23 @@
     }
     body.dark-mode .stat-card {
       background: #0f172a;
-      border-color: #334155;
+      border-color:var(--text);
     }
     body.dark-mode th {
       background: #0f172a;
       color: #e2e8f0;
-      border-bottom-color: #334155;
+      border-bottom-color:var(--text);
     }
     body.dark-mode td {
-      border-bottom-color: #334155;
+      border-bottom-color:var(--text);
       color: #cbd5e1;
     }
     body.dark-mode .bottom-nav {
       background: #1e293b;
-      border-top-color: #334155;
+      border-top-color:var(--text);
     }
     body.dark-mode .nav-item {
-      color: #94a3b8;
+      color:var(--text-muted);
     }
     body.dark-mode .nav-item.active {
       color: #f87171;
@@ -525,7 +525,7 @@
     body.dark-mode .score-btn {
       background: #0f172a;
       color: #cbd5e1;
-      border-color: #334155;
+      border-color:var(--text);
     }
     body.dark-mode .score-btn.selected {
       background: #15803d;
@@ -533,19 +533,19 @@
       border-color: #15803d;
     }
     body.dark-mode .score-group {
-      border-bottom-color: #334155;
+      border-bottom-color:var(--text);
     }
     body.dark-mode .emergency-card {
       background: #1e293b;
-      border-color: #334155;
+      border-color:var(--text);
       border-left: 5px solid #ef4444;
     }
     body.dark-mode .emergency-details {
-      border-top-color: #334155;
+      border-top-color:var(--text);
       color: #cbd5e1;
     }
     body.dark-mode .btn-outline {
-      border-color: #475569;
+      border-color:var(--text);
       color: #e2e8f0;
     }
     body.dark-mode div[style*="background:#fff"],
@@ -555,7 +555,7 @@
     body.dark-mode div[style*="background:#fafafa"],
     body.dark-mode div[style*="background: #fafafa"] {
       background: #1e293b !important;
-      border-color: #334155 !important;
+      border-color:var(--text) !important;
       color: #cbd5e1 !important;
     }
     body.dark-mode #modal-guide > div,
@@ -626,7 +626,7 @@
     }
     body.dark-mode .animal-alert-card-item {
       background: #1e293b !important;
-      border-color: #334155 !important;
+      border-color:var(--text) !important;
       color: #f1f5f9 !important;
     }
     body.dark-mode #modal-guide div,
@@ -644,25 +644,25 @@
     body.dark-mode div[style*="background: #f8fafc"] {
       background: #1e293b !important;
       color: #cbd5e1 !important;
-      border-color: #334155 !important;
+      border-color:var(--text) !important;
     }
-    body.dark-mode div[style*="color:#334155"],
-    body.dark-mode div[style*="color: #334155"],
-    body.dark-mode div[style*="color:#475569"],
-    body.dark-mode div[style*="color: #475569"],
-    body.dark-mode div[style*="color:#1e293b"],
-    body.dark-mode div[style*="color: #1e293b"],
-    body.dark-mode p[style*="color:#334155"],
-    body.dark-mode p[style*="color:#475569"],
-    body.dark-mode p[style*="color:#374151"],
-    body.dark-mode small[style*="color:#64748b"],
-    body.dark-mode small[style*="color:#475569"],
-    body.dark-mode span[style*="color:#334155"],
-    body.dark-mode span[style*="color:#475569"] {
+    body.dark-mode div[style*="color:var(--text)"],
+    body.dark-mode div[style*="color:var(--text)"],
+    body.dark-mode div[style*="color:var(--text)"],
+    body.dark-mode div[style*="color:var(--text)"],
+    body.dark-mode div[style*="color:var(--text)"],
+    body.dark-mode div[style*="color:var(--text)"],
+    body.dark-mode p[style*="color:var(--text)"],
+    body.dark-mode p[style*="color:var(--text)"],
+    body.dark-mode p[style*="color:var(--text)"],
+    body.dark-mode small[style*="color:var(--text-muted)"],
+    body.dark-mode small[style*="color:var(--text)"],
+    body.dark-mode span[style*="color:var(--text)"],
+    body.dark-mode span[style*="color:var(--text)"] {
       color: #cbd5e1 !important;
     }
-    body.dark-mode ul[style*="color:#334155"],
-    body.dark-mode ol[style*="color:#334155"],
+    body.dark-mode ul[style*="color:var(--text)"],
+    body.dark-mode ol[style*="color:var(--text)"],
     body.dark-mode li {
       color: #cbd5e1 !important;
     }
@@ -859,99 +859,199 @@
       }
     }
   
-    /* ================= SİYAH-BEYAZ (MONOCHROME) ARAYÜZ KURALLARI ================= */
-    header {
-      background: #000000 !important;
-      color: #ffffff !important;
-      border-bottom: 2px solid #000000 !important;
+    /* =========================================================================
+       MAKSİMUM KONTRAST VE KOLAY OKUNABİLİRLİK KURALLARI (SİYAH-BEYAZ)
+       ========================================================================= */
+    :root {
+      --bg: #ffffff;
+      --card-bg: #ffffff;
+      --text: #000000;
+      --text-muted: #262626; /* Yüksek kontrastlı koyu füme (21:1 oran) */
+      --primary: #000000;
+      --primary-hover: #1f1f1f;
+      --primary-light: #f5f5f5;
+      --danger: #000000;
+      --danger-light: #f5f5f5;
+      --warning: #262626;
+      --warning-light: #f5f5f5;
+      --info: #333333;
+      --info-light: #f5f5f5;
+      --border: #000000;
+      --shadow: 0 1px 3px rgba(0,0,0,0.15);
+      --radius: 8px;
     }
-    .card {
-      border: 1.5px solid #000000 !important;
-      box-shadow: none !important;
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
     }
-    .card-title {
+
+    /* Tüm metinlerin zeminle net ayrışması */
+    h1, h2, h3, h4, h5, h6, strong, b {
+      color: #000000;
+      font-weight: 800;
+    }
+
+    p, span, div, li, td {
+      color: var(--text);
+    }
+
+    label {
       color: #000000 !important;
-    }
-    .stat-card {
-      background: #ffffff !important;
-      border: 1.5px solid #000000 !important;
-    }
-    .stat-val {
-      color: #000000 !important;
-    }
-    .stat-label {
-      color: #333333 !important;
       font-weight: 700 !important;
     }
-    input, select, textarea {
+
+    small {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .card {
+      background: #ffffff !important;
       border: 2px solid #000000 !important;
       color: #000000 !important;
+    }
+
+    .card-title {
+      color: #000000 !important;
+      font-weight: 800 !important;
+    }
+
+    .stat-card {
       background: #ffffff !important;
+      border: 2px solid #000000 !important;
+    }
+
+    .stat-val {
+      color: #000000 !important;
+      font-weight: 900 !important;
+    }
+
+    .stat-label {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Giriş alanları: Beyaz zemin, net siyah yazı ve kalın çerçeve */
+    input, select, textarea {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 2px solid #000000 !important;
+      font-weight: 700 !important;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #555555 !important;
     }
     input:focus, select:focus, textarea:focus {
       border-color: #000000 !important;
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.15) !important;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.2) !important;
+    }
+
+    /* Tablo: Siyah başlık zemininde beyaz yazı, hücrelerde siyah yazı */
+    table {
+      border: 2px solid #000000 !important;
     }
     th {
       background: #000000 !important;
       color: #ffffff !important;
       border: 1px solid #000000 !important;
+      font-weight: 800 !important;
     }
     td {
-      border-bottom: 1px solid #000000 !important;
-      color: #000000 !important;
-    }
-    .score-btn.selected {
-      background: #000000 !important;
-      color: #ffffff !important;
-      border-color: #000000 !important;
-    }
-    .emergency-card {
-      border: 1.5px solid #000000 !important;
-      border-left: 6px solid #000000 !important;
-      box-shadow: none !important;
-    }
-    .emergency-card h3 {
-      color: #000000 !important;
-    }
-    .status-hub-card {
-      border: 2px solid #000000 !important;
-      box-shadow: none !important;
-    }
-    .badge-mandatory {
-      background: #000000 !important;
-      color: #ffffff !important;
-      border-color: #000000 !important;
-    }
-    .animal-alert-badge-danger {
-      background: #000000 !important;
-      color: #ffffff !important;
-      border: 1px solid #000000 !important;
-    }
-    .animal-alert-badge-warning {
-      background: #e5e7eb !important;
-      color: #000000 !important;
-      border: 1px solid #000000 !important;
-    }
-    .animal-alert-badge-info {
-      background: #f3f4f6 !important;
-      color: #000000 !important;
-      border: 1px solid #000000 !important;
-    }
-    .animal-alert-badge-success {
       background: #ffffff !important;
       color: #000000 !important;
-      border: 1.5px solid #000000 !important;
+      border-bottom: 1.5px solid #000000 !important;
+      font-weight: 600;
     }
 
-    /* Koyu Mod Siyah-Beyaz */
+    /* Koyu zeminli butonlar: Siyah zemin üzerine net BEYAZ yazı */
+    .btn-primary, .btn-primary *,
+    .btn-danger, .btn-danger *,
+    .btn-warning, .btn-warning *,
+    .btn-info, .btn-info *,
+    .btn-success, .btn-success *,
+    .tag-danger, .tag-danger *,
+    .badge-mandatory, .badge-mandatory *,
+    .score-btn.selected, .score-btn.selected * {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border-color: #000000 !important;
+    }
+
+    /* Açık zeminli butonlar: Beyaz zemin üzerine net SİYAH yazı */
+    .btn-outline, .btn-outline *,
+    .score-btn:not(.selected), .score-btn:not(.selected) *,
+    .tag-success, .tag-success *,
+    .tag-warning, .tag-warning *,
+    .tag-info, .tag-info * {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border-color: #000000 !important;
+    }
+
+    /* Sağımcı Ekranı Durum Kutuları */
+    .milker-status-box.milker-red,
+    .milker-status-box.milker-red * {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border-color: #000000 !important;
+    }
+    .milker-status-box.milker-green,
+    .milker-status-box.milker-green * {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border: 3.5px solid #000000 !important;
+    }
+    .milker-status-box.milker-yellow,
+    .milker-status-box.milker-yellow * {
+      background-color: #f3f4f6 !important;
+      color: #000000 !important;
+      border: 3px dashed #000000 !important;
+    }
+
+    /* Acil Durum Akordiyon Kartları */
+    .emergency-card {
+      background: #ffffff !important;
+      border: 2px solid #000000 !important;
+      border-left: 6px solid #000000 !important;
+    }
+    .emergency-card h3,
+    .emergency-card h3 * {
+      color: #000000 !important;
+    }
+    .emergency-details,
+    .emergency-details * {
+      color: #000000 !important;
+    }
+
+    /* Modal Açılır Pencereler */
+    .modal-overlay > div,
+    #modal-guide > div,
+    #modal-animal > div,
+    #modal-vaccine > div,
+    #modal-scanner > div,
+    #modal-animal-alerts > div {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 2.5px solid #000000 !important;
+    }
+    .modal-overlay * {
+      color: #000000 !important;
+    }
+    .modal-overlay button.btn-primary,
+    .modal-overlay button.btn-primary * {
+      color: #ffffff !important;
+      background: #000000 !important;
+    }
+
+    /* ================= KOYU MOD (DARK MODE) MAKSİMUM KONTRAST ================= */
     body.dark-mode {
-      --bg: #000000 !important;
-      --card-bg: #121212 !important;
-      --text: #ffffff !important;
-      --text-muted: #a3a3a3 !important;
-      --border: #ffffff !important;
-      --primary: #ffffff !important;
+      --bg: #000000;
+      --card-bg: #121212;
+      --text: #ffffff;
+      --text-muted: #e5e7eb;
+      --border: #ffffff;
+      --primary: #ffffff;
     }
     body.dark-mode header {
       background: #171717 !important;
@@ -961,58 +1061,94 @@
     body.dark-mode .stat-card,
     body.dark-mode .emergency-card {
       background: #121212 !important;
-      border-color: #ffffff !important;
+      border: 2px solid #ffffff !important;
       color: #ffffff !important;
     }
-    body.dark-mode .card-title,
-    body.dark-mode .stat-val,
-    body.dark-mode label,
     body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4,
-    body.dark-mode p, body.dark-mode span, body.dark-mode div {
+    body.dark-mode h5, body.dark-mode h6, body.dark-mode strong, body.dark-mode b,
+    body.dark-mode p, body.dark-mode span, body.dark-mode div, body.dark-mode li,
+    body.dark-mode label, body.dark-mode .card-title, body.dark-mode .stat-val,
+    body.dark-mode .stat-label {
       color: #ffffff !important;
+    }
+    body.dark-mode small {
+      color: #e5e7eb !important;
     }
     body.dark-mode input,
     body.dark-mode select,
     body.dark-mode textarea {
       background: #000000 !important;
       color: #ffffff !important;
-      border-color: #ffffff !important;
+      border: 2px solid #ffffff !important;
     }
-    body.dark-mode .btn-primary {
-      background: #ffffff !important;
-      color: #000000 !important;
-      border-color: #ffffff !important;
+    body.dark-mode input::placeholder,
+    body.dark-mode textarea::placeholder {
+      color: #aaaaaa !important;
     }
-    body.dark-mode .btn-outline {
-      background: #000000 !important;
-      color: #ffffff !important;
-      border-color: #ffffff !important;
-    }
-    body.dark-mode .milker-red {
-      background: #ffffff !important;
-      color: #000000 !important;
-      border-color: #ffffff !important;
-    }
-    body.dark-mode .milker-green {
-      background: #000000 !important;
-      color: #ffffff !important;
-      border-color: #ffffff !important;
-    }
-    body.dark-mode .milker-yellow {
-      background: #262626 !important;
-      color: #ffffff !important;
-      border-color: #ffffff !important;
+    body.dark-mode table {
+      border: 2px solid #ffffff !important;
     }
     body.dark-mode th {
       background: #ffffff !important;
       color: #000000 !important;
-      border-color: #ffffff !important;
+      border: 1px solid #ffffff !important;
     }
     body.dark-mode td {
-      border-bottom: 1px solid #404040 !important;
+      background: #121212 !important;
+      border-bottom: 1.5px solid #ffffff !important;
       color: #ffffff !important;
     }
-    
+    body.dark-mode .btn-primary, body.dark-mode .btn-primary *,
+    body.dark-mode .btn-danger, body.dark-mode .btn-danger *,
+    body.dark-mode .btn-warning, body.dark-mode .btn-warning *,
+    body.dark-mode .btn-info, body.dark-mode .btn-info *,
+    body.dark-mode .score-btn.selected, body.dark-mode .score-btn.selected * {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border-color: #ffffff !important;
+    }
+    body.dark-mode .btn-outline, body.dark-mode .btn-outline *,
+    body.dark-mode .score-btn:not(.selected), body.dark-mode .score-btn:not(.selected) * {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border: 2px solid #ffffff !important;
+    }
+    body.dark-mode .milker-status-box.milker-red,
+    body.dark-mode .milker-status-box.milker-red * {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border-color: #ffffff !important;
+    }
+    body.dark-mode .milker-status-box.milker-green,
+    body.dark-mode .milker-status-box.milker-green * {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border: 3.5px solid #ffffff !important;
+    }
+    body.dark-mode .milker-status-box.milker-yellow,
+    body.dark-mode .milker-status-box.milker-yellow * {
+      background-color: #262626 !important;
+      color: #ffffff !important;
+      border: 3px dashed #ffffff !important;
+    }
+    body.dark-mode .modal-overlay > div,
+    body.dark-mode #modal-guide > div,
+    body.dark-mode #modal-animal > div,
+    body.dark-mode #modal-vaccine > div,
+    body.dark-mode #modal-scanner > div,
+    body.dark-mode #modal-animal-alerts > div {
+      background: #121212 !important;
+      color: #ffffff !important;
+      border: 2.5px solid #ffffff !important;
+    }
+    body.dark-mode .modal-overlay * {
+      color: #ffffff !important;
+    }
+    body.dark-mode .modal-overlay button.btn-primary,
+    body.dark-mode .modal-overlay button.btn-primary * {
+      color: #000000 !important;
+      background: #ffffff !important;
+    }
   </style>
 </head>
 <body>
@@ -1063,7 +1199,7 @@
           <h3 style="font-size:1.05rem; font-weight:800; color:#000000; margin:0; display:flex; align-items:center; gap:6px;">
             <span>Besi Durumu Ana Menüsü</span>
           </h3>
-          <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Duruma göre tek tıkla işlem</span>
+          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Duruma göre tek tıkla işlem</span>
         </div>
 
         <div style="display:flex; flex-direction:column; gap:10px;">
@@ -1075,7 +1211,7 @@
                 <div style="font-weight:800; font-size:0.98rem; color:#000000; display:flex; align-items:center; gap:6px;">
                   1. HASTA / ACİL DANA
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Besi acilleri (CCN, idrar taşı, arpa vurması (tırnak iltihabı), işkembe gaz şişmesi), muayene ve mezbaha kilidi</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Besi acilleri (CCN, idrar taşı, arpa vurması (tırnak iltihabı), işkembe gaz şişmesi), muayene ve mezbaha kilidi</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
@@ -1092,7 +1228,7 @@
                 <div style="font-weight:800; font-size:0.98rem; color:#000000; display:flex; align-items:center; gap:6px;">
                   2. YENİ DANA GİRİŞ & 21 GÜN KARŞILAMA
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Kamyondan indirme, nakliye humması (BRD) önleme, can suyu ve kademeli yem</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Kamyondan indirme, nakliye humması (BRD) önleme, can suyu ve kademeli yem</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
@@ -1108,7 +1244,7 @@
                 <div style="font-weight:800; font-size:0.98rem; color:#000000; display:flex; align-items:center; gap:6px;">
                   3. KİLO, CAAG & MEZBAHA GELİRİ
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Kantar/şerit metre tartımı, günlük kilo artışı ve %58 karkas randımanı hesabı</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Kantar/şerit metre tartımı, günlük kilo artışı ve %58 karkas randımanı hesabı</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
@@ -1124,7 +1260,7 @@
                 <div style="font-weight:800; font-size:0.98rem; color:#c2410c; display:flex; align-items:center; gap:6px;">
                   4. YEMLİK, ASİDOZ & MASRAF DEFTERİ
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Yemlik bunk skoru, tezek kıvamı, tampon karbonat, aşı ve hastalık fire hesabı</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Yemlik bunk skoru, tezek kıvamı, tampon karbonat, aşı ve hastalık fire hesabı</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
@@ -1150,7 +1286,7 @@
                 <div style="font-weight:800; font-size:0.98rem; color:#000000; display:flex; align-items:center; gap:6px;">
                   SAĞIM & SÜT GÜVENLİĞİ
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Tanka antibiyotik dökülmesini ve cezaları önleyin</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Tanka antibiyotik dökülmesini ve cezaları önleyin</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
@@ -1166,7 +1302,7 @@
                 <div style="font-weight:800; font-size:0.98rem; color:#c2410c; display:flex; align-items:center; gap:6px;">
                   YENİ DOĞUM, BUZAĞI & GEBELİK
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Ağız sütü kalitesi, buzağı ishal serumu ve tohumlama takibi</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Ağız sütü kalitesi, buzağı ishal serumu ve tohumlama takibi</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
@@ -1179,10 +1315,10 @@
           <div class="card" style="margin-bottom:0; border-left:5px solid #475569; padding:12px 14px; background:linear-gradient(to right, #f8fafc, #ffffff);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
               <div>
-                <div style="font-weight:800; font-size:0.98rem; color:#334155; display:flex; align-items:center; gap:6px;">
+                <div style="font-weight:800; font-size:0.98rem; color:var(--text); display:flex; align-items:center; gap:6px;">
                   YENİ GELEN / SÜRÜYE GİRİŞ & AŞI
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Yeni hayvan ekleme, 21 günlük besiye alıştırma ve aşı planı</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Yeni hayvan ekleme, 21 günlük besiye alıştırma ve aşı planı</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
@@ -1199,7 +1335,7 @@
                 <div style="font-weight:800; font-size:0.98rem; color:#000000; display:flex; align-items:center; gap:6px;">
                   BESİ, KİLO & YEMLİK TAKİBİ
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Kantar/şerit metre tartımı, günlük kilo artışı ve geviş sayacı</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Kantar/şerit metre tartımı, günlük kilo artışı ve geviş sayacı</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
@@ -1215,7 +1351,7 @@
 
       <div class="card" style="border-left: 4px solid #000000;">
         <div class="card-title" style="color:#000000;">Mezbaha & Kesim İzni Hızlı Kontrol Paneli (Et İKAS)</div>
-        <p style="font-size:0.78rem; color:#64748b; margin-bottom:8px;">İlaç yapıldıktan sonra karkasta antibiyotik/ağrı kesici kalıntısı kalan danalar yasal olarak kesilemez. Küpe numarasını yazın, okutun veya sesle söyleyin:</p>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:8px;">İlaç yapıldıktan sonra karkasta antibiyotik/ağrı kesici kalıntısı kalan danalar yasal olarak kesilemez. Küpe numarasını yazın, okutun veya sesle söyleyin:</p>
         
         <div style="display:flex; gap:6px; margin-bottom:8px;">
           <input type="text" id="slaughter-search" placeholder="Örn: TR16001" oninput="checkSlaughterStatus()" style="font-size:1.15rem; font-weight:800; padding:10px; text-transform:uppercase; margin-bottom:0;">
@@ -1224,11 +1360,11 @@
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:0.8rem; background:#f8fafc; padding:6px 10px; border-radius:6px; border:1px solid #e2e8f0; flex-wrap:wrap; gap:6px;">
-          <div id="voice-slaughter-status" style="color:#64748b; font-weight:600;">
+          <div id="voice-slaughter-status" style="color:var(--text-muted); font-weight:600;">
             <strong>Eller Serbest:</strong> Kırmızı mikrofona dokunun ve küpeyi söyleyin
           </div>
           <div style="display:flex; align-items:center; gap:10px;">
-            <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0; cursor:pointer; color:#475569; font-weight:700;">
+            <label style="display:inline-flex; align-items:center; gap:5px; margin-bottom:0; cursor:pointer; color:var(--text); font-weight:700;">
               <input type="checkbox" id="slaughter-voice-feedback-toggle" checked style="margin-bottom:0; width:16px; height:16px; accent-color:#000000;">
               Sesli Cevap
             </label>
@@ -1239,7 +1375,7 @@
         <div id="slaughter-result-box" style="margin-bottom:12px;"></div>
 
         <div style="font-weight:700; color:#000000; margin-bottom:4px; font-size:0.85rem;">ŞU AN KESİM KİLİDİ OLAN TÜM DANALAR:</div>
-        <div id="dashboard-meat-list" style="font-size:0.85rem; color:#475569;">
+        <div id="dashboard-meat-list" style="font-size:0.85rem; color:var(--text);">
           Şu an kesim kilidi olan hayvan bulunmuyor.
         </div>
       </div>
@@ -1250,7 +1386,7 @@
           <div class="card-title" style="margin-bottom:0;">Hayvan Bazlı Kritik Uyarılar & Takip Listesi</div>
           <span class="tag tag-danger" id="animal-alerts-count-badge" style="font-size:0.75rem; font-weight:800;">Aktif Uyarı Yok</span>
         </div>
-        <p style="font-size:0.78rem; color:#64748b; margin-bottom:10px;">
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:10px;">
           Kesim kilidi (Et İKAS), 21 günlük besi alıştırma, aşı/parazit zamanı veya sağlık riski bulunan danaların acil eylem listesi:
         </p>
         <div style="display:flex; gap:6px; margin-bottom:10px; overflow-x:auto; padding-bottom:4px;" id="animal-alert-filter-pills">
@@ -1262,15 +1398,15 @@
           <button class="btn btn-outline" style="min-height:30px; padding:3px 10px; font-size:0.75rem; border-radius:15px; width:auto;" onclick="filterAnimalAlerts('health', this)">Sağlık & Karantina</button>
         </div>
         <div id="animal-alerts-eartags-bar" style="margin-bottom:10px; padding:8px 10px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; font-size:0.82rem;">
-          <div style="font-weight:700; color:#334155; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+          <div style="font-weight:700; color:var(--text); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
             <span>Uyarılı Küpe Numaraları:</span>
           </div>
           <div id="animal-alerts-eartags-chips" style="display:flex; flex-wrap:wrap; gap:5px;">
-            <span style="color:#94a3b8; font-size:0.78rem;">Aktif uyarılı hayvan bulunmuyor.</span>
+            <span style="color:var(--text-muted); font-size:0.78rem;">Aktif uyarılı hayvan bulunmuyor.</span>
           </div>
         </div>
         <div id="dashboard-animal-alerts-list">
-          <div style="text-align:center; padding:12px; color:#94a3b8; font-size:0.85rem;">
+          <div style="text-align:center; padding:12px; color:var(--text-muted); font-size:0.85rem;">
             Aktif hayvan uyarısı bulunmamaktadır.
           </div>
         </div>
@@ -1303,10 +1439,10 @@
       <!-- Veri Yedekleme ve Güvenlik -->
       <div class="card" style="background:#f8fafc; border:1px solid #cbd5e1;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <div style="font-weight:700; color:#334155; font-size:0.88rem;">Çiftlik Veri Güvenliği & Çevrimdışı Yedekleme</div>
-          <span style="font-size:0.75rem; color:#64748b;">%100 Cihazınızda Saklanır</span>
+          <div style="font-weight:700; color:var(--text); font-size:0.88rem;">Çiftlik Veri Güvenliği & Çevrimdışı Yedekleme</div>
+          <span style="font-size:0.75rem; color:var(--text-muted);">%100 Cihazınızda Saklanır</span>
         </div>
-        <p style="font-size:0.78rem; color:#64748b; margin-bottom:10px;">
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:10px;">
           Tüm besi danalarınızı, tartım ve aşı kayıtlarınızı tek tıkla telefonunuza indirin veya yeni telefona aktarın.
         </p>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
@@ -1326,11 +1462,11 @@
         <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:#000000; color:#000000; background:white; display:inline-flex; align-items:center; gap:6px;">
           Ana Menüye Dön
         </button>
-        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Ahır Özeti ✕</span>
       </div>
       <div class="card">
         <div class="card-title">Hasta Hayvan Kontrolü & Ateş Ölçümü</div>
-        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
+        <p style="font-size:0.8rem; color:var(--text); margin-bottom:10px;">
           Hasta görünen dananın ateşini, nabzını ve işkembesini ölçüp aciliyet derecesini anlayın:
         </p>
         
@@ -1344,12 +1480,12 @@
           <div>
             <label for="vital-temp">Makat Ateşi (°C):</label>
             <input type="number" id="vital-temp" step="0.1" value="38.8" oninput="calculateTriage()">
-            <small id="temp-hint" style="font-size:0.75rem; color:#64748b;">Normal: 38.0 - 39.3°C</small>
+            <small id="temp-hint" style="font-size:0.75rem; color:var(--text-muted);">Normal: 38.0 - 39.3°C</small>
           </div>
           <div>
             <label for="vital-pulse">Kalp / Nabız (1 dakikada):</label>
             <input type="number" id="vital-pulse" value="65" oninput="calculateTriage()">
-            <small style="font-size:0.75rem; color:#64748b;">Normal: 48 - 84 atım</small>
+            <small style="font-size:0.75rem; color:var(--text-muted);">Normal: 48 - 84 atım</small>
           </div>
         </div>
 
@@ -1357,7 +1493,7 @@
           <div>
             <label for="vital-resp">Nefes Sayısı (1 dakikada):</label>
             <input type="number" id="vital-resp" value="32" oninput="calculateTriage()">
-            <small style="font-size:0.75rem; color:#64748b;">Normal: 26 - 50 nefes</small>
+            <small style="font-size:0.75rem; color:var(--text-muted);">Normal: 26 - 50 nefes</small>
           </div>
           <div>
             <label for="vital-rumen">İşkembe Çalışması (Sol Boşluk):</label>
@@ -1413,7 +1549,7 @@
 
         <div class="score-group">
           <div class="score-label"><span>4. Ateş Puanı (Yukarıdaki dereceden gelir)</span><span id="score-val-t">0/3</span></div>
-          <small style="color:#64748b; font-size:0.75rem;">Ateş 39.5°C ve üstü ise otomatik puan eklenir</small>
+          <small style="color:var(--text-muted); font-size:0.75rem;">Ateş 39.5°C ve üstü ise otomatik puan eklenir</small>
         </div>
 
         <!-- Karar Kutusu -->
@@ -1436,11 +1572,11 @@
         <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:#000000; color:#000000; background:white; display:inline-flex; align-items:center; gap:6px;">
           Ana Menüye Dön
         </button>
-        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Ahır Özeti ✕</span>
       </div>
       <div class="card">
         <div class="card-title">İlaç Kaydı & Mezbaha Kesim Kilidi (Et İKAS)</div>
-        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
+        <p style="font-size:0.8rem; color:var(--text); margin-bottom:10px;">
           İğne veya ilaç yapıldığında et arınma süresini otomatik hesaplar. Yasal arınma süresi dolana kadar danayı mezbahaya veya kasaba göndermenizi engeller.
         </p>
 
@@ -1520,17 +1656,17 @@
         <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:#000000; color:#000000; background:white; display:inline-flex; align-items:center; gap:6px;">
           Ana Menüye Dön
         </button>
-        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Ahır Özeti ✕</span>
       </div>
       <div class="card" style="border-top: 4px solid #b91c1c;">
         <div class="card-title" style="color:#000000;">Besi Tedavi Masrafı & Büyüme/Fire Zarar Defteri</div>
-        <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
+        <p style="font-size:0.8rem; color:var(--text); margin-bottom:12px;">
           Hasta dananın veteriner parası, ilaç masrafı ve <strong>hastalık yüzünden yaşanan kilo kaybı / duraklamanın (canlı ağırlık firesi) cebinizden götürdüğü parayı</strong> hesaplar.
         </p>
 
         <!-- Çiftlik Referans Fiyat Ayarları -->
         <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:10px; margin-bottom:12px;">
-          <div style="font-weight:700; font-size:0.85rem; color:#1e293b; margin-bottom:6px;">Canlı Baskül Referans Satış Fiyatınız:</div>
+          <div style="font-weight:700; font-size:0.85rem; color:var(--text); margin-bottom:6px;">Canlı Baskül Referans Satış Fiyatınız:</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
               <label for="farm-beef-price">Canlı Baskül Satış Fiyatı (TL/kg):</label>
@@ -1588,12 +1724,12 @@
             <div>
               <label for="cost-weight-loss">Tahmini Canlı Kilo Kaybı / Duraklama (kg):</label>
               <input type="number" id="cost-weight-loss" value="15" step="1" oninput="calculateLiveCostEntry()">
-              <small style="color:#64748b; font-size:0.75rem;">Hastalık sürecinde kaybedilen veya duraklayan canlı ağırlık</small>
+              <small style="color:var(--text-muted); font-size:0.75rem;">Hastalık sürecinde kaybedilen veya duraklayan canlı ağırlık</small>
             </div>
             <div>
               <label for="cost-recovery-days">İyileşme / Duraklama Süresi (Gün):</label>
               <input type="number" id="cost-recovery-days" value="14" step="1" oninput="calculateLiveCostEntry()">
-              <small style="color:#64748b; font-size:0.75rem;">Yem tüketiminin normale döndüğü gün sayısı</small>
+              <small style="color:var(--text-muted); font-size:0.75rem;">Yem tüketiminin normale döndüğü gün sayısı</small>
             </div>
           </div>
 
@@ -1664,11 +1800,11 @@
         <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:#000000; color:#000000; background:white; display:inline-flex; align-items:center; gap:6px;">
           Ana Menüye Dön
         </button>
-        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Ahır Özeti ✕</span>
       </div>
       <div class="card" style="border-top: 4px solid #15803d;">
         <div class="card-title" style="color:#000000;">Yemlik Düzeni, İşkembe Ekşimesi & Geviş Sayacı</div>
-        <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
+        <p style="font-size:0.8rem; color:var(--text); margin-bottom:12px;">
           Fabrika yemi fazla gelip saman az kaldığında işkembe ekşir <strong>(İşkembe Ekşimesi (Asidoz))</strong>. Geviş getirme oranına ve tezek kıvamına bakarak erkenden önlem alın.
         </p>
 
@@ -1677,7 +1813,7 @@
           <div style="font-weight:700; color:#166534; font-size:0.9rem; margin-bottom:6px;">
             1. Yatan Danaların Geviş Getirme Oranı (Hedef: En Az 10 Danadan 6'sı)
           </div>
-          <p style="font-size:0.78rem; color:#374151; margin-bottom:8px;">
+          <p style="font-size:0.78rem; color:var(--text); margin-bottom:8px;">
             Yem döküldükten veya sağımdan 2 saat sonra içeri girin. Yatan danaları sayın; en az yarısından fazlası (%58-60) ağzını gevişle geveliyor olmalıdır.
           </p>
 
@@ -1699,7 +1835,7 @@
 
         <!-- 2. Dışkı Skoru ve Sindirim Eleği Değerlendirmesi -->
         <div class="card" style="background:#fff; border:1px solid #e2e8f0; margin-bottom:12px;">
-          <div style="font-weight:700; color:#1e293b; font-size:0.9rem; margin-bottom:6px;">
+          <div style="font-weight:700; color:var(--text); font-size:0.9rem; margin-bottom:6px;">
             2. Tezek Kıvamı &amp; Tezeğe Kaçan Bütün Yem Tanesi (1-5 Puanı)
           </div>
           <label for="feed-manure-score">Ahırdaki Tezeklerin Genel Hali Nasıl?:</label>
@@ -1725,10 +1861,10 @@
 
         <!-- 3. Yemlik Kalan Yem (Ortus) & Seçme Kontrolü -->
         <div class="card" style="background:#fff; border:1px solid #e2e8f0; margin-bottom:12px;">
-          <div style="font-weight:700; color:#1e293b; font-size:0.9rem; margin-bottom:6px;">
+          <div style="font-weight:700; color:var(--text); font-size:0.9rem; margin-bottom:6px;">
             3. Yemlikte Kalan Artık Yem Miktarı
           </div>
-          <p style="font-size:0.78rem; color:#475569; margin-bottom:8px;">
+          <p style="font-size:0.78rem; color:var(--text); margin-bottom:8px;">
             Yeni yem dökmeden hemen önce yemliğin dibinde dökülen yemin %3 ila %5'i kadar artık kalmalıdır (Yemlik ne bomboş ne de tepeleme olmalı).
           </p>
 
@@ -1778,7 +1914,7 @@
         </div>
 
         <!-- Bilimsel Saha İpuçları (Merck Vet) -->
-        <div class="card" style="background:#fafafa; border:1px dashed #cbd5e1; margin-top:12px; font-size:0.8rem; line-height:1.6; color:#334155;">
+        <div class="card" style="background:#fafafa; border:1px dashed #cbd5e1; margin-top:12px; font-size:0.8rem; line-height:1.6; color:var(--text);">
           <strong>Ahır İpuçları - İşkembe Ekşimesi (Gizli İşkembe Ekşimesi (Hafif Asidoz)) Rehberi:</strong>
           <br>• <strong>İşkembenin Asit Eşiği:</strong> Fabrika yemi çok verilip saman az tutulduğunda işkembenin asidi yükselir (pH 5.5 altına iner) ve mikrop düzeni bozulur, inek yemi sindiremez.
           <br>• <strong>Ahırda Nasıl Anlaşılır?:</strong> İneklerin biri yiyip biri yemez, süt yağı birden düşer, tırnaklar uzayıp hayvan topallamaya başlar, tezek sarı ve köpüklü çıkar.
@@ -1801,11 +1937,11 @@
         <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:#000000; color:#000000; background:white; display:inline-flex; align-items:center; gap:6px;">
           Ana Menüye Dön
         </button>
-        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Ahır Özeti ✕</span>
       </div>
       <div class="card">
         <div class="card-title">Akıllı Sığır Aşı Takvimi</div>
-        <p style="font-size:0.8rem; color:#475569; margin-bottom:10px;">
+        <p style="font-size:0.8rem; color:var(--text); margin-bottom:10px;">
           T.C. Tarım ve Orman Bakanlığı zorunlu aşıları (Şap, Brusella, LSD) ve koruyucu sürü bağışıklık protokolleri.
         </p>
 
@@ -1832,7 +1968,7 @@
 
       <div class="card">
         <div class="card-title">Aşı Takvimi Rehberi & İkinci Doz (Aşı Tazeleme) Kuralları</div>
-        <div style="font-size:0.82rem; line-height:1.6; color:#334155;">
+        <div style="font-size:0.82rem; line-height:1.6; color:var(--text);">
           <p><strong>• Şap Aşısı:</strong> 4 aylıkken ilk aşı vurulur, 1 ay sonra pekiştirme (ikinci) dozu yapılır. Yılda 2–3 kez tekrarlanır. Hayvan pazara veya başka yere sevk edilecekse aşının üzerinden en az 21 gün geçmiş olmalıdır.</p>
           <p><strong>• Brusella (Yavru Atma Aşısı - S19):</strong> 3–6 aylık dişi buzağılara göz damlası olarak damlatılır. Tek doz ömür boyu korur ve mecburidir.</p>
           <p><strong>• Çiçek / LSD (Yumrulu Deri Hastalığı):</strong> 3 aylıktan büyük hayvanlara her bahar başında yapılır. Yılda 1 defa mecburi aşıdır.</p>
@@ -1856,11 +1992,11 @@
         <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:#000000; color:#000000; background:white; display:inline-flex; align-items:center; gap:6px;">
           Ana Menüye Dön
         </button>
-        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Ahır Özeti ✕</span>
       </div>
       <div class="card">
         <div class="card-title">Canlı Ağırlık & Besi CAAG Takip Motoru</div>
-        <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
+        <p style="font-size:0.8rem; color:var(--text); margin-bottom:12px;">
           İster <strong>Kantar/Baskül</strong> tartımı yapın, ister şerit metreyle <strong>Schaeffer Formülü</strong> kullanın. Periyodik tartımlarla Günlük Canlı Ağırlık Artışını (CAAG) hesaplayın ve besi performansını izleyin.
         </p>
 
@@ -1890,7 +2026,7 @@
 
         <!-- 2. Mod: Şerit Metre / Mezurayla Ölçüm -->
         <div id="weight-tape-box" style="display:none;">
-          <div style="background:#f8fafc; padding:10px; border-radius:8px; margin-bottom:10px; font-size:0.8rem; color:#334155; border:1px solid #e2e8f0;">
+          <div style="background:#f8fafc; padding:10px; border-radius:8px; margin-bottom:10px; font-size:0.8rem; color:var(--text); border:1px solid #e2e8f0;">
             <strong>Şerit Metre Ölçüm Rehberi (Schaeffer Formülü):</strong><br>
             • <strong>Göğüs Çevresi:</strong> Ön ayakların hemen arkasından, kürek kemiği üzerinden mezurayla sıkmadan sarın.<br>
             • <strong>Vücut Uzunluğu:</strong> Omuz başı çıkıntısı ile kalça oturga yumrusu arası düz mesafe.
@@ -1930,13 +2066,13 @@
         <div class="card" style="background:#e8f5e9; border:2px solid #2e7d32; text-align:center; padding:12px; margin-top:4px;">
           <div style="font-size:0.85rem; font-weight:700; color:#1b5e20;">GÜNCEL CANLI AĞIRLIK:</div>
           <div id="calculated-live-weight" style="font-size:2.2rem; font-weight:900; color:#1b5e20; margin:2px 0;">450 kg</div>
-          <div id="weight-method-badge" style="font-size:0.75rem; color:#475569;">Kantar Tartımı</div>
+          <div id="weight-method-badge" style="font-size:0.75rem; color:var(--text);">Kantar Tartımı</div>
         </div>
 
         <!-- CAAG Önizleme ve Besi Performans Kartı -->
         <div id="caag-live-preview" style="background:#fff7ed; border:1.5px solid #f97316; border-radius:8px; padding:12px; margin-top:10px;">
           <div style="font-weight:800; color:#9a3412; font-size:0.95rem;">Günlük Canlı Ağırlık Artışı (CAAG) Analizi:</div>
-          <div id="caag-preview-content" style="font-size:0.85rem; color:#334155; margin-top:6px; line-height:1.6;">
+          <div id="caag-preview-content" style="font-size:0.85rem; color:var(--text); margin-top:6px; line-height:1.6;">
             Bu hayvan için henüz önceki bir tartım kaydı bulunmuyor. Bu kayıt <strong>"Başlangıç Tartımı"</strong> olarak referans alınacaktır.
           </div>
         </div>
@@ -1948,13 +2084,13 @@
 
         <!-- Otomatik Dozaj ve Besi Kuru Madde İhtiyacı -->
         <div class="card" style="background:#fff; border:1px solid #cbd5e1; margin-top:14px;">
-          <div style="font-weight:700; color:#334155; font-size:0.88rem; margin-bottom:6px;">Bu Kiloya Göre Otomatik Klinik Dozlar & Besi İhtiyacı:</div>
-          <ul id="weight-drug-doses" style="font-size:0.82rem; line-height:1.7; padding-left:18px; color:#334155;"></ul>
+          <div style="font-weight:700; color:var(--text); font-size:0.88rem; margin-bottom:6px;">Bu Kiloya Göre Otomatik Klinik Dozlar & Besi İhtiyacı:</div>
+          <ul id="weight-drug-doses" style="font-size:0.82rem; line-height:1.7; padding-left:18px; color:var(--text);"></ul>
         </div>
 
         <!-- Kesim Randımanı & Karkas Tahmin Kartı -->
         <div class="card" style="background:#f8fafc; border:1px solid #cbd5e1; margin-top:12px;">
-          <div style="font-weight:700; color:#1e293b; font-size:0.88rem; margin-bottom:6px;">Kesim / Karkas & Randıman Simülatörü:</div>
+          <div style="font-weight:700; color:var(--text); font-size:0.88rem; margin-bottom:6px;">Kesim / Karkas & Randıman Simülatörü:</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
             <div>
               <label for="slaughter-yield-percent">Tahmini Karkas Randımanı (%):</label>
@@ -1970,7 +2106,7 @@
               <input type="number" id="carcass-meat-price" value="380" step="5" oninput="updateCarcassEstimate()">
             </div>
           </div>
-          <div id="carcass-estimate-result" style="background:#f1f5f9; border-radius:6px; padding:10px; margin-top:6px; font-size:0.85rem; color:#334155; line-height:1.6;">
+          <div id="carcass-estimate-result" style="background:#f1f5f9; border-radius:6px; padding:10px; margin-top:6px; font-size:0.85rem; color:var(--text); line-height:1.6;">
             <!-- Dinamik doldurulur -->
           </div>
         </div>
@@ -2014,11 +2150,11 @@
         <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:#000000; color:#000000; background:white; display:inline-flex; align-items:center; gap:6px;">
           Ana Menüye Dön
         </button>
-        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Ahır Özeti ✕</span>
       </div>
       <div class="card">
         <div class="card-title">Yeni Dana Giriş & Besiye Alıştırma Protokolü</div>
-        <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
+        <p style="font-size:0.8rem; color:var(--text); margin-bottom:12px;">
           Pazardan, kamyondan veya başka ilden gelen yeni besi danalarında <strong>Nakliye Stresi (Shipping Fever)</strong>, solunum yolu salgınları ve ani yem geçişi kaynaklı ölümcül rumen asidozunu önleme rehberi.
         </p>
 
@@ -2070,7 +2206,7 @@
         <!-- Gün Gün Alıştırma Takvimi & İş Takibi -->
         <div class="card" style="background:#ffffff; border:1.5px solid #000000; margin-bottom:12px;">
           <div style="font-weight:800; color:#000000; font-size:0.95rem; margin-bottom:8px;">21 Günlük Adım Adım Alıştırma Protokolü:</div>
-          <div id="arrival-timeline-content" style="font-size:0.83rem; line-height:1.7; color:#334155;">
+          <div id="arrival-timeline-content" style="font-size:0.83rem; line-height:1.7; color:var(--text);">
             <!-- Dinamik doldurulur -->
           </div>
         </div>
@@ -2078,7 +2214,7 @@
         <!-- 2. Adım: 21 Günlük Adım Adım Yem Geçiş Programı (TMR / Kaba / Kesif Yem) -->
         <div class="card" style="background:#fff; border:1px solid #cbd5e1; margin-bottom:12px;">
           <div style="font-weight:700; color:#000000; font-size:0.92rem; margin-bottom:8px;">Besiye Alıştırma Yem Tablosu (250-300 kg Dana İçin)</div>
-          <p style="font-size:0.78rem; color:#64748b; margin-bottom:8px;">
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:8px;">
             İşkembe mikroplarının arpa ve fabrika yemini sindirmeye alışması en az 2–3 hafta sürer. Erken arpa yüklemesi <strong>asidoz, tırnak düşmesi ve ani ölüme</strong> yol açar.
           </p>
           <div class="table-container">
@@ -2130,7 +2266,7 @@
         <!-- 3. Adım: Giriş Sağlık & Toplu Koruyucu Tedavi Dozaj Motoru -->
         <div class="card" style="background:#fff; border:1px solid #cbd5e1; margin-bottom:12px;">
           <div style="font-weight:700; color:#000000; font-size:0.92rem; margin-bottom:8px;">Giriş Sağlık & Koruma (Toplu Koruyucu Tedavi) Önerileri</div>
-          <div id="arrival-doses-box" style="font-size:0.83rem; line-height:1.7; color:#334155;">
+          <div id="arrival-doses-box" style="font-size:0.83rem; line-height:1.7; color:var(--text);">
             <!-- Dinamik doldurulur -->
           </div>
         </div>
@@ -2179,7 +2315,7 @@
         <button class="btn btn-outline" onclick="switchTab('dashboard')" style="width:auto; padding:6px 14px; font-weight:800; font-size:0.82rem; border-color:#000000; color:#000000; background:white; display:inline-flex; align-items:center; gap:6px;">
           Ana Menüye Dön
         </button>
-        <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Ahır Özeti ✕</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Ahır Özeti ✕</span>
       </div>
       <div class="banner-alert banner-danger">
         <strong>ÖNEMLİ:</strong> Bu protokoller veteriner hekim çiftliğe ulaşana kadar hastanın yaşama şansını artırmak için acil ilk yardım adımlarıdır.
@@ -2195,14 +2331,14 @@
             10.0 mL
           </div>
         </div>
-        <small style="color:#64748b; font-size:0.75rem;">Kural: 1:1000 Adrenalin Solüsyonundan her 45 kg canlı ağırlık için 1 mL (SC veya IM)</small>
+        <small style="color:var(--text-muted); font-size:0.75rem;">Kural: 1:1000 Adrenalin Solüsyonundan her 45 kg canlı ağırlık için 1 mL (SC veya IM)</small>
       </div>
 
       <!-- Acil Kartlar -->
       <div class="emergency-card" onclick="toggleEmergency('em-anaphylaxis')">
         <h3><span>İğne / Aşı Şoku (Alerji & Yere Yıkılma)</span> <span>▼</span></h3>
         <div id="em-anaphylaxis" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Aşı veya iğne yapılır yapılmaz hayvan aniden titreyip yere devrilirse:</p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Aşı veya iğne yapılır yapılmaz hayvan aniden titreyip yere devrilirse:</p>
           <ol style="padding-left:18px; line-height:1.6;">
             <li><strong>İğneyi Derhal Durdurun!</strong> İlaç vermeyi hemen kesin.</li>
             <li><strong>Adrenalin İğnesi Vurun:</strong> Yukarıdaki hesaplayıcıdan çıkan miktarı (örneğin 450 kiloluk hayvana 10 cc Adrenalin) derhal boyundan deri altına veya ete vurun.</li>
@@ -2215,7 +2351,7 @@
       <div class="emergency-card" onclick="toggleEmergency('em-bloat')">
         <h3><span>İşkembe Gazı & Şişmesi (Sol Boşluğun Davul Gibi Şişmesi)</span> <span>▼</span></h3>
         <div id="em-bloat" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Yonca veya taze ot yedikten sonra sol açlık çukuru davul gibi şişip hayvan nefes alamıyorsa:</p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Yonca veya taze ot yedikten sonra sol açlık çukuru davul gibi şişip hayvan nefes alamıyorsa:</p>
           <ol style="padding-left:18px; line-height:1.6;">
             <li><strong>Sol Boşluğu Kontrol Edin:</strong> Sol karın sırt çizgisinden yukarı taşmışsa, hayvan ağzını açıp dilini dışarı çıkarıyorsa boğulma tehlikesi vardır.</li>
             <li><strong>Hortum (Mide Sondası) Salın:</strong> Ağzından kalın temiz hortum salarak gazı çıkarmayı deneyin.</li>
@@ -2232,7 +2368,7 @@
       <div class="emergency-card" onclick="toggleEmergency('em-choke')">
         <h3><span>Yemek Borusu Tıkanması (Patates / Pancar / Yabancı Cisim Boğulması)</span> <span>▼</span></h3>
         <div id="em-choke" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Hayvan bütün patates, elma, pancar yedikten sonra aniden öksürüyor, ağzından yoğun köpüklü salya akıtıyor ve sol açlık çukuru şişmeye başlıyorsa:</p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Hayvan bütün patates, elma, pancar yedikten sonra aniden öksürüyor, ağzından yoğun köpüklü salya akıtıyor ve sol açlık çukuru şişmeye başlıyorsa:</p>
           <ol style="padding-left:18px; line-height:1.6;">
             <li><strong>Boğazı (Yemek Borusunu) Elle Yoklayın:</strong> Boynun sol oluğunu elinizle yukarıdan aşağı yoklayın; tıkanan sert yumru genellikle boyun bölgesinde ele gelir.</li>
             <li><strong>Yukarı Doğru Sıvazlama:</strong> Tıkanıklık boğazın üst tarafındaysa, iki elle cismi yukarı ağza doğru nazikçe masajla itin ve bir kişi ağzı açarak elle dışarı alsın.</li>
@@ -2245,7 +2381,7 @@
       <div class="emergency-card" onclick="toggleEmergency('em-bleeding')">
         <h3><span>Şiddetli Kanama & Boynuz / Tırnak Kırılması</span> <span>▼</span></h3>
         <div id="em-bleeding" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Demir batması, kesik veya boynuz kırılmasında fışkıran/hızlı kan akıyorsa:</p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Demir batması, kesik veya boynuz kırılmasında fışkıran/hızlı kan akıyorsa:</p>
           <ol style="padding-left:18px; line-height:1.6;">
             <li><strong>Basınçlı Tampon Yapın:</strong> Temiz bir bez veya sargı beziyle kanayan damarın üzerine en az 5–10 dakika elinizle hiç bırakmadan kuvvetlice bastırın.</li>
             <li><strong>Boynuz Kökü Kanaması:</strong> Kırılan boynuzun dip kısmına temiz bez sarıp kalın iple veya bandajla sıkıca bağlayın (turnike etkisi). Varsa koter (yakma demiri) veya kan durdurucu toz/şap uygulayın.</li>
@@ -2260,7 +2396,7 @@
       <div class="emergency-card" onclick="toggleEmergency('em-heat-stroke')">
         <h3><span>Sıcak Çarpması & Aşırı Hararet (Güneş / Nem)</span> <span>▼</span></h3>
         <div id="em-heat-stroke" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Sıcak yaz günlerinde inek ağzını açmış, dili dışarıda, dakikada 80'den fazla hızlı soluk alıyor ve titriyorsa:</p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Sıcak yaz günlerinde inek ağzını açmış, dili dışarıda, dakikada 80'den fazla hızlı soluk alıyor ve titriyorsa:</p>
           <ol style="padding-left:18px; line-height:1.6;">
             <li><strong>Hemen Gölgelik ve Havadar Yere Alın:</strong> Hayvanı doğrudan güneşten uzaklaştırın, ahırda fan ve havalandırmayı sonuna kadar açın.</li>
             <li><strong>Kafasını ve Bacaklarını Islatın:</strong> Hortumla ineğin <strong>başına, boynuna ve bacaklarına</strong> serin su tutun (sırtına aniden buz gibi su boca etmeyin, şok yapabilir; boyun damarlarından soğutun).</li>
@@ -2273,7 +2409,7 @@
       <div class="emergency-card" onclick="toggleEmergency('em-poisoning')">
         <h3><span>Zehirlenme & Gübre / Üre Yutma (Akut Toksikasyon)</span> <span>▼</span></h3>
         <div id="em-poisoning" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Hayvan çuvaldaki üre gübresini, fare zehrini veya tarım ilacını yaladıktan sonra titriyor, diş gıcırdatıyor ve çırpınıyorsa:</p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Hayvan çuvaldaki üre gübresini, fare zehrini veya tarım ilacını yaladıktan sonra titriyor, diş gıcırdatıyor ve çırpınıyorsa:</p>
           <ol style="padding-left:18px; line-height:1.6;">
             <li><strong>Üre / Kimyasal Gübre Yemişse:</strong> Derhal <strong>2–3 litre temiz sirke (ev sirkesi)</strong> ile 5–10 litre soğuk suyu karıştırıp hortumla veya şişeyle işkembeye içirin (Sirke işkemedeki zehirli amonyağı bağlar).</li>
             <li><strong>Zehirli Ot / İlaç Yemişse:</strong> Aktif kömür (veya ezilmiş odun kömürü tozu) bol suyla karıştırılıp içirilir (bağırsaktan emilimi keser).</li>
@@ -2287,7 +2423,7 @@
       <div class="emergency-card" style="border-left: 4px solid #000000;" onclick="toggleEmergency('em-ccn')">
         <h3><span>CCN / Polio (Yıldız Gözleme, Kafayı Arkaya Atma & B1 Vitamini Eksikliği)</span> <span>▼</span></h3>
         <div id="em-ccn" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;">
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;">
             <strong>Hastalık Özeti & Nedenleri:</strong> Yoğun arpa/tahıl ve asidoz sonrası işkembe bakterilerinin B1 vitaminini (Tiamin) parçalaması sonucu beyin kabuğunun çürümesi/ödemi (Polioensefalomalasi - CCN).
           </p>
           <ol style="padding-left:18px; line-height:1.6;">
@@ -2304,7 +2440,7 @@
       <div class="emergency-card" style="border-left: 4px solid #ea580c;" onclick="toggleEmergency('em-urinary-calculi')">
         <h3><span>İdrar Taşı & Sidik Zoru (Ürolitiyazis / Su Kıtlığı / Kalsiyum-Fosfor Dengesizliği)</span> <span>▼</span></h3>
         <div id="em-urinary-calculi" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;">
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;">
             <strong>Hastalık Özeti & Nedenleri:</strong> Yüksek tahıl/kepek/küspe tüketimi (Fosfor fazlası), kireçli az su içme veya su donması sonucu idrar yolunda magnezyum-amonyum-fosfat (Struvit) taşlarının penisi tıkaması.
           </p>
           <ol style="padding-left:18px; line-height:1.6;">
@@ -2322,7 +2458,7 @@
       <div class="emergency-card" style="border-left: 4px solid #dc2626;" onclick="toggleEmergency('em-arpa vurması (tırnak iltihabı)')">
         <h3><span>Besi Arpa Vurması (Tırnak Yanması)i (Arpa Vurması / Ayak Yanması & Taban Ezilmesi)</span> <span>▼</span></h3>
         <div id="em-arpa vurması (tırnak iltihabı)" class="emergency-details">
-          <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;">
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:6px;">
             <strong>Hastalık Özeti & Nedenleri:</strong> Aniden yüksek miktarda arpa, mısır veya unlu yem yenmesi sonucu işkembede açığa çıkan laktik asit ve histaminin tırnak kılcal damarlarını felç etmesi.
           </p>
           <ol style="padding-left:18px; line-height:1.6;">
@@ -2443,15 +2579,15 @@
         <h3 style="font-size:1.05rem; color:#000000; font-weight:800; display:flex; align-items:center; gap:6px;">
           Kulak Küpesi Barkod / QR Oku
         </h3>
-        <button onclick="stopQrScanner()" style="background:transparent; border:none; font-size:1.3rem; font-weight:800; cursor:pointer; color:#64748b;">✕</button>
+        <button onclick="stopQrScanner()" style="background:transparent; border:none; font-size:1.3rem; font-weight:800; cursor:pointer; color:var(--text-muted);">✕</button>
       </div>
-      <p style="font-size:0.78rem; color:#64748b; margin-bottom:10px;">
+      <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:10px;">
         Telefon kamerasını hayvanın kulak küpesindeki barkoda veya QR koda doğrultun:
       </p>
 
       <!-- Kamera Canlı Önizleme Kutusu -->
       <div id="qr-reader" style="width:100%; min-height:260px; background:#1e293b; border-radius:8px; overflow:hidden;"></div>
-      <div id="scanner-status" style="font-size:0.8rem; font-weight:600; text-align:center; margin-top:8px; color:#1e293b;">
+      <div id="scanner-status" style="font-size:0.8rem; font-weight:600; text-align:center; margin-top:8px; color:var(--text);">
         Kamera hazırlanıyor...
       </div>
 
@@ -2468,7 +2604,7 @@
         <h3 style="font-size:1.05rem; color:#000000; font-weight:800; margin:0; display:flex; align-items:center; gap:8px;" id="animal-alerts-modal-title">
           Hayvan Uyarı & Sağlık Kartı
         </h3>
-        <button onclick="closeAnimalAlertsModal()" style="background:transparent; border:none; font-size:1.4rem; font-weight:800; cursor:pointer; color:#64748b; padding:0 4px; line-height:1;">✕</button>
+        <button onclick="closeAnimalAlertsModal()" style="background:transparent; border:none; font-size:1.4rem; font-weight:800; cursor:pointer; color:var(--text-muted); padding:0 4px; line-height:1;">✕</button>
       </div>
       <div style="padding:16px 18px; overflow-y:auto; flex:1;" id="animal-alerts-modal-content">
         <!-- Dinamik İçerik -->
@@ -2489,9 +2625,9 @@
         <h3 style="font-size:1.05rem; color:#000000; font-weight:800; display:flex; align-items:center; gap:6px;">
           Besi Çiftliği Rehberi - Kullanım Kılavuzu
         </h3>
-        <button onclick="closeGuideModal()" style="background:transparent; border:none; font-size:1.3rem; font-weight:800; cursor:pointer; color:#64748b;">✕</button>
+        <button onclick="closeGuideModal()" style="background:transparent; border:none; font-size:1.3rem; font-weight:800; cursor:pointer; color:var(--text-muted);">✕</button>
       </div>
-      <div style="padding:16px 18px; overflow-y:auto; font-size:0.85rem; line-height:1.7; color:#334155;">
+      <div style="padding:16px 18px; overflow-y:auto; font-size:0.85rem; line-height:1.7; color:var(--text);">
         <!-- 1. NEREDEN BAŞLAMALIYIM? -->
         <div style="background:#eff6ff; border-left:4px solid #2563eb; padding:10px 14px; border-radius:6px; margin-bottom:14px;">
           <h4 style="color:#1d4ed8; margin:0 0 6px 0; font-size:0.95rem; display:flex; align-items:center; gap:6px;">
@@ -2561,7 +2697,7 @@
 
         <!-- Senaryo 6: Veri Yedekleme -->
         <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 14px; border-radius:6px;">
-          <h5 style="color:#475569; margin:0 0 4px 0; font-size:0.85rem; font-weight:800;">
+          <h5 style="color:var(--text); margin:0 0 4px 0; font-size:0.85rem; font-weight:800;">
             Senaryo 6: Günün Sonunda / Hafta Sonu (Veri Güvenliği)
           </h5>
           <p style="margin:0;">• Ahır Özeti ekranındaki <strong>"Yedeği İndir"</strong> butonuyla kayıtlarınızı JSON dosyası olarak telefonunuza kaydedin. Telefon değiştiğinde <strong>"Yedeği Yükle"</strong> ile tüm besi verilerinizi 2 saniyede geri yükleyin.</p>
@@ -3365,7 +3501,7 @@
             return `<button type="button" class="tag ${cls}" style="cursor:pointer; font-size:0.82rem; font-weight:800; padding:4px 8px; border-radius:6px; border:none; display:inline-flex; align-items:center; gap:4px;" onclick="showAnimalAlertsModal('${a.id}')" title="Detay ve eylemleri gör">${a.earTag} <small style="opacity:0.85;">(${topAlert.badgeText})</small></button>`;
           }).join(" ");
         } else {
-          chipsEl.innerHTML = `<span style="color:#94a3b8; font-size:0.78rem;">Bu kategoride uyarılı küpe bulunmuyor.</span>`;
+          chipsEl.innerHTML = `<span style="color:var(--text-muted); font-size:0.78rem;">Bu kategoride uyarılı küpe bulunmuyor.</span>`;
         }
       }
 
@@ -3378,7 +3514,7 @@
           `;
         } else {
           container.innerHTML = `
-            <div style="text-align:center; padding:12px; color:#94a3b8; font-size:0.85rem;">
+            <div style="text-align:center; padding:12px; color:var(--text-muted); font-size:0.85rem;">
               Bu kategoride aktif uyarı bulunmamaktadır.
             </div>
           `;
@@ -3408,12 +3544,12 @@
               <div>
                 <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                   <strong style="font-size:1.05rem; color:#000000; background:#f5f5f5; border:1px solid #000000; padding:2px 8px; border-radius:6px;">${a.earTag}</strong>
-                  <small style="color:#64748b; font-weight:600;">(${a.type} • ${a.gender})</small>
+                  <small style="color:var(--text-muted); font-weight:600;">(${a.type} • ${a.gender})</small>
                 </div>
                 <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:4px; align-items:center;">
                   ${badgesHtml}
                 </div>
-                <div style="margin-top:6px; font-size:0.8rem; color:#475569;">
+                <div style="margin-top:6px; font-size:0.8rem; color:var(--text);">
                   <strong>Eylem:</strong> ${topAlert.actionText}
                 </div>
               </div>
@@ -3458,7 +3594,7 @@
       const filtered = animals.filter(a => a.earTag.toLowerCase().includes(search));
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:16px;">Henüz kayıtlı hayvan bulunmamaktadır.<br><small>Sağ üstteki <strong>"+ Ekle"</strong> butonundan veya kamerayla küpe okutarak yeni hayvan ekleyebilirsiniz.</small></td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:16px;">Henüz kayıtlı hayvan bulunmamaktadır.<br><small>Sağ üstteki <strong>"+ Ekle"</strong> butonundan veya kamerayla küpe okutarak yeni hayvan ekleyebilirsiniz.</small></td></tr>`;
         return;
       }
 
@@ -3539,10 +3675,10 @@
 
           alertsHtml += `
             <div style="border-left:4px solid ${bColor}; background:${bgBox}; border-radius:8px; padding:10px 14px; margin-bottom:10px; border-top:1px solid #e2e8f0; border-right:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
-              <div style="font-weight:800; font-size:0.92rem; color:#1e293b; margin-bottom:4px;">
+              <div style="font-weight:800; font-size:0.92rem; color:var(--text); margin-bottom:4px;">
                 ${alt.title}
               </div>
-              <div style="font-size:0.82rem; color:#475569; margin-bottom:6px;">
+              <div style="font-size:0.82rem; color:var(--text); margin-bottom:6px;">
                 ${alt.desc}
               </div>
               <div style="font-size:0.78rem; font-weight:700; color:#000000; margin-bottom:6px;">
@@ -3822,7 +3958,7 @@
       const now = new Date();
 
       if (treatments.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#94a3b8;">Kayıtlı tedavi bulunmuyor.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">Kayıtlı tedavi bulunmuyor.</td></tr>`;
         return;
       }
 
@@ -3881,7 +4017,7 @@
       tbody.innerHTML = "";
 
       if (vaccineRecords.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8;">Kayıtlı aşı yok.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">Kayıtlı aşı yok.</td></tr>`;
         return;
       }
 
@@ -4051,7 +4187,7 @@
       tbody.innerHTML = "";
 
       if (reproRecords.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8;">Kayıtlı üreme/tohumlama bulunmuyor.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Kayıtlı üreme/tohumlama bulunmuyor.</td></tr>`;
         return;
       }
 
@@ -4065,7 +4201,7 @@
         let badgeCalve = daysToCalve > 0 ? `<span class="tag tag-info">${daysToCalve} gün kaldı</span>` : `<span class="tag tag-danger">Günü Geldi!</span>`;
 
         tr.innerHTML = `
-          <td><strong>${r.earTag}</strong><br><small style="color:#64748b;">${r.bull}</small></td>
+          <td><strong>${r.earTag}</strong><br><small style="color:var(--text-muted);">${r.bull}</small></td>
           <td>${r.date}</td>
           <td>${r.heatDate}</td>
           <td>${r.pregCheckDate}</td>
@@ -4368,7 +4504,7 @@
       tbody.innerHTML = "";
 
       if (weightRecords.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:#94a3b8; padding:16px;">Kayıtlı tartım ve CAAG verisi bulunmuyor.<br><small>Yukarıdan tartım yaparak ilk kaydı ekleyebilirsiniz.</small></td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:var(--text-muted); padding:16px;">Kayıtlı tartım ve CAAG verisi bulunmuyor.<br><small>Yukarıdan tartım yaparak ilk kaydı ekleyebilirsiniz.</small></td></tr>`;
         return;
       }
 
@@ -4378,7 +4514,7 @@
       sorted.forEach(r => {
         const tr = document.createElement("tr");
 
-        let caagBadge = `<span style="color:#94a3b8;">- (İlk Tartım)</span>`;
+        let caagBadge = `<span style="color:var(--text-muted);">- (İlk Tartım)</span>`;
         if (r.caagDaily !== null && r.caagDaily !== undefined) {
           const grams = Math.round(r.caagDaily * 1000);
           if (grams >= 1200) {
@@ -4404,7 +4540,7 @@
           <td>${r.prevWeight ? r.prevWeight + " kg" : "-"}</td>
           <td>${r.daysPassed ? r.daysPassed + " gün" : "-"}</td>
           <td>${caagBadge}</td>
-          <td><small style="color:#475569;">${r.note || '-'}</small></td>
+          <td><small style="color:var(--text);">${r.note || '-'}</small></td>
           <td>
             <button class="btn btn-outline" style="min-height:36px; padding:6px 12px; font-size:0.8rem; font-weight:700; color:#000000; border-color:#fca5a5; touch-action:manipulation;" onclick="deleteWeightRecord(${r.id})">Sil</button>
           </td>
@@ -4592,7 +4728,7 @@
       tbody.innerHTML = "";
 
       if (arrivalRecords.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:#94a3b8; padding:16px;">Kayıtlı yeni dana giriş protokolü bulunmuyor.<br><small>Yukarıdaki formdan yeni gelen dananızı kaydedebilirsiniz.</small></td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color:var(--text-muted); padding:16px;">Kayıtlı yeni dana giriş protokolü bulunmuyor.<br><small>Yukarıdaki formdan yeni gelen dananızı kaydedebilirsiniz.</small></td></tr>`;
         return;
       }
 
@@ -4693,7 +4829,7 @@
 
       resultBox.innerHTML = `
         <div style="font-weight:800; color:#1d4ed8; font-size:0.95rem;">Gereken 24 Saatlik Toplam Sıvı Miktarı: ${totalFluid} Litre</div>
-        <div style="font-size:0.8rem; color:#334155; margin-top:4px; line-height:1.6;">
+        <div style="font-size:0.8rem; color:var(--text); margin-top:4px; line-height:1.6;">
           • <strong>İshalle Kaybolan Su Açığı:</strong> ${deficitLiters} Litre<br>
           • <strong>Günlük Normal Vücut İhtiyacı:</strong> ${maintenanceLiters} Litre<br>
           • <strong>Nasıl Uygulanacak?:</strong> ${routeText}
@@ -4768,7 +4904,7 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
       tbody.innerHTML = "";
 
       if (costRecords.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8;">Kayıtlı masraf ve fire verisi yok.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Kayıtlı masraf ve fire verisi yok.</td></tr>`;
       } else {
         costRecords.forEach(c => {
           const medCost = (c.vetFee || 0) + (c.drugFee || 0);
