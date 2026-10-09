@@ -1,6 +1,6 @@
 {
-  "name": "Besi Sağlık Rehberi",
-  "short_name": "BesiRehberi",
+  "name": "Besi Çiftliği Rehberi",
+  "short_name": "BesiÇiftliği",
   "description": "Besi danacılığı ve besi çiftlikleri için %100 internetsiz çalışan 21 günlük dana karşılama, kantar ve CAAG kilo artışı, Et İKAS kesim kilitleri ve besi acil müdahale rehberi.",
   "start_url": "./index.html",
   "scope": "./",
@@ -8,7 +8,12 @@
   "orientation": "portrait-primary",
   "background_color": "#0f172a",
   "theme_color": "#b91c1c",
-  "categories": ["medical", "business", "utilities", "productivity"],
+  "categories": [
+    "medical",
+    "business",
+    "utilities",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "./favicon-16x16.png",
@@ -44,21 +49,36 @@
       "short_name": "İlk Yardım",
       "description": "Hayat kurtaran acil müdahaleler ve adrenalin doz hesabı",
       "url": "./index.html#emergency",
-      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "./icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Hasta Muayene",
       "short_name": "Muayene",
       "description": "Ateş ölçümü ve klinik DART triyajı",
       "url": "./index.html#triage",
-      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "./icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Sağımcı Ekranı",
       "short_name": "Sağımcı",
       "description": "İlaçlı süt ve karkas kesim kilidi kontrolü",
       "url": "./index.html#milker",
-      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "./icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

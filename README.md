@@ -1,4 +1,4 @@
-# Besi Sağlık Rehberi (Offline-First & PWA)
+# Besi Çiftliği Rehberi (Offline-First & PWA)
 
 **Canlı Yayın (Web & Mobil PWA):** [https://mserman90.github.io/besi-saglik-rehberi/](https://mserman90.github.io/besi-saglik-rehberi/)  
 **GitHub Deposu:** [https://github.com/mserman90/besi-saglik-rehberi](https://github.com/mserman90/besi-saglik-rehberi)  

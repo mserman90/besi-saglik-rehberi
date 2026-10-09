@@ -1,6 +1,6 @@
-# Besi Sağlık Rehberi - Kullanım Kılavuzu
+# Besi Çiftliği Rehberi - Kullanım Kılavuzu
 
-**Besi Sağlık Rehberi**, internet bağlantısı ve sunucu kurulumu gerektirmeyen, doğrudan telefon ve bilgisayar tarayıcısında çalışan, Progressive Web App (PWA) mimarisine sahip %100 çevrimdışı bir besi danacılığı, 21 günlük karşılama protokolü, CAAG günlük kilo artışı, Et İKAS mezbaha kilitleri ve acil müdahale asistanıdır.
+**Besi Çiftliği Rehberi**, internet bağlantısı ve sunucu kurulumu gerektirmeyen, doğrudan telefon ve bilgisayar tarayıcısında çalışan, Progressive Web App (PWA) mimarisine sahip %100 çevrimdışı bir besi danacılığı, 21 günlük karşılama protokolü, CAAG günlük kilo artışı, Et İKAS mezbaha kilitleri ve acil müdahale asistanıdır.
 
 ---
 
