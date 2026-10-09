@@ -55,7 +55,7 @@ Veteriner hekim ahıra ulaşana kadar geçen kritik dakikalarda hayat kurtarır:
 
 #### 1.2. Muayene & BRD Solunum Triyajı
 Durgunlaşan veya burnu akan dana gördüğünüzde:
-1. Dereceyle makat ateşini ölçüp yazın (Normal: 38.0–39.3 °C. 39.5 °C üzeri kırmızı alarmdır).
+1. Dereceyle makat ateşini ölçüp yazın (Normal: 38.0–39.3 °C. 39.5 °C üzeri yüksek ateş alarmıdır).
 2. hastalık puanını (Keyifsizlik, yem yeme isteği, nefes sayısı/öksürük) işaretleyin.
 3. Sistem anında **"DURUMU İYİ"**, **"ORTA DERECE HASTA (İlaç Lazım)"** veya **"ÇOK ACİL & AĞIR HASTA (Veterineri Çağır)"** kararı verir ve yapılacakları listeler.
 
@@ -99,10 +99,10 @@ Antibiyotik kalıntısı nedeniyle mezbahada karkasın imha edilmesini ve cezala
 #### 4.1. Et İKAS Kilidi & Mezbaha Hızlı Kontrol Paneli
 1. **İlaç Kaydı:** Dananın küpesini ve vurulan ilacı (Florfenikol, Tulatromisin, Oksitetrasiklin LA, Meloksikam vb.) seçip dozu kaydedin.
 2. **Canlı Sayaç:** Sistem yasal et arınma süresine göre gün sayacını başlatır. Kesim kilidi bitene kadar dananın kasap veya mezbahaya gönderilmesi engellenir.
-3. **Eller Serbest Sesli Mezbaha Kontrolü:** Kırmızı mikrofona dokunup dana küpesini söyleyin (örn: *"145"* veya *"yüz kırk beş"*). Hoparlörden anında sesli cevap verir:
+3. **Eller Serbest Sesli Mezbaha Kontrolü:** "Sesle Sor" butonuna dokunup dana küpesini söyleyin (örn: *"145"* veya *"yüz kırk beş"*). Hoparlörden anında sesli cevap verir:
    - *"Dikkat! Kırmızı Alarm! 145 numaralı danada aktif kesim kilidi var. Mezbaha kısıtı: 18 gün."*
    - *"145 numaralı dana temiz. Kesim kilidi yok, mezbahaya ve kesime uygundur."*
-4. **Kamerayla Okuma:** Sarı butona dokunarak kulak küpesini kameraya gösterebilir veya klavyeden yazabilirsiniz.
+4. **Kamerayla Okuma:** "Kamera" butonuna basarak kulak küpesini kameraya gösterebilir veya klavyeden yazabilirsiniz.
 
 ---
 

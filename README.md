@@ -34,7 +34,7 @@ Besi ahırı şartlarındaki **acil müdahale önceliği** ve tek elle eldivenli
 ## Gösterge Paneli & Küpe Numaralı Kritik Takip
 
 - **Anlık Sürü İstatistikleri:** Toplam Besi Mevcudu, Kesim Kilitli Danalar (Et İKAS), 21 Günlük Karşılamadaki Danalar ve Günü Gelen Aşılar tek bakışta görülür.
-- **Uyarılı Küpe Numaraları Çipleri:** Sayfa başındaki kritik takip listesinde kafa karıştırıcı sayılar yerine doğrudan danaların **Sarı Kulak Küpe Numaraları** listelenir.
+- **Uyarılı Küpe Numaraları Çipleri:** Sayfa başındaki kritik takip listesinde kafa karıştırıcı sayılar yerine doğrudan danaların **Kulak Küpe Numaraları** listelenir.
 - **Dana Uyarı & Sağlık Kartı Modalı:** Herhangi bir küpeye dokunulduğunda dananın Et İKAS kesim kilidi, alıştırma günü, yaklaşan aşısı veya sağlık uyarısı tek ekranda açılır; ilgili butona dokunarak doğrudan eyleme geçilebilir.
 - **Kategori Filtreleme:** Uyarılı danaları *Tümü*, *Kesim Kilitli (Et İKAS)*, *Aşı & Parazit*, *Sağlık & Karantina* olarak tek dokunuşla süzebilirsiniz.
 
