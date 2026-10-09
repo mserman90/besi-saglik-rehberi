@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#b91c1c">
-  <meta name="description" content="Besi Çiftliği Rehberi - Besi danacılığı ve toklu/dana çiftlikleri için %100 internetsiz çalışan 21 günlük nakliye humması karşılama protokolü, kantar ve CAAG canlı ağırlık artışı, Et İKAS mezbaha kilitleri ve besi hastalıkları (CCN, sidik zoru, laminitis) yönetim asistanı.">
-  <meta name="keywords" content="besi sağlık rehberi, besi danacılığı, CAAG günlük canlı ağırlık artışı, 21 günlük dana karşılama, shipping fever, yol humması, et İKAS kesim kilitleri, CCN polio tiamin, idrar taşı amonyum klorür, besi laminitisi, karkas randımanı, kantar hesabı">
+  <meta name="description" content="Besi Çiftliği Rehberi - Besi danacılığı ve toklu/dana çiftlikleri için %100 internetsiz çalışan 21 günlük nakliye humması karşılama protokolü, kantar ve CAAG canlı ağırlık artışı, Et İKAS mezbaha kilitleri ve besi hastalıkları (CCN, sidik zoru, arpa vurması (tırnak iltihabı)) yönetim asistanı.">
+  <meta name="keywords" content="besi sağlık rehberi, besi danacılığı, CAAG günlük canlı ağırlık artışı, 21 günlük dana karşılama, shipping fever, yol humması, et İKAS kesim kilitleri, CCN polio tiamin, idrar taşı amonyum klorür, besi arpa vurması (tırnak iltihabı)i, karkas randımanı, kantar hesabı">
   <meta name="author" content="Dr. Mert Serman / Besi Çiftliği Rehberi">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://mserman90.github.io/besi-saglik-rehberi/">
@@ -66,7 +66,7 @@
       "21 Günlük Yeni Dana Karşılama ve Alıştırma Protokolü",
       "Besi Canlı Ağırlık Artışı (CAAG) ve Karkas Randıman Motoru",
       "Et İKAS Mezbaha / Kesim Kilitleri Canlı Takibi",
-      "Besi Hastalıkları Acil Protokolleri (CCN, İdrar Taşı, Laminitis)",
+      "Besi Hastalıkları Acil Protokolleri (CCN, İdrar Taşı, Arpa Vurması (Tırnak Yanması))",
       "Yemlik Yönetimi, Tezek Skoru ve Tampon Dozlama"
     ]
   }
@@ -271,7 +271,7 @@
     .btn-info { background: var(--info); color: white; }
     .btn-outline { background: transparent; border: 2px solid var(--border); color: var(--text); }
 
-    /* DART ve Skor Seçiciler */
+    /* Hastalık ve Nefes Skoru Seçicileri */
     .score-group {
       margin-bottom: 12px;
       padding-bottom: 10px;
@@ -914,7 +914,7 @@
                 <div style="font-weight:800; font-size:0.98rem; color:#b91c1c; display:flex; align-items:center; gap:6px;">
                   1. HASTA / ACİL DANA
                 </div>
-                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Besi acilleri (CCN, idrar taşı, laminitis, timpani), muayene ve mezbaha kilidi</div>
+                <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">Besi acilleri (CCN, idrar taşı, arpa vurması (tırnak iltihabı), işkembe gaz şişmesi), muayene ve mezbaha kilidi</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
@@ -1083,7 +1083,7 @@
         </div>
       </div>
 
-      <!-- Hayvan Bazlı Aktif Uyarılar ve Klinik Görevler -->
+      <!-- Hayvan Bazlı Aktif Uyarılar ve Sağlık Takip Listesi -->
       <div class="card" id="card-animal-alerts" style="border-left: 4px solid var(--primary);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
           <div class="card-title" style="margin-bottom:0;">Hayvan Bazlı Kritik Uyarılar & Takip Listesi</div>
@@ -1158,7 +1158,7 @@
       </div>
     </section>
 
-    <!-- ================= 2. SAHA TRİYAJI VE DART SKORLAMA ================= -->
+    <!-- ================= 2. HASTA MUAYENESİ VE NEFES/ZATÜRRE PUANLAMA ================= -->
     <section id="tab-triage" class="tab-section">
       <!-- Üst Geri Dönüş Butonu -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
@@ -1317,7 +1317,7 @@
           </div>
           <div>
             <label for="treatment-vet">Reçete Veren Veteriner Hekim:</label>
-            <input type="text" id="treatment-vet" placeholder="Veteriner Adı / Klinik">
+            <input type="text" id="treatment-vet" placeholder="Veteriner Hekim Adı">
           </div>
         </div>
 
@@ -1400,8 +1400,8 @@
                 <option value="İşkembe Asidozu / Yem Çarpması">İşkembe Asidozu / Yem Çarpması</option>
                 <option value="CCN / Beyin Dönmesi (B1 Tiamin)">CCN / Beyin Dönmesi (Tiamin Eksikliği)</option>
                 <option value="İdrar Taşı / Sidik Zoru">İdrar Taşı / Sidik Zoru (Ürolitiyazis)</option>
-                <option value="Besi Laminitisi / Ayak Yanması">Besi Laminitisi / Ayak Yanması</option>
-                <option value="İşkembe Şişmesi (Timpani)">İşkembe Şişmesi (Gaz Timpanisi)</option>
+                <option value="Besi Arpa Vurması (Tırnak Yanması)i / Ayak Yanması">Besi Arpa Vurması (Tırnak Yanması)i / Ayak Yanması</option>
+                <option value="İşkembe Gaz Şişmesi">İşkembe Şişmesi (İşkembe Gaz Şişmesi)</option>
                 <option value="Ayak Çürüğü / Tırnak">Ayak Çürüğü / Tırnak Yaralanması</option>
                 <option value="Diğer Tedavi">Diğer Hastalık / İğne</option>
               </select>
@@ -1496,7 +1496,7 @@
       </div>
     </section>
 
-    <!-- ================= 5. YEMLİK, ASİDOZ (SARA) & RUMEN İŞKEMBESİ TAKİPÇİSİ ================= -->
+    <!-- ================= 5. YEMLİK, İŞKEMBE EKŞİMESİ (ASİDOZ) & SİNDİRİM TAKİPÇİSİ ================= -->
     <section id="tab-feed" class="tab-section">
       <!-- Üst Geri Dönüş Butonu -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
@@ -1508,7 +1508,7 @@
       <div class="card" style="border-top: 4px solid #15803d;">
         <div class="card-title" style="color:#15803d;">Yemlik Düzeni, İşkembe Ekşimesi & Geviş Sayacı</div>
         <p style="font-size:0.8rem; color:#475569; margin-bottom:12px;">
-          Fabrika yemi fazla gelip saman az kaldığında işkembe ekşir <strong>(Asidoz / SARA)</strong>. Geviş getirme oranına ve tezek kıvamına bakarak erkenden önlem alın.
+          Fabrika yemi fazla gelip saman az kaldığında işkembe ekşir <strong>(İşkembe Ekşimesi (Asidoz))</strong>. Geviş getirme oranına ve tezek kıvamına bakarak erkenden önlem alın.
         </p>
 
         <!-- 1. Geviş Getirme (Rumination) İndeksi -->
@@ -1587,13 +1587,13 @@
           </div>
         </div>
 
-        <!-- 4. Rumen Tamponlayıcı (Sodyum Bikarbonat) Hesaplayıcı -->
+        <!-- 4. İşkembe Rahatlatıcı Karbonat (Sodyum Bikarbonat) Hesaplayıcı -->
         <div class="card" style="background:#eff6ff; border:1px solid #93c5fd;">
           <div style="font-weight:700; color:#1d4ed8; font-size:0.9rem; margin-bottom:6px;">
             4. Yeme Katılacak Karbonat (Sodyum Bikarbonat) Miktarı
           </div>
           <p style="font-size:0.78rem; color:#1e40af; margin-bottom:8px;">
-            İşkembenin ekşimesini ve ayak yanmasını (laminitis) önlemek için dana başına günde 150–250 gram yem karbonatı verilir.
+            İşkembenin ekşimesini ve ayak yanmasını (arpa vurması (tırnak iltihabı)) önlemek için dana başına günde 150–250 gram yem karbonatı verilir.
           </p>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
@@ -1618,7 +1618,7 @@
 
         <!-- Bilimsel Saha İpuçları (Merck Vet) -->
         <div class="card" style="background:#fafafa; border:1px dashed #cbd5e1; margin-top:12px; font-size:0.8rem; line-height:1.6; color:#334155;">
-          <strong>Ahır İpuçları - İşkembe Ekşimesi (Gizli Asidoz / SARA) Rehberi:</strong>
+          <strong>Ahır İpuçları - İşkembe Ekşimesi (Gizli İşkembe Ekşimesi (Hafif Asidoz)) Rehberi:</strong>
           <br>• <strong>İşkembenin Asit Eşiği:</strong> Fabrika yemi çok verilip saman az tutulduğunda işkembenin asidi yükselir (pH 5.5 altına iner) ve mikrop düzeni bozulur, inek yemi sindiremez.
           <br>• <strong>Ahırda Nasıl Anlaşılır?:</strong> İneklerin biri yiyip biri yemez, süt yağı birden düşer, tırnaklar uzayıp hayvan topallamaya başlar, tezek sarı ve köpüklü çıkar.
           <br>• <strong>Geviş Getirten Uzun Kaba Yem:</strong> Yemin içinde en az 3 santim uzunluğunda kuru ot, yonca veya saman olmalıdır ki inek geviş getirsin. Geviş getiren inek günde 150-200 litre doğal karbonatlı tükürük üreterek kendi işkembesini kendi iyileştirir.
@@ -1846,7 +1846,7 @@
       </div>
     </section>
 
-    <!-- ================= 6.1 YENİ DANA GİRİŞ & ALIŞTIRMA PROTOKOLÜ (METAFİLAKSİ & ASİDOZ KORUMA) ================= -->
+    <!-- ================= 6.1 YENİ DANA GİRİŞ & ALIŞTIRMA PROTOKOLÜ (KORUYUCU CİĞER İĞNESİ & ASİDOZ ÖNLEME) ================= -->
     <section id="tab-arrival" class="tab-section">
       <!-- Üst Geri Dönüş Butonu -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
@@ -1966,9 +1966,9 @@
           </div>
         </div>
 
-        <!-- 3. Adım: Giriş Sağlık & Metafilaksi Dozaj Motoru -->
+        <!-- 3. Adım: Giriş Sağlık & Toplu Koruyucu Tedavi Dozaj Motoru -->
         <div class="card" style="background:#fff; border:1px solid #cbd5e1; margin-bottom:12px;">
-          <div style="font-weight:700; color:#b91c1c; font-size:0.92rem; margin-bottom:8px;">Giriş Sağlık & Koruma (Metafilaksi) Önerileri</div>
+          <div style="font-weight:700; color:#b91c1c; font-size:0.92rem; margin-bottom:8px;">Giriş Sağlık & Koruma (Toplu Koruyucu Tedavi) Önerileri</div>
           <div id="arrival-doses-box" style="font-size:0.83rem; line-height:1.7; color:#334155;">
             <!-- Dinamik doldurulur -->
           </div>
@@ -1992,7 +1992,7 @@
                 <th>Karantina Günü</th>
                 <th>Risk Grubu</th>
                 <th>Yolculuk</th>
-                <th>Aşı / Metafilaksi</th>
+                <th>Aşı / Toplu Koruyucu Tedavi</th>
                 <th>Durum</th>
                 <th>İşlem</th>
               </tr>
@@ -2052,7 +2052,7 @@
       </div>
 
       <div class="emergency-card" onclick="toggleEmergency('em-bloat')">
-        <h3><span>İşkembe Şişmesi & Gaz Patlaması (Timpani / Şişkinlik)</span> <span>▼</span></h3>
+        <h3><span>İşkembe Gazı & Şişmesi (Sol Boşluğun Davul Gibi Şişmesi)</span> <span>▼</span></h3>
         <div id="em-bloat" class="emergency-details">
           <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;"><strong>İlk Yardım Talimatı:</strong> Yonca veya taze ot yedikten sonra sol açlık çukuru davul gibi şişip hayvan nefes alamıyorsa:</p>
           <ol style="padding-left:18px; line-height:1.6;">
@@ -2076,7 +2076,7 @@
             <li><strong>Boğazı (Yemek Borusunu) Elle Yoklayın:</strong> Boynun sol oluğunu elinizle yukarıdan aşağı yoklayın; tıkanan sert yumru genellikle boyun bölgesinde ele gelir.</li>
             <li><strong>Yukarı Doğru Sıvazlama:</strong> Tıkanıklık boğazın üst tarafındaysa, iki elle cismi yukarı ağza doğru nazikçe masajla itin ve bir kişi ağzı açarak elle dışarı alsın.</li>
             <li><strong>Zorla Sert Hortum İtmeyin:</strong> Cismi aşağı itmek için sert sopa veya sivri cisim kullanmayın, yemek borusu yırtılabilir ve ölümcül kanama yapar.</li>
-            <li><strong>Hemen Yağ Verin & Şişmeyi Önleyin:</strong> Tıkanıklık gaz çıkışını engeller ve dakikalar içinde şişkinlik (timpani) yapar. Boğulma riski oluşursa sol böğre acil trokar saplanmalı ve veteriner hekim çağrılmalıdır.</li>
+            <li><strong>Hemen Yağ Verin & Şişmeyi Önleyin:</strong> Tıkanıklık gaz çıkışını engeller ve dakikalar içinde şişkinlik (işkembe gaz şişmesi) yapar. Boğulma riski oluşursa sol böğre acil trokar saplanmalı ve veteriner hekim çağrılmalıdır.</li>
           </ol>
         </div>
       </div>
@@ -2158,9 +2158,9 @@
         </div>
       </div>
 
-      <div class="emergency-card" style="border-left: 4px solid #dc2626;" onclick="toggleEmergency('em-laminitis')">
-        <h3><span>Besi Laminitisi (Arpa Vurması / Ayak Yanması & Taban Ezilmesi)</span> <span>▼</span></h3>
-        <div id="em-laminitis" class="emergency-details">
+      <div class="emergency-card" style="border-left: 4px solid #dc2626;" onclick="toggleEmergency('em-arpa vurması (tırnak iltihabı)')">
+        <h3><span>Besi Arpa Vurması (Tırnak Yanması)i (Arpa Vurması / Ayak Yanması & Taban Ezilmesi)</span> <span>▼</span></h3>
+        <div id="em-arpa vurması (tırnak iltihabı)" class="emergency-details">
           <p style="font-size:0.75rem; color:#64748b; margin-bottom:6px;">
             <strong>Hastalık Özeti & Nedenleri:</strong> Aniden yüksek miktarda arpa, mısır veya unlu yem yenmesi sonucu işkembede açığa çıkan laktik asit ve histaminin tırnak kılcal damarlarını felç etmesi.
           </p>
@@ -2261,7 +2261,7 @@
         <option value="Bruselloz (S19)">Bruselloz S19 [Zorunlu - Dişi 3-6 Ay]</option>
         <option value="LSD (Sığır Çiçeği)">LSD (Nodüler Ekzantem) [Zorunlu]</option>
         <option value="BRD Karma Solunum">BRD Karma Solunum (IBR, BVD, PI3, BRSV)</option>
-        <option value="Klostridyal Karma (Yanıkara)">Klostridyal Karma (Yanıkara / Enterotoksemi)</option>
+        <option value="Klostridyal Karma (Yanıkara)">Klostridyal Karma (Yanıkara / Çelerme (Yem Çarpması))</option>
         <option value="Buzağı İshal Aşısı">Gebe İnek Buzağı İshal Aşısı (E. coli, Rota, Corona)</option>
       </select>
 
@@ -2360,8 +2360,8 @@
           <h5 style="color:#dc2626; margin:0 0 4px 0; font-size:0.88rem; font-weight:800;">
             Senaryo 1: Ahırda Acil Durum & Hayat Kurtarma (1. Kapı)
           </h5>
-          <p style="margin:0 0 4px 0;">• <strong>Acil İlk Yardım:</strong> Besi danasında <strong>CCN / Polio (Beyin dönmesi, B1 tiamin eksikliği)</strong>, <strong>İdrar Taşı / Sidik Zoru (Amonyum klorür)</strong>, <strong>Besi Laminitisi (Arpa vurması / ayak yanması)</strong>, işkembe gazı (timpani), patates boğulması ve aşı şoku (adrenalin hesaplayıcı) ilk yardım adımlarını uygulayın.</p>
-          <p style="margin:0;">• <strong>Muayene & BRD Triyajı:</strong> Dananın makat ateşini dereceyle ölçüp yazın (Normal: 38.0–39.3°C), DART solunum skorunu işaretleyin; nakliye humması / zatürre aciliyetini görün.</p>
+          <p style="margin:0 0 4px 0;">• <strong>Acil İlk Yardım:</strong> Besi danasında <strong>CCN / Polio (Beyin dönmesi, B1 tiamin eksikliği)</strong>, <strong>İdrar Taşı / Sidik Zoru (Amonyum klorür)</strong>, <strong>Besi Arpa Vurması (Tırnak Yanması)i (Arpa vurması / ayak yanması)</strong>, işkembe gazı (işkembe gaz şişmesi), patates boğulması ve aşı şoku (adrenalin hesaplayıcı) ilk yardım adımlarını uygulayın.</p>
+          <p style="margin:0;">• <strong>Muayene & BRD Triyajı:</strong> Dananın makat ateşini dereceyle ölçüp yazın (Normal: 38.0–39.3°C), nefes ve zatürre puanını işaretleyin; nakliye humması / zatürre aciliyetini görün.</p>
         </div>
 
         <!-- Senaryo 2: Yeni Dana Girişi -->
@@ -2369,7 +2369,7 @@
           <h5 style="color:#0284c7; margin:0 0 4px 0; font-size:0.88rem; font-weight:800;">
             Senaryo 2: Kamyondan Yeni Dana İndirme (2. Kapı)
           </h5>
-          <p style="margin:0 0 4px 0;">• <strong>21 Günlük Alıştırma Protokolü:</strong> Pazardan veya kamyondan yeni gelen danaların ilk 24 saatte arpa/fabrika yemi verilmeden dinlendirilmesi, ılık can suyu (tuz + karbonat + pekmez), metafilaksi ciğer iğnesi ve 21 günlük kademeli yem geçiş tablosunu uygulayın.</p>
+          <p style="margin:0 0 4px 0;">• <strong>21 Günlük Alıştırma Protokolü:</strong> Pazardan veya kamyondan yeni gelen danaların ilk 24 saatte arpa/fabrika yemi verilmeden dinlendirilmesi, ılık can suyu (tuz + karbonat + pekmez), toplu koruyucu ciğer iğnesi ciğer iğnesi ve 21 günlük kademeli yem geçiş tablosunu uygulayın.</p>
         </div>
 
         <!-- Senaryo 3: Tartım & Karkas Geliri -->
@@ -2479,7 +2479,7 @@
       localStorage.setItem("cattlesys_cleaned_demo_v1", "true");
     }
 
-    // DART Skorları için anlık seçimler
+    // Hastalık Puanları için anlık seçimler
     let currentDart = { d: 0, a: 0, r: 0, t: 0 };
 
     /* =========================================================================
@@ -2660,7 +2660,7 @@
           if (daysPassed <= 3) {
             stageDesc = "1.-3. Gün: Sadece kuru ot/saman ve ılık can suyu. Kesif yem KESİNLİKLE verilmez!";
           } else if (daysPassed <= 7) {
-            stageDesc = "4.-7. Gün: Günde 0.5-1.0 kg hafif ezme başlangıcı ve aşı/metafilaksi kontrolü.";
+            stageDesc = "4.-7. Gün: Günde 0.5-1.0 kg hafif ezme başlangıcı ve aşı/toplu koruyucu ciğer iğnesi kontrolü.";
           } else if (daysPassed <= 14) {
             stageDesc = "8.-14. Gün: Günde 2.0-2.5 kg kesif yem artışı, dışkı ve solunum kontrolü.";
           } else {
@@ -2741,18 +2741,18 @@
         }
       }
 
-      // 6. Kondisyon & Triyaj Sağlık Riski (Health)
+      // 6. Et-Yağ Durumu & Muayene Riski (Health)
       if (animal.bcs <= 2.0) {
         alerts.push({
           id: "alert-bcs-low",
           type: "danger",
           category: "health",
           icon: "",
-          badgeText: `Çok Zayıf (BCS ${animal.bcs.toFixed(1)})`,
-          title: `Kondisyon Tehlikesi: Aşırı Zayıf (BCS ${animal.bcs.toFixed(1)})`,
+          badgeText: `Çok Zayıf (Kondisyon: ${animal.bcs.toFixed(1)})`,
+          title: `Kondisyon Tehlikesi: Aşırı Zayıf (Kondisyon: ${animal.bcs.toFixed(1)})`,
           desc: "Kaburga kemikleri belirgin. Besi performansı düşük, parazit veya gizli asidoz riski!",
           timeInfo: "Kritik Kondisyon Kaybı",
-          actionText: "Rasyonun enerjisini artırın, iç parazit ve subklinik asidoz kontrolü yapın.",
+          actionText: "Rasyonun enerjisini artırın, iç parazit ve hafif işkembe ekşimesi kontrolü yapın.",
           urgency: 2
         });
       } else if (animal.bcs >= 4.0) {
@@ -2761,8 +2761,8 @@
           type: "warning",
           category: "health",
           icon: "",
-          badgeText: `Aşırı Yağlı (BCS ${animal.bcs.toFixed(1)})`,
-          title: `Kondisyon Uyarısı: Aşırı Yağlı (BCS ${animal.bcs.toFixed(1)})`,
+          badgeText: `Aşırı Yağlı (Kondisyon: ${animal.bcs.toFixed(1)})`,
+          title: `Kondisyon Uyarısı: Aşırı Yağlı (Kondisyon: ${animal.bcs.toFixed(1)})`,
           desc: "Besi sonuna gelmiş, yağlanma karkas randımanını ve maliyeti olumsuz etkileyebilir.",
           timeInfo: "Yağlanma Eğilimi",
           actionText: "Danayı kesim için değerlendirin veya rasyonu dengeleyin.",
@@ -2770,7 +2770,7 @@
         });
       }
 
-      // Son Triyaj Muayenesi (Ateş / Hastalık kontrolü)
+      // Son Muayene ve Durum Kontrolü (Ateş / Hastalık kontrolü)
       const myTriages = triageRecords.filter(t => t.animalId === animalId || t.earTag === earTag);
       if (myTriages.length > 0) {
         const latestTriage = myTriages.reduce((a, b) => new Date(a.date) > new Date(b.date) ? a : b);
@@ -2783,8 +2783,8 @@
             category: "health",
             icon: "",
             badgeText: `Hasta / Ateşli (${latestTriage.temp || '39.5+'}°C)`,
-            title: "Klinik Alarm: Yüksek Ateş / BRD Solunum Tehlikesi",
-            desc: `Son muayenede ateş: ${latestTriage.temp}°C, DART hastalık skoru: ${latestTriage.dartScore}/12.`,
+            title: "Acil Sağlık Alarmı: Yüksek Ateş / BRD Solunum Tehlikesi",
+            desc: `Son muayenede ateş: ${latestTriage.temp}°C, hastalık ve nefes puanı: ${latestTriage.dartScore}/12.`,
             timeInfo: `Muayene: ${triageDate.toLocaleDateString('tr-TR')}`,
             actionText: "Veteriner hekim tedavi protokolünü aksatmayın, ateşi sabah-akşam takip edin.",
             urgency: 1
@@ -3364,7 +3364,7 @@
       if (alerts.length === 0) {
         alertsHtml = `
           <div style="padding:14px; background:#f0fdf4; border:1px solid #86efac; border-radius:8px; color:#166534; font-size:0.85rem; margin-bottom:12px;">
-            <strong>HERHANGİ BİR RİSK YOK:</strong> Bu hayvan için şu anda aktif süt yasağı, kesim kilidi, gecikmiş aşı veya kritik klinik uyarı bulunmamaktadır. Tüm sağlık parametreleri uygundur.
+            <strong>HERHANGİ BİR RİSK YOK:</strong> Bu hayvan için şu anda aktif süt yasağı, kesim kilidi, gecikmiş aşı veya kritik sağlık uyarısı bulunmamaktadır. Tüm sağlık parametreleri uygundur.
           </div>
         `;
       } else {
@@ -3401,12 +3401,12 @@
           <div><strong>Küpe:</strong> ${animal.earTag}</div>
           <div><strong>Irk/Yön:</strong> ${animal.type}</div>
           <div><strong>Cinsiyet/Yaş:</strong> ${animal.gender} (${animal.ageMonths} ay)</div>
-          <div><strong>Kondisyon (BCS):</strong> ${animal.bcs.toFixed(2)} / 5.0</div>
+          <div><strong>Et-Yağ Durumu (Kondisyon):</strong> ${animal.bcs.toFixed(2)} / 5.0</div>
           <div><strong>Ayrı Bölme:</strong> ${animal.quarantine ? 'Evet (Karantina)' : 'Hayır'}</div>
           <div><strong>Son Durum:</strong> ${animal.lastStatus || 'Normal'}</div>
         </div>
 
-        <h4 style="font-size:0.9rem; margin-bottom:8px; color:var(--primary); font-weight:800;">Aktif Uyarılar & Klinik Görevler:</h4>
+        <h4 style="font-size:0.9rem; margin-bottom:8px; color:var(--primary); font-weight:800;">Aktif Uyarılar & Sağlık Takip Listesi:</h4>
         ${alertsHtml}
       `;
 
@@ -3448,7 +3448,7 @@
     }
 
     /* =========================================================================
-       2. TRİYAJ VE DART SKORLAMA MOTORU
+       2. HASTA MUAYENESİ VE NEFES/ZATÜRRE KONTROLÜ
        ========================================================================= */
     function setScore(metric, val, btn) {
       currentDart[metric] = val;
@@ -3494,7 +3494,7 @@
       let bannerType = "banner-success";
       let actionText = "Hayvan genel olarak sağlıklı görünüyor. Normal takibe devam edin.";
 
-      // Hayati Tehlike / Şiddetli Triyaj Kriterleri
+      // Hayati Tehlike / Ağır Hastalık Kriterleri
       const isShock = pulse > 90 || temp > 40.5 || dehydration >= 9 || rumen === "0";
 
       if (isShock || totalDart >= 7) {
@@ -3535,9 +3535,9 @@
       // Otomatik DART Tetikleyicisi (total_dart_score >= 4 ise karantina uyarısı)
       if (totalDart >= 4) {
         animal.quarantine = true;
-        animal.lastStatus = `Hasta (DART: ${totalDart}, Ateş: ${temp}°C) - İzolasyona Alındı`;
+        animal.lastStatus = `Hasta (Hastalık Puanı: ${totalDart}, Ateş: ${temp}°C) - Ayrı Bölmeye Alındı`;
       } else {
-        animal.lastStatus = `Kontrol Edildi (DART: ${totalDart})`;
+        animal.lastStatus = `Kontrol Edildi (Hastalık Puanı: ${totalDart})`;
       }
 
       triageRecords.push({
@@ -3553,7 +3553,7 @@
       renderAnimalTable();
       updateDashboardStats();
 
-      alert(`${animal.earTag} triyajı kaydedildi!\nToplam DART Skoru: ${totalDart}\nDurum güncellendi.`);
+      alert(`${animal.earTag} muayenesi kaydedildi!\nToplam Hastalık Puanı: ${totalDart}\nDurum güncellendi.`);
       switchTab("dashboard");
     }
 
@@ -3834,9 +3834,9 @@
       previewDiv.style.display = "block";
       itemsDiv.innerHTML = `
         <div><strong>Kızgınlık Dönüşü (18-24. Günler):</strong> ${heatDate.toLocaleDateString('tr-TR')} (Tutmadıysa tekrar kızgınlık gösterir!)</div>
-        <div><strong>Gebelik Muayenesi (35-45. Günler):</strong> ${pregCheckDate.toLocaleDateString('tr-TR')} (Ultrason / Rektal Kontrol)</div>
+        <div><strong>Gebelik Muayenesi (35-45. Günler):</strong> ${pregCheckDate.toLocaleDateString('tr-TR')} (Ultrason / Elden Muayene)</div>
         <div><strong>Kuruya Çıkarma (Doğuma 60 gün):</strong> ${dryDate.toLocaleDateString('tr-TR')} (Sağımı kes, kuru dönem tüpü uygula)</div>
-        <div><strong>Buzağı İshali Profilaksisi:</strong> ${vaccinePreCalve.toLocaleDateString('tr-TR')} (Kuru dönem kombine aşı)</div>
+        <div><strong>Doğum Öncesi Buzağı İshali Aşısı:</strong> ${vaccinePreCalve.toLocaleDateString('tr-TR')} (Kuru dönem kombine aşı)</div>
         <div><strong>Beklenen Doğum (280. Gün):</strong> <span style="color:var(--primary); font-weight:800;">${calvingDate.toLocaleDateString('tr-TR')}</span></div>
       `;
     }
@@ -3993,10 +3993,10 @@
         const dmiBesiKg = (weightKg * 0.024).toFixed(1);
 
         dosesUl.innerHTML = `
-          <li><strong>Adrenalin (1:1000 - Anafilaksi):</strong> <span style="color:var(--danger); font-weight:700;">${epiDose} mL</span> (SC / IM)</li>
-          <li><strong>Meloksikam (Ateş/Ağrı):</strong> <strong>${meloxDose} mL</strong> (SC / IV)</li>
-          <li><strong>Fluniksin (Toksemi/Ateş):</strong> <strong>${flunixinDose} mL</strong> (Yavaş IV)</li>
-          <li><strong>Tulatromisin (Besi Ciğer İğnesi - BRD):</strong> <strong>${tulaDose} mL</strong> (Tek doz SC)</li>
+          <li><strong>Adrenalin (1:1000 - Alerji Şoku):</strong> <span style="color:var(--danger); font-weight:700;">${epiDose} mL</span> (Deri Altı veya Kas İçi)</li>
+          <li><strong>Meloksikam (Ateş/Ağrı):</strong> <strong>${meloxDose} mL</strong> (Deri Altı veya Damar İçi)</li>
+          <li><strong>Fluniksin (Zehirlenme/Yüksek Ateş):</strong> <strong>${flunixinDose} mL</strong> (Damardan Çok Yavaş)</li>
+          <li><strong>Tulatromisin (Besi Ciğer İğnesi - BRD):</strong> <strong>${tulaDose} mL</strong> (Tek Doz Deri Altı)</li>
           <li><strong>Besi Danası Günlük Kuru Madde İhtiyacı:</strong> ~${dmiBesiKg} kg KM / gün (Canlı ağırlığın ~%2.4'ü)</li>
         `;
       }
@@ -4272,7 +4272,7 @@
     }
 
     /* =========================================================================
-       YENİ DANA GİRİŞ & ALIŞTIRMA PROTOKOLÜ (METAFİLAKSİ & ASİDOZ KORUMA)
+       YENİ DANA GİRİŞ & ALIŞTIRMA PROTOKOLÜ (KORUYUCU CİĞER İĞNESİ & ASİDOZ ÖNLEME)
        ========================================================================= */
     function onArrivalAnimalChange() {
       const select = document.getElementById("arrival-animal-select");
@@ -4312,7 +4312,7 @@
 
       let riskAdvice = "";
       if (risk === "high") {
-        riskAdvice = `<span style="color:#b91c1c; font-weight:800;">YÜKSEK RİSK GRUBU (Toplama / Uzun Yol):</span> Kamyondan inişte derhal uzun etkili tek doz koruyucu ciğer iğnesi (Metafilaksi - Tulatromisin vb.) ve bağışıklık vitamini (AD3E + Selenyum) veteriner hekimle planlanmalıdır. İlk 7 gün sabah-akşam makat ateşi ölçülmelidir (>39.5°C ise derhal izole edin).`;
+        riskAdvice = `<span style="color:#b91c1c; font-weight:800;">YÜKSEK RİSK GRUBU (Toplama / Uzun Yol):</span> Kamyondan inişte derhal uzun etkili tek doz koruyucu ciğer iğnesi (Toplu Koruyucu İğne - Tulatromisin vb.) ve bağışıklık vitamini (AD3E + Selenyum) veteriner hekimle planlanmalıdır. İlk 7 gün sabah-akşam makat ateşi ölçülmelidir (>39.5°C ise derhal ayrı bölmeye alın).`;
       } else if (risk === "medium") {
         riskAdvice = `<span style="color:#0284c7; font-weight:800;">ORTA RİSK GRUBU:</span> İlk 48 saat dinlendirilmeli, 3. gün iç-dış parazit ve vitamin vurulmalı, 7. günde ilk karma aşı (BRD Solunum) yapılmalıdır.`;
       } else {
@@ -4371,9 +4371,9 @@
 
       box.innerHTML = `
         <ul style="padding-left:18px; line-height:1.7;">
-          <li><strong>Tulatromisin (Metafilaksi Ciğer Kalkanı - Yüksek Riskte):</strong> <strong>${tulaDose} mL</strong> (Tek doz deri altı boyna). Nakliye ateşi ve zatürre mikroplarını 14 gün boyunca akciğerde öldürür.</li>
-          <li><strong>İvermektin (İç & Dış Kurt-Uyuz-Kene İğnesi):</strong> <strong>${iverDose} mL</strong> (Deri altı boyna). 2. veya 3. gün uygulanır.</li>
-          <li><strong>AD3E + Selenyum / B Vitamini:</strong> <strong>${vitDose} mL</strong> (Kas içi - IM). Yolda harcanan vitamin depolarını doldurur.</li>
+          <li><strong>Tulatromisin (Gelişte Koruyucu Ciğer İğnesi - Yüksek Riskte):</strong> <strong>${tulaDose} mL</strong> (Tek doz deri altı boyna). Nakliye ateşi ve zatürre mikroplarını 14 gün boyunca akciğerde öldürür.</li>
+          <li><strong>İvermektin (İç & Dış Kurt-Uyuz-Kene İğnesi):</strong> <strong>${iverDose} mL</strong> (Boyundan Deri Altı). 2. veya 3. gün uygulanır.</li>
+          <li><strong>AD3E + Selenyum / B Vitamini:</strong> <strong>${vitDose} mL</strong> (Kas İçi). Yolda harcanan vitamin depolarını doldurur.</li>
           <li><strong>Geliş & Karşılama Suyu (Tuzlu-Pekmezli Can Suyu):</strong> 10 litre ılık suya 1 çay bardağı pekmez + 50 gr tuz + 50 gr karbonat (veya veterinerden alınan 1 paket can suyu tozu) karıştırılıp içirilir. Dananın yol yorgunluğunu ve su kaybını giderir, işkembeyi ekşitmez.</li>
           <li><strong>Alıştırma Dönemi Günlük Karbonat:</strong> Günde ~${bicarbDay} gr / baş yemliğe serpilerek işkembe asitleşmesi (asidoz) engellenir.</li>
         </ul>
@@ -4662,7 +4662,7 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
     }
 
     /* =========================================================================
-       YEMLİK, ASİDOZ (SARA) & RUMEN İŞKEMBESİ TAKİP MOTORU
+       YEMLİK, İŞKEMBE EKŞİMESİ (ASİDOZ) & SİNDİRİM TAKİP MOTORU
        ========================================================================= */
     function calculateRuminationIndex() {
       const lying = parseInt(document.getElementById("feed-lying-cows").value) || 0;
@@ -4723,10 +4723,10 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
 
       if (score === "1") {
         bg = "#fee2e2"; border = "#ef4444"; color = "#991b1b";
-        msg = "<strong>SKOR 1 - TEHLİKELİ (Cıvık / Fışkıran):</strong> Akut rumen asidozu, toksin veya mikrobiyal enterit şüphesi. Bağırsak geçiş hızı çok yüksek, besin emilimi çökmüş durumda.";
+        msg = "<strong>SKOR 1 - TEHLİKELİ (Cıvık / Fışkıran):</strong> Ağır işkembe ekşimesi (yem çarpması), toksin veya bağırsak iltihabı (mikrobik ishal) şüphesi. Bağırsak geçiş hızı çok yüksek, besin emilimi çökmüş durumda.";
       } else if (score === "2") {
         bg = "#ffedd5"; border = "#f97316"; color = "#9a3412";
-        msg = "<strong>SKOR 2 - DİKKAT (Yayvan / Cıvık):</strong> Yüksek konsantre yem, yetersiz lif veya aşırı hızlı rumen fermantasyonu (Subakut Asidoz - SARA şüphesi). Ayak lezyonları (laminitis) riski taşır.";
+        msg = "<strong>SKOR 2 - DİKKAT (Yayvan / Cıvık):</strong> Yüksek konsantre yem, yetersiz lif veya aşırı hızlı rumen fermantasyonu (Gizli İşkembe Ekşimesi (Hafif Asidoz) şüphesi). Ayak lezyonları (arpa vurması (tırnak iltihabı)) riski taşır.";
       } else if (score === "3") {
         bg = "#dcfce7"; border = "#22c55e"; color = "#166534";
         msg = "<strong>SKOR 3 - İDEAL (Dengeli Pasta):</strong> Mükemmel lif-enerji-protein dengesi. Rumen mikroflorası tam kapasite çalışıyor.";
@@ -4735,7 +4735,7 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
         msg = "<strong>SKOR 4 - SERT / HALKALI:</strong> Kaba yem / sindirilemeyen lif fazla, konsantre yem veya su tüketimi yetersiz. Süt verimi baskılanabilir (Kuru dönem için kabul edilebilir).";
       } else if (score === "5") {
         bg = "#fee2e2"; border = "#ef4444"; color = "#991b1b";
-        msg = "<strong>SKOR 5 - AT DIŞKISI GİBİ TOPAK:</strong> Şiddetli su kısıtı, su donması veya abomasum tıkanması/kabızlık. Su teknelerini derhal kontrol edin.";
+        msg = "<strong>SKOR 5 - AT DIŞKISI GİBİ TOPAK:</strong> Şiddetli su kısıtı, su donması veya şirden tıkanması/kabızlık. Su teknelerini derhal kontrol edin.";
       }
 
       if (grains) {

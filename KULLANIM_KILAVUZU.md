@@ -48,15 +48,15 @@ Veteriner hekim ahıra ulaşana kadar geçen kritik dakikalarda hayat kurtarır:
 #### 1.1. Acil İlk Yardım
 - **Besi Danası CCN / Polio (Beyin Dönmesi & B1 Tiamin Eksikliği):** Dana kör gibi gezer, kafasını geriye atar (yıldız gözleme) ve diş gıcırdatır. Yüksek tahıl beslemesi sonucu oluşur. Acil damardan ve kas içine **Tiamin (B1 Vitamini)** dozu hayat kurtarır.
 - **İdrar Taşı / Sidik Zoru (Ürolitiyazis):** Sürekli kuyruk sallayan, damla damla kanlı işeyen danada amonyum klorür ve idrar asitleştirici desteği uygulanır. 48 saatte idrar kesesi patlaması (su karnı) riskini önler.
-- **Besi Laminitisi (Arpa Vurması / Ayak Yanması):** Fazla arpa ve akut asidoz sonrası ayak tabanları el yakacak kadar ısınır, hayvan köz üstünde yürür gibi basar. Kesif yem derhal kesilir, ağızdan karbonat içirilir, yangı giderici iğne vurulur ve ayaklara 20-30 dakika hortumla soğuk su tutulur.
-- **İşkembe Gazı (Timpani):** Sol açlık çukuru davul gibi şiştiğinde mide sondası salma, köpük varsa bitkisel sıvı yağ içirme ve boğulma anında sol böğre trokar saplama adımları.
+- **Arpa Vurması / Ayak Yanması (Tırnak İltihabı):** Fazla arpa ve akut asidoz sonrası ayak tabanları el yakacak kadar ısınır, hayvan köz üstünde yürür gibi basar. Kesif yem derhal kesilir, ağızdan karbonat içirilir, yangı giderici iğne vurulur ve ayaklara 20-30 dakika hortumla soğuk su tutulur.
+- **İşkembe Gazı ve Şişmesi:** Sol açlık çukuru davul gibi şiştiğinde mide sondası salma, köpük varsa bitkisel sıvı yağ içirme ve boğulma anında sol böğre trokar saplama adımları.
 - **Yemek Borusu Tıkanması (Patates / Pancar Boğulması):** Boğaz oluğunu elle yukarı sıvazlama ve soluk borusu emniyeti.
 - **Aşı Şoku / İğne Alerjisi (Anafilaktik Şok):** Kiloya göre otomatik **Adrenalin Dozu** hesaplayıcı (her 45 kg canlı ağırlığa 1 mL 1:1000 Adrenalin).
 
 #### 1.2. Muayene & BRD Solunum Triyajı
 Durgunlaşan veya burnu akan dana gördüğünüzde:
 1. Dereceyle makat ateşini ölçüp yazın (Normal: 38.0–39.3 °C. 39.5 °C üzeri kırmızı alarmdır).
-2. DART skorunu (Keyifsizlik, yem yeme isteği, nefes sayısı/öksürük) işaretleyin.
+2. hastalık puanını (Keyifsizlik, yem yeme isteği, nefes sayısı/öksürük) işaretleyin.
 3. Sistem anında **"DURUMU İYİ"**, **"ORTA DERECE HASTA (İlaç Lazım)"** veya **"ÇOK ACİL & AĞIR HASTA (Veterineri Çağır)"** kararı verir ve yapılacakları listeler.
 
 ---
@@ -71,7 +71,7 @@ Pazardan veya başka ilden gelen danalarda nakliye humması (Shipping Fever / BR
 
 #### 2.2. Adım Adım 21 Günlük Takvim & Yem Tablosu
 - **1. – 3. Gün:** %100 Serbest kuru ot/saman, dinlenme, ılık elektrolitli su. Sıfır kesif yem.
-- **4. – 7. Gün:** Günde 0.5–1.0 kg hafif ezme başlangıcı, veteriner kontrolünde uzun etkili ciğer koruma iğnesi (metafilaksi) ve aşılar.
+- **4. – 7. Gün:** Günde 0.5–1.0 kg hafif ezme başlangıcı, veteriner kontrolünde uzun etkili ciğer koruma iğnesi (toplu koruyucu ciğer iğnesi) ve aşılar.
 - **8. – 14. Gün:** Kademeli kesif yem artışı (2.0–2.5 kg/gün), iç-dış parazit (İvermektin) uygulaması.
 - **15. – 21. Gün:** Günde 3.5–4.0 kg kesif yem, tam besiye geçiş hazırlığı ve dışkı kıvamı kontrolü.
 - **22. Gün ve Sonrası:** Tam besi rasyonu ve CAAG tartım takibine geçiş.
