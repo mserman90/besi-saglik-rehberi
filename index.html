@@ -2137,11 +2137,13 @@
 
       <div class="card">
         <div class="card-title">Hayvan Listesi & Durumlar</div>
-        <div style="display:flex; gap:6px; margin-bottom:8px;">
-          <input type="text" id="animal-search" placeholder="Küpe No Yaz veya Ara (örn: TR16001)" oninput="renderAnimalTable()" style="margin-bottom:0;">
-          <button class="btn btn-primary" style="width:auto; padding:0 14px; white-space:nowrap;" onclick="openNewAnimalModal()">Yeni Ekle</button>
-          <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('search')" title="Kamerayla Küpe Oku">Kamera</button>
-          <button id="btn-animal-search-voice" class="btn btn-primary" style="width:auto; padding:0 12px; font-size:1.05rem; white-space:nowrap; background:#000000; border:1.5px solid #000000;" onclick="startVoiceAnimalSearch()" title="Sesle Küpe Ara">Sesle Ara</button>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:12px; align-items:center;">
+          <input type="text" id="animal-search" placeholder="Küpe No Yaz veya Ara (örn: TR16001)" oninput="renderAnimalTable()" style="flex:1 1 200px; min-width:170px; margin-bottom:0; min-height:42px;">
+          <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+            <button class="btn btn-primary" style="width:auto; min-height:42px; padding:0 14px; font-weight:700; white-space:nowrap;" onclick="openNewAnimalModal()">Yeni Ekle</button>
+            <button class="btn btn-warning" style="width:auto; min-height:42px; padding:0 12px; font-weight:700; white-space:nowrap;" onclick="startQrScanner('search')" title="Kamerayla Küpe Oku">Kamera</button>
+            <button id="btn-animal-search-voice" class="btn btn-primary" style="width:auto; min-height:42px; padding:0 12px; font-size:0.95rem; font-weight:700; white-space:nowrap; background:#000000; border:1.5px solid #000000;" onclick="startVoiceAnimalSearch()" title="Sesle Küpe Ara">Sesle Ara</button>
+          </div>
         </div>
         <div class="table-container">
           <table id="animal-table">
@@ -4349,9 +4351,9 @@
             </div>
           </td>
           <td>
-            <div style="display:flex; gap:4px; align-items:center;">
-              <button class="btn btn-outline" style="min-height:34px; padding:4px 10px; font-size:0.75rem; font-weight:700; color:#000000; border-color:#bae6fd; width:auto; touch-action:manipulation;" onclick="showAnimalAlertsModal('${a.id}')" title="Hayvan Uyarı ve Sağlık Kartı">Uyarılar</button>
-              <button class="btn btn-outline" style="min-height:34px; padding:4px 8px; font-size:0.75rem; font-weight:700; color:#000000; border-color:#fca5a5; width:auto; touch-action:manipulation;" onclick="deleteAnimal('${a.id}')">Sil</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <button class="btn btn-outline" style="min-height:34px; padding:5px 12px; font-size:0.75rem; font-weight:700; color:#000000; border-color:#bae6fd; width:auto; touch-action:manipulation;" onclick="showAnimalAlertsModal('${a.id}')" title="Hayvan Uyarı ve Sağlık Kartı">Uyarılar</button>
+              <button class="btn btn-outline" style="min-height:34px; padding:5px 10px; font-size:0.75rem; font-weight:700; color:#000000; border-color:#fca5a5; width:auto; touch-action:manipulation;" onclick="deleteAnimal('${a.id}')">Sil</button>
             </div>
           </td>
         `;
@@ -6192,7 +6194,7 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
     // PWA Service Worker Kaydı (Tam Çevrimdışı Çalışma)
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=5').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=6').then((reg) => {
           reg.update();
         }).catch(() => {});
       });
