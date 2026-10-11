@@ -47,7 +47,7 @@
     {
       "name": "Acil İlk Yardım",
       "short_name": "İlk Yardım",
-      "description": "Hayat kurtaran acil müdahaleler ve adrenalin doz hesabı",
+      "description": "Beyin dönmesi, idrar taşı, arpa vurması ve adrenalin doz hesabı",
       "url": "./index.html#emergency",
       "icons": [
         {
@@ -57,10 +57,10 @@
       ]
     },
     {
-      "name": "Hasta Muayene",
-      "short_name": "Muayene",
-      "description": "Ateş ölçümü ve klinik DART triyajı",
-      "url": "./index.html#triage",
+      "name": "Kilo & Karkas Ölçer",
+      "short_name": "Kilo Ölçer",
+      "description": "Kantar ve şerit metre ile günlük kilo alımı ve karkas geliri",
+      "url": "./index.html#weight",
       "icons": [
         {
           "src": "./icon-192.png",
@@ -69,10 +69,10 @@
       ]
     },
     {
-      "name": "Sağımcı Ekranı",
-      "short_name": "Sağımcı",
-      "description": "İlaçlı süt ve karkas kesim kilidi kontrolü",
-      "url": "./index.html#milker",
+      "name": "21 Gün Dana Giriş",
+      "short_name": "Dana Giriş",
+      "description": "Kamyondan yeni inen danalar için 21 günlük alıştırma protokolü",
+      "url": "./index.html#arrival",
       "icons": [
         {
           "src": "./icon-192.png",

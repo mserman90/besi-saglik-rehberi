@@ -2,8 +2,9 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="light dark">
   <meta name="description" content="Besi Çiftliği Rehberi - Besi danacılığı ve toklu/dana çiftlikleri için %100 internetsiz çalışan 21 günlük nakliye humması karşılama protokolü, kantar ve CAAG canlı ağırlık artışı, Et İKAS mezbaha kilitleri ve besi hastalıkları (CCN, sidik zoru, arpa vurması (tırnak iltihabı)) yönetim asistanı.">
   <meta name="keywords" content="besi sağlık rehberi, besi danacılığı, CAAG günlük canlı ağırlık artışı, 21 günlük dana karşılama, shipping fever, yol humması, et İKAS kesim kilitleri, CCN polio tiamin, idrar taşı amonyum klorür, besi arpa vurması (tırnak iltihabı)i, karkas randımanı, kantar hesabı">
   <meta name="author" content="Dr. Mert Serman / Besi Çiftliği Rehberi">
@@ -17,10 +18,11 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Besi Sağlık">
+  <meta name="apple-mobile-web-app-title" content="Besi Çiftliği">
   <meta name="application-name" content="Besi Çiftliği Rehberi">
-  <meta name="msapplication-TileColor" content="#b91c1c">
+  <meta name="msapplication-TileColor" content="#000000">
 
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
@@ -110,15 +112,19 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.5;
+      min-height: 100vh;
       min-height: 100dvh;
       padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      overflow-x: hidden;
     }
 
     /* Üst Başlık */
     header {
       background: #000000 !important;
       color: #ffffff !important;
-      padding: 12px 16px;
+      padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px 14px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -126,6 +132,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     header h1,
@@ -1872,6 +1880,24 @@
       color: #ffffff !important;
     }
 
+    @media (max-width: 480px) {
+      header {
+        padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px 10px;
+        gap: 6px;
+      }
+      header h1 {
+        font-size: 0.95rem !important;
+      }
+      .header-actions-group {
+        gap: 4px !important;
+      }
+      .header-actions-group a,
+      .header-actions-group button {
+        padding: 6px 8px !important;
+        font-size: 0.75rem !important;
+        min-height: 36px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1879,15 +1905,16 @@
   <!-- Başlık -->
   <header>
     <div style="display:flex; align-items:center; gap:8px;">
-      <button id="header-back-btn" onclick="switchTab('dashboard')" style="display:none; background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:800; cursor:pointer; min-height:38px; touch-action:manipulation;">Ana Menü</button>
+      <button id="header-back-btn" onclick="switchTab('dashboard')" style="display:none; background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:6px 10px; border-radius:8px; font-size:0.8rem; font-weight:800; cursor:pointer; min-height:36px; touch-action:manipulation;">Ana Menü</button>
       <div>
         <h1>Besi Çiftliği Rehberi</h1>
       </div>
     </div>
-    <div style="display:flex; align-items:center; gap:8px;">
-      <a href="../" title="Çiftlik Rehberleri Portalı" style="background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:8px 12px; border-radius:8px; font-size:0.85rem; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; min-height:44px; touch-action:manipulation;">Portal</a>
-      <button onclick="openGuideModal()" style="background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:8px 14px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; min-height:44px; touch-action:manipulation;">Kılavuz</button>
-      <button id="theme-toggle-btn" onclick="toggleTheme()" title="Koyu / Açık Mod" style="background:rgba(255,255,255,0.18); color:white; border:1.5px solid rgba(255,255,255,0.4); padding:8px 12px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; min-height:44px; touch-action:manipulation;">Gece Modu</button>
+    <div class="header-actions-group" style="display:flex; align-items:center; flex-wrap:wrap; gap:6px;">
+      <button id="pwa-install-btn" onclick="triggerPwaInstall()" title="Uygulamayı Telefona / Ana Ekrana Yükle" style="display:none; background:#ffffff; color:#000000; border:1.5px solid #ffffff; padding:8px 10px; border-radius:8px; font-size:0.82rem; font-weight:800; cursor:pointer; min-height:40px; touch-action:manipulation;">Yükle</button>
+      <a href="../" title="Çiftlik Rehberleri Portalı" style="background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:8px 10px; border-radius:8px; font-size:0.82rem; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; min-height:40px; touch-action:manipulation;">Portal</a>
+      <button onclick="openGuideModal()" style="background:rgba(255,255,255,0.22); color:white; border:1.5px solid rgba(255,255,255,0.6); padding:8px 10px; border-radius:8px; font-size:0.82rem; font-weight:700; cursor:pointer; min-height:40px; touch-action:manipulation;">Kılavuz</button>
+      <button id="theme-toggle-btn" onclick="toggleTheme()" title="Koyu / Açık Mod" style="background:rgba(255,255,255,0.18); color:white; border:1.5px solid rgba(255,255,255,0.4); padding:8px 10px; border-radius:8px; font-size:0.82rem; font-weight:700; cursor:pointer; min-height:40px; touch-action:manipulation;">Gece Modu</button>
     </div>
   </header>
 
@@ -1965,13 +1992,13 @@
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
               <div>
                 <div style="font-weight:800; font-size:0.98rem; color:#000000; display:flex; align-items:center; gap:6px;">
-                  3. KİLO, CAAG & MEZBAHA GELİRİ
+                  3. KİLO, GÜNLÜK KİLO ALIMI & MEZBAHA GELİRİ
                 </div>
-                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Kantar/şerit metre tartımı, günlük kilo artışı ve %58 karkas randımanı hesabı</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Kantar/şerit metre tartımı, günlük kilo alımı ve %58 karkas randımanı hesabı</div>
               </div>
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-              <button class="btn btn-success" style="background:#000000; border:1.5px solid #000000; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('weight')">Kilo / CAAG Ölçer</button>
+              <button class="btn btn-success" style="background:#000000; border:1.5px solid #000000; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('weight')">Kilo & Günlük Artış Ölçer</button>
               <button class="btn btn-success" style="background:#000000; border:1.5px solid #000000; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('weight')">Karkas & Satış Geliri</button>
             </div>
           </div>
@@ -1995,82 +2022,6 @@
 
         </div>
       </div>
-            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
-              <button class="btn btn-danger" style="padding:10px 4px; font-size:0.82rem; font-weight:700;" onclick="switchTab('emergency')">İlk Yardım</button>
-              <button class="btn btn-primary" style="padding:10px 4px; font-size:0.82rem; font-weight:700;" onclick="switchTab('triage')">Muayene</button>
-              <button class="btn btn-warning" style="padding:10px 4px; font-size:0.82rem; font-weight:700;" onclick="switchTab('ikas')">İlaç & Süt</button>
-            </div>
-          </div>
-
-          <!-- 2. SAĞIM & SÜT GÜVENLİĞİ -->
-          <div class="card" style="margin-bottom:0; border-left:5px solid #0284c7; padding:12px 14px; background:linear-gradient(to right, #f0f9ff, #ffffff);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div>
-                <div style="font-weight:800; font-size:0.98rem; color:#000000; display:flex; align-items:center; gap:6px;">
-                  SAĞIM & SÜT GÜVENLİĞİ
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Tanka antibiyotik dökülmesini ve cezaları önleyin</div>
-              </div>
-            </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-              <button class="btn btn-outline" style="border-color:#000000; color:#000000; font-weight:800; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('milker')">Sağımcı Ekranı (Büyük)</button>
-              <button class="btn btn-danger" style="background:#171717; border:1.5px solid #000000; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('cost')">Zarar & Masraf Defteri</button>
-            </div>
-          </div>
-
-          <!-- 3. YENİ DOĞUM, BUZAĞI & GEBELİK -->
-          <div class="card" style="margin-bottom:0; border-left:5px solid #ea580c; padding:12px 14px; background:linear-gradient(to right, #fff7ed, #ffffff);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div>
-                <div style="font-weight:800; font-size:0.98rem; color:#c2410c; display:flex; align-items:center; gap:6px;">
-                  YENİ DOĞUM, BUZAĞI & GEBELİK
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Ağız sütü kalitesi, buzağı ishal serumu ve tohumlama takibi</div>
-              </div>
-            </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-              <button class="btn btn-warning" style="background:#262626; border:1.5px solid #000000; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('calf')">Buzağı & Ağız Sütü</button>
-              <button class="btn btn-info" style="padding:10px 6px; font-size:0.83rem;" onclick="switchTab('repro')">Tohumlama & Doğum</button>
-            </div>
-          </div>
-
-          <!-- 4. YENİ GELEN / SÜRÜYE GİRİŞ & AŞI -->
-          <div class="card" style="margin-bottom:0; border-left:5px solid #475569; padding:12px 14px; background:linear-gradient(to right, #f8fafc, #ffffff);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div>
-                <div style="font-weight:800; font-size:0.98rem; color:var(--text); display:flex; align-items:center; gap:6px;">
-                  YENİ GELEN / SÜRÜYE GİRİŞ & AŞI
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Yeni hayvan ekleme, 21 günlük besiye alıştırma ve aşı planı</div>
-              </div>
-            </div>
-            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
-              <button class="btn btn-primary" style="background:#000000; border:1.5px solid #000000; color:white; padding:10px 4px; font-size:0.82rem;" onclick="openAnimalModal()">Yeni Hayvan</button>
-              <button class="btn btn-info" style="background:#000000; border:1.5px solid #000000; color:white; padding:10px 4px; font-size:0.82rem;" onclick="switchTab('arrival')">Dana Giriş</button>
-              <button class="btn btn-info" style="background:#475569; color:white; padding:10px 4px; font-size:0.82rem;" onclick="switchTab('vaccine')">Aşı Takvimi</button>
-            </div>
-          </div>
-
-          <!-- 5. BESİ, KİLO & YEMLİK TAKİBİ -->
-          <div class="card" style="margin-bottom:0; border-left:5px solid #16a34a; padding:12px 14px; background:linear-gradient(to right, #f0fdf4, #ffffff);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <div>
-                <div style="font-weight:800; font-size:0.98rem; color:#000000; display:flex; align-items:center; gap:6px;">
-                  BESİ, KİLO & YEMLİK TAKİBİ
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Kantar/şerit metre tartımı, günlük kilo artışı ve geviş sayacı</div>
-              </div>
-            </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-              <button class="btn btn-success" style="background:#000000; border:1.5px solid #000000; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('weight')">Kilo Ölçer & CAAG</button>
-              <button class="btn btn-success" style="background:#000000; border:1.5px solid #000000; color:white; padding:10px 6px; font-size:0.83rem;" onclick="switchTab('feed')">Yemlik & Geviş</button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      
 
       <div class="card" style="border-left: 4px solid #000000;">
         <div class="card-title" style="color:#000000;">Mezbaha & Kesim İzni Hızlı Kontrol Paneli (Et İKAS)</div>
@@ -6191,10 +6142,63 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
       }
     }
 
+    // PWA Kurulum Yöneticisi ve Kısayol (Hash) Yönlendirmesi
+    let deferredPwaPrompt = null;
+    const pwaInstallBtn = document.getElementById("pwa-install-btn");
+
+    function isStandaloneApp() {
+      return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+    }
+
+    function isIosDevice() {
+      return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+    }
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPwaPrompt = e;
+      if (pwaInstallBtn && !isStandaloneApp()) {
+        pwaInstallBtn.style.display = "inline-flex";
+      }
+    });
+
+    window.addEventListener("appinstalled", () => {
+      deferredPwaPrompt = null;
+      if (pwaInstallBtn) pwaInstallBtn.style.display = "none";
+    });
+
+    if (isIosDevice() && !isStandaloneApp() && pwaInstallBtn) {
+      pwaInstallBtn.style.display = "inline-flex";
+    }
+
+    async function triggerPwaInstall() {
+      if (deferredPwaPrompt) {
+        deferredPwaPrompt.prompt();
+        const { outcome } = await deferredPwaPrompt.userChoice;
+        if (outcome === "accepted" && pwaInstallBtn) {
+          pwaInstallBtn.style.display = "none";
+        }
+        deferredPwaPrompt = null;
+      } else if (isIosDevice()) {
+        alert("iPhone / iPad'de Ana Ekrana Eklemek İçin:\n\n1. Safari alt menüsündeki 'Paylaş' (yukarı ok) simgesine dokunun.\n2. Listeden 'Ana Ekrana Ekle' seçeneğine dokunun.");
+      } else {
+        openGuideModal();
+      }
+    }
+
+    function handleUrlHashRouting() {
+      const hash = (window.location.hash || "").replace("#", "").trim();
+      if (hash && document.getElementById("tab-" + hash)) {
+        switchTab(hash);
+      }
+    }
+    window.addEventListener("hashchange", handleUrlHashRouting);
+    window.addEventListener("DOMContentLoaded", handleUrlHashRouting);
+
     // PWA Service Worker Kaydı (Tam Çevrimdışı Çalışma)
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=7').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=9').then((reg) => {
           reg.update();
         }).catch(() => {});
       });
