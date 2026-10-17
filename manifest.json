@@ -1,7 +1,7 @@
 {
   "name": "Besi Çiftliği Rehberi",
   "short_name": "BesiÇiftliği",
-  "description": "Besi danacılığı ve besi çiftlikleri için %100 internetsiz çalışan 21 günlük dana karşılama, kantar ve CAAG kilo artışı, Et İKAS kesim kilitleri ve besi acil müdahale rehberi.",
+  "description": "Besi danacılığı ve besi çiftlikleri için %100 internetsiz çalışan 21 günlük dana karşılama, kantar ve CAAG kilo artışı, ilaçlı kesim yasağı kilitleri ve besi acil müdahale rehberi.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
