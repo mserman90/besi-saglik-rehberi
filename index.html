@@ -2190,6 +2190,110 @@
         </select>
       </div>
 
+      <!-- ===== ELEKTİF TEŞHİS ARAÇLARI ===== -->
+      <div class="card">
+        <div class="card-title">🔍 Hızlı Tanı Araçları (Ahırda Kendin Yapabilirsin)</div>
+        <p style="font-size:0.8rem; color:var(--text); margin-bottom:12px;">
+          Veteriner gelmeden önce aşağıdaki basit kontrolleri yap ve sonuçları kaydet.
+          Her biri hastalığın kaynağını bulmanda sana 1–2 adım önde olmanı sağlar.
+        </p>
+
+        <!-- 1. FAMACHA GÖZ KAPAĞI RENGİ -->
+        <div class="score-group" style="margin-bottom:10px;">
+          <div class="score-label"><span>1. 👁 Göz Kapağı İç Rengi (Parazit / Kan Düşüklüğü Testi)</span><span id="dx-famacha-val" style="font-size:0.75rem;">—</span></div>
+          <small style="color:var(--text-muted); font-size:0.75rem; display:block; margin-bottom:6px;">Alt göz kapağını bastırıp iç yüzeyine bak. Rengi seç:</small>
+          <div class="score-buttons" data-metric="famacha">
+            <button class="score-btn selected" onclick="setDxScore('famacha','1-pembe','✅ İyi',this)">1: Koyu Pembe / Kırmızı (Sağlıklı)</button>
+            <button class="score-btn" onclick="setDxScore('famacha','2-açık','⚠️ Orta',this)">2: Açık Pembe (Hafif solgun)</button>
+            <button class="score-btn" onclick="setDxScore('famacha','3-solgun','🔴 Riskli',this)">3: Soluk / Beyazımsı (Parazit/Kan kaybı — ilaç lazım)</button>
+            <button class="score-btn" onclick="setDxScore('famacha','4-beyaz','🚨 Acil',this)">4: Beyaz / Sarımtırak (Acil veteriner çağır!)</button>
+          </div>
+          <div id="dx-famacha-hint" style="font-size:0.78rem; color:#c0392b; font-weight:600; margin-top:4px; display:none;"></div>
+        </div>
+
+        <!-- 2. AĞIZ / DİŞET MUKOZA RENGİ -->
+        <div class="score-group" style="margin-bottom:10px;">
+          <div class="score-label"><span>2. 👄 Ağız / Diş Eti Rengi (Genel Kan Durumu)</span><span id="dx-mucosa-val" style="font-size:0.75rem;">—</span></div>
+          <small style="color:var(--text-muted); font-size:0.75rem; display:block; margin-bottom:6px;">Üst dudağı kaldır, diş etine bak:</small>
+          <div class="score-buttons" data-metric="mucosa">
+            <button class="score-btn selected" onclick="setDxScore('mucosa','pembe','✅ Normal',this)">Parlak Pembe (Normal)</button>
+            <button class="score-btn" onclick="setDxScore('mucosa','soluk','⚠️ Dikkat',this)">Soluk / Mat Pembe (Uyarı)</button>
+            <button class="score-btn" onclick="setDxScore('mucosa','mavi','🚨 Acil',this)">Mavimsi / Morumsu (Oksijen Düştü — Acil!)</button>
+            <button class="score-btn" onclick="setDxScore('mucosa','sari','🚨 Acil',this)">Sarı (Karaciğer / Zehirlenme — Acil!)</button>
+          </div>
+        </div>
+
+        <!-- 3. BURUN AKINTISI TİPİ -->
+        <div class="score-group" style="margin-bottom:10px;">
+          <div class="score-label"><span>3. 👃 Burun Akıntısı Tipi (Zatürre / Hastalık İzi)</span><span id="dx-nasal-val" style="font-size:0.75rem;">—</span></div>
+          <div class="score-buttons" data-metric="nasal">
+            <button class="score-btn selected" onclick="setDxScore('nasal','yok','✅ İyi',this)">Yok / Kuru burun</button>
+            <button class="score-btn" onclick="setDxScore('nasal','seffaf','⚠️ Erken',this)">Şeffaf / Sulu (Soğuk algınlığı başlangıcı)</button>
+            <button class="score-btn" onclick="setDxScore('nasal','beyaz','🔴 Riskli',this)">Beyaz / Köpüklü (Akciğer tutulumu olabilir)</button>
+            <button class="score-btn" onclick="setDxScore('nasal','sari-yesil','🚨 Acil',this)">Sarı / Yeşil / Kanlı (Ciddi zatürre — antibiyotik lazım)</button>
+          </div>
+        </div>
+
+        <!-- 4. DIŞKI GÖRÜNÜMÜ -->
+        <div class="score-group" style="margin-bottom:10px;">
+          <div class="score-label"><span>4. 💩 Tezek Kıvamı ve Rengi</span><span id="dx-manure-val" style="font-size:0.75rem;">—</span></div>
+          <div class="score-buttons" data-metric="manure">
+            <button class="score-btn selected" onclick="setDxScore('manure','normal','✅ Normal',this)">Koyu/Sert Top (Normal)</button>
+            <button class="score-btn" onclick="setDxScore('manure','yumusak','⚠️ Dikkat',this)">Yumuşak / Pasta Kıvamı (Enerji fazlası / hafif asidoz)</button>
+            <button class="score-btn" onclick="setDxScore('manure','civak','🔴 Riskli',this)">Cıvık / Islatıyor (İşkembe ekşimesi — yemi azalt)</button>
+            <button class="score-btn" onclick="setDxScore('manure','kanlı','🚨 Acil',this)">Kanlı / Siyah-Katranımsı (Bağırsak kanaması — acil!)</button>
+          </div>
+        </div>
+
+        <!-- 5. İDRAR RENGİ -->
+        <div class="score-group" style="margin-bottom:10px;">
+          <div class="score-label"><span>5. 💧 İdrar Rengi</span><span id="dx-urine-val" style="font-size:0.75rem;">—</span></div>
+          <small style="color:var(--text-muted); font-size:0.75rem; display:block; margin-bottom:6px;">Dana işerken veya yerde kalan lekeye bak:</small>
+          <div class="score-buttons" data-metric="urine">
+            <button class="score-btn selected" onclick="setDxScore('urine','sari-seffaf','✅ Normal',this)">Sarı / Şeffaf (Normal)</button>
+            <button class="score-btn" onclick="setDxScore('urine','koyu','⚠️ Dikkat',this)">Koyu Sarı / Turuncu (Az su içiyor / solgun)</button>
+            <button class="score-btn" onclick="setDxScore('urine','kahve','🔴 Riskli',this)">Kahverengi / Çay Rengi (Kas hasarı / zehirlenme)</button>
+            <button class="score-btn" onclick="setDxScore('urine','kanli','🚨 Acil',this)">Kanlı / Kırmızı (İdrar taşı / böbrek — acil!)</button>
+          </div>
+        </div>
+
+        <!-- 6. GEVİŞ GETİRME -->
+        <div class="score-group" style="margin-bottom:10px;">
+          <div class="score-label"><span>6. 🐄 Geviş Getiriyor mu? (İşkembe Sağlık Göstergesi)</span><span id="dx-rumination-val" style="font-size:0.75rem;">—</span></div>
+          <small style="color:var(--text-muted); font-size:0.75rem; display:block; margin-bottom:6px;">Yemden 1-2 saat sonra dinlendiren danayı gözlemle:</small>
+          <div class="score-buttons" data-metric="rumination">
+            <button class="score-btn selected" onclick="setDxScore('rumination','evet-duzgün','✅ İyi',this)">Evet, düzenli çiğniyor (Sağlıklı)</button>
+            <button class="score-btn" onclick="setDxScore('rumination','arasiara','⚠️ Dikkat',this)">Arasıra / Yavaş (İşkembe yavaşlamış)</button>
+            <button class="score-btn" onclick="setDxScore('rumination','yok','🔴 Riskli',this)">Geviş Yok (İşkembe durmuş — ciddi sorun var)</button>
+          </div>
+        </div>
+
+        <!-- 7. TITREME / SOĞUKLUK -->
+        <div class="score-group" style="margin-bottom:10px;">
+          <div class="score-label"><span>7. 🥶 Kulak / Bacak Ucu Sıcaklığı</span><span id="dx-coldness-val" style="font-size:0.75rem;">—</span></div>
+          <small style="color:var(--text-muted); font-size:0.75rem; display:block; margin-bottom:6px;">Elinle kulak ve bacak ucuna dokun:</small>
+          <div class="score-buttons" data-metric="coldness">
+            <button class="score-btn selected" onclick="setDxScore('coldness','normal','✅ Normal',this)">Ilık / Normal sıcaklıkta</button>
+            <button class="score-btn" onclick="setDxScore('coldness','titriyor','⚠️ Dikkat',this)">Titriyor / Kasılıyor (Ateş çıkış belirtisi)</button>
+            <button class="score-btn" onclick="setDxScore('coldness','buz-gibi','🚨 Acil',this)">Buz Gibi Soğuk + Titreme Yok (Şok riski — acil!)</button>
+          </div>
+        </div>
+
+        <!-- 8. GÖZ PARLAKLIGI -->
+        <div class="score-group" style="margin-bottom:12px;">
+          <div class="score-label"><span>8. 👁 Göz Parlaklığı ve Tepkisi</span><span id="dx-eye-val" style="font-size:0.75rem;">—</span></div>
+          <div class="score-buttons" data-metric="eye">
+            <button class="score-btn selected" onclick="setDxScore('eye','parlak','✅ İyi',this)">Parlak, çevresiyle ilgili (Sağlıklı)</button>
+            <button class="score-btn" onclick="setDxScore('eye','mat','⚠️ Dikkat',this)">Mat / Donuk bakış (Ağrılı / keyifsiz)</button>
+            <button class="score-btn" onclick="setDxScore('eye','kapali','🚨 Acil',this)">Yarı Kapalı / Çökmüş (Ağır hasta — veteriner şart)</button>
+          </div>
+        </div>
+
+        <!-- Tanı Özeti Kutusu -->
+        <div id="dx-summary-box" style="display:none; padding:10px; border-radius:8px; margin-top:6px; font-size:0.82rem; font-weight:600; line-height:1.5;"></div>
+        <button class="btn btn-outline" onclick="evaluateDxFindings()" style="margin-top:10px; border-color:#2980b9; color:#2980b9;">🔍 Bulgularımı Değerlendir</button>
+      </div>
+
       <div class="card">
         <div class="card-title">Ciğer ve Öksürük / Zatürre Tehlike Derecesi</div>
         
@@ -4417,6 +4521,90 @@
     /* =========================================================================
        2. HASTA MUAYENESİ VE NEFES/ZATÜRRE KONTROLÜ
        ========================================================================= */
+    // ===== ELEKTİF TEŞHİS ARAÇLARI =====
+    const dxScores = {};
+
+    function setDxScore(metric, value, label, btn) {
+      dxScores[metric] = { value, label };
+      const valEl = document.getElementById('dx-' + metric + '-val');
+      if (valEl) valEl.textContent = label;
+      const container = btn.parentElement;
+      container.querySelectorAll('.score-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      // Otomatik renk ipucu
+      if (btn.textContent.includes('🚨')) {
+        btn.style.background = '#c0392b'; btn.style.color = 'white';
+      } else if (btn.textContent.includes('🔴')) {
+        btn.style.background = '#e67e22'; btn.style.color = 'white';
+      } else if (btn.textContent.includes('⚠️')) {
+        btn.style.background = '#f1c40f'; btn.style.color = '#333';
+      } else {
+        btn.style.background = '#27ae60'; btn.style.color = 'white';
+      }
+    }
+
+    function evaluateDxFindings() {
+      const box = document.getElementById('dx-summary-box');
+      const alerts = [];
+      const warnings = [];
+
+      const checks = [
+        { key: 'famacha',   bad: ['3-solgun','4-beyaz'],   acil: ['4-beyaz'],
+          badMsg: '⚠️ Göz kapağı soluk — iç parazit (kurtlanma) ihtimali var. Taze kan kaybı yapan kurtlara karşı ilaçla.',
+          acilMsg: '🚨 Göz kapağı beyaz — ağır kan kaybı! Acil veteriner çağır.' },
+        { key: 'mucosa',    bad: ['soluk'],                acil: ['mavi','sari'],
+          badMsg: '⚠️ Diş eti rengi soluk — oksijen ya da demir düşük olabilir.',
+          acilMsg: '🚨 Diş eti mavi/sarı — oksijen kesilmesi veya karaciğer sorunu. Acil!' },
+        { key: 'nasal',     bad: ['beyaz'],                acil: ['sari-yesil'],
+          badMsg: '⚠️ Burun akıntısı köpüklü/beyaz — akciğer tutulumu başlıyor. Veteriner kontrolü şart.',
+          acilMsg: '🚨 Sarı/yeşil burun akıntısı — ciddi akciğer hastalığı. Antibiyotik lazım, veteriner çağır!' },
+        { key: 'manure',    bad: ['civak'],                acil: ['kanlı'],
+          badMsg: '⚠️ Tezek cıvık — işkembe ekşimesi. Kesif yemi bir öğün kes, karbonat ver.',
+          acilMsg: '🚨 Kanlı/siyah tezek — bağırsak kanaması riski. Acil veteriner!' },
+        { key: 'urine',     bad: ['koyu','kahve'],         acil: ['kanli'],
+          badMsg: '⚠️ Koyu/kahve idrar — su içirmeyi artır, böbreği gözle.',
+          acilMsg: '🚨 Kanlı idrar — idrar taşı! Acil veteriner. İdrara izin ver, baskı yapma.' },
+        { key: 'rumination',bad: ['arasiara'],             acil: ['yok'],
+          badMsg: '⚠️ Geviş azalmış — işkembe yavaşlamış. Yem miktarını azalt, saman artır.',
+          acilMsg: '🚨 Geviş tamamen yok — işkembe durdu! Veteriner çağır, yem kes.' },
+        { key: 'coldness',  bad: ['titriyor'],             acil: ['buz-gibi'],
+          badMsg: '⚠️ Titreme var — ateş çıkıyor olabilir. 30 dakika sonra tekrar ateş ölç.',
+          acilMsg: '🚨 Buz gibi soğuk, titreme yok — şok belirtisi! Hayvanı ört, acil yardım çağır.' },
+        { key: 'eye',       bad: ['mat'],                  acil: ['kapali'],
+          badMsg: '⚠️ Gözler mat/donuk — hayvan ağrılı ya da çok keyifsiz.',
+          acilMsg: '🚨 Gözler yarı kapalı/çökmüş — ağır hasta. Veteriner şart.' },
+      ];
+
+      checks.forEach(c => {
+        const sel = dxScores[c.key];
+        if (!sel) return;
+        if (c.acil.includes(sel.value)) alerts.push(c.acilMsg);
+        else if (c.bad.includes(sel.value)) warnings.push(c.badMsg);
+      });
+
+      let html = '';
+      if (alerts.length) {
+        html += `<div style="background:#fdecea; border-left:4px solid #c0392b; padding:8px; border-radius:6px; margin-bottom:8px;">
+          <strong>🚨 ACİL UYARILAR (Veterineri Hemen Ara):</strong><br>${alerts.join('<br>')}
+        </div>`;
+      }
+      if (warnings.length) {
+        html += `<div style="background:#fff8e1; border-left:4px solid #e67e22; padding:8px; border-radius:6px; margin-bottom:8px;">
+          <strong>⚠️ DİKKAT GEREKTİREN BULGULAR:</strong><br>${warnings.join('<br>')}
+        </div>`;
+      }
+      if (!alerts.length && !warnings.length) {
+        html = `<div style="background:#eafaf1; border-left:4px solid #27ae60; padding:8px; border-radius:6px;">
+          ✅ <strong>Tüm bulgular normal görünüyor.</strong> Hayvan takipte kal, yarın tekrar kontrol et.
+        </div>`;
+      }
+
+      box.innerHTML = html;
+      box.style.display = 'block';
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    // ===== / ELEKTİF TEŞHİS ARAÇLARI =====
+
     function setScore(metric, val, btn) {
       currentDart[metric] = val;
       document.getElementById("score-val-" + metric).textContent = val + "/3";

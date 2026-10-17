@@ -1,4 +1,4 @@
-const CACHE_NAME = 'besisys-offline-v11';
+const CACHE_NAME = 'besisys-offline-v12';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
