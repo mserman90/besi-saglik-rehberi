@@ -2148,7 +2148,11 @@
         
         <label for="triage-animal-select">Muayene Edilen Hayvan (Küpe No):</label>
         <div style="display:flex; gap:6px; margin-bottom:10px;">
-          <select id="triage-animal-select" style="margin-bottom:0;"></select>
+          <input type="text" id="triage-animal-select" list="triage-animal-datalist"
+            placeholder="Küpe no yaz veya listeden seç…"
+            autocomplete="off" style="margin-bottom:0; flex:1;"
+            oninput="this.value = this.value.toUpperCase()">
+          <datalist id="triage-animal-datalist"></datalist>
           <button class="btn btn-warning" style="width:auto; padding:0 12px; white-space:nowrap;" onclick="startQrScanner('triage')" title="Kamerayla Küpe Oku">Kamera</button>
         </div>
 
@@ -3638,7 +3642,18 @@
 
     // Hayvan Seçicileri Güncelle
     function populateAnimalSelects() {
-      const triageSelect = document.getElementById("triage-animal-select");
+      // Triage alanı artık input+datalist — datalist'i doldur
+      const triageDatalist = document.getElementById("triage-animal-datalist");
+      if (triageDatalist) {
+        triageDatalist.innerHTML = "";
+        animals.forEach(a => {
+          const opt = document.createElement("option");
+          opt.value = a.earTag;
+          opt.label = `${a.earTag} (${a.type} - ${a.gender})`;
+          triageDatalist.appendChild(opt);
+        });
+      }
+
       const treatSelect = document.getElementById("treatment-animal-select");
       const reproSelect = document.getElementById("repro-animal-select");
       const weightSelect = document.getElementById("weight-animal-select");
@@ -3646,7 +3661,7 @@
       const vacSelect = document.getElementById("vac-animal-select");
       const costSelect = document.getElementById("cost-animal-select");
 
-      [triageSelect, treatSelect, reproSelect, weightSelect, arrivalSelect, vacSelect, costSelect].forEach(sel => {
+      [treatSelect, reproSelect, weightSelect, arrivalSelect, vacSelect, costSelect].forEach(sel => {
         if (!sel) return;
         sel.innerHTML = "";
         if (animals.length === 0) {
@@ -4500,8 +4515,13 @@
       switchTab(tabId);
       setTimeout(() => {
         if (tabId === "triage") {
-          const sel = document.getElementById("triage-animal-select");
-          if (sel) { sel.value = animalId; calculateTriage(); }
+          const inp = document.getElementById("triage-animal-select");
+          if (inp) {
+            // animalId burada a.id — earTag'e çevir
+            const a = animals.find(x => x.id === animalId);
+            inp.value = a ? a.earTag : animalId;
+            calculateTriage();
+          }
         } else if (tabId === "ikas") {
           const sel = document.getElementById("treatment-animal-select");
           if (sel) { sel.value = animalId; }
@@ -4680,35 +4700,37 @@
     }
 
     function saveTriageRecord() {
-      const animalId = document.getElementById("triage-animal-select").value;
-      const animal = animals.find(a => a.id === animalId);
-      if (!animal) return;
+      const rawVal = document.getElementById("triage-animal-select").value.trim().toUpperCase();
+      const animal = animals.find(a => a.id === rawVal || (a.earTag && a.earTag.toUpperCase() === rawVal));
+      if (!animal && !rawVal) return;
+      // Elle girilen küpe listede yoksa yine de devam et ama kayıt adını koy
+      const animalLabel = animal ? animal.earTag : rawVal;
 
       const totalDart = currentDart.d + currentDart.a + currentDart.r + currentDart.t;
       const temp = parseFloat(document.getElementById("vital-temp").value);
 
-      // Otomatik DART Tetikleyicisi (total_dart_score >= 4 ise karantina uyarısı)
-      if (totalDart >= 4) {
-        animal.quarantine = true;
-        animal.lastStatus = `Hasta (Hastalık Puanı: ${totalDart}, Ateş: ${temp}°C) - Ayrı Bölmeye Alındı`;
-      } else {
-        animal.lastStatus = `Kontrol Edildi (Hastalık Puanı: ${totalDart})`;
+      // Otomatik Hasta Takibi (sisteme kayıtlı hayvansa durumu güncelle)
+      if (animal) {
+        if (totalDart >= 4) {
+          animal.quarantine = true;
+          animal.lastStatus = `Hasta (Hastalık Puanı: ${totalDart}, Ateş: ${temp}°C) - Ayrı Bölmeye Alındı`;
+        } else {
+          animal.lastStatus = `Kontrol Edildi (Hastalık Puanı: ${totalDart})`;
+        }
+        triageRecords.push({
+          id: Date.now(),
+          animalId: animal.id,
+          date: new Date().toISOString(),
+          dartScore: totalDart,
+          temp: temp
+        });
+        setStore("animals", animals);
+        setStore("triage", triageRecords);
+        renderAnimalTable();
+        updateDashboardStats();
       }
 
-      triageRecords.push({
-        id: Date.now(),
-        animalId: animal.id,
-        date: new Date().toISOString(),
-        dartScore: totalDart,
-        temp: temp
-      });
-
-      setStore("animals", animals);
-      setStore("triage", triageRecords);
-      renderAnimalTable();
-      updateDashboardStats();
-
-      alert(`${animal.earTag} muayenesi kaydedildi!\nToplam Hastalık Puanı: ${totalDart}\nDurum güncellendi.`);
+      alert(`${animalLabel} muayenesi kaydedildi!\nToplam Hastalık Puanı: ${totalDart}\nDurum güncellendi.`);
       switchTab("dashboard");
     }
 
@@ -6274,7 +6296,8 @@ Toplam Zarar: ${totalLoss.toLocaleString('tr-TR')} TL`);
         milkerInput.value = cleanTag;
         checkMilkerStatus();
       } else if (activeScanTarget === 'triage') {
-        setAnimalSelectValue("triage-animal-select", cleanTag);
+        const inp = document.getElementById("triage-animal-select");
+        if (inp) { inp.value = cleanTag; alert(`Küpe Okundu: ${cleanTag}`); }
       } else if (activeScanTarget === 'slaughter') {
         const slaughterInput = document.getElementById('slaughter-search');
         if (slaughterInput) { slaughterInput.value = cleanTag; checkSlaughterStatus(true); }
